@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="es" data-paths="{&quot;en&quot;:&quot;/backup-storage-cost/&quot;,&quot;zh-CN&quot;:&quot;/zh-cn/backup-storage-cost/&quot;,&quot;zh-TW&quot;:&quot;/zh-tw/backup-storage-cost/&quot;,&quot;ja&quot;:&quot;/ja/backup-storage-cost/&quot;,&quot;ko&quot;:&quot;/ko/backup-storage-cost/&quot;,&quot;es&quot;:&quot;/es/backup-storage-cost/&quot;,&quot;fr&quot;:&quot;/fr/backup-storage-cost/&quot;,&quot;de&quot;:&quot;/de/backup-storage-cost/&quot;,&quot;pt&quot;:&quot;/pt/backup-storage-cost/&quot;,&quot;ru&quot;:&quot;/ru/backup-storage-cost/&quot;}">
+<head>
+<meta charset="utf-8">
+<script>(function(){var d=document.documentElement,th=null,s=null;try{th=localStorage.getItem("cloud-cost:theme");s=localStorage.getItem("cloud-cost:lang")}catch(e){}if(th==="light"||th==="dark")d.setAttribute("data-theme",th);if(!d.hasAttribute("data-root"))return;var P=JSON.parse(d.getAttribute("data-paths")||"{}"),l=null;if(P[s])l=s;for(var ls=navigator.languages||[navigator.language||"en"],i=0;!l&&!s&&i<ls.length;i++){var x=String(ls[i]).toLowerCase(),b=x.split("-")[0];l=b==="zh"?(/tw|hk|mo|hant/.test(x)?"zh-TW":"zh-CN"):P[b]?b:null}if(l&&l!=="en")location.replace(P[l]+location.search+location.hash)})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Copias de seguridad: coste mensual de servidor, almacenamiento y tráfico · Planificador de costes cloud</title>
+<meta name="description" content="Copias de seguridad (Solo almacenamiento, 500 GB al mes): la combinación más barata es Backblaze B2 por 34,68 US$/mes; todo en AWS cuesta 154 US$.">
+<meta name="keywords" content="calculadora coste cloud, comparar precios VPS, coste de transferencia, precio ancho de banda, precio almacenamiento de objetos, precio CDN, AWS egress, Hetzner">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#f6f6f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1c1c1c" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://cost.1ms.dog/es/backup-storage-cost/">
+<link rel="alternate" hreflang="en" href="https://cost.1ms.dog/backup-storage-cost/">
+<link rel="alternate" hreflang="zh-CN" href="https://cost.1ms.dog/zh-cn/backup-storage-cost/">
+<link rel="alternate" hreflang="zh-TW" href="https://cost.1ms.dog/zh-tw/backup-storage-cost/">
+<link rel="alternate" hreflang="ja" href="https://cost.1ms.dog/ja/backup-storage-cost/">
+<link rel="alternate" hreflang="ko" href="https://cost.1ms.dog/ko/backup-storage-cost/">
+<link rel="alternate" hreflang="es" href="https://cost.1ms.dog/es/backup-storage-cost/">
+<link rel="alternate" hreflang="fr" href="https://cost.1ms.dog/fr/backup-storage-cost/">
+<link rel="alternate" hreflang="de" href="https://cost.1ms.dog/de/backup-storage-cost/">
+<link rel="alternate" hreflang="pt" href="https://cost.1ms.dog/pt/backup-storage-cost/">
+<link rel="alternate" hreflang="ru" href="https://cost.1ms.dog/ru/backup-storage-cost/">
+<link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/backup-storage-cost/">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="1ms.dog">
+<meta property="og:title" content="Copias de seguridad: coste mensual de servidor, almacenamiento y tráfico">
+<meta property="og:description" content="Copias de seguridad (Solo almacenamiento, 500 GB al mes): la combinación más barata es Backblaze B2 por 34,68 US$/mes; todo en AWS cuesta 154 US$.">
+<meta property="og:url" content="https://cost.1ms.dog/es/backup-storage-cost/">
+<meta property="og:image" content="https://cost.1ms.dog/og/es/backup-storage-cost.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="zh_CN">
+<meta property="og:locale:alternate" content="zh_TW">
+<meta property="og:locale:alternate" content="ja_JP">
+<meta property="og:locale:alternate" content="ko_KR">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta property="og:locale:alternate" content="de_DE">
+<meta property="og:locale:alternate" content="pt_BR">
+<meta property="og:locale:alternate" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Copias de seguridad: coste mensual de servidor, almacenamiento y tráfico">
+<meta name="twitter:description" content="Copias de seguridad (Solo almacenamiento, 500 GB al mes): la combinación más barata es Backblaze B2 por 34,68 US$/mes; todo en AWS cuesta 154 US$.">
+<meta name="twitter:image" content="https://cost.1ms.dog/og/es/backup-storage-cost.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Copias de seguridad: coste mensual de servidor, almacenamiento y tráfico","url":"https://cost.1ms.dog/es/backup-storage-cost/","applicationCategory":"BusinessApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","description":"Copias de seguridad (Solo almacenamiento, 500 GB al mes): la combinación más barata es Backblaze B2 por 34,68 US$/mes; todo en AWS cuesta 154 US$.","inLanguage":"es","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Planificador de costes cloud","item":"https://cost.1ms.dog/es/"},{"@type":"ListItem","position":2,"name":"Copias de seguridad: coste mensual de servidor, almacenamiento y tráfico","item":"https://cost.1ms.dog/es/backup-storage-cost/"}]}]}</script>
+<link rel="preload" href="/assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/app.1afc3ef2c2.css">
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <a class="brand" href="/es/" aria-label="Planificador de costes cloud">
+      <img class="logo-light" src="/assets/logo-light.svg" width="90" height="36" alt="1ms">
+      <img class="logo-dark" src="/assets/logo-dark.svg" width="90" height="36" alt="1ms">
+      <span class="pname" data-i="name">Planificador de costes cloud</span>
+    </a>
+    <div class="top-acts">
+      <label class="sel"><span class="sr" data-i="lang_label">Idioma</span>
+        <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5"/><path d="M1.5 8h13M8 1.5c2 2 2.8 4 2.8 6.5S10 12.5 8 14.5C6 12.5 5.2 10.5 5.2 8S6 3.5 8 1.5z"/></svg>
+        <select id="lang"><option value="en">English</option><option value="zh-CN">简体中文</option><option value="zh-TW">繁體中文</option><option value="ja">日本語</option><option value="ko">한국어</option><option value="es" selected>Español</option><option value="fr">Français</option><option value="de">Deutsch</option><option value="pt">Português</option><option value="ru">Русский</option></select>
+      </label>
+      <button class="icon-btn" id="helpBtn" type="button" aria-haspopup="dialog" aria-controls="help"><span class="sr" data-i="faq_h">Preguntas</span>
+        <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.2"/><path d="M6.3 6.2a1.8 1.8 0 1 1 2.5 1.7c-.5.2-.8.6-.8 1.1v.4M8 11.3v.1"/></svg>
+      </button>
+      <a class="icon-btn gh" href="https://github.com/yt1988/cloud-cost-planner" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 .2a8 8 0 0 0-2.5 15.6c.4 0 .5-.2.5-.4v-1.5c-2.2.5-2.7-1-2.7-1-.4-.9-.9-1.2-.9-1.2-.7-.5.1-.5.1-.5.8.1 1.2.8 1.2.8.7 1.3 1.9.9 2.4.7 0-.5.3-.9.5-1.1-1.8-.2-3.6-.9-3.6-4 0-.9.3-1.6.8-2.1-.1-.2-.4-1 .1-2.1 0 0 .7-.2 2.2.8a7.4 7.4 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.4 1.1.2 1.9.1 2.1.5.6.8 1.3.8 2.1 0 3.1-1.9 3.7-3.6 3.9.3.3.6.8.6 1.5v2.2c0 .2.1.5.6.4A8 8 0 0 0 8 .2z"/></svg></a>
+      <button class="icon-btn" id="theme" type="button" aria-label="Tema: sistema">
+        <svg class="i-sys" viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M5.5 14h5M8 11.5V14"/></svg>
+        <svg class="i-light" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1v1.6M8 13.4V15M1 8h1.6M13.4 8H15M3 3l1.1 1.1M11.9 11.9 13 13M3 13l1.1-1.1M11.9 4.1 13 3"/></svg>
+        <svg class="i-dark" viewBox="0 0 16 16" aria-hidden="true"><path d="M13.5 9.8A5.8 5.8 0 0 1 6.2 2.5a5.8 5.8 0 1 0 7.3 7.3z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Copias de seguridad: coste mensual de servidor, almacenamiento y tráfico</h1>
+      <p class="lede">Elige qué ejecutas y fija el tráfico: cada VPS y plan cloud se calcula con su tráfico incluido, el excedente, el almacenamiento de objetos y la CDN, y la combinación completa más barata aparece primero.</p>
+    </section>
+
+    <section class="card inputs" aria-labelledby="inH">
+      <h2 class="sr" id="inH" data-i="in_scene">¿Qué vas a ejecutar?</h2>
+      <div class="scenes" role="group" aria-label="¿Qué vas a ejecutar?"><button class="chip" type="button" data-scene="blog" aria-pressed="false">Blog</button><button class="chip" type="button" data-scene="saas" aria-pressed="false">App web / SaaS</button><button class="chip" type="button" data-scene="proxy" aria-pressed="false">Proxy / relé</button><button class="chip" type="button" data-scene="download" aria-pressed="false">Sitio de descargas</button><button class="chip" type="button" data-scene="media" aria-pressed="false">Imágenes / vídeo</button><button class="chip" type="button" data-scene="backup" aria-pressed="true">Copias de seguridad</button></div>
+      <div class="grid">
+        <div class="field wide" id="sizeField">
+          <span class="lab" data-i="in_size">Servidor</span>
+          <div class="seg" role="group" aria-label="Servidor"><button type="button" data-size="0" aria-pressed="false">1 vCPU · 2 GB</button><button type="button" data-size="1" aria-pressed="false">2 vCPU · 4 GB</button><button type="button" data-size="2" aria-pressed="false">4 vCPU · 8 GB</button><button type="button" data-size="3" aria-pressed="false">8 vCPU · 16 GB</button><button type="button" data-size="custom" aria-pressed="false">Personalizado</button><button type="button" data-size="none" aria-pressed="true">Sin servidor</button></div>
+          <div class="custom" id="custom" hidden>
+            <label><span data-i="f_vcpu">vCPU</span><input id="vcpu" type="number" min="1" max="64" step="1" inputmode="numeric"></label>
+            <label><span data-i="f_ram">RAM (GB)</span><input id="ram" type="number" min="0.5" max="256" step="0.5" inputmode="decimal"></label>
+            <label><span data-i="f_disk">Disco (GB)</span><input id="disk" type="number" min="0" max="10000" step="5" inputmode="numeric"></label>
+          </div>
+        </div>
+        <div class="field">
+          <label class="lab" for="gbN" data-i="in_gb">Tráfico de salida al mes</label>
+          <div class="amt"><input id="gbN" type="number" min="0" step="any" inputmode="decimal"><select id="gbU" aria-label="Unidad"><option value="1">GB</option><option value="1024">TB</option></select></div>
+          <input id="gbR" class="range" type="range" min="0" max="1000" step="1" aria-label="Tráfico de salida al mes">
+        </div>
+        <div class="field">
+          <label class="lab" for="stR"><span data-i="in_static">De ello, archivos estáticos</span> <b id="stV" class="val"></b></label>
+          <input id="stR" class="range" type="range" min="0" max="100" step="5">
+          <p class="hint" data-i="static_hint">Imágenes, descargas, vídeo: archivos que puede servir un bucket o una CDN en lugar de tu servidor.</p>
+        </div>
+        <div class="field">
+          <label class="lab" for="sgN" data-i="in_store">Datos almacenados</label>
+          <div class="amt"><input id="sgN" type="number" min="0" step="any" inputmode="decimal"><select id="sgU" aria-label="Unidad"><option value="1">GB</option><option value="1024">TB</option></select></div>
+          <input id="sgR" class="range" type="range" min="0" max="1000" step="1" aria-label="Datos almacenados">
+        </div>
+        <div class="field">
+          <span class="lab" data-i="in_aud">La mayoría de visitantes está en</span>
+          <div class="seg" role="group" aria-label="La mayoría de visitantes está en"><button type="button" data-aud="na" aria-pressed="true">Norteamérica</button><button type="button" data-aud="eu" aria-pressed="false">Europa</button><button type="button" data-aud="ap" aria-pressed="false">Asia-Pacífico</button><button type="button" data-aud="cn" aria-pressed="false">China continental</button></div>
+        </div>
+      </div>
+      <details class="adv" id="adv">
+        <summary data-i="adv">Más opciones</summary>
+        <div class="grid">
+          <label class="field"><span class="lab" data-i="f_count">Número de servidores</span><input id="count" type="number" min="1" max="100" step="1" inputmode="numeric"></label>
+          <label class="field"><span class="lab" data-i="f_cur">Moneda</span><select id="cur" class="pick-sel"><option value="USD">USD</option><option value="EUR">EUR</option><option value="CNY">CNY</option></select></label>
+          <label class="field"><span class="lab" data-i="f_obj">Tamaño medio de archivo (KB)</span><input id="objKB" type="number" min="1" step="any" inputmode="decimal"></label>
+          <label class="chk"><input id="shared" type="checkbox"><span data-i="f_shared">Incluir planes con CPU compartida</span></label>
+          <label class="chk"><input id="free" type="checkbox"><span data-i="f_free">Contar niveles gratuitos permanentes (Oracle, Google Cloud)</span></label>
+        </div>
+      </details>
+    </section>
+
+    <section class="card result" aria-labelledby="outH">
+      <div class="res-h">
+        <h2 id="outH" data-i="out_h">Recomendado</h2>
+        <button class="btn icon" id="share" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 10V2M5 4.5 8 1.5l3 3M3 8v5.5h10V8"/></svg><span class="sr" data-i="share">Compartir</span></button>
+      </div>
+      <p class="verdict" id="verdict">Solo almacenamiento, 500 GB al mes, visitantes en Norteamérica: lo más barato es Backblaze B2, 34,68 US$/mes. Todo en AWS cuesta 154 US$, 4,4 veces más.</p>
+      <div class="picks" id="picks"><article class="pick best">
+<div class="pk-tags"><span class="tag t-cheapest">Más barato</span><span class="tag t-near">Cerca de tus visitantes</span><span class="tag t-simple">Menos proveedores</span></div>
+<p class="pk-name">Backblaze B2</p>
+<p class="pk-total"><b>34,68 US$</b><small>/mes</small></p>
+<p class="pk-save">Todo en AWS: 154 US$, 4,4 veces más</p>
+<dl class="pk-parts"><div><dt>Servidor</dt><dd>No hace falta</dd><dd class="n">—</dd></div><div><dt>Tráfico</dt><dd>—</dd><dd class="n">—</dd></div><div><dt>Almacenamiento</dt><dd>Backblaze B2 · 5 TB · 500 GB servidos</dd><dd class="n">34,68 US$</dd></div><div><dt>CDN</dt><dd>No hace falta</dd><dd class="n">—</dd></div></dl>
+<p class="pk-why"></p>
+
+<p class="links"></p>
+</article></div>
+      <p class="links"><a class="ext" data-tool="v2c" data-pend target="_blank" rel="noopener"><span data-i="l_v2c">Medir desde tu servidor a cada nube</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2.5h4.5V7M13.5 2.5 7.5 8.5M12 10v3.5H2.5V4H6"/></svg></a></p>
+    </section>
+
+    <section class="card chart" aria-labelledby="curveH">
+      <h2 id="curveH" data-i="curve_h">Cuando crece el tráfico</h2>
+      <div id="curve"><svg class="curve" viewBox="0 0 760 240" role="img" aria-label="Cuando crece el tráfico"><g class="grid"><line x1="58" x2="750" y1="212" y2="212"/><text x="52" y="216" text-anchor="end">10 US$</text><line x1="58" x2="750" y1="161.5" y2="161.5"/><text x="52" y="165.5" text-anchor="end">100 US$</text><line x1="58" x2="750" y1="111" y2="111"/><text x="52" y="115" text-anchor="end">1 mil US$</text><line x1="58" x2="750" y1="60.5" y2="60.5"/><text x="52" y="64.5" text-anchor="end">10 mil US$</text><line x1="58" x2="750" y1="10" y2="10"/><text x="52" y="14" text-anchor="end">100 mil US$</text><line x1="58" x2="58" y1="10" y2="212"/><text x="58" y="232" text-anchor="middle">10 GB</text><line x1="196.4" x2="196.4" y1="10" y2="212"/><text x="196.4" y="232" text-anchor="middle">100 GB</text><line x1="336.22551399895" x2="336.22551399895" y1="10" y2="212"/><text x="336.22551399895" y="232" text-anchor="middle">1 TB</text><line x1="474.6255139989499" x2="474.6255139989499" y1="10" y2="212"/><text x="474.6255139989499" y="232" text-anchor="middle">10 TB</text><line x1="613.0255139989499" x2="613.0255139989499" y1="10" y2="212"/><text x="613.0255139989499" y="232" text-anchor="middle">100 TB</text><line x1="752.8510279979" x2="752.8510279979" y1="10" y2="212"/><text x="752.8510279979" y="232" text-anchor="end">1 PB</text></g><line class="now" x1="293.137448600105" x2="293.137448600105" y1="10" y2="212"/><path class="l0" d="M58.0,184.7L73.8,184.7L93.3,184.7L110.6,184.7L127.9,184.7L144.3,184.7L161.5,184.7L179.1,184.7L196.4,184.7L213.5,184.7L231.1,184.7L248.3,184.7L265.6,184.7L282.9,184.7L300.2,184.7L317.5,184.7L334.8,184.7L352.1,184.7L369.4,184.7L386.7,184.7L404.0,184.7L421.3,184.7L438.6,184.7L455.9,184.7L473.2,184.7L490.5,184.7L507.8,173.1L525.1,157.8L542.4,146.6L559.7,137.2L577.0,128.8L594.3,121.1L611.6,113.8L628.9,106.7L646.2,99.9L663.5,93.2L680.8,86.6L698.1,80.1L715.4,73.6L732.7,67.2L750.0,60.8"/><path class="la" d="M58.0,157.9L73.8,157.9L93.3,157.9L110.6,157.9L127.9,157.9L144.3,157.9L161.5,157.9L179.1,157.9L196.4,157.9L213.5,157.4L231.1,156.6L248.3,155.7L265.6,154.6L282.9,153.1L300.2,151.3L317.5,149.1L334.8,146.4L352.1,143.3L369.4,139.8L386.7,135.8L404.0,131.5L421.3,126.7L438.6,121.7L455.9,116.3L473.2,110.8L490.5,105.3L507.8,99.7L525.1,93.9L542.4,88.0L559.7,82.0L577.0,76.3L594.3,71.0L611.6,65.6L628.9,59.9L646.2,54.9L663.5,50.4L680.8,45.5L698.1,40.3L715.4,34.9L732.7,29.3L750.0,23.5"/></svg><ul class="legend"><li class="l0"><i></i>Backblaze B2</li><li class="la"><i></i>Todo en AWS</li></ul><ul class="cross"></ul></div>
+    </section>
+
+    <details class="card more" id="more">
+      <summary><span data-i="tbl_h">Todos los proveedores</span> <small data-i="tbl_hint">la combinación más barata de cada línea de producto</small></summary>
+      <div class="tbl-wrap" id="tbl"><table class="tbl"><thead><tr><th>Plan</th><th>Región</th><th>vCPU / RAM</th><th class="n">Servidor</th><th class="n">Tráfico</th><th class="n">Almacenamiento + CDN</th><th class="n">Al mes</th><th>Fuente</th></tr></thead><tbody><tr><td><b>Backblaze B2</b></td><td class="near">Norteamérica</td><td>—</td><td class="n">—</td><td class="n">—</td><td class="n">34,68 US$</td><td class="n"><b>34,68 US$</b></td><td><a class="ext" href="https://www.backblaze.com/cloud-storage/pricing" target="_blank" rel="noopener"><span>Página de precios</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2.5h4.5V7M13.5 2.5 7.5 8.5M12 10v3.5H2.5V4H6"/></svg></a></td></tr><tr><td><b>Wasabi</b><small class="warn">La salida gratis de Wasabi supone no descargar al mes más de lo que almacenas.</small></td><td class="near">Norteamérica</td><td>—</td><td class="n">—</td><td class="n">—</td><td class="n">39,95 US$</td><td class="n"><b>39,95 US$</b></td><td><a class="ext" href="https://wasabi.com/pricing" target="_blank" rel="noopener"><span>Página de precios</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2.5h4.5V7M13.5 2.5 7.5 8.5M12 10v3.5H2.5V4H6"/></svg></a></td></tr><tr><td><b>Cloudflare R2</b></td><td class="near">Norteamérica</td><td>—</td><td class="n">—</td><td class="n">—</td><td class="n">76,65 US$</td><td class="n"><b>76,65 US$</b></td><td><a class="ext" href="https://developers.cloudflare.com/r2/pricing/" target="_blank" rel="noopener"><span>Página de precios</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2.5h4.5V7M13.5 2.5 7.5 8.5M12 10v3.5H2.5V4H6"/></svg></a></td></tr><tr><td><b>DigitalOcean Spaces</b></td><td class="near">Norteamérica</td><td>—</td><td class="n">—</td><td class="n">—</td><td class="n">102 US$</td><td class="n"><b>102 US$</b></td><td><a class="ext" href="https://www.digitalocean.com/pricing/spaces-object-storage" target="_blank" rel="noopener"><span>Página de precios</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2.5h4.5V7M13.5 2.5 7.5 8.5M12 10v3.5H2.5V4H6"/></svg></a></td></tr><tr><td><b>Amazon S3</b><small class="warn">S3 al precio de US East.</small></td><td class="near">Norteamérica</td><td>—</td><td class="n">—</td><td class="n">—</td><td class="n">118 US$</td><td class="n"><b>118 US$</b></td><td><a class="ext" href="https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonS3/current/us-east-1/index.json" target="_blank" rel="noopener"><span>Página de precios</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2.5h4.5V7M13.5 2.5 7.5 8.5M12 10v3.5H2.5V4H6"/></svg></a></td></tr></tbody></table></div>
+    </details>
+<section class="card facts" aria-labelledby="factsH"><h2 id="factsH">Las cifras</h2><p>Copias de seguridad (Solo almacenamiento, 500 GB al mes): la combinación más barata es Backblaze B2 por 34,68 US$/mes; todo en AWS cuesta 154 US$.</p><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Visitantes en</th><th class="n">Cerca de tus visitantes</th><th class="n">Al mes</th><th class="n">Todo en AWS</th></tr></thead><tbody><tr><td>Norteamérica</td><td class="n">Backblaze B2</td><td class="n">34,68 US$</td><td class="n">154 US$</td></tr><tr><td>Europa</td><td class="n">Backblaze B2</td><td class="n">34,68 US$</td><td class="n">154 US$</td></tr><tr><td>Asia-Pacífico</td><td class="n">Backblaze B2</td><td class="n">34,68 US$</td><td class="n">163 US$</td></tr><tr><td>China continental</td><td class="n">Backblaze B2</td><td class="n">34,68 US$</td><td class="n">163 US$</td></tr></tbody></table></div></section>
+  </main>
+
+  <footer class="foot">
+    <nav class="sitemap" aria-label="Más páginas"><b>Más páginas</b><a href="/es/">Calculadora</a><i class="br"></i><b>Escenarios</b><a href="/es/blog-hosting-cost/">Blog: coste mensual de servidor, almacenamiento y tráfico</a><a href="/es/saas-hosting-cost/">App web / SaaS: coste mensual de servidor, almacenamiento y tráfico</a><a href="/es/proxy-vps-cost/">Proxy / relé: coste mensual de servidor, almacenamiento y tráfico</a><a href="/es/download-site-cost/">Sitio de descargas: coste mensual de servidor, almacenamiento y tráfico</a><a href="/es/video-hosting-cost/">Imágenes / vídeo: coste mensual de servidor, almacenamiento y tráfico</a><a href="/es/backup-storage-cost/" aria-current="page">Copias de seguridad: coste mensual de servidor, almacenamiento y tráfico</a><i class="br"></i><b>Coste de salida</b><a href="/es/aws-egress-cost/">Coste de salida de AWS: precio por GB de tráfico saliente</a><a href="/es/gcp-egress-cost/">Coste de salida de Google Cloud: precio por GB de tráfico saliente</a><a href="/es/azure-egress-cost/">Coste de salida de Azure: precio por GB de tráfico saliente</a><a href="/es/oracle-egress-cost/">Coste de salida de Oracle Cloud: precio por GB de tráfico saliente</a><a href="/es/1tb-egress-cost/">¿Cuánto cuestan 1 TB de tráfico de salida al mes? VPS y nubes comparados</a><a href="/es/10tb-egress-cost/">¿Cuánto cuestan 10 TB de tráfico de salida al mes? VPS y nubes comparados</a><a href="/es/100tb-egress-cost/">¿Cuánto cuestan 100 TB de tráfico de salida al mes? VPS y nubes comparados</a><i class="br"></i><b>Comparativas</b><a href="/es/aws-vs-hetzner-bandwidth/">AWS EC2 vs Hetzner: precio y tráfico incluido</a><a href="/es/hetzner-vs-digitalocean/">Hetzner vs DigitalOcean: precio y tráfico incluido</a><a href="/es/hetzner-vs-vultr/">Hetzner vs Vultr: precio y tráfico incluido</a><a href="/es/digitalocean-vs-vultr/">DigitalOcean vs Vultr: precio y tráfico incluido</a><a href="/es/vultr-vs-linode/">Vultr vs Linode (Akamai): precio y tráfico incluido</a><a href="/es/lightsail-vs-ec2/">AWS Lightsail vs AWS EC2: precio y tráfico incluido</a><a href="/es/r2-vs-s3/">Cloudflare R2 vs Amazon S3: coste del almacenamiento de objetos</a><a href="/es/b2-vs-wasabi/">Backblaze B2 vs Wasabi: coste del almacenamiento de objetos</a><a href="/es/cloudfront-vs-cloudflare/">Amazon CloudFront vs Cloudflare CDN (Free): coste de ancho de banda CDN</a><i class="br"></i><b>Lo más barato</b><a href="/es/cheapest-vps-4gb/">El VPS más barato con 4 GB de RAM</a><a href="/es/cheapest-object-storage/">El almacenamiento de objetos más barato</a><a href="/es/cheapest-cdn/">La CDN más barata</a></nav>
+    <div class="foot-l"><span>Precios comprobados el 2026-11-01 · 1 EUR = 1.1172 USD (2026-10-30) · sin IVA ni impuestos</span><span>© 1ms.dog</span></div>
+  </footer>
+</div>
+
+<div class="scrim" id="help" hidden>
+  <div class="dialog help" role="dialog" aria-modal="true" aria-labelledby="helpT">
+    <div class="dlg-h"><h2 id="helpT" data-i="faq_h">Preguntas</h2>
+      <button class="icon-btn" data-close type="button" aria-label="Cerrar"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button></div>
+    <div class="help-b">
+      <nav class="help-nav" id="helpNav" role="tablist"><button type="button" role="tab" data-hq="0" aria-selected="true">¿Cómo se calcula la recomendación?</button><button type="button" role="tab" data-hq="1" aria-selected="false">¿Por qué las grandes nubes son mucho más caras?</button><button type="button" role="tab" data-hq="2" aria-selected="false">¿Qué son los «archivos estáticos» y qué pongo?</button><button type="button" role="tab" data-hq="3" aria-selected="false">¿Cuándo compensa almacenamiento de objetos más CDN?</button><button type="button" role="tab" data-hq="4" aria-selected="false">¿Por qué la entrada es gratis y la salida se cobra?</button><button type="button" role="tab" data-hq="5" aria-selected="false">¿Qué son los niveles Premium y Standard de Google Cloud?</button><button type="button" role="tab" data-hq="6" aria-selected="false">¿Por qué cuesta más el tráfico hacia China continental?</button><button type="button" role="tab" data-hq="7" aria-selected="false">¿Por qué no se compara el rendimiento?</button><button type="button" role="tab" data-hq="8" aria-selected="false">¿Compensa comprar varios servidores pequeños por su tráfico?</button><button type="button" role="tab" data-hq="9" aria-selected="false">¿Están actualizados los precios?</button></nav>
+      <div class="help-pick">
+        <button class="icon-btn" type="button" data-hstep="-1" aria-label="Pregunta anterior"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 4L6 8l4 4"/></svg></button>
+        <select id="helpSel" aria-labelledby="helpT"></select>
+        <button class="icon-btn" type="button" data-hstep="1" aria-label="Pregunta siguiente"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg></button>
+      </div>
+      <div class="help-c" id="helpC"><article data-hqb="0"><h3>¿Cómo se calcula la recomendación?</h3><p>Cada plan de servidor que cumple tu CPU y memoria se combina con cada opción de almacenamiento de objetos y CDN. Cada combinación se calcula para un mes: el plan, el tráfico por encima del incluido (o la salida por GB de la nube), el almacenamiento, las peticiones y el tráfico de la CDN. Se muestran la más barata en total, la más barata cerca de tus visitantes y la de menos proveedores; la tabla lista el resto.</p></article><article data-hqb="1" hidden><h3>¿Por qué las grandes nubes son mucho más caras?</h3><p>AWS, Google Cloud y Azure cobran cada GB que sale a internet (entre $0,08 y $0,12 aprox.), mientras que la mayoría de VPS incluyen de 1 a 20 TB al mes. Con unos pocos TB al mes, el tráfico cuesta más que el propio servidor.</p></article><article data-hqb="2" hidden><h3>¿Qué son los «archivos estáticos» y qué pongo?</h3><p>Archivos iguales para todos los visitantes: imágenes, descargas, vídeo, scripts. Puede servirlos un almacenamiento de objetos o una CDN en vez de tu servidor. Un blog es casi todo estático (80 % aprox.), una API o un proxy nada (0 %), un sitio de descargas casi todo (95 %).</p></article><article data-hqb="3" hidden><h3>¿Cuándo compensa almacenamiento de objetos más CDN?</h3><p>Cuando los archivos estáticos son la mayor parte del tráfico y superan lo que incluye el plan del servidor. Cloudflare R2 no cobra la salida y Backblaze B2 es gratis detrás de Cloudflare o Bunny, así que unos TB de descargas pueden costar unos dólares en vez de cientos.</p></article><article data-hqb="4" hidden><h3>¿Por qué la entrada es gratis y la salida se cobra?</h3><p>Los proveedores compran tránsito según el tráfico que sale de su red, y el tráfico entrante atrae clientes. Por eso subir es gratis y lo que pagas son las descargas hacia tus visitantes.</p></article><article data-hqb="5" hidden><h3>¿Qué son los niveles Premium y Standard de Google Cloud?</h3><p>Premium lleva el tráfico por la red de Google hasta el punto más cercano al visitante y se cobra por destino; Standard lo entrega a internet cerca del centro de datos y cuesta menos. Las preferencias de enrutamiento «red de Microsoft» e «Internet» de Azure son la misma idea.</p></article><article data-hqb="6" hidden><h3>¿Por qué cuesta más el tráfico hacia China continental?</h3><p>Los enlaces internacionales hacia China son escasos y caros. Google Cloud cobra aparte el tráfico Premium hacia China (aproximadamente el doble) y las rutas hacia China suelen ser lentas pagues lo que pagues. Los centros de datos de Asia-Pacífico suelen ser los más cercanos.</p></article><article data-hqb="7" hidden><h3>¿Por qué no se compara el rendimiento?</h3><p>Es un filtro de precio y especificaciones, no un benchmark. Los planes de CPU compartida (marcados en la tabla) pueden ir más lentos si los vecinos están ocupados; desactívalos en Más opciones si te importa.</p></article><article data-hqb="8" hidden><h3>¿Compensa comprar varios servidores pequeños por su tráfico?</h3><p>A veces varios planes pequeños incluyen más tráfico que uno grande. El planificador no busca eso; cambia tú el número de servidores en Más opciones y compara.</p></article><article data-hqb="9" hidden><h3>¿Están actualizados los precios?</h3><p>Cada precio se comprobó a mano en la página de precios del proveedor; la fecha está en el pie y cada fila enlaza a su fuente. Precios sin IVA. Los precios en euros usan un tipo de cambio fijo. ¿Ves un error? Abre una issue en GitHub.</p></article></div>
+    </div>
+  </div>
+</div>
+<script type="application/json" id="data">{"lang":"es","paths":{"en":"/backup-storage-cost/","zh-CN":"/zh-cn/backup-storage-cost/","zh-TW":"/zh-tw/backup-storage-cost/","ja":"/ja/backup-storage-cost/","ko":"/ko/backup-storage-cost/","es":"/es/backup-storage-cost/","fr":"/fr/backup-storage-cost/","de":"/de/backup-storage-cost/","pt":"/pt/backup-storage-cost/","ru":"/ru/backup-storage-cost/"},"state":{"scene":"backup","aud":"na","shared":true,"free":false,"count":1,"vcpu":0,"ram":0,"disk":0,"gb":500,"staticPct":100,"storeGB":5120,"objKB":10000},"cur":"USD","verified":"2026-11-01","slug":"backup-storage-cost"}</script>
+<script src="/assets/l.es.3015bada02.js" defer></script>
+<script src="/assets/app.1fe6649065.js" defer></script>
+</body>
+</html>

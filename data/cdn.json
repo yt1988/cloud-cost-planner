@@ -1,0 +1,36 @@
+{
+  "about": "CDNs, per month, by where the visitors are (na, eu, ap, cn). tiers: [up to GB, USD per GB], counted from 0; freeBefore: GB free before the tiers. requests: USD per million after freeM million.",
+  "services": [
+    {
+      "id": "cloudflare", "name": "Cloudflare CDN (Free)", "currency": "USD",
+      "tiers": { "na": [[null, 0]], "eu": [[null, 0]], "ap": [[null, 0]], "cn": [[null, 0]] },
+      "note": "cloudflare",
+      "source": "https://www.cloudflare.com/plans/network-cdn/", "termsSource": "https://www.cloudflare.com/service-specific-terms-application-services/", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "cloudfront", "name": "Amazon CloudFront", "currency": "USD", "freeBefore": 1024,
+      "tiers": {
+        "na": [[10240, 0.085], [51200, 0.08], [153600, 0.06], [512000, 0.04], [1048576, 0.03], [5242880, 0.025], [null, 0.02]],
+        "eu": [[10240, 0.085], [51200, 0.08], [153600, 0.06], [512000, 0.04], [1048576, 0.03], [5242880, 0.025], [null, 0.02]],
+        "ap": [[10240, 0.114], [51200, 0.089], [153600, 0.086], [512000, 0.084], [1048576, 0.08], [5242880, 0.07], [null, 0.06]],
+        "cn": [[10240, 0.12], [51200, 0.1], [153600, 0.095], [512000, 0.09], [1048576, 0.08], [5242880, 0.07], [null, 0.06]]
+      },
+      "requests": { "na": 1, "eu": 1.2, "ap": 1.2, "cn": 1.2, "freeM": 10 },
+      "source": "https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonCloudFront/current/index.json", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "bunny", "name": "Bunny CDN", "currency": "USD", "minMonthly": 1,
+      "tiers": { "na": [[null, 0.01]], "eu": [[null, 0.01]], "ap": [[null, 0.03]], "cn": [[null, 0.03]] },
+      "source": "https://bunny.net/pricing/cdn/", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "bunny-volume", "name": "Bunny CDN Volume", "currency": "USD", "minMonthly": 1,
+      "tiers": {
+        "na": [[512000, 0.005], [1048576, 0.004], [2097152, 0.002]], "eu": [[512000, 0.005], [1048576, 0.004], [2097152, 0.002]],
+        "ap": [[512000, 0.005], [1048576, 0.004], [2097152, 0.002]], "cn": [[512000, 0.005], [1048576, 0.004], [2097152, 0.002]]
+      },
+      "note": "bunnyVolume",
+      "source": "https://bunny.net/pricing/cdn/", "verifiedAt": "2026-11-01"
+    }
+  ]
+}

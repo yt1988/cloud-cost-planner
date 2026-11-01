@@ -1,0 +1,62 @@
+{
+  "about": "Internet egress of the public clouds, per account and month. tiers: [up to GB (null: no limit), USD per GB], counted from 0 over the month's total; a 0 price is the free allowance. freeBefore: an allowance taken off before the tiers (AWS). Keys: the source region, then the destination (global, or cn for mainland China).",
+  "profiles": [
+    {
+      "id": "aws", "provider": "aws", "product": "Data Transfer Out to Internet",
+      "freeBefore": 100,
+      "tiers": {
+        "na": { "global": [[10240, 0.09], [51200, 0.085], [153600, 0.07], [null, 0.05]] },
+        "eu": { "global": [[10240, 0.09], [51200, 0.085], [153600, 0.07], [null, 0.05]] },
+        "ap": { "global": [[10240, 0.114], [51200, 0.089], [153600, 0.086], [null, 0.084]] }
+      },
+      "source": "https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AWSDataTransfer/current/region_index.json", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "gcp-premium", "provider": "gcp", "product": "Premium Tier",
+      "tiers": {
+        "na": { "global": [[1, 0], [1024, 0.12], [10240, 0.11], [null, 0.08]], "cn": [[1024, 0.23], [10240, 0.22], [null, 0.2]] },
+        "eu": { "global": [[1024, 0.12], [10240, 0.11], [null, 0.08]], "cn": [[1024, 0.23], [10240, 0.22], [null, 0.2]] },
+        "ap": { "global": [[1024, 0.12], [10240, 0.11], [null, 0.085]], "cn": [[1024, 0.23], [10240, 0.22], [null, 0.2]] }
+      },
+      "salesAboveGB": 512000,
+      "source": "https://cloud.google.com/vpc/network-pricing", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "gcp-standard", "provider": "gcp", "product": "Standard Tier",
+      "tiers": {
+        "na": { "global": [[200, 0], [10240, 0.085], [153600, 0.065], [null, 0.045]] },
+        "eu": { "global": [[200, 0], [10240, 0.085], [153600, 0.065], [null, 0.045]] },
+        "ap": { "global": [[200, 0], [10240, 0.11], [153600, 0.075], [null, 0.07]] }
+      },
+      "salesAboveGB": 512000,
+      "source": "https://cloud.google.com/vpc/network-pricing", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "azure-mgn", "provider": "azure", "product": "Routing preference: Microsoft network",
+      "tiers": {
+        "na": { "global": [[100, 0], [10335, 0.087], [51295, 0.083], [153695, 0.07], [null, 0.05]] },
+        "eu": { "global": [[100, 0], [10335, 0.087], [51295, 0.083], [153695, 0.07], [null, 0.05]] },
+        "ap": { "global": [[100, 0], [10335, 0.12], [51295, 0.085], [153695, 0.082], [null, 0.08]] }
+      },
+      "source": "https://prices.azure.com/api/retail/prices", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "azure-internet", "provider": "azure", "product": "Routing preference: Internet",
+      "tiers": {
+        "na": { "global": [[100, 0], [10100, 0.08], [50100, 0.065], [150100, 0.06], [null, 0.04]] },
+        "eu": { "global": [[100, 0], [10100, 0.08], [50100, 0.065], [150100, 0.06], [null, 0.04]] },
+        "ap": { "global": [[100, 0], [10100, 0.11], [50100, 0.075], [150100, 0.07], [null, 0.06]] }
+      },
+      "source": "https://prices.azure.com/api/retail/prices", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "oracle", "provider": "oracle", "product": "Outbound Data Transfer",
+      "tiers": {
+        "na": { "global": [[10240, 0], [null, 0.0085]] },
+        "eu": { "global": [[10240, 0], [null, 0.0085]] },
+        "ap": { "global": [[10240, 0], [null, 0.025]] }
+      },
+      "source": "https://www.oracle.com/cloud/price-list/", "verifiedAt": "2026-11-01"
+    }
+  ]
+}

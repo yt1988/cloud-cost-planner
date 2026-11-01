@@ -1,0 +1,43 @@
+{
+  "about": "Object storage, per month. storage: [up to GB, price per GB-month]. egress: perGB after freeGB (or freeRatio × stored GB); egressRef bills it through a cloud's egress profile; freeTo: CDNs that fetch from it without an egress charge. get: price per million GET requests after freeM million. base: a monthly fee that includes storage and egress.",
+  "services": [
+    {
+      "id": "r2", "provider": "cloudflare", "name": "Cloudflare R2", "currency": "USD",
+      "storage": [[null, 0.015]], "freeStorageGB": 10,
+      "egress": { "perGB": 0 }, "get": { "perM": 0.36, "freeM": 10 },
+      "source": "https://developers.cloudflare.com/r2/pricing/", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "s3", "provider": "aws", "name": "Amazon S3", "currency": "USD",
+      "storage": [[51200, 0.023], [512000, 0.022], [null, 0.021]],
+      "egress": { "egressRef": "aws" }, "freeTo": ["cloudfront"], "get": { "perM": 0.4 },
+      "note": "s3Region",
+      "source": "https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonS3/current/us-east-1/index.json", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "b2", "provider": "backblaze", "name": "Backblaze B2", "currency": "USD",
+      "storage": [[null, 0.0067871]], "freeStorageGB": 10,
+      "egress": { "perGB": 0.01, "freeRatio": 3 }, "freeTo": ["cloudflare", "bunny", "bunny-volume"], "get": { "perM": 0 },
+      "source": "https://www.backblaze.com/cloud-storage/pricing", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "wasabi", "provider": "wasabi", "name": "Wasabi", "currency": "USD",
+      "storage": [[null, 0.0078027]], "minStorageGB": 1024,
+      "egress": { "perGB": 0, "fairUse": true }, "get": { "perM": 0 }, "policySource": "https://wasabi.com/pricing/faq",
+      "note": "wasabi",
+      "source": "https://wasabi.com/pricing", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "spaces", "provider": "digitalocean", "name": "DigitalOcean Spaces", "currency": "USD",
+      "base": { "monthly": 5, "storageGB": 250, "egressGB": 1024 },
+      "storage": [[null, 0.02]], "egress": { "perGB": 0.01 }, "get": { "perM": 0 }, "cdn": true,
+      "source": "https://www.digitalocean.com/pricing/spaces-object-storage", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "hetzner-os", "provider": "hetzner", "name": "Hetzner Object Storage", "currency": "EUR", "regions": ["eu"],
+      "base": { "monthly": 6.49, "storageGB": 1024, "egressGB": 1024 },
+      "storage": [[null, 0.00631875]], "egress": { "perGB": 0.0009765625 }, "get": { "perM": 0 },
+      "source": "https://www.hetzner.com/storage/object-storage/", "verifiedAt": "2026-11-01"
+    }
+  ]
+}

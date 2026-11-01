@@ -1,0 +1,7 @@
+{
+  "about": "Fixed exchange rates for prices that are not in US dollars, and for showing totals in other currencies. ECB euro reference rates; USD→CNY derived from them.",
+  "date": "2026-10-30",
+  "usdPer": { "USD": 1, "EUR": 1.1172 },
+  "perUsd": { "USD": 1, "EUR": 0.89509, "CNY": 6.6529 },
+  "source": "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml", "verifiedAt": "2026-11-01"
+}

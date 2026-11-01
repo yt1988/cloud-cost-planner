@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="zh-CN" data-paths="{&quot;en&quot;:&quot;/r2-vs-s3/&quot;,&quot;zh-CN&quot;:&quot;/zh-cn/r2-vs-s3/&quot;,&quot;zh-TW&quot;:&quot;/zh-tw/r2-vs-s3/&quot;,&quot;ja&quot;:&quot;/ja/r2-vs-s3/&quot;,&quot;ko&quot;:&quot;/ko/r2-vs-s3/&quot;,&quot;es&quot;:&quot;/es/r2-vs-s3/&quot;,&quot;fr&quot;:&quot;/fr/r2-vs-s3/&quot;,&quot;de&quot;:&quot;/de/r2-vs-s3/&quot;,&quot;pt&quot;:&quot;/pt/r2-vs-s3/&quot;,&quot;ru&quot;:&quot;/ru/r2-vs-s3/&quot;}">
+<head>
+<meta charset="utf-8">
+<script>(function(){var d=document.documentElement,th=null,s=null;try{th=localStorage.getItem("cloud-cost:theme");s=localStorage.getItem("cloud-cost:lang")}catch(e){}if(th==="light"||th==="dark")d.setAttribute("data-theme",th);if(!d.hasAttribute("data-root"))return;var P=JSON.parse(d.getAttribute("data-paths")||"{}"),l=null;if(P[s])l=s;for(var ls=navigator.languages||[navigator.language||"en"],i=0;!l&&!s&&i<ls.length;i++){var x=String(ls[i]).toLowerCase(),b=x.split("-")[0];l=b==="zh"?(/tw|hk|mo|hant/.test(x)?"zh-TW":"zh-CN"):P[b]?b:null}if(l&&l!=="en")location.replace(P[l]+location.search+location.hash)})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cloudflare R2 和 Amazon S3 对比：对象存储费用 · 云成本规划器</title>
+<meta name="description" content="Cloudflare R2 还是 Amazon S3？几种常见用量下的存储、流量和请求费用。">
+<meta name="keywords" content="云服务器价格对比, VPS 比价, 流量费计算, 出口流量费用, 对象存储价格, CDN 价格, AWS 流量费, Hetzner, 云服务器哪家便宜">
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta name="applicable-device" content="pc,mobile">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#f6f6f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1c1c1c" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://cost.1ms.dog/zh-cn/r2-vs-s3/">
+<link rel="alternate" hreflang="en" href="https://cost.1ms.dog/r2-vs-s3/">
+<link rel="alternate" hreflang="zh-CN" href="https://cost.1ms.dog/zh-cn/r2-vs-s3/">
+<link rel="alternate" hreflang="zh-TW" href="https://cost.1ms.dog/zh-tw/r2-vs-s3/">
+<link rel="alternate" hreflang="ja" href="https://cost.1ms.dog/ja/r2-vs-s3/">
+<link rel="alternate" hreflang="ko" href="https://cost.1ms.dog/ko/r2-vs-s3/">
+<link rel="alternate" hreflang="es" href="https://cost.1ms.dog/es/r2-vs-s3/">
+<link rel="alternate" hreflang="fr" href="https://cost.1ms.dog/fr/r2-vs-s3/">
+<link rel="alternate" hreflang="de" href="https://cost.1ms.dog/de/r2-vs-s3/">
+<link rel="alternate" hreflang="pt" href="https://cost.1ms.dog/pt/r2-vs-s3/">
+<link rel="alternate" hreflang="ru" href="https://cost.1ms.dog/ru/r2-vs-s3/">
+<link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/r2-vs-s3/">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="1ms.dog">
+<meta property="og:title" content="Cloudflare R2 和 Amazon S3 对比：对象存储费用">
+<meta property="og:description" content="Cloudflare R2 还是 Amazon S3？几种常见用量下的存储、流量和请求费用。">
+<meta property="og:url" content="https://cost.1ms.dog/zh-cn/r2-vs-s3/">
+<meta property="og:image" content="https://cost.1ms.dog/og/zh-cn.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="zh_TW">
+<meta property="og:locale:alternate" content="ja_JP">
+<meta property="og:locale:alternate" content="ko_KR">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta property="og:locale:alternate" content="de_DE">
+<meta property="og:locale:alternate" content="pt_BR">
+<meta property="og:locale:alternate" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cloudflare R2 和 Amazon S3 对比：对象存储费用">
+<meta name="twitter:description" content="Cloudflare R2 还是 Amazon S3？几种常见用量下的存储、流量和请求费用。">
+<meta name="twitter:image" content="https://cost.1ms.dog/og/zh-cn.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Cloudflare R2 和 Amazon S3 对比：对象存储费用","url":"https://cost.1ms.dog/zh-cn/r2-vs-s3/","applicationCategory":"BusinessApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","description":"Cloudflare R2 还是 Amazon S3？几种常见用量下的存储、流量和请求费用。","inLanguage":"zh-CN","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"云成本规划器","item":"https://cost.1ms.dog/zh-cn/"},{"@type":"ListItem","position":2,"name":"Cloudflare R2 和 Amazon S3 对比：对象存储费用","item":"https://cost.1ms.dog/zh-cn/r2-vs-s3/"}]}]}</script>
+<link rel="preload" href="/assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/app.1afc3ef2c2.css">
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <a class="brand" href="/zh-cn/" aria-label="云成本规划器">
+      <img class="logo-light" src="/assets/logo-light.svg" width="90" height="36" alt="1ms">
+      <img class="logo-dark" src="/assets/logo-dark.svg" width="90" height="36" alt="1ms">
+      <span class="pname" data-i="name">云成本规划器</span>
+    </a>
+    <div class="top-acts">
+      <label class="sel"><span class="sr" data-i="lang_label">语言</span>
+        <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5"/><path d="M1.5 8h13M8 1.5c2 2 2.8 4 2.8 6.5S10 12.5 8 14.5C6 12.5 5.2 10.5 5.2 8S6 3.5 8 1.5z"/></svg>
+        <select id="lang"><option value="en">English</option><option value="zh-CN" selected>简体中文</option><option value="zh-TW">繁體中文</option><option value="ja">日本語</option><option value="ko">한국어</option><option value="es">Español</option><option value="fr">Français</option><option value="de">Deutsch</option><option value="pt">Português</option><option value="ru">Русский</option></select>
+      </label>
+      <button class="icon-btn" id="helpBtn" type="button" aria-haspopup="dialog" aria-controls="help"><span class="sr" data-i="faq_h">常见问题</span>
+        <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.2"/><path d="M6.3 6.2a1.8 1.8 0 1 1 2.5 1.7c-.5.2-.8.6-.8 1.1v.4M8 11.3v.1"/></svg>
+      </button>
+      <a class="icon-btn gh" href="https://github.com/yt1988/cloud-cost-planner" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 .2a8 8 0 0 0-2.5 15.6c.4 0 .5-.2.5-.4v-1.5c-2.2.5-2.7-1-2.7-1-.4-.9-.9-1.2-.9-1.2-.7-.5.1-.5.1-.5.8.1 1.2.8 1.2.8.7 1.3 1.9.9 2.4.7 0-.5.3-.9.5-1.1-1.8-.2-3.6-.9-3.6-4 0-.9.3-1.6.8-2.1-.1-.2-.4-1 .1-2.1 0 0 .7-.2 2.2.8a7.4 7.4 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.4 1.1.2 1.9.1 2.1.5.6.8 1.3.8 2.1 0 3.1-1.9 3.7-3.6 3.9.3.3.6.8.6 1.5v2.2c0 .2.1.5.6.4A8 8 0 0 0 8 .2z"/></svg></a>
+      <button class="icon-btn" id="theme" type="button" aria-label="主题：跟随系统">
+        <svg class="i-sys" viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M5.5 14h5M8 11.5V14"/></svg>
+        <svg class="i-light" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1v1.6M8 13.4V15M1 8h1.6M13.4 8H15M3 3l1.1 1.1M11.9 11.9 13 13M3 13l1.1-1.1M11.9 4.1 13 3"/></svg>
+        <svg class="i-dark" viewBox="0 0 16 16" aria-hidden="true"><path d="M13.5 9.8A5.8 5.8 0 0 1 6.2 2.5a5.8 5.8 0 1 0 7.3 7.3z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Cloudflare R2 和 Amazon S3 对比：对象存储费用</h1>
+      <p class="lede">选好业务类型、填上流量，每家 VPS 和云主机都按套餐流量、超额费、对象存储和 CDN 算出月费，最便宜的整套方案排在最前面。</p>
+    </section>
+
+    <section class="card inputs" aria-labelledby="inH">
+      <h2 class="sr" id="inH" data-i="in_scene">你要跑什么？</h2>
+      <div class="scenes" role="group" aria-label="你要跑什么？"><button class="chip" type="button" data-scene="blog" aria-pressed="false">个人博客</button><button class="chip" type="button" data-scene="saas" aria-pressed="false">Web 应用 / SaaS</button><button class="chip" type="button" data-scene="proxy" aria-pressed="false">代理 / 中转</button><button class="chip" type="button" data-scene="download" aria-pressed="false">下载站</button><button class="chip" type="button" data-scene="media" aria-pressed="false">图片 / 视频站</button><button class="chip" type="button" data-scene="backup" aria-pressed="false">备份存储</button></div>
+      <div class="grid">
+        <div class="field wide" id="sizeField">
+          <span class="lab" data-i="in_size">服务器配置</span>
+          <div class="seg" role="group" aria-label="服务器配置"><button type="button" data-size="0" aria-pressed="false">1 vCPU · 2 GB</button><button type="button" data-size="1" aria-pressed="false">2 vCPU · 4 GB</button><button type="button" data-size="2" aria-pressed="false">4 vCPU · 8 GB</button><button type="button" data-size="3" aria-pressed="false">8 vCPU · 16 GB</button><button type="button" data-size="custom" aria-pressed="false">自定义</button><button type="button" data-size="none" aria-pressed="true">不要服务器</button></div>
+          <div class="custom" id="custom" hidden>
+            <label><span data-i="f_vcpu">CPU 核数</span><input id="vcpu" type="number" min="1" max="64" step="1" inputmode="numeric"></label>
+            <label><span data-i="f_ram">内存 (GB)</span><input id="ram" type="number" min="0.5" max="256" step="0.5" inputmode="decimal"></label>
+            <label><span data-i="f_disk">硬盘 (GB)</span><input id="disk" type="number" min="0" max="10000" step="5" inputmode="numeric"></label>
+          </div>
+        </div>
+        <div class="field">
+          <label class="lab" for="gbN" data-i="in_gb">每月出口流量</label>
+          <div class="amt"><input id="gbN" type="number" min="0" step="any" inputmode="decimal"><select id="gbU" aria-label="单位"><option value="1">GB</option><option value="1024">TB</option></select></div>
+          <input id="gbR" class="range" type="range" min="0" max="1000" step="1" aria-label="每月出口流量">
+        </div>
+        <div class="field">
+          <label class="lab" for="stR"><span data-i="in_static">其中静态文件</span> <b id="stV" class="val"></b></label>
+          <input id="stR" class="range" type="range" min="0" max="100" step="5">
+          <p class="hint" data-i="static_hint">图片、下载、视频这类文件，可以交给对象存储或 CDN 发，不占服务器流量。</p>
+        </div>
+        <div class="field">
+          <label class="lab" for="sgN" data-i="in_store">存储文件量</label>
+          <div class="amt"><input id="sgN" type="number" min="0" step="any" inputmode="decimal"><select id="sgU" aria-label="单位"><option value="1">GB</option><option value="1024">TB</option></select></div>
+          <input id="sgR" class="range" type="range" min="0" max="1000" step="1" aria-label="存储文件量">
+        </div>
+        <div class="field">
+          <span class="lab" data-i="in_aud">用户主要在</span>
+          <div class="seg" role="group" aria-label="用户主要在"><button type="button" data-aud="na" aria-pressed="true">北美</button><button type="button" data-aud="eu" aria-pressed="false">欧洲</button><button type="button" data-aud="ap" aria-pressed="false">亚太</button><button type="button" data-aud="cn" aria-pressed="false">中国大陆</button></div>
+        </div>
+      </div>
+      <details class="adv" id="adv">
+        <summary data-i="adv">高级选项</summary>
+        <div class="grid">
+          <label class="field"><span class="lab" data-i="f_count">服务器数量</span><input id="count" type="number" min="1" max="100" step="1" inputmode="numeric"></label>
+          <label class="field"><span class="lab" data-i="f_cur">币种</span><select id="cur" class="pick-sel"><option value="USD">USD</option><option value="EUR">EUR</option><option value="CNY">CNY</option></select></label>
+          <label class="field"><span class="lab" data-i="f_obj">平均文件大小 (KB)</span><input id="objKB" type="number" min="1" step="any" inputmode="decimal"></label>
+          <label class="chk"><input id="shared" type="checkbox"><span data-i="f_shared">包含共享 CPU 套餐</span></label>
+          <label class="chk"><input id="free" type="checkbox"><span data-i="f_free">计入永久免费额度（Oracle、谷歌云）</span></label>
+        </div>
+      </details>
+    </section>
+
+    <section class="card result" aria-labelledby="outH">
+      <div class="res-h">
+        <h2 id="outH" data-i="out_h">推荐方案</h2>
+        <button class="btn icon" id="share" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 10V2M5 4.5 8 1.5l3 3M3 8v5.5h10V8"/></svg><span class="sr" data-i="share">分享</span></button>
+      </div>
+      <p class="verdict" id="verdict">只要存储，每月 1 TB，用户在北美：最省钱的是 Backblaze B2，US$6.88/月；全放 AWS 要 US$107，是它的 15.6 倍。</p>
+      <div class="picks" id="picks"><article class="pick best">
+<div class="pk-tags"><span class="tag t-cheapest">最省钱</span><span class="tag t-near">离用户近</span><span class="tag t-simple">最省事</span></div>
+<p class="pk-name">Backblaze B2</p>
+<p class="pk-total"><b>US$6.88</b><small>/月</small></p>
+<p class="pk-save">全放 AWS 要 US$107，是它的 15.6 倍</p>
+<dl class="pk-parts"><div><dt>服务器</dt><dd>不需要</dd><dd class="n">—</dd></div><div><dt>流量</dt><dd>—</dd><dd class="n">—</dd></div><div><dt>存储</dt><dd>Backblaze B2 · 1 TB · 直出 1 TB</dd><dd class="n">US$6.88</dd></div><div><dt>CDN</dt><dd>不需要</dd><dd class="n">—</dd></div></dl>
+<p class="pk-why"></p>
+
+<p class="links"></p>
+</article></div>
+      <p class="links"><a class="ext" data-tool="v2c" data-pend target="_blank" rel="noopener"><span data-i="l_v2c">从你的服务器测到各家云</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2.5h4.5V7M13.5 2.5 7.5 8.5M12 10v3.5H2.5V4H6"/></svg></a></p>
+    </section>
+
+    <section class="card chart" aria-labelledby="curveH">
+      <h2 id="curveH" data-i="curve_h">流量变化时的费用</h2>
+      <div id="curve"><svg class="curve" viewBox="0 0 760 240" role="img" aria-label="流量变化时的费用"><g class="grid"><line x1="58" x2="750" y1="212" y2="212"/><text x="52" y="216" text-anchor="end">US$1</text><line x1="58" x2="750" y1="171.60000000000002" y2="171.60000000000002"/><text x="52" y="175.60000000000002" text-anchor="end">US$10</text><line x1="58" x2="750" y1="131.2" y2="131.2"/><text x="52" y="135.2" text-anchor="end">US$100</text><line x1="58" x2="750" y1="90.80000000000001" y2="90.80000000000001"/><text x="52" y="94.80000000000001" text-anchor="end">US$1000</text><line x1="58" x2="750" y1="50.39999999999999" y2="50.39999999999999"/><text x="52" y="54.39999999999999" text-anchor="end">US$1万</text><line x1="58" x2="750" y1="10" y2="10"/><text x="52" y="14" text-anchor="end">US$10万</text><line x1="58" x2="58" y1="10" y2="212"/><text x="58" y="232" text-anchor="middle">10 GB</text><line x1="196.4" x2="196.4" y1="10" y2="212"/><text x="196.4" y="232" text-anchor="middle">100 GB</text><line x1="336.22551399895" x2="336.22551399895" y1="10" y2="212"/><text x="336.22551399895" y="232" text-anchor="middle">1 TB</text><line x1="474.6255139989499" x2="474.6255139989499" y1="10" y2="212"/><text x="474.6255139989499" y="232" text-anchor="middle">10 TB</text><line x1="613.0255139989499" x2="613.0255139989499" y1="10" y2="212"/><text x="613.0255139989499" y="232" text-anchor="middle">100 TB</text><line x1="752.8510279979" x2="752.8510279979" y1="10" y2="212"/><text x="752.8510279979" y="232" text-anchor="end">1 PB</text></g><line class="now" x1="336.22551399895" x2="336.22551399895" y1="10" y2="212"/><path class="l0" d="M58.0,178.2L73.8,178.2L93.3,178.2L110.6,178.2L127.9,178.2L144.3,178.2L161.5,178.2L179.1,178.2L196.4,178.2L213.5,178.2L231.1,178.2L248.3,178.2L265.6,178.2L282.9,178.2L300.2,178.2L317.5,178.2L334.8,178.2L352.1,178.2L369.4,178.2L386.7,178.2L404.0,176.0L421.3,161.0L438.6,151.0L455.9,143.0L473.2,136.0L490.5,129.6L507.8,123.6L525.1,117.9L542.4,112.4L559.7,107.0L577.0,101.7L594.3,96.4L611.6,91.2L628.9,86.1L646.2,80.9L663.5,75.8L680.8,70.7L698.1,65.6L715.4,60.6L732.7,55.5L750.0,50.4"/><path class="la" d="M58.0,156.6L73.8,156.6L93.3,156.6L110.6,156.6L127.9,156.6L144.3,156.6L161.5,156.6L179.1,156.5L196.4,156.5L213.5,154.4L231.1,152.0L248.3,149.1L265.6,146.0L282.9,142.4L300.2,138.7L317.5,134.6L334.8,130.3L352.1,125.9L369.4,121.3L386.7,116.7L404.0,111.9L421.3,107.1L438.6,102.2L455.9,97.2L473.2,92.3L490.5,87.5L507.8,82.7L525.1,77.9L542.4,72.9L559.7,68.0L577.0,63.3L594.3,59.0L611.6,54.6L628.9,50.0L646.2,46.0L663.5,42.3L680.8,38.4L698.1,34.2L715.4,29.8L732.7,25.3L750.0,20.7"/></svg><ul class="legend"><li class="l0"><i></i>Backblaze B2</li><li class="la"><i></i>全放 AWS</li></ul><ul class="cross"></ul></div>
+    </section>
+
+    <details class="card more" id="more">
+      <summary><span data-i="tbl_h">所有厂商对比</span> <small data-i="tbl_hint">每条产品线最便宜的方案</small></summary>
+      <div class="tbl-wrap" id="tbl"><table class="tbl"><thead><tr><th>方案</th><th>机房</th><th>CPU / 内存</th><th class="n">服务器</th><th class="n">流量</th><th class="n">存储 + CDN</th><th class="n">月费</th><th>来源</th></tr></thead><tbody><tr><td><b>Backblaze B2</b></td><td class="near">北美</td><td>—</td><td class="n">—</td><td class="n">—</td><td class="n">US$6.88</td><td class="n"><b>US$6.88</b></td><td><a class="ext" href="https://www.backblaze.com/cloud-storage/pricing" target="_blank" rel="noopener"><span>定价页</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2.5h4.5V7M13.5 2.5 7.5 8.5M12 10v3.5H2.5V4H6"/></svg></a></td></tr><tr><td><b>Wasabi</b><small class="warn">Wasabi 免费出口的前提是每月下载量不超过存储量。</small></td><td class="near">北美</td><td>—</td><td class="n">—</td><td class="n">—</td><td class="n">US$7.99</td><td class="n"><b>US$7.99</b></td><td><a class="ext" href="https://wasabi.com/pricing" target="_blank" rel="noopener"><span>定价页</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2.5h4.5V7M13.5 2.5 7.5 8.5M12 10v3.5H2.5V4H6"/></svg></a></td></tr><tr><td><b>Cloudflare R2</b></td><td class="near">北美</td><td>—</td><td class="n">—</td><td class="n">—</td><td class="n">US$15.21</td><td class="n"><b>US$15.21</b></td><td><a class="ext" href="https://developers.cloudflare.com/r2/pricing/" target="_blank" rel="noopener"><span>定价页</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2.5h4.5V7M13.5 2.5 7.5 8.5M12 10v3.5H2.5V4H6"/></svg></a></td></tr><tr><td><b>DigitalOcean Spaces</b></td><td class="near">北美</td><td>—</td><td class="n">—</td><td class="n">—</td><td class="n">US$20.48</td><td class="n"><b>US$20.48</b></td><td><a class="ext" href="https://www.digitalocean.com/pricing/spaces-object-storage" target="_blank" rel="noopener"><span>定价页</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2.5h4.5V7M13.5 2.5 7.5 8.5M12 10v3.5H2.5V4H6"/></svg></a></td></tr><tr><td><b>Amazon S3</b><small class="warn">S3 存储按美东价格计算。</small></td><td class="near">北美</td><td>—</td><td class="n">—</td><td class="n">—</td><td class="n">US$23.55</td><td class="n"><b>US$23.55</b></td><td><a class="ext" href="https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonS3/current/us-east-1/index.json" target="_blank" rel="noopener"><span>定价页</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2.5h4.5V7M13.5 2.5 7.5 8.5M12 10v3.5H2.5V4H6"/></svg></a></td></tr></tbody></table></div>
+    </details>
+<section class="card facts" aria-labelledby="factsH"><h2 id="factsH">这一页的数据</h2><p>Cloudflare R2 还是 Amazon S3？几种常见用量下的存储、流量和请求费用。</p><div class="tbl-wrap"><table class="tbl"><thead><tr><th>存储量 · 下载量</th><th class="n">Cloudflare R2</th><th class="n">Amazon S3</th></tr></thead><tbody><tr><td>100 GB · 100 GB</td><td class="n">US$1.35</td><td class="n">US$2.34</td></tr><tr><td>1 TB · 1 TB</td><td class="n">US$15.21</td><td class="n">US$107</td></tr><tr><td>1 TB · 10 TB</td><td class="n">US$15.48</td><td class="n">US$940</td></tr><tr><td>10 TB · 10 TB</td><td class="n">US$154</td><td class="n">US$1,152</td></tr><tr><td>10 TB · 50 TB</td><td class="n">US$169</td><td class="n">US$4,652</td></tr></tbody></table></div></section>
+  </main>
+
+  <footer class="foot">
+    <nav class="sitemap" aria-label="更多页面"><b>更多页面</b><a href="/zh-cn/">计算器</a><i class="br"></i><b>按场景</b><a href="/zh-cn/blog-hosting-cost/">个人博客每月要花多少钱？服务器、存储、流量费用</a><a href="/zh-cn/saas-hosting-cost/">Web 应用 / SaaS 每月要花多少钱？服务器、存储、流量费用</a><a href="/zh-cn/proxy-vps-cost/">代理 / 中转每月要花多少钱？服务器、存储、流量费用</a><a href="/zh-cn/download-site-cost/">下载站每月要花多少钱？服务器、存储、流量费用</a><a href="/zh-cn/video-hosting-cost/">图片 / 视频站每月要花多少钱？服务器、存储、流量费用</a><a href="/zh-cn/backup-storage-cost/">备份存储每月要花多少钱？服务器、存储、流量费用</a><i class="br"></i><b>流量费</b><a href="/zh-cn/aws-egress-cost/">AWS 流量费多少钱？出口流量每 GB 价格</a><a href="/zh-cn/gcp-egress-cost/">Google Cloud 流量费多少钱？出口流量每 GB 价格</a><a href="/zh-cn/azure-egress-cost/">Azure 流量费多少钱？出口流量每 GB 价格</a><a href="/zh-cn/oracle-egress-cost/">Oracle Cloud 流量费多少钱？出口流量每 GB 价格</a><a href="/zh-cn/1tb-egress-cost/">每月 1 TB 流量要多少钱？VPS 和云服务器对比</a><a href="/zh-cn/10tb-egress-cost/">每月 10 TB 流量要多少钱？VPS 和云服务器对比</a><a href="/zh-cn/100tb-egress-cost/">每月 100 TB 流量要多少钱？VPS 和云服务器对比</a><i class="br"></i><b>对比</b><a href="/zh-cn/aws-vs-hetzner-bandwidth/">AWS EC2 和 Hetzner 哪个便宜？价格与流量对比</a><a href="/zh-cn/hetzner-vs-digitalocean/">Hetzner 和 DigitalOcean 哪个便宜？价格与流量对比</a><a href="/zh-cn/hetzner-vs-vultr/">Hetzner 和 Vultr 哪个便宜？价格与流量对比</a><a href="/zh-cn/digitalocean-vs-vultr/">DigitalOcean 和 Vultr 哪个便宜？价格与流量对比</a><a href="/zh-cn/vultr-vs-linode/">Vultr 和 Linode (Akamai) 哪个便宜？价格与流量对比</a><a href="/zh-cn/lightsail-vs-ec2/">AWS Lightsail 和 AWS EC2 哪个便宜？价格与流量对比</a><a href="/zh-cn/r2-vs-s3/" aria-current="page">Cloudflare R2 和 Amazon S3 对比：对象存储费用</a><a href="/zh-cn/b2-vs-wasabi/">Backblaze B2 和 Wasabi 对比：对象存储费用</a><a href="/zh-cn/cloudfront-vs-cloudflare/">Amazon CloudFront 和 Cloudflare CDN (Free) 对比：CDN 流量费用</a><i class="br"></i><b>最便宜</b><a href="/zh-cn/cheapest-vps-4gb/">4 GB 内存的 VPS 哪家最便宜</a><a href="/zh-cn/cheapest-object-storage/">哪家对象存储最便宜</a><a href="/zh-cn/cheapest-cdn/">哪家 CDN 最便宜</a></nav>
+    <div class="foot-l"><span>价格核对于 2026-11-01 · 汇率 1 EUR = 1.1172 USD（2026-10-30）· 价格不含税</span><span>© 1ms.dog</span></div>
+  </footer>
+</div>
+
+<div class="scrim" id="help" hidden>
+  <div class="dialog help" role="dialog" aria-modal="true" aria-labelledby="helpT">
+    <div class="dlg-h"><h2 id="helpT" data-i="faq_h">常见问题</h2>
+      <button class="icon-btn" data-close type="button" aria-label="关闭"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button></div>
+    <div class="help-b">
+      <nav class="help-nav" id="helpNav" role="tablist"><button type="button" role="tab" data-hq="0" aria-selected="true">推荐方案是怎么算出来的？</button><button type="button" role="tab" data-hq="1" aria-selected="false">为什么大云厂商贵这么多？</button><button type="button" role="tab" data-hq="2" aria-selected="false">「静态文件」指什么，该填多少？</button><button type="button" role="tab" data-hq="3" aria-selected="false">什么时候值得用对象存储加 CDN？</button><button type="button" role="tab" data-hq="4" aria-selected="false">为什么入站免费、出站收费？</button><button type="button" role="tab" data-hq="5" aria-selected="false">谷歌云的 Premium 和 Standard 网络层级是什么？</button><button type="button" role="tab" data-hq="6" aria-selected="false">发往中国大陆的流量为什么更贵？</button><button type="button" role="tab" data-hq="7" aria-selected="false">为什么不比性能？</button><button type="button" role="tab" data-hq="8" aria-selected="false">多买几台小机器凑流量划算吗？</button><button type="button" role="tab" data-hq="9" aria-selected="false">价格多久更新一次？</button></nav>
+      <div class="help-pick">
+        <button class="icon-btn" type="button" data-hstep="-1" aria-label="上一个问题"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 4L6 8l4 4"/></svg></button>
+        <select id="helpSel" aria-labelledby="helpT"></select>
+        <button class="icon-btn" type="button" data-hstep="1" aria-label="下一个问题"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg></button>
+      </div>
+      <div class="help-c" id="helpC"><article data-hqb="0"><h3>推荐方案是怎么算出来的？</h3><p>把所有满足 CPU 和内存要求的服务器套餐，和每种对象存储、CDN 组合起来，逐个算一个月的费用：套餐价、超出套餐的流量（或云厂商按 GB 收的出口费）、存储、请求和 CDN 流量。页面显示全局最便宜、离用户近的方案里最便宜、服务商最少的三个方案，其余的在对比表里。</p></article><article data-hqb="1" hidden><h3>为什么大云厂商贵这么多？</h3><p>AWS、谷歌云、Azure 对流向公网的每 GB 都收费（约 $0.08 到 $0.12），而大多数 VPS 套餐每月自带 1 到 20 TB 流量。每月几 TB 流量时，流量费比服务器本身还贵。</p></article><article data-hqb="2" hidden><h3>「静态文件」指什么，该填多少？</h3><p>每个访客拿到的都一样的文件：图片、下载包、视频、脚本。这些可以交给对象存储或 CDN 发，不经过服务器。博客大多是静态的（80% 左右），API 和代理完全不是（0%），下载站几乎全是（95%）。</p></article><article data-hqb="3" hidden><h3>什么时候值得用对象存储加 CDN？</h3><p>静态文件占了大部分流量、而且超出服务器套餐自带流量时。Cloudflare R2 出口免费，Backblaze B2 经 Cloudflare 或 Bunny 分发也免费，几 TB 的下载量可能只要几美元，而不是几百美元。</p></article><article data-hqb="4" hidden><h3>为什么入站免费、出站收费？</h3><p>厂商按流出自己网络的流量向上游买带宽，入站流量还能吸引客户上来。所以上传免费，发给访客的下载流量才收钱。</p></article><article data-hqb="5" hidden><h3>谷歌云的 Premium 和 Standard 网络层级是什么？</h3><p>Premium 走谷歌自己的骨干网，送到离访客最近的节点再出去，按目的地计价；Standard 在机房附近就交给公网，更便宜。Azure 的「Microsoft 网络」和「Internet」路由偏好是同一个意思。</p></article><article data-hqb="6" hidden><h3>发往中国大陆的流量为什么更贵？</h3><p>进入中国的国际链路稀缺又昂贵。谷歌云 Premium 层级发往中国单独计价，约是普通价格的两倍；而且不管付多少钱，进中国的线路经常都慢。一般亚太机房离得最近，可以先用延迟测试看看。</p></article><article data-hqb="7" hidden><h3>为什么不比性能？</h3><p>这是按价格和规格筛选，不是跑分。共享 CPU 套餐（表里有标注）在邻居繁忙时可能变慢；在意的话可以在高级选项里把它们排除。</p></article><article data-hqb="8" hidden><h3>多买几台小机器凑流量划算吗？</h3><p>有时几台小套餐加起来的流量比一台大的多。规划器不会自动找这种组合；可以在高级选项里自己改服务器数量对比。</p></article><article data-hqb="9" hidden><h3>价格多久更新一次？</h3><p>每个价格都对照厂商官方定价页人工核对，核对日期在页脚，每一行都有来源链接。价格不含税，欧元价格按固定汇率换算。发现不对可以在 GitHub 提 issue。</p></article></div>
+    </div>
+  </div>
+</div>
+<script type="application/json" id="data">{"lang":"zh-CN","paths":{"en":"/r2-vs-s3/","zh-CN":"/zh-cn/r2-vs-s3/","zh-TW":"/zh-tw/r2-vs-s3/","ja":"/ja/r2-vs-s3/","ko":"/ko/r2-vs-s3/","es":"/es/r2-vs-s3/","fr":"/fr/r2-vs-s3/","de":"/de/r2-vs-s3/","pt":"/pt/r2-vs-s3/","ru":"/ru/r2-vs-s3/"},"state":{"scene":"","aud":"na","shared":true,"free":false,"vcpu":0,"ram":0,"disk":0,"count":1,"staticPct":100,"objKB":1000,"storeGB":1024,"gb":1024},"cur":"USD","verified":"2026-11-01","slug":"r2-vs-s3"}</script>
+<script src="/assets/l.zh-cn.7c1a3175df.js" defer></script>
+<script src="/assets/app.1fe6649065.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "cloud-cost-planner",
+  "private": true,
+  "type": "module",
+  "description": "Static calculator: the cheapest VPS, object storage and CDN setup for your traffic, priced from each provider's published prices",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node scripts/build.mjs --check && node --test \"test/*.test.mjs\"",
+    "og": "node scripts/og.mjs",
+    "dev": "node scripts/dev.mjs"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "esbuild": "0.25.10"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yt1988/cloud-cost-planner"
+  },
+  "homepage": "https://cost.1ms.dog"
+}

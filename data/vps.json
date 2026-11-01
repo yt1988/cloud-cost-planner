@@ -1,0 +1,208 @@
+{
+  "about": "Servers: one offer per provider product line and region. plans: [name, vCPU, RAM GB, disk GB (null: pay per GB), price, included transfer GB (null: billed through an egress profile)]. Prices exclude VAT unless noted. 1 TB = 1024 GB.",
+  "providers": {
+    "hetzner": { "name": "Hetzner", "kind": "vps", "m2c": "hetzner" },
+    "digitalocean": { "name": "DigitalOcean", "kind": "vps", "m2c": "digitalocean" },
+    "vultr": { "name": "Vultr", "kind": "vps", "m2c": "vultr" },
+    "linode": { "name": "Linode (Akamai)", "kind": "vps", "m2c": "linode" },
+    "lightsail": { "name": "AWS Lightsail", "kind": "vps", "m2c": "aws", "ls": true },
+    "contabo": { "name": "Contabo", "kind": "vps" },
+    "oracle": { "name": "Oracle Cloud", "kind": "cloud", "m2c": "oracle" },
+    "aws": { "name": "AWS EC2", "kind": "cloud", "m2c": "aws" },
+    "gcp": { "name": "Google Cloud", "kind": "cloud", "m2c": "gcp" },
+    "azure": { "name": "Azure", "kind": "cloud", "m2c": "azure" }
+  },
+  "offers": [
+    {
+      "id": "hetzner-cx-eu", "provider": "hetzner", "line": "CX", "region": "eu", "loc": "Nuremberg / Helsinki", "cpu": "shared", "disk": "nvme",
+      "currency": "EUR", "per": "month", "traffic": { "scope": "instance", "overagePerGB": 0.0009765625 },
+      "plans": [["CX23", 2, 4, 40, 5.99, 20480], ["CX33", 4, 8, 80, 8.99, 20480], ["CX43", 8, 16, 160, 16.49, 20480], ["CX53", 16, 32, 320, 29.99, 20480]],
+      "note": "stock",
+      "source": "https://www.hetzner.com/cloud/cost-optimized/", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "hetzner-cax-eu", "provider": "hetzner", "line": "CAX", "region": "eu", "loc": "Nuremberg / Helsinki", "cpu": "shared", "arch": "arm", "disk": "nvme",
+      "currency": "EUR", "per": "month", "traffic": { "scope": "instance", "overagePerGB": 0.0009765625 },
+      "plans": [["CAX11", 2, 4, 40, 6.49, 20480], ["CAX21", 4, 8, 80, 10.99, 20480], ["CAX31", 8, 16, 160, 21.49, 20480], ["CAX41", 16, 32, 320, 41.49, 20480]],
+      "note": "stock",
+      "source": "https://www.hetzner.com/cloud/cost-optimized/", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "hetzner-cpx-eu", "provider": "hetzner", "line": "CPX", "region": "eu", "loc": "Falkenstein / Nuremberg / Helsinki", "cpu": "shared", "disk": "nvme",
+      "currency": "EUR", "per": "month", "traffic": { "scope": "instance", "overagePerGB": 0.0009765625 },
+      "plans": [["CPX02", 1, 1, 20, 6.49, 20480], ["CPX12", 1, 2, 40, 11.99, 20480], ["CPX22", 2, 4, 80, 19.99, 20480], ["CPX32", 4, 8, 160, 35.99, 20480],
+        ["CPX42", 8, 16, 320, 69.99, 20480], ["CPX62", 16, 32, 640, 130.49, 20480]],
+      "source": "https://www.hetzner.com/cloud/regular-performance/", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "hetzner-cpx-na", "provider": "hetzner", "line": "CPX", "region": "na", "loc": "Ashburn / Hillsboro", "cpu": "shared", "disk": "nvme",
+      "currency": "EUR", "per": "month", "traffic": { "scope": "instance", "overagePerGB": 0.0009765625 },
+      "plans": [["CPX11", 2, 2, 40, 17.99, 1024], ["CPX21", 3, 4, 80, 32.49, 2048], ["CPX31", 4, 8, 160, 62.99, 3072], ["CPX41", 8, 16, 240, 120.99, 4096],
+        ["CPX51", 16, 32, 360, 238.49, 5120]],
+      "source": "https://www.hetzner.com/cloud/regular-performance/", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "hetzner-cpx-ap", "provider": "hetzner", "line": "CPX", "region": "ap", "loc": "Singapore", "cpu": "shared", "disk": "nvme",
+      "currency": "EUR", "per": "month", "traffic": { "scope": "instance", "overagePerGB": 0.00722656 },
+      "plans": [["CPX02", 1, 1, 20, 7.99, 512], ["CPX12", 1, 2, 40, 15.99, 512], ["CPX22", 2, 4, 80, 26.99, 1024], ["CPX32", 4, 8, 160, 49.49, 2048],
+        ["CPX42", 8, 16, 320, 93.99, 3072], ["CPX62", 16, 32, 640, 172.49, 5120]],
+      "source": "https://www.hetzner.com/cloud/regular-performance/", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "do-basic", "provider": "digitalocean", "line": "Basic", "regions": { "na": "New York", "eu": "Frankfurt", "ap": "Singapore" }, "cpu": "shared", "disk": "ssd",
+      "currency": "USD", "per": "month", "traffic": { "scope": "pooled", "overagePerGB": 0.01 },
+      "plans": [["s-1vcpu-512mb", 1, 0.5, 10, 4, 500], ["s-1vcpu-1gb", 1, 1, 25, 6, 1000], ["s-1vcpu-2gb", 1, 2, 50, 12, 2000], ["s-2vcpu-2gb", 2, 2, 60, 18, 3000],
+        ["s-2vcpu-4gb", 2, 4, 80, 24, 4000], ["s-4vcpu-8gb", 4, 8, 160, 48, 5000], ["s-8vcpu-16gb", 8, 16, 320, 96, 6000]],
+      "source": "https://www.digitalocean.com/pricing/droplets", "trafficSource": "https://docs.digitalocean.com/platform/billing/bandwidth/", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "do-gp", "provider": "digitalocean", "line": "General Purpose", "regions": { "na": "New York", "eu": "Frankfurt", "ap": "Singapore" }, "cpu": "dedicated", "disk": "ssd",
+      "currency": "USD", "per": "month", "traffic": { "scope": "pooled", "overagePerGB": 0.01 },
+      "plans": [["g-2vcpu-8gb", 2, 8, 25, 63, 4000]],
+      "source": "https://www.digitalocean.com/pricing/droplets", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "vultr-vc2", "provider": "vultr", "line": "Cloud Compute", "regions": { "na": "New Jersey", "eu": "Frankfurt", "ap": "Tokyo" }, "cpu": "shared", "disk": "ssd",
+      "currency": "USD", "per": "month", "traffic": { "scope": "pooled", "overagePerGB": 0.01, "accountFreeGB": 2048 },
+      "plans": [["vc2-1c-1gb", 1, 1, 25, 5, 1024], ["vc2-1c-2gb", 1, 2, 55, 10, 2048], ["vc2-2c-2gb", 2, 2, 65, 15, 3072], ["vc2-2c-4gb", 2, 4, 80, 20, 3072],
+        ["vc2-4c-8gb", 4, 8, 160, 40, 4096], ["vc2-6c-16gb", 6, 16, 320, 80, 5120], ["vc2-8c-32gb", 8, 32, 640, 160, 6144]],
+      "source": "https://api.vultr.com/v2/plans?type=vc2", "trafficSource": "https://docs.vultr.com/support/platform/billing/what-is-the-bandwidth-overage-rate", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "vultr-vhp", "provider": "vultr", "line": "High Performance", "regions": { "na": "New Jersey", "eu": "Frankfurt", "ap": "Tokyo" }, "cpu": "shared", "disk": "nvme",
+      "currency": "USD", "per": "month", "traffic": { "scope": "pooled", "overagePerGB": 0.01, "accountFreeGB": 2048 },
+      "plans": [["vhp-1c-1gb-amd", 1, 1, 25, 6, 2048], ["vhp-1c-2gb-amd", 1, 2, 50, 12, 3072], ["vhp-2c-2gb-amd", 2, 2, 60, 18, 4096], ["vhp-2c-4gb-amd", 2, 4, 100, 24, 5120],
+        ["vhp-4c-8gb-amd", 4, 8, 180, 48, 6144], ["vhp-8c-16gb-amd", 8, 16, 350, 96, 8192], ["vhp-12c-24gb-amd", 12, 24, 500, 144, 12288]],
+      "source": "https://api.vultr.com/v2/plans?type=vhp", "trafficSource": "https://docs.vultr.com/support/platform/billing/what-is-the-bandwidth-overage-rate", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "linode-shared", "provider": "linode", "line": "Shared CPU", "regions": { "na": "Newark", "eu": "Frankfurt", "ap": "Tokyo" }, "cpu": "shared", "disk": "ssd",
+      "currency": "USD", "per": "month", "traffic": { "scope": "pooled", "overagePerGB": 0.005 },
+      "plans": [["Nanode 1 GB", 1, 1, 25, 5, 1024], ["Linode 2 GB", 1, 2, 50, 12, 2048], ["Linode 4 GB", 2, 4, 80, 24, 4096], ["Linode 8 GB", 4, 8, 160, 48, 5120],
+        ["Linode 16 GB", 6, 16, 320, 96, 8192], ["Linode 32 GB", 8, 32, 640, 192, 16384]],
+      "source": "https://www.akamai.com/cloud/pricing/cpu", "trafficSource": "https://techdocs.akamai.com/cloud-computing/docs/network-transfer-usage-and-costs", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "linode-dedicated", "provider": "linode", "line": "Dedicated G7", "regions": { "na": "Newark", "eu": "Frankfurt", "ap": "Tokyo" }, "cpu": "dedicated", "disk": "ssd",
+      "currency": "USD", "per": "month", "traffic": { "scope": "pooled", "overagePerGB": 0.005 },
+      "plans": [["G7 Dedicated 4 GB", 2, 4, 80, 43, 4096], ["G7 Dedicated 8 GB", 4, 8, 160, 86, 5120], ["G7 Dedicated 16 GB", 8, 16, 320, 173, 6144],
+        ["G7 Dedicated 32 GB", 16, 32, 640, 346, 7168]],
+      "source": "https://www.akamai.com/cloud/pricing/cpu", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "lightsail-na", "provider": "lightsail", "line": "Linux", "region": "na", "loc": "N. Virginia", "cpu": "shared", "disk": "ssd",
+      "currency": "USD", "per": "month", "traffic": { "scope": "pooled", "overagePerGB": 0.09 },
+      "plans": [["0.5 GB", 2, 0.5, 20, 5, 1024], ["1 GB", 2, 1, 40, 7, 2048], ["2 GB", 2, 2, 60, 12, 3072], ["4 GB", 2, 4, 80, 24, 4096],
+        ["8 GB", 2, 8, 160, 44, 5120], ["16 GB", 4, 16, 320, 84, 6144], ["32 GB", 8, 32, 640, 164, 7168]],
+      "source": "https://aws.amazon.com/lightsail/pricing/", "trafficSource": "https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonLightsail/current/region_index.json", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "lightsail-eu", "provider": "lightsail", "line": "Linux", "region": "eu", "loc": "Frankfurt", "cpu": "shared", "disk": "ssd",
+      "currency": "USD", "per": "month", "traffic": { "scope": "pooled", "overagePerGB": 0.09 },
+      "plans": [["0.5 GB", 2, 0.5, 20, 5, 1024], ["1 GB", 2, 1, 40, 7, 2048], ["2 GB", 2, 2, 60, 12, 3072], ["4 GB", 2, 4, 80, 24, 4096],
+        ["8 GB", 2, 8, 160, 44, 5120], ["16 GB", 4, 16, 320, 84, 6144], ["32 GB", 8, 32, 640, 164, 7168]],
+      "source": "https://aws.amazon.com/lightsail/pricing/", "trafficSource": "https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonLightsail/current/region_index.json", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "lightsail-ap", "provider": "lightsail", "line": "Linux", "region": "ap", "loc": "Tokyo", "cpu": "shared", "disk": "ssd",
+      "currency": "USD", "per": "month", "traffic": { "scope": "pooled", "overagePerGB": 0.14 },
+      "plans": [["0.5 GB", 2, 0.5, 20, 5, 1024], ["1 GB", 2, 1, 40, 7, 2048], ["2 GB", 2, 2, 60, 12, 3072], ["4 GB", 2, 4, 80, 24, 4096],
+        ["8 GB", 2, 8, 160, 44, 5120], ["16 GB", 4, 16, 320, 84, 6144], ["32 GB", 8, 32, 640, 164, 7168]],
+      "source": "https://aws.amazon.com/lightsail/pricing/", "trafficSource": "https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonLightsail/current/region_index.json", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "contabo-eu", "provider": "contabo", "line": "Cloud VPS", "region": "eu", "loc": "Germany", "cpu": "shared", "disk": "ssd",
+      "currency": "USD", "per": "month", "traffic": { "scope": "unlimited", "fairUse": true },
+      "plans": [["Cloud VPS 4", 4, 8, 100, 6.6, null, 200], ["Cloud VPS 6", 6, 12, 200, 9, null, 300], ["Cloud VPS 8", 8, 24, 300, 16.8, null, 600],
+        ["Cloud VPS 12", 12, 48, 400, 30, null, 800]],
+      "note": "contabo",
+      "source": "https://contabo.com/en/vps/", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "oracle-a1", "provider": "oracle", "line": "Ampere A1 Flex", "regions": { "na": "Ashburn", "eu": "Frankfurt", "ap": "Tokyo" }, "cpu": "dedicated", "arch": "arm", "disk": "block",
+      "currency": "USD", "per": "hour", "egress": ["oracle"], "extras": { "diskPerGB": 0.0425, "minDiskGB": 50 },
+      "alwaysFree": { "vcpu": 4, "ram": 24, "diskGB": 200 },
+      "plans": [["A1 1 OCPU / 2 GB", 1, 2, null, 0.013], ["A1 2 OCPU / 4 GB", 2, 4, null, 0.026], ["A1 4 OCPU / 8 GB", 4, 8, null, 0.052],
+        ["A1 4 OCPU / 24 GB", 4, 24, null, 0.076], ["A1 8 OCPU / 16 GB", 8, 16, null, 0.104], ["A1 16 OCPU / 32 GB", 16, 32, null, 0.208]],
+      "note": "oracle",
+      "source": "https://www.oracle.com/cloud/price-list/", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "oracle-e4", "provider": "oracle", "line": "E4 Flex", "regions": { "na": "Ashburn", "eu": "Frankfurt", "ap": "Tokyo" }, "cpu": "dedicated", "disk": "block",
+      "currency": "USD", "per": "hour", "egress": ["oracle"], "extras": { "diskPerGB": 0.0425, "minDiskGB": 50 },
+      "plans": [["E4 1 OCPU / 2 GB", 2, 2, null, 0.028], ["E4 1 OCPU / 4 GB", 2, 4, null, 0.031], ["E4 1 OCPU / 8 GB", 2, 8, null, 0.037],
+        ["E4 2 OCPU / 8 GB", 4, 8, null, 0.062], ["E4 2 OCPU / 16 GB", 4, 16, null, 0.074], ["E4 4 OCPU / 16 GB", 8, 16, null, 0.124],
+        ["E4 8 OCPU / 32 GB", 16, 32, null, 0.248]],
+      "source": "https://www.oracle.com/cloud/price-list/", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "aws-t4g-na", "provider": "aws", "line": "t4g", "region": "na", "loc": "N. Virginia", "cpu": "shared", "arch": "arm", "disk": "block",
+      "currency": "USD", "per": "hour", "egress": ["aws"], "extras": { "ipv4PerHour": 0.005, "diskPerGB": 0.08, "minDiskGB": 8 },
+      "plans": [["t4g.micro", 2, 1, null, 0.0084], ["t4g.small", 2, 2, null, 0.0168], ["t4g.medium", 2, 4, null, 0.0336], ["t4g.large", 2, 8, null, 0.0672],
+        ["t4g.xlarge", 4, 16, null, 0.1344], ["t4g.2xlarge", 8, 32, null, 0.2688]],
+      "note": "awsDisk",
+      "source": "https://aws.amazon.com/ec2/pricing/on-demand/", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "aws-t4g-eu", "provider": "aws", "line": "t4g", "region": "eu", "loc": "Frankfurt", "cpu": "shared", "arch": "arm", "disk": "block",
+      "currency": "USD", "per": "hour", "egress": ["aws"], "extras": { "ipv4PerHour": 0.005, "diskPerGB": 0.08, "minDiskGB": 8 },
+      "plans": [["t4g.micro", 2, 1, null, 0.0096], ["t4g.small", 2, 2, null, 0.0192], ["t4g.medium", 2, 4, null, 0.0384], ["t4g.large", 2, 8, null, 0.0768],
+        ["t4g.xlarge", 4, 16, null, 0.1536], ["t4g.2xlarge", 8, 32, null, 0.3072]],
+      "note": "awsDisk",
+      "source": "https://aws.amazon.com/ec2/pricing/on-demand/", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "aws-t4g-ap", "provider": "aws", "line": "t4g", "region": "ap", "loc": "Tokyo", "cpu": "shared", "arch": "arm", "disk": "block",
+      "currency": "USD", "per": "hour", "egress": ["aws"], "extras": { "ipv4PerHour": 0.005, "diskPerGB": 0.08, "minDiskGB": 8 },
+      "plans": [["t4g.micro", 2, 1, null, 0.0108], ["t4g.small", 2, 2, null, 0.0216], ["t4g.medium", 2, 4, null, 0.0432], ["t4g.large", 2, 8, null, 0.0864],
+        ["t4g.xlarge", 4, 16, null, 0.1728], ["t4g.2xlarge", 8, 32, null, 0.3456]],
+      "note": "awsDisk",
+      "source": "https://aws.amazon.com/ec2/pricing/on-demand/", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "gcp-e2-na", "provider": "gcp", "line": "E2", "region": "na", "loc": "Iowa", "cpu": "shared", "disk": "block",
+      "currency": "USD", "per": "hour", "egress": ["gcp-premium", "gcp-standard"], "extras": { "ipv4PerHour": 0.005, "diskPerGB": 0.1, "minDiskGB": 10 },
+      "alwaysFree": { "plan": "e2-micro", "diskGB": 30 },
+      "plans": [["e2-micro", 2, 1, null, 0.008376428], ["e2-small", 2, 2, null, 0.016752855], ["e2-medium", 2, 4, null, 0.03350571],
+        ["e2-standard-2", 2, 8, null, 0.06701142], ["e2-standard-4", 4, 16, null, 0.13402284], ["e2-standard-8", 8, 32, null, 0.26804568]],
+      "source": "https://cloud.google.com/products/compute/pricing/general-purpose", "diskSource": "https://cloud.google.com/compute/disks-image-pricing", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "gcp-e2-eu", "provider": "gcp", "line": "E2", "region": "eu", "loc": "Frankfurt", "cpu": "shared", "disk": "block",
+      "currency": "USD", "per": "hour", "egress": ["gcp-premium", "gcp-standard"], "extras": { "ipv4PerHour": 0.005, "diskPerGB": 0.1, "minDiskGB": 10 },
+      "plans": [["e2-micro", 2, 1, null, 0.010791945], ["e2-small", 2, 2, null, 0.02158389], ["e2-medium", 2, 4, null, 0.04316778],
+        ["e2-standard-2", 2, 8, null, 0.08633556], ["e2-standard-4", 4, 16, null, 0.17267112], ["e2-standard-8", 8, 32, null, 0.34534224]],
+      "note": "gcpDisk",
+      "source": "https://cloud.google.com/products/compute/pricing/general-purpose", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "gcp-e2-ap", "provider": "gcp", "line": "E2", "region": "ap", "loc": "Tokyo", "cpu": "shared", "disk": "block",
+      "currency": "USD", "per": "hour", "egress": ["gcp-premium", "gcp-standard"], "extras": { "ipv4PerHour": 0.005, "diskPerGB": 0.1, "minDiskGB": 10 },
+      "plans": [["e2-micro", 2, 1, null, 0.010745715], ["e2-small", 2, 2, null, 0.02149143], ["e2-medium", 2, 4, null, 0.04298286],
+        ["e2-standard-2", 2, 8, null, 0.08596572], ["e2-standard-4", 4, 16, null, 0.17193144], ["e2-standard-8", 8, 32, null, 0.34386288]],
+      "note": "gcpDisk",
+      "source": "https://cloud.google.com/products/compute/pricing/general-purpose", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "azure-b-na", "provider": "azure", "line": "B-series", "region": "na", "loc": "East US", "cpu": "shared", "disk": "block",
+      "currency": "USD", "per": "hour", "egress": ["azure-mgn", "azure-internet"], "extras": { "ipv4PerHour": 0.005, "diskPerGB": 0.075, "minDiskGB": 32 },
+      "plans": [["B2ats v2", 2, 1, null, 0.0094], ["B1ms", 1, 2, null, 0.0207], ["B2als v2", 2, 4, null, 0.0376], ["B2as v2", 2, 8, null, 0.0752],
+        ["B4as v2", 4, 16, null, 0.15], ["B8as v2", 8, 32, null, 0.301]],
+      "source": "https://prices.azure.com/api/retail/prices", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "azure-b-eu", "provider": "azure", "line": "B-series", "region": "eu", "loc": "West Europe", "cpu": "shared", "disk": "block",
+      "currency": "USD", "per": "hour", "egress": ["azure-mgn", "azure-internet"], "extras": { "ipv4PerHour": 0.005, "diskPerGB": 0.075, "minDiskGB": 32 },
+      "plans": [["B2ats v2", 2, 1, null, 0.0108], ["B1ms", 1, 2, null, 0.024], ["B2als v2", 2, 4, null, 0.0432], ["B2as v2", 2, 8, null, 0.0864],
+        ["B4as v2", 4, 16, null, 0.173], ["B8as v2", 8, 32, null, 0.346]],
+      "source": "https://prices.azure.com/api/retail/prices", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "azure-b-ap", "provider": "azure", "line": "B-series", "region": "ap", "loc": "Japan East", "cpu": "shared", "disk": "block",
+      "currency": "USD", "per": "hour", "egress": ["azure-mgn", "azure-internet"], "extras": { "ipv4PerHour": 0.005, "diskPerGB": 0.075, "minDiskGB": 32 },
+      "plans": [["B2ats v2", 2, 1, null, 0.0123], ["B1ms", 1, 2, null, 0.0272], ["B2als v2", 2, 4, null, 0.049], ["B2as v2", 2, 8, null, 0.098],
+        ["B4as v2", 4, 16, null, 0.196], ["B8as v2", 8, 32, null, 0.392]],
+      "source": "https://prices.azure.com/api/retail/prices", "verifiedAt": "2026-11-01"
+    }
+  ]
+}
