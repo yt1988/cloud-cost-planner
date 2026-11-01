@@ -63,14 +63,15 @@ export function facts(page, D, T, F) {
   const k = page.kind;
   if (k === "scene") {
     const st = stateOf(page), rows = [];
-    let v = null;
+    let v = null, ref = "AWS";
     for (const aud of ["na", "eu", "ap", "cn"]) {
       const r = recommend({ ...st, aud }, D), near = r.picks[0];
       if (!near) continue;
-      if (aud === "na") v = { scene: T["sc_" + page.scene], spec: st.vcpu ? fill(T.spec, { c: st.vcpu, r: F.num(st.ram) }) : T.spec_none, gb: F.size(st.gb), best: comboName(D, r.picks[0].r), t: F.money(r.picks[0].r.total), aws: r.aws ? F.money(r.aws.total) : "—" };
+      if (r.aws) ref = comboName(D, r.aws);
+      if (aud === "na") v = { scene: T["sc_" + page.scene], spec: st.vcpu ? fill(T.spec, { c: st.vcpu, r: F.num(st.ram) }) : T.spec_none, gb: F.size(st.gb), best: comboName(D, r.picks[0].r), t: F.money(r.picks[0].r.total), ref, aws: r.aws ? F.money(r.aws.total) : "—" };
       rows.push([esc(T["aud_" + aud]), esc(comboName(D, near.r)), F.money(near.r.total), r.aws ? F.money(r.aws.total) : "—"]);
     }
-    return { v, table: tableOf([T.th_aud, T.tag_cheapest, T.c_total, T.aws_ref], rows) };
+    return { v, table: tableOf([T.th_aud, T.tag_cheapest, T.c_total, ref], rows) };
   }
   if (k === "egress") {
     const profs = page.profiles.map(id => D.egress.profiles.find(p => p.id === id));

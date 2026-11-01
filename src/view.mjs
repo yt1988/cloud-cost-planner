@@ -54,7 +54,8 @@ export function pickCard(p, q, T, F, D, aws) {
   if (r.flags.includes("free")) why.push(T.why_free);
   if (p.tags.includes("simple") && !p.tags.includes("cheapest")) why.push(fill(T.why_simple, { n: r.vendors }));
   const notes = noteList(r, T);
-  const save = aws && aws !== r && aws.total > r.total * 1.05 ? fill(T.vs_aws, { aws: F.money(aws.total), k: F.num(aws.total / Math.max(r.total, 0.01)) }) : "";
+  // the reference is named in full ("AWS EC2 t4g.micro"): Lightsail is AWS too, and often in the table for less
+  const save = aws && aws !== r && aws.total > r.total * 1.05 ? fill(T.vs_aws, { ref: comboName(D, aws), aws: F.money(aws.total), k: F.num(aws.total / Math.max(r.total, 0.01)) }) : "";
   const links = [];
   if (m) links.push(ext(m.source, T.l_src));
   if (m && D.vps.providers[m.provider].m2c) links.push(ext(null, T.l_m2c, ` data-tool="m2c" data-p="${D.vps.providers[m.provider].m2c}" data-pend`));
@@ -82,7 +83,7 @@ export function verdict(rec, T, F, D) {
   if (!best) return T.v_none;
   const spec = q.vcpu > 0 ? fill(T.spec, { c: q.vcpu, r: F.num(q.ram) }) : T.spec_none;
   const v = { spec, gb: F.size(q.gb), aud: T["aud_" + q.aud], best: comboName(D, best), t: F.money(best.total) };
-  if (rec.aws && rec.aws !== best && rec.aws.total > best.total * 1.05) return fill(T.v_aws, { ...v, aws: F.money(rec.aws.total), k: F.num(rec.aws.total / Math.max(best.total, 0.01)) });
+  if (rec.aws && rec.aws !== best && rec.aws.total > best.total * 1.05) return fill(T.v_aws, { ...v, ref: comboName(D, rec.aws), aws: F.money(rec.aws.total), k: F.num(rec.aws.total / Math.max(best.total, 0.01)) });
   return fill(T.v_plain, v);
 }
 
@@ -110,7 +111,7 @@ export function tableHTML(rec, T, F, D) {
 // cost as traffic grows, log-log: the picks and the all-AWS reference; where one line overtakes another
 export function curveHTML(rec, T, F, D, input) {
   const lines = rec.picks.map((p, i) => ({ name: comboName(D, p.r), cls: "l" + i, v: curve(p.r, input, D, POINTS) }));
-  if (rec.aws && !rec.picks.some(p => p.r === rec.aws)) lines.push({ name: T.aws_ref, cls: "la", v: curve(rec.aws, input, D, POINTS) });
+  if (rec.aws && !rec.picks.some(p => p.r === rec.aws)) lines.push({ name: comboName(D, rec.aws), cls: "la", v: curve(rec.aws, input, D, POINTS) });
   if (!lines.length) return "";
   const W = 760, H = 240, L = 58, R = 10, Tp = 10, B = 28;
   const xs = gb => L + (Math.log10(gb) - 1) / (Math.log10(POINTS[POINTS.length - 1]) - 1) * (W - L - R);
