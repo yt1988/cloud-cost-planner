@@ -22,14 +22,10 @@
   let cur = ["USD", "EUR", "CNY"].includes(store.get(LS.cur)) ? store.get(LS.cur) : P.cur;
   $("cur").value = cur;
 
-  // Traffic and storage are entered in TB (the engine counts GB, 1 TB = 1024 GB). The log slider runs from 0.01 TB to
-  // 1 PB and stops at round numbers: 0.01, 0.02, 0.05, 0.1 … 500, 1000 TB (typed values stay as typed).
-  const LO = Math.log10(0.01), HI = Math.log10(1024);
-  const STOPS = [];
-  for (let k = 0.01; k < 1500; k *= 10) for (const m of [1, 2, 5]) if (m * k <= 1024) STOPS.push(+(m * k).toPrecision(2));
-  const toTB = v => { if (v <= 0) return 0; const want = LO + (v / 1000) * (HI - LO); return STOPS.reduce((a, b) => (Math.abs(Math.log10(b) - want) < Math.abs(Math.log10(a) - want) ? b : a)); };
-  const toSlider = gb => (gb <= 0 ? 0 : Math.max(1, Math.round(((Math.log10(gb / 1024) - LO) / (HI - LO)) * 1000)));
-  const trim = tb => +tb.toFixed(tb < 1 ? 2 : tb < 10 ? 1 : 0);
+  // Traffic and storage: a number in the unit the visitor picked (GB until they pick TB; 1 TB = 1024 GB). The unit is
+  // theirs: nothing switches it, and switching it only shows the same amount in the other unit.
+  const unit = { gb: 1, storeGB: 1 };
+  const trim = v => +v.toFixed(2);
 
   function syncInputs() {
     document.querySelectorAll("[data-scene]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.scene === st.scene)));
@@ -38,10 +34,8 @@
     document.querySelectorAll("[data-size]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.size === (none ? "none" : size >= 0 ? String(size) : "custom"))));
     $("custom").hidden = none || size >= 0;
     $("vcpu").value = st.vcpu; $("ram").value = st.ram; $("disk").value = st.disk;
-    for (const [k, n, r] of [["gb", "gbN", "gbR"], ["storeGB", "sgN", "sgR"]]) {
-      if (document.activeElement !== $(n)) $(n).value = trim(st[k] / 1024);
-      $(r).value = toSlider(st[k]);
-    }
+    for (const [k, n] of [["gb", "gbN"], ["storeGB", "sgN"]]) if (document.activeElement !== $(n)) $(n).value = trim(st[k] / unit[k]);
+    document.querySelectorAll("[data-unit]").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.v === unit[b.dataset.unit])));
     $("stR").value = st.staticPct; $("stV").textContent = st.staticPct + "%";
     document.querySelectorAll("[data-aud]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.aud === st.aud)));
     $("count").value = st.count; $("objKB").value = st.objKB; $("shared").checked = st.shared; $("free").checked = st.free;
@@ -90,10 +84,9 @@
   }));
   for (const [id, key] of [["vcpu", "vcpu"], ["ram", "ram"], ["disk", "disk"], ["count", "count"], ["objKB", "objKB"]])
     $(id).addEventListener("input", () => { const v = parseFloat($(id).value); if (Number.isFinite(v) && v >= 0) set({ [key]: v }); });
-  for (const [k, n, r] of [["gb", "gbN", "gbR"], ["storeGB", "sgN", "sgR"]]) {
-    $(n).addEventListener("input", () => { const v = parseFloat($(n).value); if (Number.isFinite(v) && v >= 0) set({ [k]: Math.round(v * 1024 * 100) / 100 }); });
-    $(r).addEventListener("input", () => set({ [k]: Math.round(toTB(+$(r).value) * 1024 * 100) / 100 }));
-  }
+  for (const [k, n] of [["gb", "gbN"], ["storeGB", "sgN"]])
+    $(n).addEventListener("input", () => { const v = parseFloat($(n).value); if (Number.isFinite(v) && v >= 0) set({ [k]: Math.round(v * unit[k] * 100) / 100 }); });
+  document.querySelectorAll("[data-unit]").forEach(b => b.addEventListener("click", () => { unit[b.dataset.unit] = +b.dataset.v; syncInputs(); }));
   $("stR").addEventListener("input", () => set({ staticPct: +$("stR").value }));
   document.querySelectorAll("[data-aud]").forEach(b => b.addEventListener("click", () => set({ aud: b.dataset.aud }, true)));
   $("shared").addEventListener("change", () => set({ shared: $("shared").checked }, true));

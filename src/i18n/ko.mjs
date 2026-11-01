@@ -6,7 +6,7 @@ export default {
   h1: "서버, 스토리지, CDN 어디가 가장 저렴할까?",
   lede: "용도를 고르고 트래픽을 입력하면 각사의 VPS와 클라우드를 포함 트래픽, 초과 요금, 오브젝트 스토리지, CDN까지 월 요금으로 계산해 가장 싼 구성부터 보여 줍니다.",
   og_sub: "VPS, 스토리지, CDN: 내 트래픽에 맞는 가장 싼 구성",
-  lang_label: "언어", faq_h: "자주 묻는 질문", a_close: "닫기", a_prev: "이전 질문", a_next: "다음 질문", a_gh: "GitHub", 
+  lang_label: "언어", faq_h: "자주 묻는 질문", a_close: "닫기", a_prev: "이전 질문", a_next: "다음 질문", a_gh: "GitHub", a_unit: "단위", 
   th_system: "테마: 시스템", th_light: "테마: 라이트", th_dark: "테마: 다크",
   in_scene: "무엇을 운영하나요?",
   sc_blog: "블로그", sc_saas: "웹 앱 / SaaS", sc_proxy: "프록시 / 중계", sc_download: "다운로드 사이트", sc_media: "이미지 / 동영상", sc_backup: "백업",

@@ -6,7 +6,7 @@ export default {
   h1: "买哪家服务器、存储和 CDN 最省钱？",
   lede: "选好业务类型、填上流量，每家 VPS 和云主机都按套餐流量、超额费、对象存储和 CDN 算出月费，最便宜的整套方案排在最前面。",
   og_sub: "VPS、存储、CDN：按你的流量算出最便宜的组合",
-  lang_label: "语言", faq_h: "常见问题", a_close: "关闭", a_prev: "上一个问题", a_next: "下一个问题", a_gh: "GitHub", 
+  lang_label: "语言", faq_h: "常见问题", a_close: "关闭", a_prev: "上一个问题", a_next: "下一个问题", a_gh: "GitHub", a_unit: "单位", 
   th_system: "主题：跟随系统", th_light: "主题：浅色", th_dark: "主题：深色",
   in_scene: "你要跑什么？",
   sc_blog: "个人博客", sc_saas: "Web 应用 / SaaS", sc_proxy: "代理 / 中转", sc_download: "下载站", sc_media: "图片 / 视频站", sc_backup: "备份存储",

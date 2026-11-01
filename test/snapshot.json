@@ -4,58 +4,58 @@
       "cheapest,simple: vultr-vc2 Regular 1 vCPU / 2 GB @na + - + - = 10.00",
       "far: hetzner-cx-eu CX23 @eu + - + - = 6.69"
     ],
-    "aws": "18.95"
+    "aws": "18.71"
   },
   "blog/eu": {
     "picks": [
       "cheapest,simple: hetzner-cx-eu CX23 @eu + - + - = 6.69"
     ],
-    "aws": "20.70"
+    "aws": "20.47"
   },
   "blog/ap": {
     "picks": [
       "cheapest,simple: vultr-vc2 Regular 1 vCPU / 2 GB @ap + - + - = 10.00",
       "far: hetzner-cx-eu CX23 @eu + - + - = 6.69"
     ],
-    "aws": "22.51"
+    "aws": "22.22"
   },
   "blog/cn": {
     "picks": [
       "cheapest,simple: vultr-vc2 Regular 1 vCPU / 2 GB @ap + - + - = 10.00",
       "far: hetzner-cx-eu CX23 @eu + - + - = 6.69"
     ],
-    "aws": "22.51"
+    "aws": "22.22"
   },
   "saas/na": {
     "picks": [
-      "cheapest: vultr-vc2 Regular 2 vCPU / 4 GB @na + b2 + cloudflare = 20.28",
-      "simple: oracle-a1 A1 2 OCPU / 4 GB oracle @na + - + - = 23.28",
+      "cheapest: vultr-vc2 Regular 2 vCPU / 4 GB @na + b2 + cloudflare = 20.27",
+      "simple: oracle-a1 A1 2 OCPU / 4 GB oracle @na + - + - = 23.23",
       "far: hetzner-cx-eu CX33 @eu + b2 + cloudflare = 10.32"
     ],
-    "aws": "211.59"
+    "aws": "211.50"
   },
   "saas/eu": {
     "picks": [
       "cheapest: hetzner-cx-eu CX33 @eu + b2 + cloudflare = 10.32",
       "simple: hetzner-cx-eu CX33 @eu + hetzner-os + - = 17.29"
     ],
-    "aws": "215.10"
+    "aws": "215.00"
   },
   "saas/ap": {
     "picks": [
-      "cheapest: vultr-vc2 Regular 2 vCPU / 4 GB @ap + b2 + cloudflare = 20.28",
-      "simple: oracle-a1 A1 2 OCPU / 4 GB oracle @ap + - + - = 23.28",
+      "cheapest: vultr-vc2 Regular 2 vCPU / 4 GB @ap + b2 + cloudflare = 20.27",
+      "simple: oracle-a1 A1 2 OCPU / 4 GB oracle @ap + - + - = 23.23",
       "far: hetzner-cx-eu CX33 @eu + b2 + cloudflare = 10.32"
     ],
-    "aws": "265.35"
+    "aws": "265.26"
   },
   "saas/cn": {
     "picks": [
-      "cheapest: vultr-vc2 Regular 2 vCPU / 4 GB @ap + b2 + cloudflare = 20.28",
-      "simple: oracle-a1 A1 2 OCPU / 4 GB oracle @ap + - + - = 23.28",
+      "cheapest: vultr-vc2 Regular 2 vCPU / 4 GB @ap + b2 + cloudflare = 20.27",
+      "simple: oracle-a1 A1 2 OCPU / 4 GB oracle @ap + - + - = 23.23",
       "far: hetzner-cx-eu CX33 @eu + b2 + cloudflare = 10.32"
     ],
-    "aws": "265.35"
+    "aws": "265.26"
   },
   "proxy/na": {
     "picks": [
@@ -144,24 +144,24 @@
     "picks": [
       "cheapest,simple: - + b2 + - = 34.68"
     ],
-    "aws": "154.86"
+    "aws": "153.78"
   },
   "backup/eu": {
     "picks": [
       "cheapest,simple: - + b2 + - = 34.68"
     ],
-    "aws": "154.86"
+    "aws": "153.78"
   },
   "backup/ap": {
     "picks": [
       "cheapest,simple: - + b2 + - = 34.68"
     ],
-    "aws": "164.75"
+    "aws": "163.38"
   },
   "backup/cn": {
     "picks": [
       "cheapest,simple: - + b2 + - = 34.68"
     ],
-    "aws": "164.75"
+    "aws": "163.38"
   }
 }

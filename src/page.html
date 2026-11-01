@@ -54,8 +54,7 @@
         </div>
         <div class="field">
           <label class="lab" for="gbN" data-i="in_gb"></label>
-          <div class="amt"><input id="gbN" type="number" min="0" step="any" inputmode="decimal"><span class="unit">TB</span></div>
-          <input id="gbR" class="range" type="range" min="0" max="1000" step="1" aria-label="{{a:in_gb}}">
+          <div class="amt"><input id="gbN" type="number" min="0" step="any" inputmode="decimal"><div class="seg units" role="group" aria-label="{{a:a_unit}}"><button type="button" data-unit="gb" data-v="1" aria-pressed="true">GB</button><button type="button" data-unit="gb" data-v="1024" aria-pressed="false">TB</button></div></div>
         </div>
         <div class="field">
           <label class="lab" for="stR"><span data-i="in_static"></span> <b id="stV" class="val"></b></label>
@@ -64,8 +63,7 @@
         </div>
         <div class="field">
           <label class="lab" for="sgN" data-i="in_store"></label>
-          <div class="amt"><input id="sgN" type="number" min="0" step="any" inputmode="decimal"><span class="unit">TB</span></div>
-          <input id="sgR" class="range" type="range" min="0" max="1000" step="1" aria-label="{{a:in_store}}">
+          <div class="amt"><input id="sgN" type="number" min="0" step="any" inputmode="decimal"><div class="seg units" role="group" aria-label="{{a:a_unit}}"><button type="button" data-unit="storeGB" data-v="1" aria-pressed="true">GB</button><button type="button" data-unit="storeGB" data-v="1024" aria-pressed="false">TB</button></div></div>
         </div>
         <div class="field">
           <span class="lab" data-i="in_aud"></span>

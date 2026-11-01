@@ -6,7 +6,7 @@ export default {
   h1: "Quel serveur, quel stockage et quel CDN vous coûtent le moins ?",
   lede: "Choisissez ce que vous hébergez, réglez le trafic : chaque VPS et offre cloud est chiffré avec son trafic inclus, le dépassement, le stockage objet et le CDN, et la combinaison complète la moins chère arrive en tête.",
   og_sub: "VPS, stockage et CDN : la combinaison la moins chère pour votre trafic",
-  lang_label: "Langue", faq_h: "Questions", a_close: "Fermer", a_prev: "Question précédente", a_next: "Question suivante", a_gh: "GitHub", 
+  lang_label: "Langue", faq_h: "Questions", a_close: "Fermer", a_prev: "Question précédente", a_next: "Question suivante", a_gh: "GitHub", a_unit: "Unité", 
   th_system: "Thème : système", th_light: "Thème : clair", th_dark: "Thème : sombre",
   in_scene: "Qu’hébergez-vous ?",
   sc_blog: "Blog", sc_saas: "Appli web / SaaS", sc_proxy: "Proxy / relais", sc_download: "Site de téléchargement", sc_media: "Images / vidéo", sc_backup: "Sauvegardes",

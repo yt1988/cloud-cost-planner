@@ -6,7 +6,7 @@ export default {
   h1: "Welcher Server, welcher Speicher und welches CDN kosten dich am wenigsten?",
   lede: "Wähle, was du betreibst, und stelle den Traffic ein: Jeder VPS- und Cloud-Tarif wird mit Inklusiv-Traffic, Mehrverbrauch, Object Storage und CDN berechnet, die günstigste Gesamtlösung steht oben.",
   og_sub: "VPS, Speicher und CDN: die günstigste Kombination für deinen Traffic",
-  lang_label: "Sprache", faq_h: "Fragen", a_close: "Schließen", a_prev: "Vorherige Frage", a_next: "Nächste Frage", a_gh: "GitHub", 
+  lang_label: "Sprache", faq_h: "Fragen", a_close: "Schließen", a_prev: "Vorherige Frage", a_next: "Nächste Frage", a_gh: "GitHub", a_unit: "Einheit", 
   th_system: "Design: System", th_light: "Design: hell", th_dark: "Design: dunkel",
   in_scene: "Was betreibst du?",
   sc_blog: "Blog", sc_saas: "Web-App / SaaS", sc_proxy: "Proxy / Relay", sc_download: "Download-Seite", sc_media: "Bilder / Video", sc_backup: "Backups",

@@ -6,7 +6,7 @@ export default {
   h1: "Which server, storage and CDN costs you least?",
   lede: "Pick what you run, set the traffic: every VPS and cloud plan is priced with its included traffic, overage, object storage and CDN, and the cheapest full setup comes out on top.",
   og_sub: "VPS, storage and CDN: the cheapest setup for your traffic",
-  lang_label: "Language", faq_h: "Questions", a_close: "Close", a_prev: "Previous question", a_next: "Next question", a_gh: "GitHub", 
+  lang_label: "Language", faq_h: "Questions", a_close: "Close", a_prev: "Previous question", a_next: "Next question", a_gh: "GitHub", a_unit: "Unit", 
   th_system: "Theme: system", th_light: "Theme: light", th_dark: "Theme: dark",
   in_scene: "What are you running?",
   sc_blog: "Blog", sc_saas: "Web app / SaaS", sc_proxy: "Proxy / relay", sc_download: "Download site", sc_media: "Images / video", sc_backup: "Backups",

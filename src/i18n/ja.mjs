@@ -6,7 +6,7 @@ export default {
   h1: "サーバー・ストレージ・CDN、どれが一番安い？",
   lede: "用途を選んで転送量を入れると、各社の VPS とクラウドを込みの転送量、超過料金、オブジェクトストレージ、CDN まで含めて月額で計算し、最安の構成から並べます。",
   og_sub: "VPS・ストレージ・CDN：転送量に合った最安の構成",
-  lang_label: "言語", faq_h: "よくある質問", a_close: "閉じる", a_prev: "前の質問", a_next: "次の質問", a_gh: "GitHub", 
+  lang_label: "言語", faq_h: "よくある質問", a_close: "閉じる", a_prev: "前の質問", a_next: "次の質問", a_gh: "GitHub", a_unit: "単位", 
   th_system: "テーマ：システム", th_light: "テーマ：ライト", th_dark: "テーマ：ダーク",
   in_scene: "何を動かしますか？",
   sc_blog: "ブログ", sc_saas: "Web アプリ / SaaS", sc_proxy: "プロキシ / 中継", sc_download: "ダウンロードサイト", sc_media: "画像 / 動画サイト", sc_backup: "バックアップ",

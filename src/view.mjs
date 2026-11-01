@@ -16,8 +16,8 @@ export function formats(lang, cur, rates) {
   const money = usd => { const v = usd * k; return (Math.abs(v) >= 100 ? f0 : f2).format(Math.abs(v) < 0.005 ? 0 : v); };
   const compact = new Intl.NumberFormat(lang, { style: "currency", currency: cur, notation: "compact", maximumFractionDigits: 0 });
   const num = new Intl.NumberFormat(lang, { maximumFractionDigits: 1 }), num2 = new Intl.NumberFormat(lang, { maximumFractionDigits: 2 });
-  // traffic and storage always in TB (as entered), PB from 1 PB
-  const size = gb => (gb >= 1048576 ? num.format(gb / 1048576) + " PB" : gb <= 0 ? "0 TB" : gb < 10.24 ? "<0.01 TB" : (gb < 10240 ? num2 : num).format(gb / 1024) + " TB");
+  // results read in GB below 1 TB, TB above, PB from 1 PB
+  const size = gb => (gb >= 1048576 ? num.format(gb / 1048576) + " PB" : gb >= 1024 ? (gb < 10240 ? num2 : num).format(gb / 1024) + " TB" : num.format(gb) + " GB");
   return { money, short: usd => compact.format(usd * k), size, num: v => num.format(v) };
 }
 

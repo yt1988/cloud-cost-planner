@@ -205,8 +205,9 @@ a[data-pend] { visibility: hidden; }
   .pname { display: none; }
 }
 
-/* traffic and storage are entered in TB */
-.unit { display: grid; place-items: center; min-width: 44px; height: 36px; padding: 0 10px; border: 1px solid var(--line); border-radius: 9px; background: var(--soft); color: var(--muted); font: 600 13px var(--f-num); }
+/* GB | TB beside a traffic or storage amount: the visitor picks it, and it stays */
+.amt .units { flex: none; align-self: stretch; align-items: center; }
+.amt .units button { padding: 4px 10px; font-family: var(--f-num); font-size: 13px; }
 /* the comparison table is always open */
 .more h2 { font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
 .more h2 small { font-weight: 400; text-transform: none; letter-spacing: 0; margin-left: 6px; }

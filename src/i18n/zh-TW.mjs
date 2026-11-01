@@ -6,7 +6,7 @@ export default {
   h1: "買哪家主機、儲存和 CDN 最省錢？",
   lede: "選好服務類型、填上流量，每家 VPS 和雲端主機都依方案內含流量、超額費、物件儲存和 CDN 算出月費，最便宜的整套方案排在最前面。",
   og_sub: "VPS、儲存、CDN：依你的流量算出最便宜的組合",
-  lang_label: "語言", faq_h: "常見問題", a_close: "關閉", a_prev: "上一個問題", a_next: "下一個問題", a_gh: "GitHub", 
+  lang_label: "語言", faq_h: "常見問題", a_close: "關閉", a_prev: "上一個問題", a_next: "下一個問題", a_gh: "GitHub", a_unit: "單位", 
   th_system: "主題：跟隨系統", th_light: "主題：淺色", th_dark: "主題：深色",
   in_scene: "你要跑什麼？",
   sc_blog: "個人部落格", sc_saas: "Web 應用 / SaaS", sc_proxy: "代理 / 中轉", sc_download: "下載站", sc_media: "圖片 / 影片站", sc_backup: "備份儲存",

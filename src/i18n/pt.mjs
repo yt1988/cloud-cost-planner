@@ -6,7 +6,7 @@ export default {
   h1: "Qual servidor, armazenamento e CDN saem mais baratos?",
   lede: "Escolha o que você roda e ajuste o tráfego: cada VPS e plano de nuvem é calculado com o tráfego incluído, o excedente, o armazenamento de objetos e a CDN, e a combinação completa mais barata aparece primeiro.",
   og_sub: "VPS, armazenamento e CDN: a combinação mais barata para o seu tráfego",
-  lang_label: "Idioma", faq_h: "Perguntas", a_close: "Fechar", a_prev: "Pergunta anterior", a_next: "Próxima pergunta", a_gh: "GitHub", 
+  lang_label: "Idioma", faq_h: "Perguntas", a_close: "Fechar", a_prev: "Pergunta anterior", a_next: "Próxima pergunta", a_gh: "GitHub", a_unit: "Unidade", 
   th_system: "Tema: sistema", th_light: "Tema: claro", th_dark: "Tema: escuro",
   in_scene: "O que você vai rodar?",
   sc_blog: "Blog", sc_saas: "App web / SaaS", sc_proxy: "Proxy / relay", sc_download: "Site de downloads", sc_media: "Imagens / vídeo", sc_backup: "Backups",
