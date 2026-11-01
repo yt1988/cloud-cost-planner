@@ -4,7 +4,7 @@
 
 填上你要跑的业务和每月流量，它把每家 VPS 和云主机，连同对象存储和 CDN，按一个月算出费用，推荐最便宜的整套方案。
 
-- **服务器**：Hetzner、DigitalOcean、Vultr、Linode（Akamai）、AWS Lightsail、Contabo、Oracle Cloud、AWS EC2、谷歌云、Azure
+- **服务器**：Hetzner、DigitalOcean、Vultr、Linode（Akamai）、AWS Lightsail、Oracle Cloud、AWS EC2、谷歌云、Azure
 - **对象存储**：Cloudflare R2、Amazon S3、Backblaze B2、Wasabi、DigitalOcean Spaces、Hetzner Object Storage
 - **CDN**：Cloudflare（免费版）、Amazon CloudFront、Bunny CDN
 - 套餐流量和超额费、云厂商按 GB 收的出口费（含阶梯和免费额度）、Premium/Standard 网络层级、发往中国大陆的价格、请求费、最低计费量、公平使用和条款限制（Cloudflare 免费版不能发视频、Wasabi 出口不能超过存储量）

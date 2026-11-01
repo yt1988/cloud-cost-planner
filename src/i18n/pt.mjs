@@ -38,7 +38,6 @@ export default {
   c_plan: "Plano", c_region: "Região", c_cpu: "vCPU / RAM", c_total: "Por mês", c_src: "Fonte",
   cpu_shared: "CPU compartilhada", cpu_dedicated: "CPU dedicada",
   n_stock: "As linhas mais baratas da Hetzner esgotam com frequência em alguns locais.",
-  n_contabo: "Contabo: ilimitado com política de uso justo; preço sem desconto de fidelidade; só locais europeus.",
   n_oracle: "A Oracle cobra por OCPU e GB de memória; A1 é Arm.",
   n_awsDisk: "Disco ao preço gp3 de US$ 0,08/GB em US East; outras regiões são um pouco mais caras.",
   n_gcpDisk: "Disco ao preço do disco balanceado de Iowa; outras regiões são um pouco mais caras.",

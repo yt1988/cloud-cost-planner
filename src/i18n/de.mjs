@@ -38,7 +38,6 @@ export default {
   c_plan: "Tarif", c_region: "Region", c_cpu: "vCPU / RAM", c_total: "Pro Monat", c_src: "Quelle",
   cpu_shared: "geteilte CPU", cpu_dedicated: "dedizierte CPU",
   n_stock: "Hetzners günstigste Linien sind an manchen Standorten oft ausverkauft.",
-  n_contabo: "Contabo: unbegrenzt mit Fair-Use-Regel; Preis ohne Rabatt für lange Laufzeit; nur europäische Standorte.",
   n_oracle: "Oracle rechnet pro OCPU und GB Arbeitsspeicher ab; A1 ist Arm.",
   n_awsDisk: "Speicher zum gp3-Preis von 0,08 $/GB in US East; andere Regionen sind etwas teurer.",
   n_gcpDisk: "Speicher zum Preis für Balanced Disks in Iowa; andere Regionen sind etwas teurer.",

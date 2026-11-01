@@ -38,7 +38,6 @@ export default {
   c_plan: "方案", c_region: "機房", c_cpu: "CPU / 記憶體", c_total: "月費", c_src: "來源",
   cpu_shared: "共享 CPU", cpu_dedicated: "專用 CPU",
   n_stock: "Hetzner 最便宜的幾條產品線在部分機房常缺貨。",
-  n_contabo: "Contabo：不限流量但有合理使用條款；依不綁長約的價格計算；只算歐洲機房。",
   n_oracle: "Oracle 依 OCPU 和記憶體計費；A1 是 Arm 架構。",
   n_awsDisk: "硬碟依 gp3 美東價 $0.08/GB 計算，其他區域略高。",
   n_gcpDisk: "硬碟依愛荷華的平衡磁碟價格計算，其他區域略高。",

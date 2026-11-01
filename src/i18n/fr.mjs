@@ -38,7 +38,6 @@ export default {
   c_plan: "Offre", c_region: "Région", c_cpu: "vCPU / RAM", c_total: "Par mois", c_src: "Source",
   cpu_shared: "CPU partagé", cpu_dedicated: "CPU dédié",
   n_stock: "Les gammes les moins chères de Hetzner sont souvent épuisées dans certains sites.",
-  n_contabo: "Contabo : illimité avec politique d’usage raisonnable ; prix sans remise d’engagement ; sites européens uniquement.",
   n_oracle: "Oracle facture à l’OCPU et au Go de mémoire ; A1 est en Arm.",
   n_awsDisk: "Disque au tarif gp3 de 0,08 $/Go en US East ; les autres régions sont un peu plus chères.",
   n_gcpDisk: "Disque au tarif du disque équilibré de l’Iowa ; les autres régions sont un peu plus chères.",

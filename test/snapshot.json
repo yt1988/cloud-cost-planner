@@ -2,27 +2,27 @@
   "blog/na": {
     "picks": [
       "cheapest,simple: vultr-vc2 vc2-1c-2gb @na + - + - = 10.00",
-      "far: contabo-eu Cloud VPS 4 @eu + - + - = 6.60"
+      "far: hetzner-cx-eu CX23 @eu + - + - = 6.69"
     ],
     "aws": "18.71"
   },
   "blog/eu": {
     "picks": [
-      "cheapest,simple: contabo-eu Cloud VPS 4 @eu + - + - = 6.60"
+      "cheapest,simple: hetzner-cx-eu CX23 @eu + - + - = 6.69"
     ],
     "aws": "20.47"
   },
   "blog/ap": {
     "picks": [
       "cheapest,simple: vultr-vc2 vc2-1c-2gb @ap + - + - = 10.00",
-      "far: contabo-eu Cloud VPS 4 @eu + - + - = 6.60"
+      "far: hetzner-cx-eu CX23 @eu + - + - = 6.69"
     ],
     "aws": "22.22"
   },
   "blog/cn": {
     "picks": [
       "cheapest,simple: vultr-vc2 vc2-1c-2gb @ap + - + - = 10.00",
-      "far: contabo-eu Cloud VPS 4 @eu + - + - = 6.60"
+      "far: hetzner-cx-eu CX23 @eu + - + - = 6.69"
     ],
     "aws": "22.22"
   },
@@ -30,13 +30,14 @@
     "picks": [
       "cheapest: vultr-vc2 vc2-2c-4gb @na + b2 + cloudflare = 20.27",
       "simple: oracle-a1 A1 2 OCPU / 4 GB oracle @na + - + - = 23.23",
-      "far: contabo-eu Cloud VPS 4 @eu + - + - = 6.60"
+      "far: hetzner-cx-eu CX33 @eu + b2 + cloudflare = 10.32"
     ],
     "aws": "211.50"
   },
   "saas/eu": {
     "picks": [
-      "cheapest,simple: contabo-eu Cloud VPS 4 @eu + - + - = 6.60"
+      "cheapest: hetzner-cx-eu CX33 @eu + b2 + cloudflare = 10.32",
+      "simple: hetzner-cx-eu CX33 @eu + hetzner-os + - = 17.29"
     ],
     "aws": "215.00"
   },
@@ -44,7 +45,7 @@
     "picks": [
       "cheapest: vultr-vc2 vc2-2c-4gb @ap + b2 + cloudflare = 20.27",
       "simple: oracle-a1 A1 2 OCPU / 4 GB oracle @ap + - + - = 23.23",
-      "far: contabo-eu Cloud VPS 4 @eu + - + - = 6.60"
+      "far: hetzner-cx-eu CX33 @eu + b2 + cloudflare = 10.32"
     ],
     "aws": "265.26"
   },
@@ -52,47 +53,47 @@
     "picks": [
       "cheapest: vultr-vc2 vc2-2c-4gb @ap + b2 + cloudflare = 20.27",
       "simple: oracle-a1 A1 2 OCPU / 4 GB oracle @ap + - + - = 23.23",
-      "far: contabo-eu Cloud VPS 4 @eu + - + - = 6.60"
+      "far: hetzner-cx-eu CX33 @eu + b2 + cloudflare = 10.32"
     ],
     "aws": "265.26"
   },
   "proxy/na": {
     "picks": [
       "cheapest,simple: oracle-a1 A1 1 OCPU / 2 GB oracle @na + - + - = 11.62",
-      "far: contabo-eu Cloud VPS 4 @eu + - + - = 6.60"
+      "far: hetzner-cx-eu CX23 @eu + - + - = 6.69"
     ],
     "aws": "469.71"
   },
   "proxy/eu": {
     "picks": [
-      "cheapest,simple: contabo-eu Cloud VPS 4 @eu + - + - = 6.60"
+      "cheapest,simple: hetzner-cx-eu CX23 @eu + - + - = 6.69"
     ],
     "aws": "471.47"
   },
   "proxy/ap": {
     "picks": [
       "cheapest,simple: oracle-a1 A1 1 OCPU / 2 GB oracle @ap + - + - = 11.62",
-      "far: contabo-eu Cloud VPS 4 @eu + - + - = 6.60"
+      "far: hetzner-cx-eu CX23 @eu + - + - = 6.69"
     ],
     "aws": "593.70"
   },
   "proxy/cn": {
     "picks": [
       "cheapest,simple: oracle-a1 A1 1 OCPU / 2 GB oracle @ap + - + - = 11.62",
-      "far: contabo-eu Cloud VPS 4 @eu + - + - = 6.60"
+      "far: hetzner-cx-eu CX23 @eu + - + - = 6.69"
     ],
     "aws": "593.70"
   },
   "download/na": {
     "picks": [
       "cheapest,simple: vultr-vc2 vc2-2c-4gb @na + r2 + - = 50.57",
-      "far: contabo-eu Cloud VPS 4 @eu + r2 + - = 37.17"
+      "far: hetzner-cx-eu CX33 @eu + r2 + - = 40.61"
     ],
     "aws": "1979.52"
   },
   "download/eu": {
     "picks": [
-      "cheapest: contabo-eu Cloud VPS 4 @eu + r2 + - = 37.17",
+      "cheapest: hetzner-cx-eu CX33 @eu + r2 + - = 40.61",
       "simple: hetzner-cx-eu CX33 @eu + hetzner-os + - = 44.63"
     ],
     "aws": "1983.02"
@@ -100,27 +101,27 @@
   "download/ap": {
     "picks": [
       "cheapest,simple: vultr-vc2 vc2-2c-4gb @ap + r2 + - = 50.57",
-      "far: contabo-eu Cloud VPS 4 @eu + r2 + - = 37.17"
+      "far: hetzner-cx-eu CX33 @eu + r2 + - = 40.61"
     ],
     "aws": "2272.85"
   },
   "download/cn": {
     "picks": [
       "cheapest,simple: vultr-vc2 vc2-2c-4gb @ap + r2 + - = 50.57",
-      "far: contabo-eu Cloud VPS 4 @eu + r2 + - = 37.17"
+      "far: hetzner-cx-eu CX33 @eu + r2 + - = 40.61"
     ],
     "aws": "2272.85"
   },
   "media/na": {
     "picks": [
       "cheapest,simple: oracle-a1 A1 4 OCPU / 8 GB oracle @na + r2 + - = 208.60",
-      "far: contabo-eu Cloud VPS 4 @eu + r2 + - = 173.84"
+      "far: hetzner-cx-eu CX33 @eu + r2 + - = 177.29"
     ],
     "aws": "8907.56"
   },
   "media/eu": {
     "picks": [
-      "cheapest: contabo-eu Cloud VPS 4 @eu + r2 + - = 173.84",
+      "cheapest: hetzner-cx-eu CX33 @eu + r2 + - = 177.29",
       "simple: hetzner-cx-eu CX33 @eu + hetzner-os + - = 181.78"
     ],
     "aws": "8921.58"
@@ -128,14 +129,14 @@
   "media/ap": {
     "picks": [
       "cheapest,simple: oracle-a1 A1 4 OCPU / 8 GB oracle @ap + r2 + - = 208.60",
-      "far: contabo-eu Cloud VPS 4 @eu + r2 + - = 173.84"
+      "far: hetzner-cx-eu CX33 @eu + r2 + - = 177.29"
     ],
     "aws": "10162.79"
   },
   "media/cn": {
     "picks": [
       "cheapest,simple: oracle-a1 A1 4 OCPU / 8 GB oracle @ap + r2 + - = 208.60",
-      "far: contabo-eu Cloud VPS 4 @eu + r2 + - = 173.84"
+      "far: hetzner-cx-eu CX33 @eu + r2 + - = 177.29"
     ],
     "aws": "10162.79"
   },

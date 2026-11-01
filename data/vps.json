@@ -6,7 +6,6 @@
     "vultr": { "name": "Vultr", "kind": "vps", "m2c": "vultr" },
     "linode": { "name": "Linode (Akamai)", "kind": "vps", "m2c": "linode" },
     "lightsail": { "name": "AWS Lightsail", "kind": "vps", "m2c": "aws", "ls": true },
-    "contabo": { "name": "Contabo", "kind": "vps" },
     "oracle": { "name": "Oracle Cloud", "kind": "cloud", "m2c": "oracle" },
     "aws": { "name": "AWS EC2", "kind": "cloud", "m2c": "aws" },
     "gcp": { "name": "Google Cloud", "kind": "cloud", "m2c": "gcp" },
@@ -109,14 +108,6 @@
       "plans": [["0.5 GB", 2, 0.5, 20, 5, 1024], ["1 GB", 2, 1, 40, 7, 2048], ["2 GB", 2, 2, 60, 12, 3072], ["4 GB", 2, 4, 80, 24, 4096],
         ["8 GB", 2, 8, 160, 44, 5120], ["16 GB", 4, 16, 320, 84, 6144], ["32 GB", 8, 32, 640, 164, 7168]],
       "source": "https://aws.amazon.com/lightsail/pricing/", "trafficSource": "https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonLightsail/current/region_index.json", "verifiedAt": "2026-11-01"
-    },
-    {
-      "id": "contabo-eu", "provider": "contabo", "line": "Cloud VPS", "region": "eu", "loc": "Germany", "cpu": "shared", "disk": "ssd",
-      "currency": "USD", "per": "month", "traffic": { "scope": "unlimited", "fairUse": true },
-      "plans": [["Cloud VPS 4", 4, 8, 100, 6.6, null, 200], ["Cloud VPS 6", 6, 12, 200, 9, null, 300], ["Cloud VPS 8", 8, 24, 300, 16.8, null, 600],
-        ["Cloud VPS 12", 12, 48, 400, 30, null, 800]],
-      "note": "contabo",
-      "source": "https://contabo.com/en/vps/", "verifiedAt": "2026-11-01"
     },
     {
       "id": "oracle-a1", "provider": "oracle", "line": "Ampere A1 Flex", "regions": { "na": "Ashburn", "eu": "Frankfurt", "ap": "Tokyo" }, "cpu": "dedicated", "arch": "arm", "disk": "block",

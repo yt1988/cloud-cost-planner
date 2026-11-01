@@ -56,13 +56,6 @@ test("Vultr: plan transfer plus the account's free 2 TB, pooled; three servers t
   near(three.cost.traffic, (6000 - 3 * 1024 - 2048) * 0.01);
 });
 
-test("Contabo: unlimited traffic, but not beyond what the port can move", () => {
-  const vm = m("contabo-eu:Cloud VPS 4:eu");
-  near(portGB(200), 60349.7028);
-  assert.ok(price(vm, null, null, q({ gb: 50000 }), D));
-  assert.equal(price(vm, null, null, q({ gb: 70000 }), D), null);
-});
-
 test("a server's disk must hold the files it serves", () => {
   const vm = m("hetzner-cx-eu:CX23:eu");                               // 40 GB
   assert.ok(price(vm, null, null, q({ gb: 100, staticPct: 50, storeGB: 10 }), D));
@@ -136,7 +129,7 @@ test("the Worker's preview: the page, the cheapest setup in the title, the verdi
   const { resultMeta } = await import("../src/worker.js");
   const m = resultMeta("/zh-cn/download-site-cost/r/1_download_2_4_50_1_20480_95_2048_na_1_50000");
   assert.equal(m.page, "/zh-cn/download-site-cost/");
-  assert.match(m.title, /Contabo|Hetzner|Vultr|Oracle/);
+  assert.match(m.title, /Hetzner|Vultr|Oracle|DigitalOcean/);
   assert.match(m.title, /云成本规划器$/);
   assert.match(m.desc, /20 TB/);
   assert.equal(resultMeta("/r/1_-_1_2_25_1_100_0_0_na_1_500").page, "/");

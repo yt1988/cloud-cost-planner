@@ -38,7 +38,6 @@ export default {
   c_plan: "요금제", c_region: "리전", c_cpu: "vCPU / 메모리", c_total: "월 요금", c_src: "출처",
   cpu_shared: "공유 CPU", cpu_dedicated: "전용 CPU",
   n_stock: "Hetzner의 최저가 라인은 일부 지역에서 자주 품절됩니다.",
-  n_contabo: "Contabo: 무제한이지만 공정 사용 정책이 있습니다. 장기 약정 할인 없는 가격, 유럽만 포함.",
   n_oracle: "Oracle은 OCPU와 메모리 단위로 과금하며 A1은 Arm입니다.",
   n_awsDisk: "디스크는 gp3 미국 동부 가격 $0.08/GB 기준이며 다른 리전은 약간 비쌉니다.",
   n_gcpDisk: "디스크는 아이오와 균형 디스크 가격 기준이며 다른 리전은 약간 비쌉니다.",

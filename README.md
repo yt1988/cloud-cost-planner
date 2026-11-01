@@ -5,7 +5,7 @@
 Tell it what you run and how much traffic it serves; it prices every VPS and cloud plan together with object storage and
 CDNs for one month and recommends the cheapest setup.
 
-- **Servers**: Hetzner, DigitalOcean, Vultr, Linode (Akamai), AWS Lightsail, Contabo, Oracle Cloud, AWS EC2, Google Cloud, Azure
+- **Servers**: Hetzner, DigitalOcean, Vultr, Linode (Akamai), AWS Lightsail, Oracle Cloud, AWS EC2, Google Cloud, Azure
 - **Object storage**: Cloudflare R2, Amazon S3, Backblaze B2, Wasabi, DigitalOcean Spaces, Hetzner Object Storage
 - **CDN**: Cloudflare (Free), Amazon CloudFront, Bunny CDN
 - Included traffic and overage, per-GB cloud egress with its tiers and free allowances, Premium/Standard network tiers,

@@ -38,7 +38,6 @@ export default {
   c_plan: "プラン", c_region: "リージョン", c_cpu: "vCPU / メモリ", c_total: "月額", c_src: "出典",
   cpu_shared: "共有 CPU", cpu_dedicated: "専有 CPU",
   n_stock: "Hetzner の最安ラインは一部ロケーションでよく売り切れます。",
-  n_contabo: "Contabo：転送量無制限ですがフェアユース条項あり。長期契約割引なしの価格、ヨーロッパのみ。",
   n_oracle: "Oracle は OCPU とメモリ単位の課金。A1 は Arm です。",
   n_awsDisk: "ディスクは gp3 の米国東部価格 $0.08/GB で計算。他リージョンはやや高めです。",
   n_gcpDisk: "ディスクはアイオワのバランス永続ディスク価格で計算。他リージョンはやや高めです。",

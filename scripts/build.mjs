@@ -161,7 +161,7 @@ export async function build({ check = false } = {}) {
   const llms = `# ${en.name}
 
 > Free browser calculator: given a server size, monthly outbound traffic, the share of static files, stored data and where
-> visitors are, it prices every VPS and cloud plan (Hetzner, DigitalOcean, Vultr, Linode, Lightsail, Contabo, Oracle Cloud,
+> visitors are, it prices every VPS and cloud plan (Hetzner, DigitalOcean, Vultr, Linode, Lightsail, Oracle Cloud,
 > AWS EC2, Google Cloud, Azure) combined with object storage (R2, S3, B2, Wasabi, Spaces, Hetzner) and CDNs (Cloudflare,
 > CloudFront, Bunny) for one month, and recommends the cheapest setup. Prices checked by hand against each provider's
 > pricing page (${verified}); excluding VAT.
