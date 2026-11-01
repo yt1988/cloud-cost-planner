@@ -9,6 +9,8 @@
   const LS = { theme: "cloud-cost:theme", lang: "cloud-cost:lang", cur: "cloud-cost:cur" };
   const store = { get: k => { try { return localStorage.getItem(k); } catch (e) { return null; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} } };
   const meta = id => { const m = document.querySelector(`meta[name="${id}"]`); return m && /^https:\/\//.test(m.content) ? m.content.replace(/\/+$/, "") : null; };
+  // the other 1ms.dog tools this page links to, at the addresses the shell announces (none when self-hosted)
+  const TOOLS = { m2c: meta("m2c"), ls: meta("ls"), v2c: meta("v2c") };
   const langDir = P.lang === "en" ? "/" : "/" + P.lang.toLowerCase() + "/";
 
   // ---- state: the page's preset; a shared result (/…/r/<code>) or the address while editing (?v=1&…) on top
@@ -71,7 +73,7 @@
   // links to other 1ms.dog tools, from the addresses the shell announces; none when self-hosted
   function links() {
     document.querySelectorAll("a[data-tool]").forEach(a => {
-      const base = meta(a.dataset.tool);
+      const base = TOOLS[a.dataset.tool];
       if (!base) return;
       a.href = base + langDir + (a.dataset.p ? a.dataset.p + "/" : "");
       a.removeAttribute("data-pend");
