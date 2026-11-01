@@ -136,7 +136,7 @@
       </div>
       <p class="verdict" id="verdict">只要存储，每月 1 TB，用户在北美：最省钱的是 Backblaze B2，US$6.88/月；全放 AWS 要 US$107，是它的 15.6 倍。</p>
       <div class="picks" id="picks"><article class="pick best">
-<div class="pk-tags"><span class="tag t-cheapest">最省钱</span><span class="tag t-near">离用户近</span><span class="tag t-simple">最省事</span></div>
+<div class="pk-tags"><span class="tag t-cheapest">最省钱</span><span class="tag t-simple">最省事</span></div>
 <p class="pk-name">Backblaze B2</p>
 <p class="pk-total"><b>US$6.88</b><small>/月</small></p>
 <p class="pk-save">全放 AWS 要 US$107，是它的 15.6 倍</p>
@@ -177,12 +177,12 @@
         <select id="helpSel" aria-labelledby="helpT"></select>
         <button class="icon-btn" type="button" data-hstep="1" aria-label="下一个问题"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg></button>
       </div>
-      <div class="help-c" id="helpC"><article data-hqb="0"><h3>推荐方案是怎么算出来的？</h3><p>把所有满足 CPU 和内存要求的服务器套餐，和每种对象存储、CDN 组合起来，逐个算一个月的费用：套餐价、超出套餐的流量（或云厂商按 GB 收的出口费）、存储、请求和 CDN 流量。页面显示全局最便宜、离用户近的方案里最便宜、服务商最少的三个方案，其余的在对比表里。</p></article><article data-hqb="1" hidden><h3>为什么大云厂商贵这么多？</h3><p>AWS、谷歌云、Azure 对流向公网的每 GB 都收费（约 $0.08 到 $0.12），而大多数 VPS 套餐每月自带 1 到 20 TB 流量。每月几 TB 流量时，流量费比服务器本身还贵。</p></article><article data-hqb="2" hidden><h3>「静态文件」指什么，该填多少？</h3><p>每个访客拿到的都一样的文件：图片、下载包、视频、脚本。这些可以交给对象存储或 CDN 发，不经过服务器。博客大多是静态的（80% 左右），API 和代理完全不是（0%），下载站几乎全是（95%）。</p></article><article data-hqb="3" hidden><h3>什么时候值得用对象存储加 CDN？</h3><p>静态文件占了大部分流量、而且超出服务器套餐自带流量时。Cloudflare R2 出口免费，Backblaze B2 经 Cloudflare 或 Bunny 分发也免费，几 TB 的下载量可能只要几美元，而不是几百美元。</p></article><article data-hqb="4" hidden><h3>为什么入站免费、出站收费？</h3><p>厂商按流出自己网络的流量向上游买带宽，入站流量还能吸引客户上来。所以上传免费，发给访客的下载流量才收钱。</p></article><article data-hqb="5" hidden><h3>谷歌云的 Premium 和 Standard 网络层级是什么？</h3><p>Premium 走谷歌自己的骨干网，送到离访客最近的节点再出去，按目的地计价；Standard 在机房附近就交给公网，更便宜。Azure 的「Microsoft 网络」和「Internet」路由偏好是同一个意思。</p></article><article data-hqb="6" hidden><h3>发往中国大陆的流量为什么更贵？</h3><p>进入中国的国际链路稀缺又昂贵。谷歌云 Premium 层级发往中国单独计价，约是普通价格的两倍；而且不管付多少钱，进中国的线路经常都慢。一般亚太机房离得最近，可以先用延迟测试看看。</p></article><article data-hqb="7" hidden><h3>为什么不比性能？</h3><p>这是按价格和规格筛选，不是跑分。共享 CPU 套餐（表里有标注）在邻居繁忙时可能变慢；在意的话可以在高级选项里把它们排除。</p></article><article data-hqb="8" hidden><h3>多买几台小机器凑流量划算吗？</h3><p>有时几台小套餐加起来的流量比一台大的多。规划器不会自动找这种组合；可以在高级选项里自己改服务器数量对比。</p></article><article data-hqb="9" hidden><h3>价格多久更新一次？</h3><p>每个价格都对照厂商官方定价页人工核对，核对日期在页脚，每一行都有来源链接。价格不含税，欧元价格按固定汇率换算。发现不对可以在 GitHub 提 issue。</p></article></div>
+      <div class="help-c" id="helpC"><article data-hqb="0"><h3>推荐方案是怎么算出来的？</h3><p>把所有满足 CPU 和内存要求的服务器套餐，和每种对象存储、CDN 组合起来，逐个算一个月的费用：套餐价、超出套餐的流量（或云厂商按 GB 收的出口费）、存储、请求和 CDN 流量。页面显示全局最便宜、离用户近的方案里最便宜、服务商最少的三个方案，其余的在对比表里。CDN 按 80% 缓存命中计算，其余 20% 回源，回源流量按源站的规则计费。</p></article><article data-hqb="1" hidden><h3>为什么大云厂商贵这么多？</h3><p>AWS、谷歌云、Azure 对流向公网的每 GB 都收费（约 $0.08 到 $0.12），而大多数 VPS 套餐每月自带 1 到 20 TB 流量。每月几 TB 流量时，流量费比服务器本身还贵。</p></article><article data-hqb="2" hidden><h3>「静态文件」指什么，该填多少？</h3><p>每个访客拿到的都一样的文件：图片、下载包、视频、脚本。这些可以交给对象存储或 CDN 发，不经过服务器。博客大多是静态的（80% 左右），API 和代理完全不是（0%），下载站几乎全是（95%）。</p></article><article data-hqb="3" hidden><h3>什么时候值得用对象存储加 CDN？</h3><p>静态文件占了大部分流量、而且超出服务器套餐自带流量时。Cloudflare R2 出口免费，Backblaze B2 经 Cloudflare 或 Bunny 分发也免费，几 TB 的下载量可能只要几美元，而不是几百美元。</p></article><article data-hqb="4" hidden><h3>为什么入站免费、出站收费？</h3><p>厂商按流出自己网络的流量向上游买带宽，入站流量还能吸引客户上来。所以上传免费，发给访客的下载流量才收钱。</p></article><article data-hqb="5" hidden><h3>谷歌云的 Premium 和 Standard 网络层级是什么？</h3><p>Premium 走谷歌自己的骨干网，送到离访客最近的节点再出去，按目的地计价；Standard 在机房附近就交给公网，更便宜。Azure 的「Microsoft 网络」和「Internet」路由偏好是同一个意思。</p></article><article data-hqb="6" hidden><h3>发往中国大陆的流量为什么更贵？</h3><p>进入中国的国际链路稀缺又昂贵。谷歌云 Premium 层级发往中国单独计价，约是普通价格的两倍；而且不管付多少钱，进中国的线路经常都慢。一般亚太机房离得最近，可以先用延迟测试看看。</p></article><article data-hqb="7" hidden><h3>为什么不比性能？</h3><p>这是按价格和规格筛选，不是跑分。共享 CPU 套餐（表里有标注）在邻居繁忙时可能变慢；在意的话可以在高级选项里把它们排除。</p></article><article data-hqb="8" hidden><h3>多买几台小机器凑流量划算吗？</h3><p>有时几台小套餐加起来的流量比一台大的多。规划器不会自动找这种组合；可以在高级选项里自己改服务器数量对比。</p></article><article data-hqb="9" hidden><h3>价格多久更新一次？</h3><p>每个价格都对照厂商官方定价页人工核对，核对日期在页脚，每一行都有来源链接。价格不含税，欧元价格按固定汇率换算。发现不对可以在 GitHub 提 issue。</p></article></div>
     </div>
   </div>
 </div>
 <script type="application/json" id="data">{"lang":"zh-CN","paths":{"en":"/r2-vs-s3/","zh-CN":"/zh-cn/r2-vs-s3/","zh-TW":"/zh-tw/r2-vs-s3/","ja":"/ja/r2-vs-s3/","ko":"/ko/r2-vs-s3/","es":"/es/r2-vs-s3/","fr":"/fr/r2-vs-s3/","de":"/de/r2-vs-s3/","pt":"/pt/r2-vs-s3/","ru":"/ru/r2-vs-s3/"},"state":{"scene":"","aud":"na","shared":true,"free":false,"vcpu":0,"ram":0,"disk":0,"count":1,"staticPct":100,"objKB":1000,"storeGB":1024,"gb":1024},"cur":"USD","verified":"2026-11-01","slug":"r2-vs-s3"}</script>
-<script src="/assets/l.zh-cn.7c1a3175df.js" defer></script>
-<script src="/assets/app.45b53f01fc.js" defer></script>
+<script src="/assets/l.zh-cn.78e29c6955.js" defer></script>
+<script src="/assets/app.bc2f0f35f6.js" defer></script>
 </body>
 </html>

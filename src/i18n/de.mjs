@@ -17,7 +17,7 @@ export default {
   reg_na: "Nordamerika", reg_eu: "Europa", reg_ap: "Asien-Pazifik",
   adv: "Weitere Optionen", f_count: "Anzahl Server", f_obj: "Durchschnittliche Dateigröße (KB)", f_shared: "Tarife mit geteilter CPU einbeziehen", f_free: "Dauerhaft kostenlose Kontingente zählen (Oracle, Google Cloud)", f_cur: "Währung",
   out_h: "Empfohlen", share: "Teilen",
-  tag_cheapest: "Am günstigsten", tag_near: "Nah an den Besuchern", tag_simple: "Wenigste Anbieter",
+  tag_cheapest: "Am günstigsten", tag_far: "Günstiger auf einem anderen Kontinent", tag_simple: "Wenigste Anbieter",
   per_month: "/Monat", none: "Nicht nötig", cdn_builtin: "Im Speicher enthalten",
   p_machine: "Server", p_traffic: "Traffic", p_storage: "Speicher", p_cdn: "CDN",
   tr_incl: "{gb} von {inc} inklusive", tr_over: "{inc} inklusive, {x} darüber", tr_unlim: "{gb}, unbegrenzt (Fair Use)", tr_cloud: "{gb} · {tier}", tr_free: "{gb} frei",
@@ -64,7 +64,7 @@ export default {
   lt_cheapStorage: "Günstigster Object Storage", lt_cheapStorage_i: "1 TB gespeichert und 1 TB pro Monat heruntergeladen: {best} kostet am wenigsten, {t}/Monat.",
   lt_cheapCdn: "Günstigstes CDN", lt_cheapCdn_i: "10 TB pro Monat nach Nordamerika: {best} ist das günstigste bezahlte CDN für {t}/Monat; Cloudflares kostenloser Tarif kostet für Websites nichts.",
   docs: [
-    ["Wie wird die Empfehlung berechnet?", "Jeder Servertarif, der CPU und Arbeitsspeicher erfüllt, wird mit jeder Option für Object Storage und CDN kombiniert. Jede Kombination wird für einen Monat berechnet: Tarif, Traffic über dem Inklusivvolumen (oder der Egress pro GB der Cloud), Speicher, Anfragen und CDN-Traffic. Angezeigt werden die insgesamt günstigste, die günstigste nahe deinen Besuchern und die mit den wenigsten Anbietern; die Tabelle zeigt den Rest."],
+    ["Wie wird die Empfehlung berechnet?", "Jeder Servertarif, der CPU und Arbeitsspeicher erfüllt, wird mit jeder Option für Object Storage und CDN kombiniert. Jede Kombination wird für einen Monat berechnet: Tarif, Traffic über dem Inklusivvolumen (oder der Egress pro GB der Cloud), Speicher, Anfragen und CDN-Traffic. Angezeigt werden die insgesamt günstigste, die günstigste nahe deinen Besuchern und die mit den wenigsten Anbietern; die Tabelle zeigt den Rest. Ein CDN liefert annahmegemäß 80 % aus dem Cache und holt den Rest vom Origin, abgerechnet nach dessen Regeln."],
     ["Warum sind die großen Clouds so viel teurer?", "AWS, Google Cloud und Azure berechnen jedes GB, das ins Internet geht (etwa 0,08 bis 0,12 $), während die meisten VPS 1 bis 20 TB pro Monat enthalten. Bei ein paar TB im Monat kostet der Traffic mehr als der Server."],
     ["Was heißt „statische Dateien“ und was trage ich ein?", "Dateien, die für alle Besucher gleich sind: Bilder, Downloads, Video, Skripte. Ein Object Storage oder CDN kann sie statt deines Servers ausliefern. Ein Blog ist großteils statisch (etwa 80 %), eine API oder ein Proxy gar nicht (0 %), eine Download-Seite fast ganz (95 %)."],
     ["Wann lohnen sich Object Storage und CDN?", "Wenn statische Dateien den Großteil des Traffics ausmachen und über das Inklusivvolumen des Servers hinausgehen. Cloudflare R2 berechnet keinen Egress, Backblaze B2 ist hinter Cloudflare oder Bunny kostenlos – ein paar TB Downloads kosten dann ein paar Dollar statt Hunderte."],

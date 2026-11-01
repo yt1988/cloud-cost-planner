@@ -20,9 +20,13 @@
 
   // log slider ⇄ GB: 0 is 0, then 1 GB … 1 PB
   const MAXLOG = Math.log10(1048576);
-  const toGB = v => (v <= 0 ? 0 : Math.round(Math.pow(10, (v / 1000) * MAXLOG)));
+  // the slider stops at round numbers: 1, 2, 5, 10 … 500 GB, then 1, 2, 5, 10 … TB (typed values stay as typed)
+  const STOPS = [0];
+  for (let k = 1; k < 1024; k *= 10) for (const m of [1, 2, 5]) if (m * k < 1024) STOPS.push(m * k);
+  for (let k = 1; k <= 1024; k *= 10) for (const m of [1, 2, 5]) if (m * k <= 1024) STOPS.push(m * k * 1024);
+  const toGB = v => { if (v <= 0) return 0; const want = (v / 1000) * MAXLOG; return STOPS.slice(1).reduce((a, b) => (Math.abs(Math.log10(b) - want) < Math.abs(Math.log10(a) - want) ? b : a)); };
   const toSlider = gb => (gb <= 0 ? 0 : Math.round((Math.log10(Math.max(1, gb)) / MAXLOG) * 1000));
-  const unitOf = gb => (gb >= 1024 && gb % 1024 === 0 ? 1024 : gb >= 10240 ? 1024 : 1);
+  const unitOf = gb => (gb >= 1024 ? 1024 : 1);
   const trim = v => +v.toFixed(v < 10 ? 2 : 1);
 
   function syncInputs() {

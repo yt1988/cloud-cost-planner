@@ -11,6 +11,8 @@ export const nearOf = aud => (aud === "cn" ? "ap" : aud);
 export const portGB = mbps => (mbps * 1e6 * 2592000) / 8 / 1073741824;
 // providers that bill as one vendor (one account, one bill)
 const VENDOR = { lightsail: "aws", cloudfront: "aws", "bunny-volume": "bunny" };
+// the share of static traffic a CDN fetches from its origin (an 80% cache hit rate)
+export const ORIGIN = 0.2;
 const vendorOf = id => VENDOR[id] || id;
 
 // Cost of `gb` under tiers [[upTo, price], …] counted from 0. A finite last limit means "contact sales" above it:
@@ -85,11 +87,14 @@ export function price(m, s, c, q, D) {
   const pools = new Map();                                              // egress profile usage, summed per account
   const pool = (prof, gb) => { const k = prof.id; pools.set(k, { prof, gb: (pools.get(k)?.gb || 0) + gb }); };
 
-  // what leaves the server, the bucket and the CDN (cache fills from the origin are left out)
+  // What leaves the server, the bucket and the CDN. A CDN still fetches what it has not cached from its origin:
+  // ORIGIN of the static traffic (an 80% cache hit rate), billed by the origin's own rules, unless the origin sends to
+  // that CDN for free (S3 → CloudFront, B2 → Cloudflare or Bunny, anything on AWS → CloudFront).
   let serverGB = q.gb, bucketGB = 0, cdnGB = 0;
-  if (useStore) { serverGB = dyn; if (c) cdnGB = stat; else bucketGB = stat; }
-  else if (c) { serverGB = dyn; cdnGB = stat; }
-  if (!m && (!useStore || serverGB > 0)) return null;                   // dynamic traffic and a CDN's origin need a server
+  if (useStore) { serverGB = dyn; if (c) { cdnGB = stat; if (!(s.freeTo || []).includes(c.id)) bucketGB = stat * ORIGIN; } else bucketGB = stat; }
+  else if (c) { serverGB = dyn; cdnGB = stat; if (!(m && vendorOf(m.provider) === "aws" && c.id === "cloudfront")) serverGB += stat * ORIGIN; }
+  if (!m && (!useStore || dyn > 0)) return null;                        // dynamic traffic and a CDN's origin need a server
+  if (!m) serverGB = 0;
 
   if (m) {
     const need = q.disk + (useStore ? 0 : q.storeGB);                  // files served by the server live on its disk
@@ -132,7 +137,7 @@ export function price(m, s, c, q, D) {
       const reqM = bucketGB * 1048576 / q.objKB / 1e6;
       st += Math.max(0, reqM - (s.get.freeM || 0)) * s.get.perM;
     }
-    if (s.egress.fairUse && bucketGB > q.storeGB) flags.push("fair");
+    if (s.egress.fairUse && Math.max(bucketGB, cdnGB) > q.storeGB) flags.push("fair");
     cost.storage = st;
   }
 
@@ -177,19 +182,21 @@ export function plan(input, D) {
   return { q, rows };
 }
 
-// The three picks: cheapest anywhere, cheapest near the visitors, fewest vendors near the visitors. Plus the
-// all-AWS reference (EC2 serving everything, or S3 alone) for the "n times" line.
+// The picks, all in the visitors' region: the cheapest, and the one with the fewest vendors. A data center on another
+// continent only when it is clearly cheaper (15% or more): the visitor asked for a region, so the headline respects it.
+// Plus the all-AWS reference (EC2 serving everything, or S3 alone) for the "n times" line.
 export function recommend(input, D) {
   const { q, rows } = plan(input, D);
   // not recommended: above the published tiers (contact sales), or against the terms (video on Cloudflare Free, Wasabi egress above what is stored)
   const ok = rows.filter(r => !r.flags.some(f => f === "sales" || f === "cfTos" || f === "fair"));
   const near = ok.filter(r => r.region === nearOf(q.aud));
-  const cheapest = ok[0] || null, close = near[0] || null;
+  const close = near[0] || ok[0] || null;
+  const far = ok[0] && close && ok[0] !== close && ok[0].total < close.total * 0.85 ? ok[0] : null;
   // fewer vendors is worth a little more, not ten times more
   const cap = close ? Math.max(close.total * 1.5, close.total + 10) : 0;
   const simple = near.filter(r => r.total <= cap).sort((a, b) => a.vendors - b.vendors || a.total - b.total)[0] || null;
   const picks = [];
-  for (const [tag, r] of [["cheapest", cheapest], ["near", close], ["simple", simple]]) {
+  for (const [tag, r] of [["cheapest", close], ["simple", simple], ["far", far]]) {
     if (!r) continue;
     const same = picks.find(p => p.r === r);
     if (same) same.tags.push(tag); else picks.push({ tags: [tag], r });

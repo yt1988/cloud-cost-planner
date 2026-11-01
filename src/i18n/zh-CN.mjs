@@ -17,7 +17,7 @@ export default {
   reg_na: "北美", reg_eu: "欧洲", reg_ap: "亚太",
   adv: "高级选项", f_count: "服务器数量", f_obj: "平均文件大小 (KB)", f_shared: "包含共享 CPU 套餐", f_free: "计入永久免费额度（Oracle、谷歌云）", f_cur: "币种",
   out_h: "推荐方案", share: "分享",
-  tag_cheapest: "最省钱", tag_near: "离用户近", tag_simple: "最省事",
+  tag_cheapest: "最省钱", tag_far: "换个区域更省", tag_simple: "最省事",
   per_month: "/月", none: "不需要", cdn_builtin: "存储自带",
   p_machine: "服务器", p_traffic: "流量", p_storage: "存储", p_cdn: "CDN",
   tr_incl: "套餐含 {inc}，用 {gb}", tr_over: "套餐含 {inc}，超出 {x}", tr_unlim: "{gb}，不限量（公平使用）", tr_cloud: "{gb} · {tier}", tr_free: "免费 {gb}",
@@ -64,7 +64,7 @@ export default {
   lt_cheapStorage: "哪家对象存储最便宜", lt_cheapStorage_i: "存 1 TB、每月下载 1 TB：{best} 最便宜，{t}/月。",
   lt_cheapCdn: "哪家 CDN 最便宜", lt_cheapCdn_i: "每月向北美分发 10 TB：付费 CDN 里 {best} 最便宜，{t}/月；网站用 Cloudflare 免费版不花钱。",
   docs: [
-    ["推荐方案是怎么算出来的？", "把所有满足 CPU 和内存要求的服务器套餐，和每种对象存储、CDN 组合起来，逐个算一个月的费用：套餐价、超出套餐的流量（或云厂商按 GB 收的出口费）、存储、请求和 CDN 流量。页面显示全局最便宜、离用户近的方案里最便宜、服务商最少的三个方案，其余的在对比表里。"],
+    ["推荐方案是怎么算出来的？", "把所有满足 CPU 和内存要求的服务器套餐，和每种对象存储、CDN 组合起来，逐个算一个月的费用：套餐价、超出套餐的流量（或云厂商按 GB 收的出口费）、存储、请求和 CDN 流量。页面显示全局最便宜、离用户近的方案里最便宜、服务商最少的三个方案，其余的在对比表里。CDN 按 80% 缓存命中计算，其余 20% 回源，回源流量按源站的规则计费。"],
     ["为什么大云厂商贵这么多？", "AWS、谷歌云、Azure 对流向公网的每 GB 都收费（约 $0.08 到 $0.12），而大多数 VPS 套餐每月自带 1 到 20 TB 流量。每月几 TB 流量时，流量费比服务器本身还贵。"],
     ["「静态文件」指什么，该填多少？", "每个访客拿到的都一样的文件：图片、下载包、视频、脚本。这些可以交给对象存储或 CDN 发，不经过服务器。博客大多是静态的（80% 左右），API 和代理完全不是（0%），下载站几乎全是（95%）。"],
     ["什么时候值得用对象存储加 CDN？", "静态文件占了大部分流量、而且超出服务器套餐自带流量时。Cloudflare R2 出口免费，Backblaze B2 经 Cloudflare 或 Bunny 分发也免费，几 TB 的下载量可能只要几美元，而不是几百美元。"],

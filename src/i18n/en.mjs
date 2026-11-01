@@ -17,7 +17,7 @@ export default {
   reg_na: "North America", reg_eu: "Europe", reg_ap: "Asia-Pacific",
   adv: "More options", f_count: "Number of servers", f_obj: "Average file size (KB)", f_shared: "Include shared-CPU plans", f_free: "Count always-free tiers (Oracle, Google Cloud)", f_cur: "Currency",
   out_h: "Recommended", share: "Share",
-  tag_cheapest: "Cheapest", tag_near: "Close to visitors", tag_simple: "Fewest vendors",
+  tag_cheapest: "Cheapest", tag_far: "Cheaper on another continent", tag_simple: "Fewest vendors",
   per_month: "/month", none: "Not needed", cdn_builtin: "Built into the storage",
   p_machine: "Server", p_traffic: "Traffic", p_storage: "Storage", p_cdn: "CDN",
   tr_incl: "{gb} of {inc} included", tr_over: "{inc} included, {x} over", tr_unlim: "{gb}, unmetered (fair use)", tr_cloud: "{gb} · {tier}", tr_free: "{gb} free",
@@ -64,7 +64,7 @@ export default {
   lt_cheapStorage: "Cheapest object storage", lt_cheapStorage_i: "1 TB stored and 1 TB downloaded a month: {best} costs least, {t}/month.",
   lt_cheapCdn: "Cheapest CDN", lt_cheapCdn_i: "10 TB a month to North America: {best} is the cheapest paid CDN at {t}/month; Cloudflare's free plan costs nothing for websites.",
   docs: [
-    ["How is the recommendation worked out?", "Every server plan that fits your CPU and memory is combined with every object storage and CDN option. Each combination is priced for one month: the plan, traffic beyond what it includes (or the cloud's per-GB egress), storage, requests and CDN traffic. The cheapest overall, the cheapest near your visitors and the one with the fewest vendors are shown; the table lists the rest."],
+    ["How is the recommendation worked out?", "Every server plan that fits your CPU and memory is combined with every object storage and CDN option. Each combination is priced for one month: the plan, traffic beyond what it includes (or the cloud's per-GB egress), storage, requests and CDN traffic. The cheapest overall, the cheapest near your visitors and the one with the fewest vendors are shown; the table lists the rest. A CDN is assumed to serve 80% from cache and fetch the rest from the origin, billed by the origin's own rules."],
     ["Why are the clouds so much more expensive?", "AWS, Google Cloud and Azure bill every GB that leaves for the internet (about $0.08 to $0.12), while most VPS plans include 1 to 20 TB a month. At a few TB a month the traffic costs more than the server itself."],
     ["What does \"static files\" mean, and what should I enter?", "Files that are the same for every visitor: images, downloads, video, scripts. They can be served by object storage or a CDN instead of your server. A blog is mostly static (around 80%), an API or proxy is not at all (0%), a download site almost entirely (95%)."],
     ["When is object storage plus a CDN worth it?", "When static files are most of the traffic and more than your server's plan includes. Cloudflare R2 charges nothing for egress, and Backblaze B2 is free behind Cloudflare or Bunny, so a few TB of downloads can cost a few dollars instead of hundreds."],

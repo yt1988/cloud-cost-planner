@@ -17,7 +17,7 @@ export default {
   reg_na: "América do Norte", reg_eu: "Europa", reg_ap: "Ásia-Pacífico",
   adv: "Mais opções", f_count: "Número de servidores", f_obj: "Tamanho médio dos arquivos (KB)", f_shared: "Incluir planos com CPU compartilhada", f_free: "Contar camadas gratuitas permanentes (Oracle, Google Cloud)", f_cur: "Moeda",
   out_h: "Recomendado", share: "Compartilhar",
-  tag_cheapest: "Mais barato", tag_near: "Perto dos visitantes", tag_simple: "Menos fornecedores",
+  tag_cheapest: "Mais barato", tag_far: "Mais barato em outro continente", tag_simple: "Menos fornecedores",
   per_month: "/mês", none: "Não precisa", cdn_builtin: "Incluída no armazenamento",
   p_machine: "Servidor", p_traffic: "Tráfego", p_storage: "Armazenamento", p_cdn: "CDN",
   tr_incl: "{gb} de {inc} incluídos", tr_over: "{inc} incluídos, {x} a mais", tr_unlim: "{gb}, ilimitado (uso justo)", tr_cloud: "{gb} · {tier}", tr_free: "{gb} grátis",
@@ -64,7 +64,7 @@ export default {
   lt_cheapStorage: "Armazenamento de objetos mais barato", lt_cheapStorage_i: "1 TB armazenado e 1 TB baixado por mês: {best} custa menos, {t}/mês.",
   lt_cheapCdn: "CDN mais barata", lt_cheapCdn_i: "10 TB por mês para a América do Norte: {best} é a CDN paga mais barata, {t}/mês; o plano gratuito da Cloudflare não custa nada para sites.",
   docs: [
-    ["Como a recomendação é calculada?", "Cada plano de servidor que atende sua CPU e memória é combinado com cada opção de armazenamento de objetos e CDN. Cada combinação é calculada para um mês: o plano, o tráfego acima do incluído (ou a saída por GB da nuvem), o armazenamento, as requisições e o tráfego da CDN. Mostramos a mais barata no geral, a mais barata perto dos seus visitantes e a com menos fornecedores; a tabela lista o resto."],
+    ["Como a recomendação é calculada?", "Cada plano de servidor que atende sua CPU e memória é combinado com cada opção de armazenamento de objetos e CDN. Cada combinação é calculada para um mês: o plano, o tráfego acima do incluído (ou a saída por GB da nuvem), o armazenamento, as requisições e o tráfego da CDN. Mostramos a mais barata no geral, a mais barata perto dos seus visitantes e a com menos fornecedores; a tabela lista o resto. Supõe-se que a CDN sirva 80% do cache e busque o resto na origem, cobrado pelas regras da origem."],
     ["Por que as grandes nuvens são tão mais caras?", "AWS, Google Cloud e Azure cobram cada GB que sai para a internet (cerca de US$ 0,08 a 0,12), enquanto a maioria dos VPS inclui de 1 a 20 TB por mês. Com alguns TB por mês, o tráfego custa mais que o próprio servidor."],
     ["O que são \"arquivos estáticos\" e o que eu coloco?", "Arquivos iguais para todos os visitantes: imagens, downloads, vídeo, scripts. Um armazenamento de objetos ou uma CDN pode servi-los no lugar do servidor. Um blog é quase todo estático (cerca de 80%), uma API ou proxy nada (0%), um site de downloads quase tudo (95%)."],
     ["Quando vale a pena armazenamento de objetos mais CDN?", "Quando os arquivos estáticos são a maior parte do tráfego e passam do que o plano do servidor inclui. O Cloudflare R2 não cobra saída e o Backblaze B2 é grátis atrás da Cloudflare ou da Bunny, então alguns TB de downloads podem custar alguns dólares em vez de centenas."],

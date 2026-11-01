@@ -48,7 +48,7 @@ export function pickCard(p, q, T, F, D, aws) {
     [T.p_cdn, r.c ? `${r.c.name} · ${F.size(r.cdnGB)}` : r.s && r.s.cdn ? T.cdn_builtin : T.none, r.c ? r.cost.cdn : null],
   ];
   const why = [];
-  if (p.tags.includes("cheapest") && r.region !== nearOf(q.aud)) why.push(fill(T.why_far, { region: regionName }));
+  if (p.tags.includes("far")) why.push(fill(T.why_far, { region: regionName }));
   if (r.s && q.staticPct > 0 && m) why.push(fill(T.why_store, { s: r.s.name, gb: F.size(r.serverGB) }));
   else if (r.c && m) why.push(fill(T.why_cdn, { c: r.c.name, gb: F.size(r.serverGB) }));
   if (r.flags.includes("free")) why.push(T.why_free);

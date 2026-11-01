@@ -17,7 +17,7 @@ export default {
   reg_na: "Amérique du Nord", reg_eu: "Europe", reg_ap: "Asie-Pacifique",
   adv: "Plus d’options", f_count: "Nombre de serveurs", f_obj: "Taille moyenne des fichiers (Ko)", f_shared: "Inclure les offres à CPU partagé", f_free: "Compter les offres gratuites permanentes (Oracle, Google Cloud)", f_cur: "Devise",
   out_h: "Recommandé", share: "Partager",
-  tag_cheapest: "Le moins cher", tag_near: "Proche des visiteurs", tag_simple: "Moins de fournisseurs",
+  tag_cheapest: "Le moins cher", tag_far: "Moins cher sur un autre continent", tag_simple: "Moins de fournisseurs",
   per_month: "/mois", none: "Inutile", cdn_builtin: "Intégré au stockage",
   p_machine: "Serveur", p_traffic: "Trafic", p_storage: "Stockage", p_cdn: "CDN",
   tr_incl: "{gb} sur {inc} inclus", tr_over: "{inc} inclus, {x} en plus", tr_unlim: "{gb}, illimité (usage raisonnable)", tr_cloud: "{gb} · {tier}", tr_free: "{gb} gratuits",
@@ -64,7 +64,7 @@ export default {
   lt_cheapStorage: "Le stockage objet le moins cher", lt_cheapStorage_i: "1 To stocké et 1 To téléchargé par mois : {best} coûte le moins, {t}/mois.",
   lt_cheapCdn: "Le CDN le moins cher", lt_cheapCdn_i: "10 To par mois vers l’Amérique du Nord : {best} est le CDN payant le moins cher, {t}/mois ; l’offre gratuite de Cloudflare ne coûte rien pour un site web.",
   docs: [
-    ["Comment la recommandation est-elle calculée ?", "Chaque offre de serveur qui satisfait votre CPU et votre mémoire est combinée avec chaque option de stockage objet et de CDN. Chaque combinaison est chiffrée pour un mois : l’offre, le trafic au-delà de l’inclus (ou la sortie au Go du cloud), le stockage, les requêtes et le trafic CDN. On affiche la moins chère au total, la moins chère proche de vos visiteurs et celle qui a le moins de fournisseurs ; le tableau liste le reste."],
+    ["Comment la recommandation est-elle calculée ?", "Chaque offre de serveur qui satisfait votre CPU et votre mémoire est combinée avec chaque option de stockage objet et de CDN. Chaque combinaison est chiffrée pour un mois : l’offre, le trafic au-delà de l’inclus (ou la sortie au Go du cloud), le stockage, les requêtes et le trafic CDN. On affiche la moins chère au total, la moins chère proche de vos visiteurs et celle qui a le moins de fournisseurs ; le tableau liste le reste. Le CDN est supposé servir 80 % depuis son cache et aller chercher le reste à l’origine, facturé selon les règles de l’origine."],
     ["Pourquoi les grands clouds sont-ils si chers ?", "AWS, Google Cloud et Azure facturent chaque Go qui sort vers internet (environ 0,08 à 0,12 $), alors que la plupart des VPS incluent 1 à 20 To par mois. À quelques To par mois, le trafic coûte plus que le serveur lui-même."],
     ["Que sont les « fichiers statiques » et que saisir ?", "Des fichiers identiques pour tous les visiteurs : images, téléchargements, vidéo, scripts. Un stockage objet ou un CDN peut les servir à la place du serveur. Un blog est surtout statique (environ 80 %), une API ou un proxy pas du tout (0 %), un site de téléchargement presque entièrement (95 %)."],
     ["Quand le stockage objet plus un CDN vaut-il le coup ?", "Quand les fichiers statiques représentent l’essentiel du trafic et dépassent ce qu’inclut l’offre du serveur. Cloudflare R2 ne facture pas la sortie et Backblaze B2 est gratuit derrière Cloudflare ou Bunny : quelques To de téléchargements peuvent coûter quelques dollars au lieu de centaines."],

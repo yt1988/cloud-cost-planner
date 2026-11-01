@@ -17,7 +17,7 @@ export default {
   reg_na: "北美", reg_eu: "歐洲", reg_ap: "亞太",
   adv: "進階選項", f_count: "主機數量", f_obj: "平均檔案大小 (KB)", f_shared: "包含共享 CPU 方案", f_free: "計入永久免費額度（Oracle、Google Cloud）", f_cur: "幣別",
   out_h: "推薦方案", share: "分享",
-  tag_cheapest: "最省錢", tag_near: "離使用者近", tag_simple: "最省事",
+  tag_cheapest: "最省錢", tag_far: "換個區域更省", tag_simple: "最省事",
   per_month: "/月", none: "不需要", cdn_builtin: "儲存內建",
   p_machine: "主機", p_traffic: "流量", p_storage: "儲存", p_cdn: "CDN",
   tr_incl: "方案含 {inc}，用 {gb}", tr_over: "方案含 {inc}，超出 {x}", tr_unlim: "{gb}，不限量（合理使用）", tr_cloud: "{gb} · {tier}", tr_free: "免費 {gb}",
@@ -64,7 +64,7 @@ export default {
   lt_cheapStorage: "哪家物件儲存最便宜", lt_cheapStorage_i: "存 1 TB、每月下載 1 TB：{best} 最便宜，{t}/月。",
   lt_cheapCdn: "哪家 CDN 最便宜", lt_cheapCdn_i: "每月向北美傳送 10 TB：付費 CDN 中 {best} 最便宜，{t}/月；網站用 Cloudflare 免費版不花錢。",
   docs: [
-    ["推薦方案是怎麼算出來的？", "把所有符合 CPU 和記憶體需求的主機方案，與每種物件儲存、CDN 組合起來，逐一計算一個月的費用：方案價、超出方案的流量（或雲端廠商依 GB 收的對外流量費）、儲存、請求和 CDN 流量。頁面顯示整體最便宜、離使用者近的方案中最便宜、服務商最少的三個方案，其餘列在比較表。"],
+    ["推薦方案是怎麼算出來的？", "把所有符合 CPU 和記憶體需求的主機方案，與每種物件儲存、CDN 組合起來，逐一計算一個月的費用：方案價、超出方案的流量（或雲端廠商依 GB 收的對外流量費）、儲存、請求和 CDN 流量。頁面顯示整體最便宜、離使用者近的方案中最便宜、服務商最少的三個方案，其餘列在比較表。CDN 以 80% 快取命中計算，其餘 20% 回源，回源流量依來源站的規則計費。"],
     ["為什麼大型雲端廠商貴這麼多？", "AWS、Google Cloud、Azure 對流向網際網路的每 GB 都收費（約 $0.08 到 $0.12），而多數 VPS 方案每月內含 1 到 20 TB 流量。每月幾 TB 流量時，流量費比主機本身還貴。"],
     ["「靜態檔案」是什麼，該填多少？", "每位訪客拿到的都一樣的檔案：圖片、下載檔、影片、腳本。這些可以交給物件儲存或 CDN 傳送，不經過主機。部落格大多是靜態的（約 80%），API 和代理完全不是（0%），下載站幾乎全是（95%）。"],
     ["什麼時候值得用物件儲存加 CDN？", "靜態檔案占大部分流量、而且超過主機方案內含流量時。Cloudflare R2 對外流量免費，Backblaze B2 經 Cloudflare 或 Bunny 傳送也免費，幾 TB 的下載量可能只要幾美元，而不是幾百美元。"],
