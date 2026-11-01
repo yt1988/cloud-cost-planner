@@ -237,7 +237,21 @@ export function verifiedAt(D) {
   return all.sort()[0];
 }
 
-// state ⇄ query string (?v=1&…): short keys, so links stay short
+// state ⇄ the code of a shared result link, /<lang>/[<page>/]r/<code>: "1_<scene>_<vcpu>_<ram>_<disk>_<servers>_<GB>_
+// <static %>_<stored GB>_<na|eu|ap|cn>_<flags: 1 shared CPU, 2 free tiers>_<file KB>". The first field is the format's
+// version: a new format gets a new number, and this one keeps opening.
+export function toCode(s) {
+  return ["1", s.scene || "-", s.vcpu, s.ram, s.disk, s.count, s.gb, s.staticPct, s.storeGB, s.aud, (s.shared ? 1 : 0) + (s.free ? 2 : 0), s.objKB].join("_");
+}
+export function fromCode(code) {
+  const p = String(code || "").split("_");
+  if (p[0] !== "1" || p.length !== 12 || !AUDIENCES.includes(p[9]) || !/^[a-z-]{1,20}$/.test(p[1])) return null;
+  const n = [2, 3, 4, 5, 6, 7, 8, 11, 10].map(i => (/^\d+(\.\d+)?$/.test(p[i]) ? +p[i] : NaN));
+  if (n.some(v => !Number.isFinite(v)) || n[5] > 100 || n[3] < 1) return null;
+  return { scene: p[1] === "-" ? "" : p[1], vcpu: n[0], ram: n[1], disk: n[2], count: n[3], gb: n[4], staticPct: n[5], storeGB: n[6], aud: p[9], shared: !!(n[8] & 1), free: !!(n[8] & 2), objKB: n[7] };
+}
+
+// state ⇄ query string (?v=1&…), the page's own address while you edit: short keys, so links stay short
 export const PARAMS = { s: "scene", c: "vcpu", r: "ram", d: "disk", n: "count", gb: "gb", st: "staticPct", sg: "storeGB", a: "aud", sh: "shared", f: "free", o: "objKB" };
 export function toQuery(state) {
   const p = new URLSearchParams({ v: "1" });

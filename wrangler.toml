@@ -1,12 +1,14 @@
-# Cloudflare Workers with static assets: `npx wrangler deploy` uploads ./public.
-# There is no Worker script, so every request is a static asset request (free and not metered).
+# Cloudflare Workers with static assets: `npx wrangler deploy` uploads ./public and the Worker in src/worker.js.
+# A request for a file in public/ is served without running the Worker (free and not metered); src/worker.js only
+# sees the rest: shared result links (/r/…), which get their own preview title, and 404s.
 # No routes or custom domain here: on 1ms.dog the site routes cost.1ms.dog to this Worker. To self-host, bind your own
 # domain in the dashboard (see README).
 name = "cloud-cost-planner"
+main = "src/worker.js"
 compatibility_date = "2025-10-01"
 workers_dev = false
 preview_urls = false
 
 [assets]
 directory = "./public"
-not_found_handling = "none"
+binding = "ASSETS"

@@ -122,3 +122,25 @@ test("scenario snapshot", () => {
   if (process.env.UPDATE) writeFileSync(file, JSON.stringify(snap, null, 2) + "\n");
   assert.deepEqual(snap, JSON.parse(readFileSync(file, "utf8")));
 });
+
+test("a shared result's code round-trips, and bad codes are refused", async () => {
+  const { toCode, fromCode } = await import("../src/calc.mjs");
+  const st = { scene: "", vcpu: 2, ram: 0.5, disk: 50, count: 3, gb: 20480, staticPct: 95, storeGB: 2048, aud: "cn", shared: false, free: true, objKB: 50000 };
+  assert.equal(toCode(st), "1_-_2_0.5_50_3_20480_95_2048_cn_2_50000");
+  assert.deepEqual(fromCode(toCode(st)), st);
+  for (const bad of ["", "2_-_2_4_50_1_1_1_1_na_1_1", "1_-_2_4_50_1_1_101_1_na_1_1", "1_-_2_4_50_0_1_1_1_na_1_1", "1_x_2_4_50_1_1_1_1_mars_1_1", "1_<b>_2_4_50_1_1_1_1_na_1_1"])
+    assert.equal(fromCode(bad), null, bad);
+});
+
+test("the Worker's preview: the page, the cheapest setup in the title, the verdict as description", async () => {
+  const { resultMeta } = await import("../src/worker.js");
+  const m = resultMeta("/zh-cn/download-site-cost/r/1_download_2_4_50_1_20480_95_2048_na_1_50000");
+  assert.equal(m.page, "/zh-cn/download-site-cost/");
+  assert.match(m.title, /Contabo|Hetzner|Vultr|Oracle/);
+  assert.match(m.title, /云成本规划器$/);
+  assert.match(m.desc, /20 TB/);
+  assert.equal(resultMeta("/r/1_-_1_2_25_1_100_0_0_na_1_500").page, "/");
+  assert.deepEqual(resultMeta("/ja/r/garbage"), { page: "/ja/", title: null, desc: null });
+  assert.equal(resultMeta("/zh-cn/no-such-page/r/1_-_1_2_25_1_100_0_0_na_1_500"), null);
+  assert.equal(resultMeta("/zh-cn/download-site-cost/"), null);
+});

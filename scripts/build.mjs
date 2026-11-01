@@ -169,7 +169,8 @@ export async function build({ check = false } = {}) {
 - Planner: ${SITE}/ (also ${LANGS.slice(1).map(([, s]) => "/" + s + "/").join(", ")})
 - Pages: ${PAGES.map(p => `${SITE}/${p.slug}/`).join(", ")}
 - Price data (JSON, CORS): ${["vps", "egress", "storage", "cdn", "rates"].map(f => `${SITE}/data/${f}.json`).join(", ")}
-- Link format: ?v=1&c=<vCPU>&r=<RAM GB>&d=<disk GB>&n=<servers>&gb=<egress GB/month>&st=<static %>&sg=<stored GB>&a=<na|eu|ap|cn>&sh=<shared CPU 0|1>&f=<free tiers 0|1>&o=<file KB>
+- Shared result: /[<lang>/][<page>/]r/1_<scene|->_<vCPU>_<RAM GB>_<disk GB>_<servers>_<egress GB/month>_<static %>_<stored GB>_<na|eu|ap|cn>_<flags: 1 shared CPU + 2 free tiers>_<file KB>
+- Page state: ?v=1&c=<vCPU>&r=<RAM GB>&d=<disk GB>&n=<servers>&gb=<egress GB/month>&st=<static %>&sg=<stored GB>&a=<na|eu|ap|cn>&sh=<shared CPU 0|1>&f=<free tiers 0|1>&o=<file KB>
 `;
   const csp = ["default-src 'self'", `script-src 'self' 'sha256-${sha(PREPAINT)}'`, "style-src 'self'", "font-src 'self'", "img-src 'self' data: blob:",
     "connect-src 'self' https:", "manifest-src 'self'", "object-src 'none'", "base-uri 'none'", "form-action 'none'", "frame-ancestors 'none'"].join("; ");

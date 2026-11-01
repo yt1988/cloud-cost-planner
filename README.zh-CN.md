@@ -42,7 +42,7 @@ npm run og         # 链接预览图（用系统字体，生成后提交）
 
 ## 部署
 
-纯静态网站：`npx wrangler deploy` 把 `public/` 作为只有静态资源的 Cloudflare Worker 上传（没有 Worker 脚本，请求免费）。部署到别的域名时构建前设置 `SITE_URL`。也可以放在任何静态托管上。
+`npx wrangler deploy` 上传 `public/` 静态资源和 `src/worker.js`。静态文件直接返回、不运行 Worker（免费）；Worker 只处理分享出去的结果链接（`/r/<编码>`），把推荐结论写进预览标题，以及返回 404。部署到别的域名时构建前设置 `SITE_URL`。放在普通静态托管上也能用，只是结果链接没有专属预览标题。
 
 ## 许可
 

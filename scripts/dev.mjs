@@ -26,6 +26,7 @@ async function rules() {
 createServer(async (req, res) => {
   const urlPath = decodeURIComponent(new URL(req.url, "http://x").pathname);
   let path = urlPath;
+  path = path.replace(/r\/[^/]+\/?$/, "");                   // a shared result link shows its page (src/worker.js in production)
   if (path.endsWith("/")) path += "index.html";
   const file = normalize(root + path);
   if (!file.startsWith(normalize(root))) { res.writeHead(403).end(); return; }

@@ -11,8 +11,10 @@
   const meta = id => { const m = document.querySelector(`meta[name="${id}"]`); return m && /^https:\/\//.test(m.content) ? m.content.replace(/\/+$/, "") : null; };
   const langDir = P.lang === "en" ? "/" : "/" + P.lang.toLowerCase() + "/";
 
-  // ---- state: the page's preset, then the link's ?v=1&… on top
-  let st = { ...P.state, ...(fromQuery(location.search) || {}) };
+  // ---- state: the page's preset; a shared result (/…/r/<code>) or the address while editing (?v=1&…) on top
+  const shared = /\/r\/([^/]+)\/?$/.exec(location.pathname);
+  const pagePath = location.pathname.replace(/r\/[^/]*\/?$/, "");
+  let st = { ...P.state, ...((shared && fromCode(decodeURIComponent(shared[1]))) || fromQuery(location.search) || {}) };
   let cur = ["USD", "EUR", "CNY"].includes(store.get(LS.cur)) ? store.get(LS.cur) : P.cur;
   $("cur").value = cur;
 
@@ -42,7 +44,7 @@
   }
 
   // ---- results
-  let rec = null, raf = 0;
+  let rec = null, raf = 0, keepShared = !!shared;
   function render() {
     raf = 0;
     const F = formats(P.lang, cur, D.rates);
@@ -54,7 +56,8 @@
     else tableStale = true;
     links();
     const q = toQuery(st);
-    history.replaceState(null, "", location.pathname + "?" + q + location.hash);
+    // a shared link keeps its address until the visitor changes something
+    if (keepShared) keepShared = false; else history.replaceState(null, "", pagePath + "?" + q + location.hash);
   }
   let tableStale = false;
   $("more").addEventListener("toggle", () => { if ($("more").open && tableStale) { $("tbl").innerHTML = tableHTML(rec, T, formats(P.lang, cur, D.rates), D); tableStale = false; } });
@@ -109,7 +112,7 @@
   // ---- language: save first, then go (the shell syncs it across tools)
   $("lang").addEventListener("change", () => {
     const l = $("lang").value; store.set(LS.lang, l);
-    location.href = P.paths[l] + location.search;
+    location.href = P.paths[l] + (shared ? "r/" + shared[1] + "/" : location.search);
   });
 
   // ---- help dialog: questions on the left, one answer at a time; a picker on phones
@@ -135,7 +138,7 @@
     const { share } = await import("/assets/share/share.js");
     const F = formats(P.lang, cur, D.rates);
     const slug = (SCENES.find(s => s.id === st.scene) || SCENES.find(s => s.id === nearestScene(st))).slug;
-    const link = location.origin + langDir + slug + "/?" + toQuery(st);
+    const link = location.origin + langDir + slug + "/r/" + toCode(st);
     const line = verdict(rec, T, F, D);
     share({
       lang: P.lang, name: T.name, file: "cloud-cost", show: [], never: [], home: location.origin + langDir,
@@ -185,5 +188,5 @@
 
   syncInputs();
   // the prerendered result matches the page's preset; redraw only if the link or saved currency changed it
-  if (location.search || cur !== P.cur) render(); else { rec = recommend(st, D); links(); }
+  if (shared || location.search || cur !== P.cur) render(); else { rec = recommend(st, D); links(); }
 })();

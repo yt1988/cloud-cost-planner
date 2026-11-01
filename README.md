@@ -58,8 +58,9 @@ After a deliberate price change, refresh the snapshot: `UPDATE=1 node --test "te
 
 ## Deploy
 
-A static site: `npx wrangler deploy` uploads `public/` as a Cloudflare Worker with static assets (no Worker script, so
-requests are free). Set `SITE_URL` when building for another domain. Any static host works too.
+`npx wrangler deploy` uploads `public/` as Cloudflare Worker static assets plus `src/worker.js`. Files are served without
+running the Worker (free); it only answers shared result links (`/r/<code>`), giving them the recommendation as their
+preview title, and 404s. Set `SITE_URL` when building for another domain. On a plain static host everything works except the per-result preview title.
 
 ## License
 
