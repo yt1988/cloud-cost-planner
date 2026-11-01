@@ -54,7 +54,7 @@
         </div>
         <div class="field">
           <label class="lab" for="gbN" data-i="in_gb"></label>
-          <div class="amt"><input id="gbN" type="number" min="0" step="any" inputmode="decimal"><select id="gbU" aria-label="{{a:a_unit}}"><option value="1">GB</option><option value="1024">TB</option></select></div>
+          <div class="amt"><input id="gbN" type="number" min="0" step="any" inputmode="decimal"><span class="unit">TB</span></div>
           <input id="gbR" class="range" type="range" min="0" max="1000" step="1" aria-label="{{a:in_gb}}">
         </div>
         <div class="field">
@@ -64,7 +64,7 @@
         </div>
         <div class="field">
           <label class="lab" for="sgN" data-i="in_store"></label>
-          <div class="amt"><input id="sgN" type="number" min="0" step="any" inputmode="decimal"><select id="sgU" aria-label="{{a:a_unit}}"><option value="1">GB</option><option value="1024">TB</option></select></div>
+          <div class="amt"><input id="sgN" type="number" min="0" step="any" inputmode="decimal"><span class="unit">TB</span></div>
           <input id="sgR" class="range" type="range" min="0" max="1000" step="1" aria-label="{{a:in_store}}">
         </div>
         <div class="field">
@@ -99,10 +99,10 @@
       <div id="curve">{{curve}}</div>
     </section>
 
-    <details class="card more" id="more">
-      <summary><span data-i="tbl_h"></span> <small data-i="tbl_hint"></small></summary>
+    <section class="card more" aria-labelledby="tblH">
+      <h2 id="tblH"><span data-i="tbl_h"></span> <small data-i="tbl_hint"></small></h2>
       <div class="tbl-wrap" id="tbl">{{table}}</div>
-    </details>
+    </section>
 {{facts}}
   </main>
 

@@ -15,8 +15,9 @@ export function formats(lang, cur, rates) {
   const f0 = nf(0), f2 = nf(2);
   const money = usd => { const v = usd * k; return (Math.abs(v) >= 100 ? f0 : f2).format(Math.abs(v) < 0.005 ? 0 : v); };
   const compact = new Intl.NumberFormat(lang, { style: "currency", currency: cur, notation: "compact", maximumFractionDigits: 0 });
-  const num = new Intl.NumberFormat(lang, { maximumFractionDigits: 1 });
-  const size = gb => (gb >= 1048576 ? num.format(gb / 1048576) + " PB" : gb >= 1024 ? num.format(gb / 1024) + " TB" : num.format(gb) + " GB");
+  const num = new Intl.NumberFormat(lang, { maximumFractionDigits: 1 }), num2 = new Intl.NumberFormat(lang, { maximumFractionDigits: 2 });
+  // traffic and storage always in TB (as entered), PB from 1 PB
+  const size = gb => (gb >= 1048576 ? num.format(gb / 1048576) + " PB" : gb <= 0 ? "0 TB" : gb < 10.24 ? "<0.01 TB" : (gb < 10240 ? num2 : num).format(gb / 1024) + " TB");
   return { money, short: usd => compact.format(usd * k), size, num: v => num.format(v) };
 }
 
@@ -24,48 +25,36 @@ const providerName = (D, id) => D.vps.providers[id]?.name || id;
 export const machineName = (D, m) => `${providerName(D, m.provider)} ${m.plan}`;
 export const comboName = (D, r) => [r.m && machineName(D, r.m), r.s && r.s.name, r.c && r.c.name].filter(Boolean).join(" + ");
 
-function trafficText(r, q, T, F, D) {
+// the server's traffic, one line under its name: what the plan includes and what it uses, or the cloud's egress bill
+function trafficText(r, q, T, F) {
   const m = r.m;
-  if (!m) return "—";
-  if (m.egress) {
-    const prod = m.egress.product, free = m.egress.freeBefore || (m.egress.tiers[r.region].global[0][1] === 0 ? m.egress.tiers[r.region].global[0][0] : 0);
-    return fill(T.tr_cloud, { gb: F.size(r.serverGB), tier: prod }) + (free ? " · " + fill(T.tr_free, { gb: F.size(free) }) : "");
-  }
-  const t = m.traffic;
-  if (t.scope === "unlimited") return fill(T.tr_unlim, { gb: F.size(r.serverGB) });
-  const inc = t.includedGB * q.count + t.accountFreeGB;
-  return fill(r.serverGB > inc ? T.tr_over : T.tr_incl, { inc: F.size(inc), gb: F.size(r.serverGB), x: F.size(r.serverGB - inc) });
+  if (r.serverGB <= 0) return T.tr_none;
+  if (m.egress) return fill(T.tr_cloud, { gb: F.size(r.serverGB), tier: m.egress.product, c: F.money(r.cost.traffic) });
+  const inc = m.traffic.includedGB * q.count + m.traffic.accountFreeGB;
+  return fill(r.serverGB > inc ? T.tr_over : T.tr_incl, { inc: F.size(inc), gb: F.size(r.serverGB), x: F.size(r.serverGB - inc), c: F.money(r.cost.traffic) });
 }
 
-// one recommendation card; links to other tools carry data-tool and are filled in by the page from the shell's metas
-export function pickCard(p, q, T, F, D, aws) {
+// One recommendation card: the total, then one line per part actually used (server with its traffic, storage, CDN),
+// each with what it costs. Links to other tools carry data-tool and are filled in by the page from the shell's metas.
+export function pickCard(p, q, T, F, D) {
   const r = p.r, m = r.m;
   const regionName = T["reg_" + r.region];
-  const parts = [
-    [T.p_machine, m ? `${machineName(D, m)}${q.count > 1 ? " ×" + q.count : ""} · ${regionName} ${m.loc}` : T.none, m ? r.cost.machine : null],
-    [T.p_traffic, trafficText(r, q, T, F, D), m ? r.cost.traffic : null],
-    [T.p_storage, r.s ? `${r.s.name} · ${F.size(q.storeGB)}${r.bucketGB > 0 ? " · " + fill(T.st_out, { gb: F.size(r.bucketGB) }) : ""}` : T.none, r.s ? r.cost.storage : null],
-    [T.p_cdn, r.c ? `${r.c.name} · ${F.size(r.cdnGB)}` : r.s && r.s.cdn ? T.cdn_builtin : T.none, r.c ? r.cost.cdn : null],
-  ];
+  const parts = [];
+  if (m) parts.push([T.p_machine, `${machineName(D, m)}${q.count > 1 ? " ×" + q.count : ""}`, `${regionName} · ${m.loc} · ${trafficText(r, q, T, F)}`, r.cost.machine + r.cost.traffic]);
+  if (r.s) parts.push([T.p_storage, r.s.name, r.bucketGB > 0 ? fill(T.st_sub, { s: F.size(q.storeGB), o: F.size(r.bucketGB) }) : fill(T.st_keep, { s: F.size(q.storeGB) }), r.cost.storage]);
+  if (r.c) parts.push([T.p_cdn, r.c.name, fill(T.cdn_sub, { o: F.size(r.cdnGB) }), r.cost.cdn]);
   const why = [];
   if (p.tags.includes("far")) why.push(fill(T.why_far, { region: regionName }));
-  if (r.s && q.staticPct > 0 && m) why.push(fill(T.why_store, { s: r.s.name, gb: F.size(r.serverGB) }));
-  else if (r.c && m) why.push(fill(T.why_cdn, { c: r.c.name, gb: F.size(r.serverGB) }));
   if (r.flags.includes("free")) why.push(T.why_free);
-  if (p.tags.includes("simple") && !p.tags.includes("cheapest")) why.push(fill(T.why_simple, { n: r.vendors }));
   const notes = noteList(r, T);
-  // the reference is named in full ("AWS EC2 t4g.micro"): Lightsail is AWS too, and often in the table for less
-  const save = aws && aws !== r && aws.total > r.total * 1.05 ? fill(T.vs_aws, { ref: comboName(D, aws), aws: F.money(aws.total), k: F.num(aws.total / Math.max(r.total, 0.01)) }) : "";
   const links = [];
   if (m) links.push(ext(m.source, T.l_src));
   if (m && D.vps.providers[m.provider].m2c) links.push(ext(null, T.l_m2c, ` data-tool="m2c" data-p="${D.vps.providers[m.provider].m2c}" data-pend`));
   if (m && D.vps.providers[m.provider].ls) links.push(ext(null, T.l_ls, ` data-tool="ls" data-pend`));
   return `<article class="pick${p.tags.includes("cheapest") ? " best" : ""}">
 <div class="pk-tags">${p.tags.map(t => `<span class="tag t-${t}">${esc(T["tag_" + t])}</span>`).join("")}</div>
-<p class="pk-name">${esc(comboName(D, r))}</p>
 <p class="pk-total"><b>${F.money(r.total)}</b><small>${esc(T.per_month)}</small></p>
-<p class="pk-save">${esc(save)}</p>
-<dl class="pk-parts">${parts.map(([k, v, c]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd><dd class="n">${c == null ? "—" : F.money(c)}</dd></div>`).join("")}</dl>
+<dl class="pk-parts">${parts.map(([k, name, sub, c]) => `<div><dt>${esc(k)}</dt><dd><b>${esc(name)}</b><small>${esc(sub)}</small></dd><dd class="n">${F.money(c)}</dd></div>`).join("")}</dl>
 <p class="pk-why">${esc(why.join(" "))}</p>
 ${notes.length ? `<ul class="pk-notes">${notes.map(n => `<li>${esc(n)}</li>`).join("")}</ul>` : ""}
 <p class="links">${links.join("")}</p>
@@ -89,11 +78,13 @@ export function verdict(rec, T, F, D) {
 
 export function picksHTML(rec, T, F, D) {
   if (!rec.picks.length) return `<p class="empty">${esc(T.v_none)}</p>`;
-  return rec.picks.map(p => pickCard(p, rec.q, T, F, D, rec.aws)).join("");
+  return rec.picks.map(p => pickCard(p, rec.q, T, F, D)).join("");
 }
 
 export function tableHTML(rec, T, F, D) {
-  const rows = table(rec.rows, 40);
+  // the visitors' region first, as in the picks; then the other continents
+  const near0 = nearOf(rec.q.aud);
+  const rows = table([...rec.rows.filter(r => r.region === near0), ...rec.rows.filter(r => r.region !== near0)], 40);
   const near = nearOf(rec.q.aud);
   return `<table class="tbl"><thead><tr><th>${esc(T.c_plan)}</th><th>${esc(T.c_region)}</th><th>${esc(T.c_cpu)}</th><th class="n">${esc(T.p_machine)}</th><th class="n">${esc(T.p_traffic)}</th><th class="n">${esc(T.p_storage)} + ${esc(T.p_cdn)}</th><th class="n">${esc(T.c_total)}</th><th>${esc(T.c_src)}</th></tr></thead><tbody>` +
     rows.map(r => {

@@ -16,20 +16,20 @@
   // ---- state: the page's preset; a shared result (/…/r/<code>) or the address while editing (?v=1&…) on top
   const shared = /\/r\/([^/]+)\/?$/.exec(location.pathname);
   const pagePath = location.pathname.replace(/r\/[^/]*\/?$/, "");
-  let st = { ...P.state, ...((shared && fromCode(decodeURIComponent(shared[1]))) || fromQuery(location.search) || {}) };
+  const linked = (shared && fromCode(decodeURIComponent(shared[1]))) || fromQuery(location.search);
+  // a link names its own scenario (or none): the page's preset scenario doesn't stay highlighted for other numbers
+  let st = linked ? { ...P.state, scene: "", ...linked } : { ...P.state };
   let cur = ["USD", "EUR", "CNY"].includes(store.get(LS.cur)) ? store.get(LS.cur) : P.cur;
   $("cur").value = cur;
 
-  // log slider ⇄ GB: 0 is 0, then 1 GB … 1 PB
-  const MAXLOG = Math.log10(1048576);
-  // the slider stops at round numbers: 1, 2, 5, 10 … 500 GB, then 1, 2, 5, 10 … TB (typed values stay as typed)
-  const STOPS = [0];
-  for (let k = 1; k < 1024; k *= 10) for (const m of [1, 2, 5]) if (m * k < 1024) STOPS.push(m * k);
-  for (let k = 1; k <= 1024; k *= 10) for (const m of [1, 2, 5]) if (m * k <= 1024) STOPS.push(m * k * 1024);
-  const toGB = v => { if (v <= 0) return 0; const want = (v / 1000) * MAXLOG; return STOPS.slice(1).reduce((a, b) => (Math.abs(Math.log10(b) - want) < Math.abs(Math.log10(a) - want) ? b : a)); };
-  const toSlider = gb => (gb <= 0 ? 0 : Math.round((Math.log10(Math.max(1, gb)) / MAXLOG) * 1000));
-  const unitOf = gb => (gb >= 1024 ? 1024 : 1);
-  const trim = v => +v.toFixed(v < 10 ? 2 : 1);
+  // Traffic and storage are entered in TB (the engine counts GB, 1 TB = 1024 GB). The log slider runs from 0.01 TB to
+  // 1 PB and stops at round numbers: 0.01, 0.02, 0.05, 0.1 … 500, 1000 TB (typed values stay as typed).
+  const LO = Math.log10(0.01), HI = Math.log10(1024);
+  const STOPS = [];
+  for (let k = 0.01; k < 1500; k *= 10) for (const m of [1, 2, 5]) if (m * k <= 1024) STOPS.push(+(m * k).toPrecision(2));
+  const toTB = v => { if (v <= 0) return 0; const want = LO + (v / 1000) * (HI - LO); return STOPS.reduce((a, b) => (Math.abs(Math.log10(b) - want) < Math.abs(Math.log10(a) - want) ? b : a)); };
+  const toSlider = gb => (gb <= 0 ? 0 : Math.max(1, Math.round(((Math.log10(gb / 1024) - LO) / (HI - LO)) * 1000)));
+  const trim = tb => +tb.toFixed(tb < 1 ? 2 : tb < 10 ? 1 : 0);
 
   function syncInputs() {
     document.querySelectorAll("[data-scene]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.scene === st.scene)));
@@ -38,10 +38,8 @@
     document.querySelectorAll("[data-size]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.size === (none ? "none" : size >= 0 ? String(size) : "custom"))));
     $("custom").hidden = none || size >= 0;
     $("vcpu").value = st.vcpu; $("ram").value = st.ram; $("disk").value = st.disk;
-    for (const [k, n, u, r] of [["gb", "gbN", "gbU", "gbR"], ["storeGB", "sgN", "sgU", "sgR"]]) {
-      const unit = document.activeElement === $(n) ? +$(u).value : unitOf(st[k]);
-      $(u).value = String(unit);
-      if (document.activeElement !== $(n)) $(n).value = trim(st[k] / unit);
+    for (const [k, n, r] of [["gb", "gbN", "gbR"], ["storeGB", "sgN", "sgR"]]) {
+      if (document.activeElement !== $(n)) $(n).value = trim(st[k] / 1024);
       $(r).value = toSlider(st[k]);
     }
     $("stR").value = st.staticPct; $("stV").textContent = st.staticPct + "%";
@@ -58,15 +56,12 @@
     $("verdict").textContent = verdict(rec, T, F, D);
     $("picks").innerHTML = picksHTML(rec, T, F, D);
     $("curve").innerHTML = curveHTML(rec, T, F, D, st);
-    if ($("more").open) $("tbl").innerHTML = tableHTML(rec, T, F, D);
-    else tableStale = true;
+    $("tbl").innerHTML = tableHTML(rec, T, F, D);
     links();
     const q = toQuery(st);
     // a shared link keeps its address until the visitor changes something
     if (keepShared) keepShared = false; else history.replaceState(null, "", pagePath + "?" + q + location.hash);
   }
-  let tableStale = false;
-  $("more").addEventListener("toggle", () => { if ($("more").open && tableStale) { $("tbl").innerHTML = tableHTML(rec, T, formats(P.lang, cur, D.rates), D); tableStale = false; } });
   // one redraw per burst of input events (a timer, not requestAnimationFrame: that one stops in background tabs)
   const update = () => { syncInputs(); if (!raf) raf = setTimeout(render, 0); };
 
@@ -95,10 +90,9 @@
   }));
   for (const [id, key] of [["vcpu", "vcpu"], ["ram", "ram"], ["disk", "disk"], ["count", "count"], ["objKB", "objKB"]])
     $(id).addEventListener("input", () => { const v = parseFloat($(id).value); if (Number.isFinite(v) && v >= 0) set({ [key]: v }); });
-  for (const [k, n, u, r] of [["gb", "gbN", "gbU", "gbR"], ["storeGB", "sgN", "sgU", "sgR"]]) {
-    $(n).addEventListener("input", () => { const v = parseFloat($(n).value); if (Number.isFinite(v) && v >= 0) set({ [k]: Math.round(v * +$(u).value * 100) / 100 }); });
-    $(u).addEventListener("change", () => { const v = parseFloat($(n).value) || 0; set({ [k]: v * +$(u).value }); });
-    $(r).addEventListener("input", () => set({ [k]: toGB(+$(r).value) }));
+  for (const [k, n, r] of [["gb", "gbN", "gbR"], ["storeGB", "sgN", "sgR"]]) {
+    $(n).addEventListener("input", () => { const v = parseFloat($(n).value); if (Number.isFinite(v) && v >= 0) set({ [k]: Math.round(v * 1024 * 100) / 100 }); });
+    $(r).addEventListener("input", () => set({ [k]: Math.round(toTB(+$(r).value) * 1024 * 100) / 100 }));
   }
   $("stR").addEventListener("input", () => set({ staticPct: +$("stR").value }));
   document.querySelectorAll("[data-aud]").forEach(b => b.addEventListener("click", () => set({ aud: b.dataset.aud }, true)));

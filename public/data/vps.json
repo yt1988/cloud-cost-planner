@@ -50,28 +50,28 @@
     {
       "id": "do-basic", "provider": "digitalocean", "line": "Basic", "regions": { "na": "New York", "eu": "Frankfurt", "ap": "Singapore" }, "cpu": "shared", "disk": "ssd",
       "currency": "USD", "per": "month", "traffic": { "scope": "pooled", "overagePerGB": 0.01 },
-      "plans": [["s-1vcpu-512mb", 1, 0.5, 10, 4, 500], ["s-1vcpu-1gb", 1, 1, 25, 6, 1000], ["s-1vcpu-2gb", 1, 2, 50, 12, 2000], ["s-2vcpu-2gb", 2, 2, 60, 18, 3000],
-        ["s-2vcpu-4gb", 2, 4, 80, 24, 4000], ["s-4vcpu-8gb", 4, 8, 160, 48, 5000], ["s-8vcpu-16gb", 8, 16, 320, 96, 6000]],
+      "plans": [["Basic 1 vCPU / 512 MB", 1, 0.5, 10, 4, 500], ["Basic 1 vCPU / 1 GB", 1, 1, 25, 6, 1000], ["Basic 1 vCPU / 2 GB", 1, 2, 50, 12, 2000], ["Basic 2 vCPU / 2 GB", 2, 2, 60, 18, 3000],
+        ["Basic 2 vCPU / 4 GB", 2, 4, 80, 24, 4000], ["Basic 4 vCPU / 8 GB", 4, 8, 160, 48, 5000], ["Basic 8 vCPU / 16 GB", 8, 16, 320, 96, 6000]],
       "source": "https://www.digitalocean.com/pricing/droplets", "trafficSource": "https://docs.digitalocean.com/platform/billing/bandwidth/", "verifiedAt": "2026-11-01"
     },
     {
       "id": "do-gp", "provider": "digitalocean", "line": "General Purpose", "regions": { "na": "New York", "eu": "Frankfurt", "ap": "Singapore" }, "cpu": "dedicated", "disk": "ssd",
       "currency": "USD", "per": "month", "traffic": { "scope": "pooled", "overagePerGB": 0.01 },
-      "plans": [["g-2vcpu-8gb", 2, 8, 25, 63, 4000]],
+      "plans": [["General Purpose 2 vCPU / 8 GB", 2, 8, 25, 63, 4000]],
       "source": "https://www.digitalocean.com/pricing/droplets", "verifiedAt": "2026-11-01"
     },
     {
       "id": "vultr-vc2", "provider": "vultr", "line": "Cloud Compute", "regions": { "na": "New Jersey", "eu": "Frankfurt", "ap": "Tokyo" }, "cpu": "shared", "disk": "ssd",
       "currency": "USD", "per": "month", "traffic": { "scope": "pooled", "overagePerGB": 0.01, "accountFreeGB": 2048 },
-      "plans": [["vc2-1c-1gb", 1, 1, 25, 5, 1024], ["vc2-1c-2gb", 1, 2, 55, 10, 2048], ["vc2-2c-2gb", 2, 2, 65, 15, 3072], ["vc2-2c-4gb", 2, 4, 80, 20, 3072],
-        ["vc2-4c-8gb", 4, 8, 160, 40, 4096], ["vc2-6c-16gb", 6, 16, 320, 80, 5120], ["vc2-8c-32gb", 8, 32, 640, 160, 6144]],
+      "plans": [["Regular 1 vCPU / 1 GB", 1, 1, 25, 5, 1024], ["Regular 1 vCPU / 2 GB", 1, 2, 55, 10, 2048], ["Regular 2 vCPU / 2 GB", 2, 2, 65, 15, 3072], ["Regular 2 vCPU / 4 GB", 2, 4, 80, 20, 3072],
+        ["Regular 4 vCPU / 8 GB", 4, 8, 160, 40, 4096], ["Regular 6 vCPU / 16 GB", 6, 16, 320, 80, 5120], ["Regular 8 vCPU / 32 GB", 8, 32, 640, 160, 6144]],
       "source": "https://api.vultr.com/v2/plans?type=vc2", "trafficSource": "https://docs.vultr.com/support/platform/billing/what-is-the-bandwidth-overage-rate", "verifiedAt": "2026-11-01"
     },
     {
       "id": "vultr-vhp", "provider": "vultr", "line": "High Performance", "regions": { "na": "New Jersey", "eu": "Frankfurt", "ap": "Tokyo" }, "cpu": "shared", "disk": "nvme",
       "currency": "USD", "per": "month", "traffic": { "scope": "pooled", "overagePerGB": 0.01, "accountFreeGB": 2048 },
-      "plans": [["vhp-1c-1gb-amd", 1, 1, 25, 6, 2048], ["vhp-1c-2gb-amd", 1, 2, 50, 12, 3072], ["vhp-2c-2gb-amd", 2, 2, 60, 18, 4096], ["vhp-2c-4gb-amd", 2, 4, 100, 24, 5120],
-        ["vhp-4c-8gb-amd", 4, 8, 180, 48, 6144], ["vhp-8c-16gb-amd", 8, 16, 350, 96, 8192], ["vhp-12c-24gb-amd", 12, 24, 500, 144, 12288]],
+      "plans": [["High Performance 1 vCPU / 1 GB", 1, 1, 25, 6, 2048], ["High Performance 1 vCPU / 2 GB", 1, 2, 50, 12, 3072], ["High Performance 2 vCPU / 2 GB", 2, 2, 60, 18, 4096], ["High Performance 2 vCPU / 4 GB", 2, 4, 100, 24, 5120],
+        ["High Performance 4 vCPU / 8 GB", 4, 8, 180, 48, 6144], ["High Performance 8 vCPU / 16 GB", 8, 16, 350, 96, 8192], ["High Performance 12 vCPU / 24 GB", 12, 24, 500, 144, 12288]],
       "source": "https://api.vultr.com/v2/plans?type=vhp", "trafficSource": "https://docs.vultr.com/support/platform/billing/what-is-the-bandwidth-overage-rate", "verifiedAt": "2026-11-01"
     },
     {
@@ -91,21 +91,21 @@
     {
       "id": "lightsail-na", "provider": "lightsail", "line": "Linux", "region": "na", "loc": "N. Virginia", "cpu": "shared", "disk": "ssd",
       "currency": "USD", "per": "month", "traffic": { "scope": "pooled", "overagePerGB": 0.09 },
-      "plans": [["0.5 GB", 2, 0.5, 20, 5, 1024], ["1 GB", 2, 1, 40, 7, 2048], ["2 GB", 2, 2, 60, 12, 3072], ["4 GB", 2, 4, 80, 24, 4096],
+      "plans": [["512 MB", 2, 0.5, 20, 5, 1024], ["1 GB", 2, 1, 40, 7, 2048], ["2 GB", 2, 2, 60, 12, 3072], ["4 GB", 2, 4, 80, 24, 4096],
         ["8 GB", 2, 8, 160, 44, 5120], ["16 GB", 4, 16, 320, 84, 6144], ["32 GB", 8, 32, 640, 164, 7168]],
       "source": "https://aws.amazon.com/lightsail/pricing/", "trafficSource": "https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonLightsail/current/region_index.json", "verifiedAt": "2026-11-01"
     },
     {
       "id": "lightsail-eu", "provider": "lightsail", "line": "Linux", "region": "eu", "loc": "Frankfurt", "cpu": "shared", "disk": "ssd",
       "currency": "USD", "per": "month", "traffic": { "scope": "pooled", "overagePerGB": 0.09 },
-      "plans": [["0.5 GB", 2, 0.5, 20, 5, 1024], ["1 GB", 2, 1, 40, 7, 2048], ["2 GB", 2, 2, 60, 12, 3072], ["4 GB", 2, 4, 80, 24, 4096],
+      "plans": [["512 MB", 2, 0.5, 20, 5, 1024], ["1 GB", 2, 1, 40, 7, 2048], ["2 GB", 2, 2, 60, 12, 3072], ["4 GB", 2, 4, 80, 24, 4096],
         ["8 GB", 2, 8, 160, 44, 5120], ["16 GB", 4, 16, 320, 84, 6144], ["32 GB", 8, 32, 640, 164, 7168]],
       "source": "https://aws.amazon.com/lightsail/pricing/", "trafficSource": "https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonLightsail/current/region_index.json", "verifiedAt": "2026-11-01"
     },
     {
       "id": "lightsail-ap", "provider": "lightsail", "line": "Linux", "region": "ap", "loc": "Tokyo", "cpu": "shared", "disk": "ssd",
       "currency": "USD", "per": "month", "traffic": { "scope": "pooled", "overagePerGB": 0.14 },
-      "plans": [["0.5 GB", 2, 0.5, 20, 5, 1024], ["1 GB", 2, 1, 40, 7, 2048], ["2 GB", 2, 2, 60, 12, 3072], ["4 GB", 2, 4, 80, 24, 4096],
+      "plans": [["512 MB", 2, 0.5, 20, 5, 1024], ["1 GB", 2, 1, 40, 7, 2048], ["2 GB", 2, 2, 60, 12, 3072], ["4 GB", 2, 4, 80, 24, 4096],
         ["8 GB", 2, 8, 160, 44, 5120], ["16 GB", 4, 16, 320, 84, 6144], ["32 GB", 8, 32, 640, 164, 7168]],
       "source": "https://aws.amazon.com/lightsail/pricing/", "trafficSource": "https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonLightsail/current/region_index.json", "verifiedAt": "2026-11-01"
     },

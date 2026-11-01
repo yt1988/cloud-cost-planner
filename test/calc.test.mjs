@@ -49,7 +49,7 @@ test("Hetzner CPX11 in the US: euros, 1 TB included, €1 per extra TB", () => {
 });
 
 test("Vultr: plan transfer plus the account's free 2 TB, pooled; three servers triple the plan part", () => {
-  const vm = m("vultr-vc2:vc2-1c-1gb:na");
+  const vm = m("vultr-vc2:Regular 1 vCPU / 1 GB:na");
   near(price(vm, null, null, q({ gb: 4000 }), D).cost.traffic, (4000 - 1024 - 2048) * 0.01);
   const three = price(vm, null, null, q({ gb: 6000, count: 3 }), D);
   near(three.cost.machine, 15);

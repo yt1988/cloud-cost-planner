@@ -7,7 +7,7 @@ import { esc, fill, comboName, machineName } from "./view.mjs";
 
 const PROXY = { vcpu: 1, ram: 2, disk: 25, count: 1, staticPct: 0, storeGB: 0, objKB: 500 };
 const BUCKET = { vcpu: 0, ram: 0, disk: 0, count: 1, staticPct: 100, objKB: 1000 };
-const SITE = { vcpu: 2, ram: 4, disk: 50, count: 1, staticPct: 90, storeGB: 100, objKB: 300 };
+const SITE = { vcpu: 2, ram: 4, disk: 50, count: 1, staticPct: 90, storeGB: 102.4, objKB: 300 };
 
 export const PAGES = [
   ...SCENES.map(s => ({ slug: s.slug, kind: "scene", scene: s.id })),
@@ -46,7 +46,7 @@ export function stateOf(page) {
 function scene(id) { const { slug, id: sid, ...v } = SCENES.find(s => s.id === id); return { scene: sid, count: 1, ...v }; }
 
 const provName = (D, id) => D.vps.providers[id]?.name || D.storage.services.find(s => s.id === id)?.name || D.cdn.services.find(s => s.id === id)?.name || id;
-const VOLS = [100, 1024, 10240, 51200, 102400];
+const VOLS = [102.4, 1024, 10240, 51200, 102400];
 
 // the cheapest server of one provider for a size and traffic, any region
 function bestOf(D, provider, q) {
@@ -95,7 +95,7 @@ export function facts(page, D, T, F) {
     return { v: { a: provName(D, page.a), b: provName(D, page.b) }, table: tableOf([T.th_size, provName(D, page.a), provName(D, page.b)], rows) };
   }
   if (k === "vsStorage" || k === "cheapStorage") {
-    const ss = storages(D), cases = [[100, 100], [1024, 1024], [1024, 10240], [10240, 10240], [10240, 51200]];
+    const ss = storages(D), cases = [[102.4, 102.4], [1024, 1024], [1024, 10240], [10240, 10240], [10240, 51200]];
     const cost = (s, stored, gb) => { const r = price(null, s, null, normalize({ ...BUCKET, storeGB: stored, gb }), D); return r && !r.flags.includes("fair") ? r.total : null; };
     if (k === "vsStorage") {
       const a = ss.find(s => s.id === page.a), b = ss.find(s => s.id === page.b);
