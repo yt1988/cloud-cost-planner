@@ -1,7 +1,7 @@
 // HTML for the results: the three picks, the one-line verdict, the comparison table and the cost curve.
 // Pure string builders: the build prerenders a page's default result with them (crawlers and first paint see real
 // numbers), and the page redraws with the same code on every input change. T: the language's strings.
-import { nearOf, POINTS, curve, crossings, table } from "./calc.mjs";
+import { nearOf, POINTS, curve, crossings, table, BLOCKING } from "./calc.mjs";
 
 export const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 export const fill = (s, v) => String(s).replace(/\{(\w+)\}/g, (m, k) => (v[k] ?? m));
@@ -24,13 +24,17 @@ export function formats(lang, cur, rates) {
 const providerName = (D, id) => D.vps.providers[id]?.name || id;
 export const machineName = (D, m) => `${providerName(D, m.provider)} ${m.plan}`;
 export const comboName = (D, r) => [r.m && machineName(D, r.m), r.s && r.s.name, r.c && r.c.name].filter(Boolean).join(" + ");
+// a cloud's way of billing egress, in the page's language ("Premium 层级", "按量出口")
+const egressName = (T, prof) => T["eg_" + prof.id.replace(/-/g, "_")] || prof.product;
+// the plan's size in a few words: "4 vCPU / 8 GB · shared CPU · Arm"
+const specOf = (T, F, m) => `${m.vcpu} vCPU / ${F.num(m.ram)} GB · ${T["cpu_" + m.cpu]}${m.arch === "arm" ? " · Arm" : ""}`;
 
 // the server's traffic, one line under its name: what the plan includes and what it uses, or the cloud's egress bill
 function trafficText(r, q, T, F) {
   const m = r.m;
   if (r.serverGB <= 0) return T.tr_none;
-  if (m.egress) return fill(T.tr_cloud, { gb: F.size(r.serverGB), tier: m.egress.product, c: F.money(r.cost.traffic) });
-  const inc = m.traffic.includedGB * q.count + m.traffic.accountFreeGB;
+  if (m.egress) return fill(r.cost.traffic < 0.005 ? T.tr_cloud_free : T.tr_cloud, { gb: F.size(r.serverGB), tier: egressName(T, m.egress), c: F.money(r.cost.traffic) });
+  const inc = m.traffic.includedGB * r.count + m.traffic.accountFreeGB;
   return fill(r.serverGB > inc ? T.tr_over : T.tr_incl, { inc: F.size(inc), gb: F.size(r.serverGB), x: F.size(r.serverGB - inc), c: F.money(r.cost.traffic) });
 }
 
@@ -40,7 +44,7 @@ export function pickCard(p, q, T, F, D) {
   const r = p.r, m = r.m;
   const regionName = T["reg_" + r.region];
   const parts = [];
-  if (m) parts.push([T.p_machine, `${machineName(D, m)}${q.count > 1 ? " ×" + q.count : ""}`, `${regionName} · ${m.loc} · ${trafficText(r, q, T, F)}`, r.cost.machine + r.cost.traffic]);
+  if (m) parts.push([T.p_machine, `${machineName(D, m)}${r.count > 1 ? " ×" + r.count : ""}`, [`${specOf(T, F, m)} · ${regionName} · ${m.loc}`, trafficText(r, q, T, F)], r.cost.machine + r.cost.traffic]);
   if (r.s) parts.push([T.p_storage, r.s.name, r.bucketGB > 0 ? fill(T.st_sub, { s: F.size(q.storeGB), o: F.size(r.bucketGB) }) : fill(T.st_keep, { s: F.size(q.storeGB) }), r.cost.storage]);
   if (r.c) parts.push([T.p_cdn, r.c.name, fill(T.cdn_sub, { o: F.size(r.cdnGB) }), r.cost.cdn]);
   const why = [];
@@ -54,7 +58,7 @@ export function pickCard(p, q, T, F, D) {
   return `<article class="pick${p.tags.includes("cheapest") ? " best" : ""}">
 <div class="pk-tags">${p.tags.map(t => `<span class="tag t-${t}">${esc(T["tag_" + t])}</span>`).join("")}</div>
 <p class="pk-total"><b>${F.money(r.total)}</b><small>${esc(T.per_month)}</small></p>
-<dl class="pk-parts">${parts.map(([k, name, sub, c]) => `<div><dt>${esc(k)}</dt><dd><b>${esc(name)}</b><small>${esc(sub)}</small></dd><dd class="n">${F.money(c)}</dd></div>`).join("")}</dl>
+<dl class="pk-parts">${parts.map(([k, name, sub, c]) => `<div><dt>${esc(k)}</dt><dd><b>${esc(name)}</b>${[].concat(sub).map(x => `<small>${esc(x)}</small>`).join("")}</dd><dd class="n">${F.money(c)}</dd></div>`).join("")}</dl>
 <p class="pk-why">${esc(why.join(" "))}</p>
 ${notes.length ? `<ul class="pk-notes">${notes.map(n => `<li>${esc(n)}</li>`).join("")}</ul>` : ""}
 <p class="links">${links.join("")}</p>
@@ -89,8 +93,8 @@ export function tableHTML(rec, T, F, D) {
   return `<table class="tbl"><thead><tr><th>${esc(T.c_plan)}</th><th>${esc(T.c_region)}</th><th>${esc(T.c_cpu)}</th><th class="n">${esc(T.p_machine)}</th><th class="n">${esc(T.p_traffic)}</th><th class="n">${esc(T.p_storage)} + ${esc(T.p_cdn)}</th><th class="n">${esc(T.c_total)}</th><th>${esc(T.c_src)}</th></tr></thead><tbody>` +
     rows.map(r => {
       const notes = noteList(r, T);
-      const bad = r.flags.some(f => f === "sales" || f === "cfTos" || f === "fair");
-      return `<tr${bad ? ' class="bad"' : ""}><td><b>${esc(r.m ? machineName(D, r.m) : r.s.name)}</b>${r.m && r.m.egress ? `<small>${esc(r.m.egress.product)}</small>` : ""}${r.m && (r.s || r.c) ? `<small>+ ${esc([r.s && r.s.name, r.c && r.c.name].filter(Boolean).join(" + "))}</small>` : ""}${notes.length ? `<small class="warn">${esc(notes.join(" "))}</small>` : ""}</td>` +
+      const bad = r.flags.some(f => BLOCKING.includes(f));
+      return `<tr${bad ? ' class="bad"' : ""}><td><b>${esc(r.m ? machineName(D, r.m) + (r.count > 1 ? " ×" + r.count : "") : r.s.name)}</b>${r.m && r.m.egress ? `<small>${esc(egressName(T, r.m.egress))}</small>` : ""}${r.m && (r.s || r.c) ? `<small>+ ${esc([r.s && r.s.name, r.c && r.c.name].filter(Boolean).join(" + "))}</small>` : ""}${notes.length ? `<small class="warn">${esc(notes.join(" "))}</small>` : ""}</td>` +
         `<td${r.region === near ? ' class="near"' : ""}>${esc(T["reg_" + r.region])}${r.m ? `<small>${esc(r.m.loc)}</small>` : ""}</td>` +
         `<td>${r.m ? `${r.m.vcpu} / ${F.num(r.m.ram)} GB<small>${esc(T["cpu_" + r.m.cpu])}${r.m.arch === "arm" ? " · Arm" : ""}</small>` : "—"}</td>` +
         `<td class="n">${r.m ? F.money(r.cost.machine) : "—"}</td><td class="n">${r.m ? F.money(r.cost.traffic) : "—"}</td>` +

@@ -12,7 +12,7 @@ test("every entry has a source and a check date", () => {
   for (const e of entries) {
     assert.match(e.source, /^https:\/\//, `${e.id || "rates"}: source`);
     assert.match(e.verifiedAt, /^\d{4}-\d{2}-\d{2}$/, `${e.id || "rates"}: verifiedAt`);
-    for (const k of ["trafficSource", "diskSource"]) if (e[k]) assert.match(e[k], /^https:\/\//, `${e.id}: ${k}`);
+    for (const k of ["trafficSource", "diskSource", "soldOutSource", "termsSource", "policySource"]) if (e[k]) assert.match(e[k], /^https:\/\//, `${e.id}: ${k}`);
   }
 });
 

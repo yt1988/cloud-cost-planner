@@ -45,7 +45,9 @@ npm run dev        # http://localhost:8799/
 npm run og         # link-preview images (uses system fonts; commit the output)
 ```
 
-After a deliberate price change, refresh the snapshot: `UPDATE=1 node --test "test/*.test.mjs"`.
+`npm run prices` compares the data with the price APIs of AWS, Azure and Vultr and lists entries not re-checked by hand
+for 90 days; a GitHub workflow runs it every Monday and fails when something needs a look. After a deliberate price
+change, refresh the snapshot: `UPDATE=1 node --test "test/*.test.mjs"`.
 
 | Path | What |
 |---|---|

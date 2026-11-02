@@ -13,6 +13,9 @@ export const portGB = mbps => (mbps * 1e6 * 2592000) / 8 / 1073741824;
 const VENDOR = { lightsail: "aws", cloudfront: "aws", "bunny-volume": "bunny" };
 // the share of static traffic a CDN fetches from its origin (an 80% cache hit rate)
 export const ORIGIN = 0.2;
+// What one server is assumed to sustain, month-round, when its plan names no port speed: 1 Gbit/s (about 300 TB a
+// month). More traffic than its servers can carry adds servers (the "scaled" flag) instead of pretending one can.
+export const SERVER_MBPS = 1000;
 const vendorOf = id => VENDOR[id] || id;
 
 // Cost of `gb` under tiers [[upTo, price], …] counted from 0. A finite last limit means "contact sales" above it:
@@ -40,7 +43,8 @@ export function machines(D) {
       const [plan, vcpu, ram, disk, price, includedGB, portMbps] = p;
       const base = {
         offer: o.id, provider: o.provider, line: o.line, plan, region, loc, vcpu, ram, disk, cpu: o.cpu, arch: o.arch || "x86",
-        diskType: o.disk, note: o.note || null, source: o.source,
+        diskType: o.disk, note: o.note || null, source: o.source, soldOut: !!o.soldOut, cnRoute: o.cnRoute || null,
+        portMbps: portMbps || o.portMbps || SERVER_MBPS,
         monthly: usd(o.per === "hour" ? price * HOURS : price, o.currency),
         extras: o.extras ? {
           ipv4: usd((o.extras.ipv4PerHour || 0) * HOURS, o.currency), diskPerGB: usd(o.extras.diskPerGB || 0, o.currency), minDisk: o.extras.minDiskGB || 0,
@@ -50,7 +54,7 @@ export function machines(D) {
       if (o.egress) for (const id of o.egress) out.push({ ...base, id: `${o.id}:${plan}:${region}:${id}`, egress: egress[id] });
       else out.push({
         ...base, id: `${o.id}:${plan}:${region}`,
-        traffic: { scope: o.traffic.scope, includedGB, portMbps: portMbps || null, overage: usd(o.traffic.overagePerGB || 0, o.currency), accountFreeGB: o.traffic.accountFreeGB || 0 },
+        traffic: { scope: o.traffic.scope, includedGB, overage: usd(o.traffic.overagePerGB || 0, o.currency), accountFreeGB: o.traffic.accountFreeGB || 0 },
       });
     }
   }
@@ -96,30 +100,29 @@ export function price(m, s, c, q, D) {
   if (!m && (!useStore || dyn > 0)) return null;                        // dynamic traffic and a CDN's origin need a server
   if (!m) serverGB = 0;
 
+  let count = q.count;
   if (m) {
     const need = q.disk + (useStore ? 0 : q.storeGB);                  // files served by the server live on its disk
     if (m.disk != null && m.disk < need) return null;
+    // as many servers as the traffic needs at the plan's port speed (each holds a copy of the files it serves)
+    count = Math.max(q.count, Math.ceil(serverGB / portGB(m.portMbps)));
+    if (count > q.count) flags.push("scaled");
     let each = m.monthly;
     if (m.extras) each += m.extras.ipv4 + Math.max(need, m.extras.minDisk) * m.extras.diskPerGB;
-    let total = each * q.count;
+    let total = each * count;
     if (q.free && m.alwaysFree) {
       const f = m.alwaysFree;
-      if (f.plan ? f.plan === m.plan && m.region === "na" : m.vcpu * q.count <= f.vcpu && m.ram * q.count <= f.ram) {
-        const diskFree = Math.min(f.diskGB || 0, Math.max(need, m.extras.minDisk) * q.count);
-        total -= (f.plan ? m.monthly : m.monthly * q.count) + diskFree * m.extras.diskPerGB;
+      if (f.plan ? f.plan === m.plan && m.region === "na" : m.vcpu * count <= f.vcpu && m.ram * count <= f.ram) {
+        const diskFree = Math.min(f.diskGB || 0, Math.max(need, m.extras.minDisk) * count);
+        total -= (f.plan ? m.monthly : m.monthly * count) + diskFree * m.extras.diskPerGB;
         flags.push("free");
       }
     }
     cost.machine = total;
+    if (m.soldOut) flags.push("soldOut");
     if (m.traffic) {
       const t = m.traffic;
-      if (t.scope === "unlimited") {
-        if (t.portMbps && serverGB / q.count > portGB(t.portMbps)) return null;
-        if (t.portMbps && serverGB / q.count > portGB(t.portMbps) * 0.5) flags.push("port");
-      } else {
-        const included = t.includedGB * q.count + t.accountFreeGB;
-        cost.traffic += Math.max(0, serverGB - included) * t.overage;
-      }
+      if (t.scope !== "unlimited") cost.traffic += Math.max(0, serverGB - (t.includedGB * count + t.accountFreeGB)) * t.overage;
     } else pool(m.egress, serverGB);
   }
 
@@ -160,7 +163,7 @@ export function price(m, s, c, q, D) {
 
   const total = cost.machine + cost.traffic + cost.storage + cost.cdn;
   const vendors = new Set([m && vendorOf(m.provider), useStore && vendorOf(s.provider), c && vendorOf(c.id)].filter(Boolean));
-  return { m, s: useStore ? s : null, c, region, cost, total, flags, vendors: vendors.size, serverGB, bucketGB, cdnGB };
+  return { m, s: useStore ? s : null, c, region, cost, total, flags, vendors: vendors.size, count, serverGB, bucketGB, cdnGB };
 }
 
 const fits = (m, q) => m.vcpu >= q.vcpu && m.ram >= q.ram && (q.shared || m.cpu !== "shared");
@@ -184,13 +187,18 @@ export function plan(input, D) {
 
 // The picks, all in the visitors' region: the cheapest, and the one with the fewest vendors. A data center on another
 // continent only when it is clearly cheaper (15% or more): the visitor asked for a region, so the headline respects it.
-// Plus the all-AWS reference (EC2 serving everything, or S3 alone) for the "n times" line.
+// Plus the reference for the "n times" line: the cheapest setup built only from AWS's own cloud (EC2, with S3 and
+// CloudFront where they help; S3 alone without a server), near the visitors.
+export const BLOCKING = ["sales", "cfTos", "fair", "soldOut"];
 export function recommend(input, D) {
   const { q, rows } = plan(input, D);
-  // not recommended: above the published tiers (contact sales), or against the terms (video on Cloudflare Free, Wasabi egress above what is stored)
-  const ok = rows.filter(r => !r.flags.some(f => f === "sales" || f === "cfTos" || f === "fair"));
+  // not recommended: above the published tiers (contact sales), against the terms (video on Cloudflare Free, Wasabi
+  // egress above what is stored), or not for sale right now
+  const ok = rows.filter(r => !r.flags.some(f => BLOCKING.includes(f)));
   const near = ok.filter(r => r.region === nearOf(q.aud));
-  const close = near[0] || ok[0] || null;
+  // the cheapest, unless one with fewer vendors costs about the same (within $1 or 5%): one bill beats saving cents
+  const top = near[0] || ok[0] || null;
+  const close = top && near.find(r => r.vendors < top.vendors && r.total <= top.total + Math.max(1, top.total * 0.05)) || top;
   const far = ok[0] && close && ok[0] !== close && ok[0].total < close.total * 0.85 ? ok[0] : null;
   // fewer vendors is worth a little more, not ten times more
   const cap = close ? Math.max(close.total * 1.5, close.total + 10) : 0;
@@ -201,8 +209,8 @@ export function recommend(input, D) {
     const same = picks.find(p => p.r === r);
     if (same) same.tags.push(tag); else picks.push({ tags: [tag], r });
   }
-  const aws = rows.filter(r => r.region === nearOf(q.aud) && (r.m ? r.m.provider === "aws" && !r.s && !r.c : r.s && r.s.id === "s3" && !r.c));
-  return { q, rows, picks, aws: aws[0] || null };
+  const aws = rows.find(r => r.region === nearOf(q.aud) && (r.m ? r.m.provider === "aws" : true) && (!r.s || r.s.id === "s3") && (!r.c || r.c.id === "cloudfront") && (r.m || r.s));
+  return { q, rows, picks, aws: aws || null };
 }
 
 // The best combination of each product line (any region: the cheapest, near the visitors on a tie), for the table.

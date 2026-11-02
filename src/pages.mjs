@@ -5,9 +5,9 @@ import { SCENES, SIZES } from "./scenes.mjs";
 import { recommend, plan, table, price, tiered, machines, storages, nearOf, normalize } from "./calc.mjs";
 import { esc, fill, comboName, machineName } from "./view.mjs";
 
-const PROXY = { vcpu: 1, ram: 2, disk: 25, count: 1, staticPct: 0, storeGB: 0, objKB: 500 };
+const PROXY = { vcpu: 1, ram: 2, disk: 20, count: 1, staticPct: 0, storeGB: 0, objKB: 500 };
 const BUCKET = { vcpu: 0, ram: 0, disk: 0, count: 1, staticPct: 100, objKB: 1000 };
-const SITE = { vcpu: 2, ram: 4, disk: 50, count: 1, staticPct: 90, storeGB: 100, objKB: 300 };
+const SITE = { vcpu: 2, ram: 4, disk: 20, count: 1, staticPct: 90, storeGB: 100, objKB: 300 };
 
 export const PAGES = [
   ...SCENES.map(s => ({ slug: s.slug, kind: "scene", scene: s.id })),
@@ -39,7 +39,7 @@ export function stateOf(page) {
   if (page.kind === "scene") return { ...base, ...scene(page.scene) };
   if (page.kind === "volume") return { ...base, ...PROXY, gb: page.gb };
   if (page.kind === "egress" || page.kind === "vs") return { ...base, ...PROXY, gb: 10240 };
-  if (page.kind === "cheapVps") return { ...base, ...PROXY, vcpu: 2, ram: page.ram, disk: 50, gb: 1024 };
+  if (page.kind === "cheapVps") return { ...base, ...PROXY, vcpu: 2, ram: page.ram, disk: 20, gb: 1024 };
   if (page.kind === "vsStorage" || page.kind === "cheapStorage") return { ...base, ...BUCKET, storeGB: 1024, gb: 1024 };
   return { ...base, ...SITE, gb: 10240 };
 }

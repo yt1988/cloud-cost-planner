@@ -2,7 +2,7 @@
   "about": "CDNs, per month, by where the visitors are (na, eu, ap, cn). tiers: [up to GB, USD per GB], counted from 0; freeBefore: GB free before the tiers. requests: USD per million after freeM million.",
   "services": [
     {
-      "id": "cloudflare", "name": "Cloudflare CDN (Free)", "currency": "USD",
+      "id": "cloudflare", "name": "Cloudflare CDN", "currency": "USD",
       "tiers": { "na": [[null, 0]], "eu": [[null, 0]], "ap": [[null, 0]], "cn": [[null, 0]] },
       "note": "cloudflare",
       "source": "https://www.cloudflare.com/plans/network-cdn/", "termsSource": "https://www.cloudflare.com/service-specific-terms-application-services/", "verifiedAt": "2026-11-01"

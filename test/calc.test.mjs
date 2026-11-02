@@ -137,3 +137,31 @@ test("the Worker's preview: the page, the cheapest setup in the title, the verdi
   assert.equal(resultMeta("/zh-cn/no-such-page/r/1_-_1_2_25_1_100_0_0_na_1_500"), null);
   assert.equal(resultMeta("/zh-cn/download-site-cost/"), null);
 });
+
+test("a plan marked sold out is priced but never recommended", () => {
+  const r = price(m("hetzner-cx-eu:CX23:eu"), null, null, q({ gb: 100 }), D);
+  assert.ok(r.flags.includes("soldOut"));
+  const rec = recommend({ vcpu: 1, ram: 2, disk: 20, gb: 100, staticPct: 0, storeGB: 0, aud: "eu" }, D);
+  assert.ok(rec.picks.every(p => !p.r.flags.includes("soldOut")));
+  assert.ok(rec.rows.some(x => x.flags.includes("soldOut")));
+});
+
+test("traffic beyond what one server carries adds servers", () => {
+  const vm = m("hetzner-cpx-na:CPX21:na");
+  const one = price(vm, null, null, q({ gb: 100000 }), D);
+  assert.equal(one.count, 1);
+  const big = price(vm, null, null, q({ gb: 512000 }), D);
+  assert.equal(big.count, Math.ceil(512000 / portGB(1000)));
+  assert.ok(big.flags.includes("scaled"));
+  near(big.cost.machine, 32.49 * 1.1172 * big.count);
+  near(big.cost.traffic, ((512000 - 2048 * big.count) / 1024) * 1.1172);
+});
+
+test("about the same price with fewer vendors wins; the AWS reference may use S3 and CloudFront", () => {
+  const rec = recommend({ vcpu: 2, ram: 4, disk: 20, gb: 2048, staticPct: 30, storeGB: 50, aud: "na", objKB: 200 }, D);
+  assert.equal(rec.picks[0].r.vendors, 1);
+  const dl = recommend({ vcpu: 2, ram: 4, disk: 20, gb: 20480, staticPct: 95, storeGB: 2048, aud: "na", objKB: 50000 }, D);
+  assert.equal(dl.aws.m.provider, "aws");
+  assert.ok(!dl.aws.s || dl.aws.s.id === "s3");
+  assert.ok(!dl.aws.c || dl.aws.c.id === "cloudfront");
+});

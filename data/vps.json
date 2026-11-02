@@ -16,14 +16,14 @@
       "id": "hetzner-cx-eu", "provider": "hetzner", "line": "CX", "region": "eu", "loc": "Nuremberg / Helsinki", "cpu": "shared", "disk": "nvme",
       "currency": "EUR", "per": "month", "traffic": { "scope": "instance", "overagePerGB": 0.0009765625 },
       "plans": [["CX23", 2, 4, 40, 5.99, 20480], ["CX33", 4, 8, 80, 8.99, 20480], ["CX43", 8, 16, 160, 16.49, 20480], ["CX53", 16, 32, 320, 29.99, 20480]],
-      "note": "stock",
+      "soldOut": true, "soldOutSource": "https://www.hetzner.com/cloud/cost-optimized/",
       "source": "https://www.hetzner.com/cloud/cost-optimized/", "verifiedAt": "2026-11-01"
     },
     {
       "id": "hetzner-cax-eu", "provider": "hetzner", "line": "CAX", "region": "eu", "loc": "Nuremberg / Helsinki", "cpu": "shared", "arch": "arm", "disk": "nvme",
       "currency": "EUR", "per": "month", "traffic": { "scope": "instance", "overagePerGB": 0.0009765625 },
       "plans": [["CAX11", 2, 4, 40, 6.49, 20480], ["CAX21", 4, 8, 80, 10.99, 20480], ["CAX31", 8, 16, 160, 21.49, 20480], ["CAX41", 16, 32, 320, 41.49, 20480]],
-      "note": "stock",
+      "soldOut": true, "soldOutSource": "https://www.hetzner.com/cloud/cost-optimized/",
       "source": "https://www.hetzner.com/cloud/cost-optimized/", "verifiedAt": "2026-11-01"
     },
     {

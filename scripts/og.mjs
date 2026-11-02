@@ -1,18 +1,17 @@
 #!/usr/bin/env node
 // Renders the link-preview images with resvg, 1200 × 630: public/og/<lang>.png for each language, and
-// public/og/<lang>/<scenario>.png for the scenario pages (where shared links land), with that scenario's cheapest setup.
-// Run when the name, a subtitle, the logo or the prices change, and commit the output. Uses system fonts for the text
+// public/og/<lang>/<scenario>.png for the scenario pages (where shared links land). No prices on them: the build
+// does not redraw images, so a price on a card would go stale the day the data changes.
+// Run when the name, a subtitle or the logo changes, and commit the output. Uses system fonts for the text
 // (Windows: Segoe UI, Microsoft YaHei, Microsoft JhengHei, Yu Gothic UI, Malgun Gothic), like the other 1ms.dog tools.
 // Usage: npm i && node scripts/og.mjs
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { Resvg } from "@resvg/resvg-js";
 import { LANGS } from "./build.mjs";
-import { loadData } from "./data.mjs";
-import { recommend } from "../src/calc.mjs";
-import { PAGES, stateOf } from "../src/pages.mjs";
-import { formats, comboName, fill } from "../src/view.mjs";
+import { PAGES } from "../src/pages.mjs";
+import { fill } from "../src/view.mjs";
 
-const pub = new URL("../public/", import.meta.url), D = loadData();
+const pub = new URL("../public/", import.meta.url);
 const HOST = new URL(process.env.SITE_URL || "https://cost.1ms.dog").host;
 const render = svg => new Resvg(svg, { fitTo: { mode: "width", value: 1200 }, font: { loadSystemFonts: true, defaultFontFamily: "Segoe UI" } }).render().asPng();
 const logo = Buffer.from(await readFile(new URL("assets/logo-dark.svg", pub))).toString("base64");
@@ -49,13 +48,12 @@ function card(lang, title, sub) {
 
 await mkdir(new URL("og/", pub), { recursive: true });
 for (const [lang] of LANGS) {
-  const T = (await import(new URL(`../src/i18n/${lang}.mjs`, import.meta.url).href)).default, F = formats(lang, "USD", D.rates);
+  const T = (await import(new URL(`../src/i18n/${lang}.mjs`, import.meta.url).href)).default;
   await writeFile(new URL(`og/${lang.toLowerCase()}.png`, pub), render(card(lang, T.name, T.og_sub)));
   await mkdir(new URL(`og/${lang.toLowerCase()}/`, pub), { recursive: true });
   for (const p of PAGES.filter(p => p.kind === "scene")) {
-    const r = recommend(stateOf(p), D), best = r.picks[0].r;
     const title = fill(T.lt_scene, { scene: T["sc_" + p.scene] }).split(/[：:？?]/)[0];
-    const sub = `${T.tag_cheapest}${/^(zh|ja)/.test(lang) ? "：" : ": "}${comboName(D, best)} · ${F.money(best.total)}${T.per_month}`;
+    const sub = T.og_sub;
     await writeFile(new URL(`og/${lang.toLowerCase()}/${p.slug}.png`, pub), render(card(lang, title, sub)));
   }
   console.log("wrote og for " + lang);

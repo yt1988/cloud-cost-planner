@@ -38,7 +38,7 @@ npm run dev        # http://localhost:8799/
 npm run og         # 链接预览图（用系统字体，生成后提交）
 ```
 
-有意改了价格之后刷新快照：`UPDATE=1 node --test "test/*.test.mjs"`。
+`npm run prices` 把数据和 AWS、Azure、Vultr 的价格接口比对，并列出超过 90 天没人工核对的条目；GitHub 每周一自动跑一次，有需要处理的就会失败并发邮件。有意改了价格之后刷新快照：`UPDATE=1 node --test "test/*.test.mjs"`。
 
 ## 部署
 
