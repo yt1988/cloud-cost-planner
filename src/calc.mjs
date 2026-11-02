@@ -258,17 +258,23 @@ export function verifiedAt(D) {
 }
 
 // state ⇄ the code of a shared result link, /<lang>/[<page>/]r/<code>: "1_<scene>_<vcpu>_<ram>_<disk>_<servers>_<GB>_
-// <static %>_<stored GB>_<na|eu|ap|cn>_<flags: 1 shared CPU, 2 free tiers>_<file KB>". The first field is the format's
-// version: a new format gets a new number, and this one keeps opening.
-export function toCode(s) {
-  return ["1", s.scene || "-", s.vcpu, s.ram, s.disk, s.count, s.gb, s.staticPct, s.storeGB, s.aud, (s.shared ? 1 : 0) + (s.free ? 2 : 0), s.objKB].join("_");
+// <static %>_<stored GB>_<na|eu|ap|cn>_<flags: 1 shared CPU, 2 free tiers>_<file KB>[_<shared on, YYYYMMDD UTC>]". The first
+// field is the format's version: a new format gets a new number, and this one keeps opening. The date is optional (links
+// made before it was added have none); fromCode gives it back as `on`, a timestamp, beside the state.
+export function toCode(s, on) {
+  const f = ["1", s.scene || "-", s.vcpu, s.ram, s.disk, s.count, s.gb, s.staticPct, s.storeGB, s.aud, (s.shared ? 1 : 0) + (s.free ? 2 : 0), s.objKB];
+  if (on) f.push(new Date(on).toISOString().slice(0, 10).replace(/-/g, ""));
+  return f.join("_");
 }
 export function fromCode(code) {
   const p = String(code || "").split("_");
-  if (p[0] !== "1" || p.length !== 12 || !AUDIENCES.includes(p[9]) || !/^[a-z-]{1,20}$/.test(p[1])) return null;
+  if (p[0] !== "1" || (p.length !== 12 && p.length !== 13) || !AUDIENCES.includes(p[9]) || !/^[a-z-]{1,20}$/.test(p[1])) return null;
+  const on = p[12] && /^(\d{4})(\d\d)(\d\d)$/.exec(p[12]), t = on && Date.UTC(+on[1], on[2] - 1, +on[3]);
+  if (p[12] && !(t > 0 && new Date(t).getUTCDate() === +on[3])) return null;
   const n = [2, 3, 4, 5, 6, 7, 8, 11, 10].map(i => (/^\d+(\.\d+)?$/.test(p[i]) ? +p[i] : NaN));
   if (n.some(v => !Number.isFinite(v)) || n[5] > 100 || n[3] < 1) return null;
-  return { scene: p[1] === "-" ? "" : p[1], vcpu: n[0], ram: n[1], disk: n[2], count: n[3], gb: n[4], staticPct: n[5], storeGB: n[6], aud: p[9], shared: !!(n[8] & 1), free: !!(n[8] & 2), objKB: n[7] };
+  const s = { scene: p[1] === "-" ? "" : p[1], vcpu: n[0], ram: n[1], disk: n[2], count: n[3], gb: n[4], staticPct: n[5], storeGB: n[6], aud: p[9], shared: !!(n[8] & 1), free: !!(n[8] & 2), objKB: n[7] };
+  return t ? { ...s, on: t } : s;
 }
 
 // state ⇄ query string (?v=1&…), the page's own address while you edit: short keys, so links stay short

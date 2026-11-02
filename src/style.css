@@ -101,9 +101,10 @@ input[type="number"]:focus { border-color: var(--ink); }
 .chk input { width: 16px; height: 16px; accent-color: var(--ink); flex: none; }
 
 /* result */
-.res-h { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.res-h h2, .chart h2 { font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
-.verdict { font-size: 17px; font-weight: 650; line-height: 1.45; margin: 6px 0 14px; min-height: 2.9em; text-wrap: pretty; }
+.verdict-row { display: flex; align-items: flex-start; gap: 8px 16px; margin: 6px 0 14px; }
+.verdict-row .btn { margin-top: 2px; }
+.result > h2, .chart h2 { font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+.verdict { flex: 1; font-size: 17px; font-weight: 650; line-height: 1.45; min-height: 2.9em; text-wrap: pretty; }
 .picks { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
 .pick { display: flex; flex-direction: column; gap: 8px; border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; min-width: 0; background: var(--panel); }
 .pick.best { border-color: color-mix(in srgb, var(--ink) 55%, transparent); background: color-mix(in srgb, var(--ink) 5%, var(--panel)); }
@@ -138,6 +139,8 @@ a.ext svg { width: .95em; height: .95em; flex: none; }
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 34px; padding: 0 14px; border-radius: 9px; border: 1px solid var(--line); background: var(--panel); cursor: pointer; font-weight: 500; white-space: nowrap; }
 .btn svg { width: 15px; height: 15px; }
 .btn.icon { width: 34px; padding: 0; }
+.btn.primary { background: var(--ink); color: var(--ink-fg); border-color: transparent; font-weight: 600; }
+.btn.primary:hover { filter: brightness(1.06); }
 
 /* curve */
 .curve { display: block; width: 100%; height: auto; margin-top: 10px; }

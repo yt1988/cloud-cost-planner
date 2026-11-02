@@ -16,7 +16,8 @@
   // ---- state: the page's preset; a shared result (/…/r/<code>) or the address while editing (?v=1&…) on top
   const shared = /\/r\/([^/]+)\/?$/.exec(location.pathname);
   const pagePath = location.pathname.replace(/r\/[^/]*\/?$/, "");
-  const linked = (shared && fromCode(decodeURIComponent(shared[1]))) || fromQuery(location.search);
+  const fromLink = shared && fromCode(decodeURIComponent(shared[1]));
+  const { on: sharedOn, ...linked } = fromLink || fromQuery(location.search) || {};
   // a link names its own scenario (or none): the page's preset scenario doesn't stay highlighted for other numbers
   let st = linked ? { ...P.state, scene: "", ...linked } : { ...P.state };
   let cur = ["USD", "EUR", "CNY"].includes(store.get(LS.cur)) ? store.get(LS.cur) : P.cur;
@@ -54,7 +55,7 @@
     links(); latency();
     const q = toQuery(st);
     // a shared link keeps its address until the visitor changes something
-    if (keepShared) keepShared = false; else history.replaceState(null, "", pagePath + "?" + q + location.hash);
+    if (keepShared) keepShared = false; else { history.replaceState(null, "", pagePath + "?" + q + location.hash); if (banner) banner = banner.remove(); }
   }
   // one redraw per burst of input events (a timer, not requestAnimationFrame: that one stops in background tabs)
   const update = () => { syncInputs(); if (!raf) raf = setTimeout(render, 0); };
@@ -169,44 +170,64 @@
     const { share } = await import("/assets/share/share.js");
     const F = formats(P.lang, cur, D.rates);
     const slug = (SCENES.find(s => s.id === st.scene) || SCENES.find(s => s.id === nearestScene(st))).slug;
-    const link = location.origin + langDir + slug + "/r/" + toCode(st);
+    const link = location.origin + langDir + slug + "/r/" + toCode(st, Date.now());
     const line = verdict(rec, T, F, D);
     share({
       lang: P.lang, name: T.name, file: "cloud-cost", show: [], never: [], home: location.origin + langDir,
       link: () => link, text: () => line,
-      // the verdict (up to three lines, starting below the QR code), then one box per pick, then the footer
-      height: (x, k) => { x.font = `700 34px ${k.F}`; return k.top + 40 + Math.min(3, wrap(x, line, k.W - k.P * 2).length) * 46 + 16 + rec.picks.length * 144 + 80; },
+      // fitted into 1200×630 for the link preview, so the cheapest setup and its monthly price come first and large;
+      // the workload above it, the other picks one row each below, AWS's price for the same as the last line
+      height: (x, k) => k.top + 44 + 200 + Math.max(0, rec.picks.length - 1) * 60 + (awsRef() ? 50 : 0) + 84,
       draw: async (x, k) => {
-        let y = k.top + 40;
-        x.fillStyle = k.v("fg"); x.font = `700 34px ${k.F}`;
-        for (const ln of wrap(x, line, k.W - k.P * 2).slice(0, 3)) { x.fillText(ln, k.P, y); y += 46; }
-        y += 16 - 34;
-        const colors = [k.v("c1"), k.v("c2"), k.v("c3")];
-        rec.picks.slice(0, 3).forEach((p, i) => {
-          const bx = k.P, bw = k.W - k.P * 2, bh = 128;
-          x.fillStyle = k.v("panel"); k.roundRect(x, bx, y, bw, bh, 16); x.fill();
-          x.strokeStyle = colors[i]; x.lineWidth = i === 0 ? 3 : 1.5; k.roundRect(x, bx, y, bw, bh, 16); x.stroke();
-          x.fillStyle = colors[i]; x.font = `700 22px ${k.F}`; x.fillText(p.tags.map(t => T["tag_" + t]).join(" · "), bx + 24, y + 38);
-          x.fillStyle = k.v("fg"); x.font = `600 28px ${k.F}`; x.fillText(k.clip(x, comboName(D, p.r), bw - 300), bx + 24, y + 80);
-          x.fillStyle = k.v("muted"); x.font = `400 20px ${k.F}`; x.fillText(k.clip(x, T["reg_" + p.r.region] + (p.r.m ? " · " + p.r.m.loc : ""), bw - 300), bx + 24, y + 110);
-          x.fillStyle = k.v("fg"); x.font = `700 40px ${k.M}`; x.textAlign = "right"; x.fillText(F.money(p.r.total), bx + bw - 24, y + 76);
-          x.font = `400 20px ${k.F}`; x.fillStyle = k.v("muted"); x.fillText(T.per_month, bx + bw - 24, y + 106); x.textAlign = "left";
-          y += bh + 16;
+        const colors = [k.v("c1"), k.v("c2"), k.v("c3"), k.v("c4") || k.v("c3")], bw = k.W - k.P * 2, q = rec.q;
+        const right = (t, xx, yy) => { x.textAlign = "right"; x.fillText(t, xx, yy); x.textAlign = "left"; };
+        let y = k.top + 20;
+        x.fillStyle = k.v("muted"); x.font = `500 24px ${k.F}`;
+        x.fillText(k.clip(x, [q.vcpu > 0 ? fill(T.spec, { c: q.vcpu, r: F.num(q.ram) }) : T.spec_none, F.size(q.gb) + T.per_month, T["aud_" + q.aud]].join("  ·  "), bw), k.P, y);
+        y += 24;
+        const [best, ...rest] = rec.picks;
+        if (!best) { x.fillStyle = k.v("fg"); x.font = `700 34px ${k.F}`; x.fillText(k.clip(x, T.v_none, bw), k.P, y + 60); return; }
+        // the cheapest: name (up to two lines) and place on the left, the price large on the right
+        x.fillStyle = k.v("panel"); k.roundRect(x, k.P, y, bw, 184, 18); x.fill();
+        x.strokeStyle = colors[0]; x.lineWidth = 3; k.roundRect(x, k.P, y, bw, 184, 18); x.stroke();
+        x.font = `700 66px ${k.M}`; const pw = x.measureText(F.money(best.r.total)).width;
+        x.fillStyle = k.v("fg"); right(F.money(best.r.total), k.P + bw - 28, y + 104);
+        x.fillStyle = k.v("muted"); x.font = `400 22px ${k.F}`; right(T.per_month, k.P + bw - 28, y + 140);
+        const lw = bw - 56 - pw - 32;
+        x.fillStyle = colors[0]; x.font = `700 24px ${k.F}`; x.fillText(k.clip(x, best.tags.map(t => T["tag_" + t]).join(" · "), lw), k.P + 28, y + 42);
+        x.fillStyle = k.v("fg"); x.font = `700 30px ${k.F}`;
+        const lines = [""];
+        for (const word of comboName(D, best.r).split(" ")) {
+          const last = lines.length - 1, next = lines[last] ? lines[last] + " " + word : word;
+          if (x.measureText(next).width <= lw || !lines[last] || last === 1) lines[last] = next; else lines.push(word);
+        }
+        lines.forEach((ln, i) => x.fillText(k.clip(x, ln, lw), k.P + 28, y + 82 + i * 38));
+        x.fillStyle = k.v("muted"); x.font = `400 22px ${k.F}`; x.fillText(k.clip(x, T["reg_" + best.r.region] + (best.r.m ? " · " + best.r.m.loc : ""), lw), k.P + 28, y + 158);
+        y += 184 + 16;
+        // the others: tag and setup, price on the right
+        rest.forEach((p, i) => {
+          x.font = `700 34px ${k.M}`; const w = x.measureText(F.money(p.r.total)).width;
+          x.fillStyle = k.v("fg"); right(F.money(p.r.total), k.P + bw - 28, y + 38);
+          x.fillStyle = colors[i + 1]; x.font = `700 22px ${k.F}`;
+          const tag = p.tags.map(t => T["tag_" + t]).join(" · "), tw = x.measureText(tag).width;
+          x.fillText(tag, k.P + 28, y + 36);
+          x.fillStyle = k.v("fg"); x.font = `500 26px ${k.F}`; x.fillText(k.clip(x, comboName(D, p.r), bw - 56 - w - tw - 52), k.P + 28 + tw + 16, y + 36);
+          y += 60;
         });
+        const aws = awsRef();
+        if (aws) {
+          x.fillStyle = k.v("muted"); x.font = `400 24px ${k.F}`;
+          x.fillText(k.clip(x, comboName(D, aws) + "  " + F.money(aws.total) + T.per_month + "  (" + F.num(aws.total / Math.max(best.r.total, 0.01)) + "×)", bw - 56), k.P + 28, y + 38);
+        }
       },
       foot: () => [fill(T.foot_short, { d: P.verified })],
       ts: Date.now(),
     }).open();
   });
-  function wrap(x, text, w) {
-    const out = []; let line = "";
-    for (const ch of text.split(/(?<=[\s，。、,])/)) {
-      if (x.measureText(line + ch).width > w && line) { out.push(line.trim()); line = ""; }
-      line += ch;
-      while (x.measureText(line).width > w) { let i = line.length; while (i > 1 && x.measureText(line.slice(0, i)).width > w) i--; out.push(line.slice(0, i)); line = line.slice(i); }
-    }
-    if (line.trim()) out.push(line.trim());
-    return out;
+  // AWS's price for the same workload, when it's notably dearer (as the verdict says)
+  function awsRef() {
+    const best = rec.picks[0]?.r;
+    return best && rec.aws && rec.aws !== best && rec.aws.total > best.total * 1.05 ? rec.aws : null;
   }
   // a custom setup shares through the scenario it is closest to
   function nearestScene(s) {
@@ -216,6 +237,16 @@
     if (s.storeGB >= 512) return "download";
     return s.gb >= 1024 ? "saas" : "blog";
   }
+
+  // someone else's shared result: the shared banner above the verdict; "work out mine" takes the visitor to the inputs,
+  // starting from their numbers. The banner goes once the visitor changes something.
+  let banner = null;
+  if (fromLink) import("/assets/share/share.js").then(({ received }) => {
+    banner = received({ lang: P.lang, ts: sharedOn || Date.now(), at: $("verdictRow"), test: () => {
+      $("inH").closest("section").scrollIntoView({ behavior: "smooth", block: "start" });
+      $("gbN").focus({ preventScroll: true });
+    } });
+  });
 
   syncInputs();
   // the prerendered result matches the page's preset; redraw only if the link or saved currency changed it

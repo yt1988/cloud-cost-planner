@@ -121,6 +121,10 @@ test("a shared result's code round-trips, and bad codes are refused", async () =
   const st = { scene: "", vcpu: 2, ram: 0.5, disk: 50, count: 3, gb: 20480, staticPct: 95, storeGB: 2048, aud: "cn", shared: false, free: true, objKB: 50000 };
   assert.equal(toCode(st), "1_-_2_0.5_50_3_20480_95_2048_cn_2_50000");
   assert.deepEqual(fromCode(toCode(st)), st);
+  const on = Date.UTC(2026, 10, 2);
+  assert.equal(toCode(st, on + 5e7), "1_-_2_0.5_50_3_20480_95_2048_cn_2_50000_20261102");
+  assert.deepEqual(fromCode(toCode(st, on)), { ...st, on });
+  for (const bad of ["1_-_2_0.5_50_3_20480_95_2048_cn_2_50000_20261340", "1_-_2_0.5_50_3_20480_95_2048_cn_2_50000_2026110"]) assert.equal(fromCode(bad), null, bad);
   for (const bad of ["", "2_-_2_4_50_1_1_1_1_na_1_1", "1_-_2_4_50_1_1_101_1_na_1_1", "1_-_2_4_50_0_1_1_1_na_1_1", "1_x_2_4_50_1_1_1_1_mars_1_1", "1_<b>_2_4_50_1_1_1_1_na_1_1"])
     assert.equal(fromCode(bad), null, bad);
 });

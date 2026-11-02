@@ -48,7 +48,7 @@
 <meta name="twitter:image" content="https://cost.1ms.dog/og/zh-tw.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"雲端成本規劃器","url":"https://cost.1ms.dog/zh-tw/","applicationCategory":"BusinessApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","description":"填寫你要跑的服務和每月流量，比較 Hetzner、DigitalOcean、Vultr、Linode、Lightsail、Oracle、AWS、Google Cloud、Azure，加上 R2、S3、B2 和 CDN 的組合，算出每月最便宜的方案。","inLanguage":"zh-TW","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"推薦方案是怎麼算出來的？","acceptedAnswer":{"@type":"Answer","text":"把所有符合 CPU 和記憶體需求的主機方案，與每種物件儲存、CDN 組合起來，逐一計算一個月的費用：方案價、超出方案的流量（或雲端廠商依 GB 收的對外流量費）、儲存、請求和 CDN 流量。頁面顯示整體最便宜、離使用者近的方案中最便宜、服務商最少的三個方案，其餘列在比較表。CDN 以 80% 快取命中計算，其餘 20% 回源，回源流量依來源站的規則計費。"}},{"@type":"Question","name":"為什麼大型雲端廠商貴這麼多？","acceptedAnswer":{"@type":"Answer","text":"AWS、Google Cloud、Azure 對流向網際網路的每 GB 都收費（約 $0.08 到 $0.12），而多數 VPS 方案每月內含 1 到 20 TB 流量。每月幾 TB 流量時，流量費比主機本身還貴。"}},{"@type":"Question","name":"「靜態檔案」是什麼，該填多少？","acceptedAnswer":{"@type":"Answer","text":"每位訪客拿到的都一樣的檔案：圖片、下載檔、影片、腳本。這些可以交給物件儲存或 CDN 傳送，不經過主機。部落格大多是靜態的（約 80%），API 和代理完全不是（0%），下載站幾乎全是（95%）。"}},{"@type":"Question","name":"什麼時候值得用物件儲存加 CDN？","acceptedAnswer":{"@type":"Answer","text":"靜態檔案占大部分流量、而且超過主機方案內含流量時。Cloudflare R2 對外流量免費，Backblaze B2 經 Cloudflare 或 Bunny 傳送也免費，幾 TB 的下載量可能只要幾美元，而不是幾百美元。"}},{"@type":"Question","name":"為什麼進站免費、出站收費？","acceptedAnswer":{"@type":"Answer","text":"廠商依流出自己網路的流量向上游購買頻寬，進站流量還能吸引客戶上來。所以上傳免費，送給訪客的下載流量才收費。"}},{"@type":"Question","name":"Google Cloud 的 Premium 和 Standard 網路層級是什麼？","acceptedAnswer":{"@type":"Answer","text":"Premium 走 Google 自己的骨幹網路，送到離訪客最近的節點再出去，依目的地計價；Standard 在機房附近就交給公共網路，比較便宜。Azure 的「Microsoft 網路」和「網際網路」路由喜好設定是同樣的概念。"}},{"@type":"Question","name":"送往中國大陸的流量為什麼比較貴？","acceptedAnswer":{"@type":"Answer","text":"進入中國的國際線路稀缺又昂貴。Google Cloud Premium 層級送往中國另外計價，約是一般價格的兩倍；而且不管付多少錢，進中國的線路常常都慢。通常亞太機房最近，可以先用延遲測試看看。"}},{"@type":"Question","name":"為什麼不比較效能？","acceptedAnswer":{"@type":"Answer","text":"這是依價格和規格篩選，不是跑分。共享 CPU 方案（表中有標註）在鄰居忙碌時可能變慢；在意的話可以在進階選項把它們排除。"}},{"@type":"Question","name":"多買幾台小主機湊流量划算嗎？","acceptedAnswer":{"@type":"Answer","text":"有時幾台小方案加起來的流量比一台大的多。規劃器不會自動找這種組合；可以在進階選項自己改主機數量比較。"}},{"@type":"Question","name":"價格多久更新一次？","acceptedAnswer":{"@type":"Answer","text":"每個價格都對照廠商官方價格頁人工核對，核對日期在頁尾，每一列都有來源連結。價格未稅，歐元價格依固定匯率換算。發現錯誤可以到 GitHub 提 issue。"}},{"@type":"Question","name":"延遲是怎麼測的？到中國大陸的線路怎麼看？","acceptedAnswer":{"@type":"Answer","text":"你的瀏覽器會向頁面上每個機房送出幾個小請求計時，用的是和 Me2Cloud 相同的測速點和方法：先預熱一次，再取三次的中位數。測出來的是你自己網路的真實延遲，不是實驗室數據。到中國大陸的線路品質因廠商和電信業者差異很大，價格看不出來：如果使用者在中國大陸，就在當地開啟這個頁面（或請當地使用者幫忙），比較香港和東京機房的延遲。"}}]}]}</script>
 <link rel="preload" href="/assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/app.4bfe38d156.css">
+<link rel="stylesheet" href="/assets/app.324af63bf8.css">
 </head>
 <body>
 <div class="app">
@@ -125,11 +125,11 @@
     </section>
 
     <section class="card result" aria-labelledby="outH">
-      <div class="res-h">
-        <h2 id="outH" data-i="out_h">推薦方案</h2>
-        <button class="btn icon" id="share" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 10V2M5 4.5 8 1.5l3 3M3 8v5.5h10V8"/></svg><span class="sr" data-i="share">分享</span></button>
+      <h2 id="outH" data-i="out_h">推薦方案</h2>
+      <div class="verdict-row" id="verdictRow">
+        <p class="verdict" id="verdict">2 核 4 GB，每月 2 TB，使用者在北美：最省錢的是 Tencent Cloud Lighthouse Razor Speed 2 vCPU / 4 GB + Cloudflare R2，US$9.10/月；AWS EC2 t4g.medium + Amazon S3 + Amazon CloudFront 要 US$151，是它的 16.6 倍。</p>
+        <button class="btn primary" id="share" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 10V2M5 4.5 8 1.5l3 3M3 8v5.5h10V8"/></svg><span data-i="share">分享</span></button>
       </div>
-      <p class="verdict" id="verdict">2 核 4 GB，每月 2 TB，使用者在北美：最省錢的是 Tencent Cloud Lighthouse Razor Speed 2 vCPU / 4 GB + Cloudflare R2，US$9.10/月；AWS EC2 t4g.medium + Amazon S3 + Amazon CloudFront 要 US$151，是它的 16.6 倍。</p>
       <div class="picks" id="picks"><article class="pick best">
 <div class="pk-tags"><span class="tag t-cheapest">最省錢</span></div>
 <p class="pk-total"><b>US$9.10</b><small>/月</small></p>
@@ -193,6 +193,6 @@
 </div>
 <script type="application/json" id="data">{"lang":"zh-TW","paths":{"en":"/","zh-CN":"/zh-cn/","zh-TW":"/zh-tw/","ja":"/ja/","ko":"/ko/","es":"/es/","fr":"/fr/","de":"/de/","pt":"/pt/","ru":"/ru/"},"state":{"scene":"saas","aud":"na","shared":true,"free":false,"count":1,"vcpu":2,"ram":4,"disk":20,"gb":2048,"staticPct":30,"storeGB":50,"objKB":200},"cur":"USD","verified":"2026-11-01","slug":""}</script>
 <script src="/assets/l.zh-tw.58cbdbddfc.js" defer></script>
-<script src="/assets/app.ae7cd1e347.js" defer></script>
+<script src="/assets/app.ba85b75a78.js" defer></script>
 </body>
 </html>
