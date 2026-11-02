@@ -28,7 +28,7 @@ export default {
   lt_cheapHk_i: "월 1 TB 트래픽 기준 가장 싼 홍콩 서버는 {best}, 월 {t}입니다. 홍콩은 ICP 등록이 필요 없고 본토와 가장 가까운 역외 지역입니다.",
   per_month: "/월", 
   p_machine: "서버", p_traffic: "트래픽", p_storage: "스토리지", p_cdn: "CDN",
-  tr_incl: "{inc} 포함, {gb} 사용", tr_over: "{inc} 포함, {x} 초과 (+{c})", tr_cloud: "전송 {gb}, {tier} (+{c})", tr_none: "서버를 거치지 않음", st_sub: "저장 {s}, 전송 {o}", st_keep: "저장 {s}", cdn_sub: "전송 {o}",
+  tr_unlim: "트래픽 무제한, {gb} 사용",   tr_incl: "{inc} 포함, {gb} 사용", tr_over: "{inc} 포함, {x} 초과 (+{c})", tr_cloud: "전송 {gb}, {tier} (+{c})", tr_none: "서버를 거치지 않음", st_sub: "저장 {s}, 전송 {o}", st_keep: "저장 {s}", cdn_sub: "전송 {o}",
   why_far: "데이터센터가 {region}에 있어 사용자와 멉니다.",
   why_free: "상시 무료 한도를 포함했지만 무료 인스턴스는 자주 매진됩니다.",
   v_aws: "{spec}, 월 {gb}, 사용자 {aud}: 가장 싼 구성은 {best}, 월 {t}. {ref}면 {aws}로 {k}배입니다.",

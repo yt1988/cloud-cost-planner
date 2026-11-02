@@ -28,7 +28,7 @@ export default {
   lt_cheapHk_i: "月 1 TB の転送量で最安の香港サーバーは {best}、{t}/月です。香港は ICP 届出が不要で、本土に最も近い域外の拠点です。",
   per_month: "/月", 
   p_machine: "サーバー", p_traffic: "転送量", p_storage: "ストレージ", p_cdn: "CDN",
-  tr_incl: "{inc} 込み、{gb} 使用", tr_over: "{inc} 込み、{x} 超過（+{c}）", tr_cloud: "送信 {gb}、{tier}（+{c}）", tr_none: "サーバーを通りません", st_sub: "保存 {s}、送信 {o}", st_keep: "保存 {s}", cdn_sub: "送信 {o}",
+  tr_unlim: "転送量無制限、{gb} 使用",   tr_incl: "{inc} 込み、{gb} 使用", tr_over: "{inc} 込み、{x} 超過（+{c}）", tr_cloud: "送信 {gb}、{tier}（+{c}）", tr_none: "サーバーを通りません", st_sub: "保存 {s}、送信 {o}", st_keep: "保存 {s}", cdn_sub: "送信 {o}",
   why_far: "データセンターが{region}にあり、利用者から遠めです。",
   why_free: "無料枠を含めていますが、無料インスタンスは在庫切れが多いです。",
   v_aws: "{spec}、毎月 {gb}、利用者は{aud}：最安は {best} で {t}/月。{ref} なら {aws}、{k} 倍です。",

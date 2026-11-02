@@ -37,6 +37,7 @@ function trafficText(r, q, T, F) {
   const m = r.m;
   if (r.serverGB <= 0) return T.tr_none;
   if (m.egress) return fill(r.cost.traffic < 0.005 ? T.tr_cloud_free : T.tr_cloud, { gb: F.size(r.serverGB), tier: egressName(T, m.egress), c: F.money(r.cost.traffic) });
+  if (m.traffic.scope === "unlimited") return fill(T.tr_unlim, { gb: F.size(r.serverGB) });
   const inc = m.traffic.includedGB * r.count + m.traffic.accountFreeGB;
   return fill(r.serverGB > inc ? T.tr_over : T.tr_incl, { inc: F.size(inc), gb: F.size(r.serverGB), x: F.size(r.serverGB - inc), c: F.money(r.cost.traffic) });
 }
