@@ -28,7 +28,7 @@ export default {
   lt_cheapHk_i: "Con 1 TB al mes, el servidor más barato en Hong Kong es {best} por {t}/mes. Hong Kong no requiere licencia ICP y es lo más cercano fuera de China continental.",
   per_month: "/mes", 
   p_machine: "Servidor", p_traffic: "Tráfico", p_storage: "Almacenamiento", p_cdn: "CDN",
-  tr_unlim: "{gb}, tráfico sin límite",   tr_incl: "{inc} incluidos, {gb} usados", tr_over: "{inc} incluidos, {x} de más (+{c})", tr_cloud: "{gb} de salida, {tier} (+{c})", tr_none: "No pasa por el servidor", st_sub: "{s} almacenados, {o} enviados", st_keep: "{s} almacenados", cdn_sub: "{o} enviados",
+  tr_unlim: "{gb}, tráfico sin límite", tr_incl: "{inc} incluidos, {gb} usados", tr_over: "{inc} incluidos, {x} de más (+{c})", tr_cloud: "{gb} de salida, {tier} (+{c})", tr_none: "No pasa por el servidor", st_sub: "{s} almacenados, {o} enviados", st_keep: "{s} almacenados", cdn_sub: "{o} enviados",
   why_far: "Su centro de datos está en {region}, más lejos de tus visitantes.",
   why_free: "Cuenta el nivel gratuito permanente, que a menudo no tiene capacidad.",
   v_aws: "{spec}, {gb} al mes, visitantes en {aud}: lo más barato es {best}, {t}/mes. {ref} cuesta {aws}, {k} veces más.",

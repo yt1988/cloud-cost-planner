@@ -28,7 +28,7 @@ export default {
   lt_cheapHk_i: "每月 1 TB 流量时，最便宜的香港服务器是 {best}，{t}/月。香港机房不需要备案，是离大陆最近的境外机房。",
   per_month: "/月", 
   p_machine: "服务器", p_traffic: "流量", p_storage: "存储", p_cdn: "CDN",
-  tr_unlim: "不限流量，用 {gb}",   tr_incl: "含 {inc} 流量，用 {gb}", tr_over: "含 {inc} 流量，超出 {x}（+{c}）", tr_cloud: "出口 {gb}，{tier}（+{c}）", tr_none: "流量不经过服务器", st_sub: "存 {s}，发出 {o}", st_keep: "存 {s}", cdn_sub: "发出 {o}",
+  tr_unlim: "不限流量，用 {gb}", tr_incl: "含 {inc} 流量，用 {gb}", tr_over: "含 {inc} 流量，超出 {x}（+{c}）", tr_cloud: "出口 {gb}，{tier}（+{c}）", tr_none: "流量不经过服务器", st_sub: "存 {s}，发出 {o}", st_keep: "存 {s}", cdn_sub: "发出 {o}",
   why_far: "机房在{region}，离你的用户较远。",
   why_free: "算了永久免费额度，但免费机器经常抢不到。",
   v_aws: "{spec}，每月 {gb}，用户在{aud}：最省钱的是 {best}，{t}/月；{ref} 要 {aws}，是它的 {k} 倍。",
