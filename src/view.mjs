@@ -29,6 +29,9 @@ const egressName = (T, prof) => T["eg_" + prof.id.replace(/-/g, "_")] || prof.pr
 // the plan's size in a few words: "4 vCPU / 8 GB · shared CPU · Arm"
 const specOf = (T, F, m) => `${m.vcpu} vCPU / ${F.num(m.ram)} GB · ${T["cpu_" + m.cpu]}${m.arch === "arm" ? " · Arm" : ""}`;
 
+// where the browser's latency measurement goes (src/app.js fills it from m2c's endpoints); invisible until then
+const latSlot = (T, id, tag = "span") => (id ? `<${tag} class="lat" data-ping="${esc(id)}" data-pend>${esc(T.lat_wait)}</${tag}>` : "");
+
 // the server's traffic, one line under its name: what the plan includes and what it uses, or the cloud's egress bill
 function trafficText(r, q, T, F) {
   const m = r.m;
@@ -58,6 +61,7 @@ export function pickCard(p, q, T, F, D) {
   return `<article class="pick${p.tags.includes("cheapest") ? " best" : ""}">
 <div class="pk-tags">${p.tags.map(t => `<span class="tag t-${t}">${esc(T["tag_" + t])}</span>`).join("")}</div>
 <p class="pk-total"><b>${F.money(r.total)}</b><small>${esc(T.per_month)}</small></p>
+${m && m.ping ? `<p class="pk-lat">${latSlot(T, m.ping)}</p>` : ""}
 <dl class="pk-parts">${parts.map(([k, name, sub, c]) => `<div><dt>${esc(k)}</dt><dd><b>${esc(name)}</b>${[].concat(sub).map(x => `<small>${esc(x)}</small>`).join("")}</dd><dd class="n">${F.money(c)}</dd></div>`).join("")}</dl>
 <p class="pk-why">${esc(why.join(" "))}</p>
 ${notes.length ? `<ul class="pk-notes">${notes.map(n => `<li>${esc(n)}</li>`).join("")}</ul>` : ""}
@@ -95,7 +99,7 @@ export function tableHTML(rec, T, F, D) {
       const notes = noteList(r, T);
       const bad = r.flags.some(f => BLOCKING.includes(f));
       return `<tr${bad ? ' class="bad"' : ""}><td><b>${esc(r.m ? machineName(D, r.m) + (r.count > 1 ? " ×" + r.count : "") : r.s.name)}</b>${r.m && r.m.egress ? `<small>${esc(egressName(T, r.m.egress))}</small>` : ""}${r.m && (r.s || r.c) ? `<small>+ ${esc([r.s && r.s.name, r.c && r.c.name].filter(Boolean).join(" + "))}</small>` : ""}${notes.length ? `<small class="warn">${esc(notes.join(" "))}</small>` : ""}</td>` +
-        `<td${r.region === near ? ' class="near"' : ""}>${esc(T["reg_" + r.region])}${r.m ? `<small>${esc(r.m.loc)}</small>` : ""}</td>` +
+        `<td${r.region === near ? ' class="near"' : ""}>${esc(T["reg_" + r.region])}${r.m ? `<small>${esc(r.m.loc)}</small>${latSlot(T, r.m.ping, "small")}` : ""}</td>` +
         `<td>${r.m ? `${r.m.vcpu} / ${F.num(r.m.ram)} GB<small>${esc(T["cpu_" + r.m.cpu])}${r.m.arch === "arm" ? " · Arm" : ""}</small>` : "—"}</td>` +
         `<td class="n">${r.m ? F.money(r.cost.machine) : "—"}</td><td class="n">${r.m ? F.money(r.cost.traffic) : "—"}</td>` +
         `<td class="n">${r.s || r.c ? F.money(r.cost.storage + r.cost.cdn) : "—"}</td><td class="n"><b>${F.money(r.total)}</b></td>` +

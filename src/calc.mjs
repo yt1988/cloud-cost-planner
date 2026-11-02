@@ -44,6 +44,7 @@ export function machines(D) {
       const base = {
         offer: o.id, provider: o.provider, line: o.line, plan, region, loc, vcpu, ram, disk, cpu: o.cpu, arch: o.arch || "x86",
         diskType: o.disk, note: o.note || null, source: o.source, soldOut: !!o.soldOut, cnRoute: o.cnRoute || null,
+        ping: typeof o.ping === "string" ? o.ping : (o.ping || {})[region] || null,   // m2c's latency endpoint for this data center
         portMbps: portMbps || o.portMbps || SERVER_MBPS,
         monthly: usd(o.per === "hour" ? price * HOURS : price, o.currency),
         extras: o.extras ? {
@@ -152,6 +153,7 @@ export function price(m, s, c, q, D) {
     if (c.requests) cc += Math.max(0, cdnGB * 1048576 / q.objKB / 1e6 - c.requests.freeM) * c.requests[q.aud];
     cost.cdn = Math.max(cc, c.minMonthly || 0);
     if (c.note === "cloudflare" && q.objKB >= 1000) flags.push("cfTos");  // video and large downloads: see its terms
+    if (c.id === "cloudflare" && q.aud === "cn") flags.push("cfCn");     // no edge inside mainland China on the free plan
   } else if (c) return null;                                            // a CDN with nothing to carry
 
   for (const { prof, gb } of pools.values()) {
@@ -203,8 +205,11 @@ export function recommend(input, D) {
   // fewer vendors is worth a little more, not ten times more
   const cap = close ? Math.max(close.total * 1.5, close.total + 10) : 0;
   const simple = near.filter(r => r.total <= cap).sort((a, b) => a.vendors - b.vendors || a.total - b.total)[0] || null;
+  // visitors in mainland China: also the cheapest server in Hong Kong, the closest place outside the mainland's
+  // licensing rules (routes into China vary a lot: the page measures them from the visitor's browser)
+  const hk = q.aud === "cn" ? near.find(r => r.m && r.m.cnRoute === "hk") || null : null;
   const picks = [];
-  for (const [tag, r] of [["cheapest", close], ["simple", simple], ["far", far]]) {
+  for (const [tag, r] of [["cheapest", close], ["simple", simple], ["hk", hk], ["far", far]]) {
     if (!r) continue;
     const same = picks.find(p => p.r === r);
     if (same) same.tags.push(tag); else picks.push({ tags: [tag], r });

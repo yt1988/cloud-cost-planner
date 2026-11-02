@@ -59,3 +59,13 @@ test("server plans are well formed", () => {
     }
   }
 });
+
+test("every server names a latency endpoint (vendor:region) for its data center", () => {
+  for (const o of D.vps.offers) {
+    const regs = o.region ? [o.region] : Object.keys(o.regions);
+    for (const r of regs) {
+      const id = typeof o.ping === "string" ? o.ping : o.ping && o.ping[r];
+      assert.match(id || "", /^[a-z]+:[a-z0-9-]+$/, `${o.id} ${r}: ping`);
+    }
+  }
+});

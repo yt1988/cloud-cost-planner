@@ -1,122 +1,133 @@
 {
   "blog/na": {
     "picks": [
-      "cheapest,simple: vultr-vc2 Regular 1 vCPU / 2 GB @na + - + - = 10.00"
+      "cheapest,simple: tencent-razor-na Lighthouse Razor Speed 2 vCPU / 2 GB @na + - + - = 5.60",
+      "far: tencent-lh-sg Lighthouse Starter 2 vCPU / 2 GB · 512 GB @ap + - + - = 4.20"
     ],
     "aws": "17.74"
   },
   "blog/eu": {
     "picks": [
-      "cheapest,simple: vultr-vc2 Regular 1 vCPU / 2 GB @eu + - + - = 10.00"
+      "cheapest,simple: tencent-lh-fra Lighthouse Starter 2 vCPU / 2 GB · 512 GB @eu + - + - = 4.20"
     ],
     "aws": "19.50"
   },
   "blog/ap": {
     "picks": [
-      "cheapest,simple: vultr-vc2 Regular 1 vCPU / 2 GB @ap + - + - = 10.00"
+      "cheapest,simple: tencent-lh-sg Lighthouse Starter 2 vCPU / 2 GB · 512 GB @ap + - + - = 4.20"
     ],
     "aws": "21.25"
   },
   "blog/cn": {
     "picks": [
-      "cheapest,simple: vultr-vc2 Regular 1 vCPU / 2 GB @ap + - + - = 10.00"
+      "cheapest,simple: tencent-lh-sg Lighthouse Starter 2 vCPU / 2 GB · 512 GB @ap + - + - = 4.20",
+      "hk: tencent-lh-hk Lighthouse Starter 2 vCPU / 2 GB · 512 GB @ap + - + - = 6.00"
     ],
     "aws": "21.25"
   },
   "saas/na": {
     "picks": [
-      "cheapest,simple: vultr-vc2 Regular 2 vCPU / 4 GB @na + - + - = 20.00"
+      "cheapest: tencent-razor-na Lighthouse Razor Speed 2 vCPU / 4 GB @na + r2 + - = 9.10",
+      "simple: tencent-razor-na Lighthouse Razor Speed 2 vCPU / 8 GB @na + - + - = 13.20",
+      "far: tencent-lh-sg Lighthouse Starter 2 vCPU / 4 GB · 1.5 TB @ap + b2 + cloudflare = 6.27"
     ],
     "aws": "150.95"
   },
   "saas/eu": {
     "picks": [
-      "cheapest,simple: vultr-vc2 Regular 2 vCPU / 4 GB @eu + - + - = 20.00"
+      "cheapest: tencent-lh-fra Lighthouse Starter 2 vCPU / 4 GB · 1.5 TB @eu + r2 + - = 6.60",
+      "simple: tencent-lh-fra Lighthouse Starter 2 vCPU / 4 GB · 2 TB @eu + - + - = 7.50"
     ],
     "aws": "154.46"
   },
   "saas/ap": {
     "picks": [
-      "cheapest,simple: vultr-vc2 Regular 2 vCPU / 4 GB @ap + - + - = 20.00"
+      "cheapest: tencent-lh-sg Lighthouse Starter 2 vCPU / 4 GB · 1.5 TB @ap + r2 + - = 6.60",
+      "simple: tencent-lh-sg Lighthouse Starter 2 vCPU / 4 GB · 2 TB @ap + - + - = 7.50"
     ],
     "aws": "189.97"
   },
   "saas/cn": {
     "picks": [
-      "cheapest,simple: vultr-vc2 Regular 2 vCPU / 4 GB @ap + - + - = 20.00"
+      "cheapest: tencent-lh-sg Lighthouse Starter 2 vCPU / 4 GB · 1.5 TB @ap + r2 + - = 6.60",
+      "simple: tencent-lh-sg Lighthouse Starter 2 vCPU / 4 GB · 2 TB @ap + - + - = 7.50",
+      "hk: tencent-lh-hk Lighthouse Starter 2 vCPU / 4 GB · 2 TB @ap + - + - = 15.00"
     ],
     "aws": "189.97"
   },
   "proxy/na": {
     "picks": [
-      "cheapest,simple: oracle-a1 A1 1 OCPU / 2 GB oracle @na + - + - = 11.62"
+      "cheapest,simple: tencent-razor-na Lighthouse Razor Speed 2 vCPU / 2 GB @na + - + - = 5.60"
     ],
     "aws": "469.31"
   },
   "proxy/eu": {
     "picks": [
-      "cheapest,simple: oracle-a1 A1 1 OCPU / 2 GB oracle @eu + - + - = 11.62"
+      "cheapest,simple: tencent-razor-eu Lighthouse Razor Speed 2 vCPU / 2 GB @eu + - + - = 5.60"
     ],
     "aws": "471.07"
   },
   "proxy/ap": {
     "picks": [
-      "cheapest,simple: oracle-a1 A1 1 OCPU / 2 GB oracle @ap + - + - = 11.62"
+      "cheapest,simple: tencent-razor-ap Lighthouse Razor Speed 2 vCPU / 2 GB @ap + - + - = 5.60"
     ],
     "aws": "593.30"
   },
   "proxy/cn": {
     "picks": [
-      "cheapest,simple: oracle-a1 A1 1 OCPU / 2 GB oracle @ap + - + - = 11.62"
+      "cheapest,simple: tencent-razor-ap Lighthouse Razor Speed 2 vCPU / 2 GB @ap + - + - = 5.60",
+      "hk: aliyun-sas-hk SAS 2 vCPU / 8 GB @ap + - + - = 35.00"
     ],
     "aws": "593.30"
   },
   "download/na": {
     "picks": [
-      "cheapest,simple: vultr-vc2 Regular 2 vCPU / 4 GB @na + r2 + - = 50.57"
+      "cheapest,simple: tencent-razor-na Lighthouse Razor Speed 2 vCPU / 4 GB @na + r2 + - = 39.07"
     ],
     "aws": "1685.80"
   },
   "download/eu": {
     "picks": [
-      "cheapest: vultr-vc2 Regular 2 vCPU / 4 GB @eu + r2 + - = 50.57",
-      "simple: hetzner-cpx-eu CPX22 @eu + hetzner-os + - = 56.92"
+      "cheapest,simple: tencent-lh-fra Lighthouse Starter 2 vCPU / 4 GB · 1.5 TB @eu + r2 + - = 36.57"
     ],
     "aws": "1689.31"
   },
   "download/ap": {
     "picks": [
-      "cheapest,simple: vultr-vc2 Regular 2 vCPU / 4 GB @ap + r2 + - = 50.57"
+      "cheapest,simple: tencent-lh-sg Lighthouse Starter 2 vCPU / 4 GB · 1.5 TB @ap + r2 + - = 36.57"
     ],
     "aws": "2085.67"
   },
   "download/cn": {
     "picks": [
-      "cheapest,simple: vultr-vc2 Regular 2 vCPU / 4 GB @ap + r2 + - = 50.57"
+      "cheapest,simple: tencent-lh-sg Lighthouse Starter 2 vCPU / 4 GB · 1.5 TB @ap + r2 + - = 36.57",
+      "hk: tencent-lh-hk Lighthouse Starter 2 vCPU / 4 GB · 2 TB @ap + r2 + - = 45.57"
     ],
     "aws": "2153.87"
   },
   "media/na": {
     "picks": [
-      "cheapest,simple: oracle-a1 A1 4 OCPU / 8 GB oracle @na + r2 + - = 207.33"
+      "cheapest,simple: tencent-razor-na Lighthouse Razor Speed 4 vCPU / 8 GB @na + r2 + - = 200.24"
     ],
     "aws": "7833.16"
   },
   "media/eu": {
     "picks": [
-      "cheapest,simple: hetzner-cpx-eu CPX32 @eu + hetzner-os + - = 211.95"
+      "cheapest: tencent-razor-eu Lighthouse Razor Speed 4 vCPU / 8 GB @eu + r2 + - = 200.24",
+      "simple: hetzner-cpx-eu CPX32 @eu + hetzner-os + - = 211.95"
     ],
     "aws": "7854.84"
   },
   "media/ap": {
     "picks": [
-      "cheapest,simple: oracle-a1 A1 4 OCPU / 8 GB oracle @ap + r2 + - = 207.33"
+      "cheapest,simple: tencent-razor-ap Lighthouse Razor Speed 4 vCPU / 8 GB @ap + r2 + - = 200.24"
     ],
     "aws": "9593.64"
   },
   "media/cn": {
     "picks": [
-      "cheapest,simple: oracle-a1 A1 4 OCPU / 8 GB oracle @ap + r2 + - = 207.33"
+      "cheapest,simple: tencent-razor-ap Lighthouse Razor Speed 4 vCPU / 8 GB @ap + r2 + - = 200.24",
+      "hk: aliyun-sas-hk SAS 4 vCPU / 16 GB @ap + r2 + - = 307.24"
     ],
     "aws": "9593.64"
   },

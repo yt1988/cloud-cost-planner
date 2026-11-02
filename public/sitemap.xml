@@ -321,6 +321,22 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/lightsail-vs-ec2/"/>
   </url>
   <url>
+    <loc>https://cost.1ms.dog/tencent-cloud-vs-alibaba-cloud/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cost.1ms.dog/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://cost.1ms.dog/zh-cn/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://cost.1ms.dog/zh-tw/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://cost.1ms.dog/ja/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://cost.1ms.dog/ko/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cost.1ms.dog/es/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cost.1ms.dog/fr/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cost.1ms.dog/de/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cost.1ms.dog/pt/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cost.1ms.dog/ru/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/tencent-cloud-vs-alibaba-cloud/"/>
+  </url>
+  <url>
     <loc>https://cost.1ms.dog/r2-vs-s3/</loc>
     <lastmod>2026-11-01</lastmod>
     <priority>0.7</priority>
@@ -415,6 +431,22 @@
     <xhtml:link rel="alternate" hreflang="pt" href="https://cost.1ms.dog/pt/cheapest-cdn/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://cost.1ms.dog/ru/cheapest-cdn/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/cheapest-cdn/"/>
+  </url>
+  <url>
+    <loc>https://cost.1ms.dog/hong-kong-vps-cost/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cost.1ms.dog/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://cost.1ms.dog/zh-cn/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://cost.1ms.dog/zh-tw/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://cost.1ms.dog/ja/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://cost.1ms.dog/ko/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cost.1ms.dog/es/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cost.1ms.dog/fr/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cost.1ms.dog/de/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cost.1ms.dog/pt/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cost.1ms.dog/ru/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/hong-kong-vps-cost/"/>
   </url>
   <url>
     <loc>https://cost.1ms.dog/zh-cn/</loc>
@@ -737,6 +769,22 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/lightsail-vs-ec2/"/>
   </url>
   <url>
+    <loc>https://cost.1ms.dog/zh-cn/tencent-cloud-vs-alibaba-cloud/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cost.1ms.dog/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://cost.1ms.dog/zh-cn/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://cost.1ms.dog/zh-tw/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://cost.1ms.dog/ja/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://cost.1ms.dog/ko/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cost.1ms.dog/es/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cost.1ms.dog/fr/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cost.1ms.dog/de/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cost.1ms.dog/pt/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cost.1ms.dog/ru/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/tencent-cloud-vs-alibaba-cloud/"/>
+  </url>
+  <url>
     <loc>https://cost.1ms.dog/zh-cn/r2-vs-s3/</loc>
     <lastmod>2026-11-01</lastmod>
     <priority>0.7</priority>
@@ -831,6 +879,22 @@
     <xhtml:link rel="alternate" hreflang="pt" href="https://cost.1ms.dog/pt/cheapest-cdn/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://cost.1ms.dog/ru/cheapest-cdn/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/cheapest-cdn/"/>
+  </url>
+  <url>
+    <loc>https://cost.1ms.dog/zh-cn/hong-kong-vps-cost/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cost.1ms.dog/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://cost.1ms.dog/zh-cn/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://cost.1ms.dog/zh-tw/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://cost.1ms.dog/ja/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://cost.1ms.dog/ko/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cost.1ms.dog/es/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cost.1ms.dog/fr/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cost.1ms.dog/de/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cost.1ms.dog/pt/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cost.1ms.dog/ru/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/hong-kong-vps-cost/"/>
   </url>
   <url>
     <loc>https://cost.1ms.dog/zh-tw/</loc>
@@ -1153,6 +1217,22 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/lightsail-vs-ec2/"/>
   </url>
   <url>
+    <loc>https://cost.1ms.dog/zh-tw/tencent-cloud-vs-alibaba-cloud/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cost.1ms.dog/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://cost.1ms.dog/zh-cn/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://cost.1ms.dog/zh-tw/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://cost.1ms.dog/ja/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://cost.1ms.dog/ko/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cost.1ms.dog/es/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cost.1ms.dog/fr/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cost.1ms.dog/de/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cost.1ms.dog/pt/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cost.1ms.dog/ru/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/tencent-cloud-vs-alibaba-cloud/"/>
+  </url>
+  <url>
     <loc>https://cost.1ms.dog/zh-tw/r2-vs-s3/</loc>
     <lastmod>2026-11-01</lastmod>
     <priority>0.7</priority>
@@ -1247,6 +1327,22 @@
     <xhtml:link rel="alternate" hreflang="pt" href="https://cost.1ms.dog/pt/cheapest-cdn/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://cost.1ms.dog/ru/cheapest-cdn/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/cheapest-cdn/"/>
+  </url>
+  <url>
+    <loc>https://cost.1ms.dog/zh-tw/hong-kong-vps-cost/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cost.1ms.dog/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://cost.1ms.dog/zh-cn/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://cost.1ms.dog/zh-tw/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://cost.1ms.dog/ja/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://cost.1ms.dog/ko/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cost.1ms.dog/es/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cost.1ms.dog/fr/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cost.1ms.dog/de/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cost.1ms.dog/pt/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cost.1ms.dog/ru/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/hong-kong-vps-cost/"/>
   </url>
   <url>
     <loc>https://cost.1ms.dog/ja/</loc>
@@ -1569,6 +1665,22 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/lightsail-vs-ec2/"/>
   </url>
   <url>
+    <loc>https://cost.1ms.dog/ja/tencent-cloud-vs-alibaba-cloud/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cost.1ms.dog/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://cost.1ms.dog/zh-cn/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://cost.1ms.dog/zh-tw/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://cost.1ms.dog/ja/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://cost.1ms.dog/ko/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cost.1ms.dog/es/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cost.1ms.dog/fr/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cost.1ms.dog/de/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cost.1ms.dog/pt/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cost.1ms.dog/ru/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/tencent-cloud-vs-alibaba-cloud/"/>
+  </url>
+  <url>
     <loc>https://cost.1ms.dog/ja/r2-vs-s3/</loc>
     <lastmod>2026-11-01</lastmod>
     <priority>0.7</priority>
@@ -1663,6 +1775,22 @@
     <xhtml:link rel="alternate" hreflang="pt" href="https://cost.1ms.dog/pt/cheapest-cdn/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://cost.1ms.dog/ru/cheapest-cdn/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/cheapest-cdn/"/>
+  </url>
+  <url>
+    <loc>https://cost.1ms.dog/ja/hong-kong-vps-cost/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cost.1ms.dog/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://cost.1ms.dog/zh-cn/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://cost.1ms.dog/zh-tw/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://cost.1ms.dog/ja/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://cost.1ms.dog/ko/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cost.1ms.dog/es/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cost.1ms.dog/fr/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cost.1ms.dog/de/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cost.1ms.dog/pt/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cost.1ms.dog/ru/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/hong-kong-vps-cost/"/>
   </url>
   <url>
     <loc>https://cost.1ms.dog/ko/</loc>
@@ -1985,6 +2113,22 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/lightsail-vs-ec2/"/>
   </url>
   <url>
+    <loc>https://cost.1ms.dog/ko/tencent-cloud-vs-alibaba-cloud/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cost.1ms.dog/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://cost.1ms.dog/zh-cn/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://cost.1ms.dog/zh-tw/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://cost.1ms.dog/ja/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://cost.1ms.dog/ko/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cost.1ms.dog/es/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cost.1ms.dog/fr/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cost.1ms.dog/de/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cost.1ms.dog/pt/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cost.1ms.dog/ru/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/tencent-cloud-vs-alibaba-cloud/"/>
+  </url>
+  <url>
     <loc>https://cost.1ms.dog/ko/r2-vs-s3/</loc>
     <lastmod>2026-11-01</lastmod>
     <priority>0.7</priority>
@@ -2079,6 +2223,22 @@
     <xhtml:link rel="alternate" hreflang="pt" href="https://cost.1ms.dog/pt/cheapest-cdn/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://cost.1ms.dog/ru/cheapest-cdn/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/cheapest-cdn/"/>
+  </url>
+  <url>
+    <loc>https://cost.1ms.dog/ko/hong-kong-vps-cost/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cost.1ms.dog/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://cost.1ms.dog/zh-cn/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://cost.1ms.dog/zh-tw/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://cost.1ms.dog/ja/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://cost.1ms.dog/ko/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cost.1ms.dog/es/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cost.1ms.dog/fr/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cost.1ms.dog/de/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cost.1ms.dog/pt/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cost.1ms.dog/ru/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/hong-kong-vps-cost/"/>
   </url>
   <url>
     <loc>https://cost.1ms.dog/es/</loc>
@@ -2401,6 +2561,22 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/lightsail-vs-ec2/"/>
   </url>
   <url>
+    <loc>https://cost.1ms.dog/es/tencent-cloud-vs-alibaba-cloud/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cost.1ms.dog/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://cost.1ms.dog/zh-cn/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://cost.1ms.dog/zh-tw/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://cost.1ms.dog/ja/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://cost.1ms.dog/ko/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cost.1ms.dog/es/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cost.1ms.dog/fr/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cost.1ms.dog/de/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cost.1ms.dog/pt/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cost.1ms.dog/ru/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/tencent-cloud-vs-alibaba-cloud/"/>
+  </url>
+  <url>
     <loc>https://cost.1ms.dog/es/r2-vs-s3/</loc>
     <lastmod>2026-11-01</lastmod>
     <priority>0.7</priority>
@@ -2495,6 +2671,22 @@
     <xhtml:link rel="alternate" hreflang="pt" href="https://cost.1ms.dog/pt/cheapest-cdn/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://cost.1ms.dog/ru/cheapest-cdn/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/cheapest-cdn/"/>
+  </url>
+  <url>
+    <loc>https://cost.1ms.dog/es/hong-kong-vps-cost/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cost.1ms.dog/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://cost.1ms.dog/zh-cn/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://cost.1ms.dog/zh-tw/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://cost.1ms.dog/ja/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://cost.1ms.dog/ko/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cost.1ms.dog/es/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cost.1ms.dog/fr/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cost.1ms.dog/de/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cost.1ms.dog/pt/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cost.1ms.dog/ru/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/hong-kong-vps-cost/"/>
   </url>
   <url>
     <loc>https://cost.1ms.dog/fr/</loc>
@@ -2817,6 +3009,22 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/lightsail-vs-ec2/"/>
   </url>
   <url>
+    <loc>https://cost.1ms.dog/fr/tencent-cloud-vs-alibaba-cloud/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cost.1ms.dog/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://cost.1ms.dog/zh-cn/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://cost.1ms.dog/zh-tw/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://cost.1ms.dog/ja/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://cost.1ms.dog/ko/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cost.1ms.dog/es/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cost.1ms.dog/fr/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cost.1ms.dog/de/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cost.1ms.dog/pt/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cost.1ms.dog/ru/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/tencent-cloud-vs-alibaba-cloud/"/>
+  </url>
+  <url>
     <loc>https://cost.1ms.dog/fr/r2-vs-s3/</loc>
     <lastmod>2026-11-01</lastmod>
     <priority>0.7</priority>
@@ -2911,6 +3119,22 @@
     <xhtml:link rel="alternate" hreflang="pt" href="https://cost.1ms.dog/pt/cheapest-cdn/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://cost.1ms.dog/ru/cheapest-cdn/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/cheapest-cdn/"/>
+  </url>
+  <url>
+    <loc>https://cost.1ms.dog/fr/hong-kong-vps-cost/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cost.1ms.dog/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://cost.1ms.dog/zh-cn/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://cost.1ms.dog/zh-tw/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://cost.1ms.dog/ja/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://cost.1ms.dog/ko/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cost.1ms.dog/es/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cost.1ms.dog/fr/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cost.1ms.dog/de/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cost.1ms.dog/pt/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cost.1ms.dog/ru/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/hong-kong-vps-cost/"/>
   </url>
   <url>
     <loc>https://cost.1ms.dog/de/</loc>
@@ -3233,6 +3457,22 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/lightsail-vs-ec2/"/>
   </url>
   <url>
+    <loc>https://cost.1ms.dog/de/tencent-cloud-vs-alibaba-cloud/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cost.1ms.dog/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://cost.1ms.dog/zh-cn/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://cost.1ms.dog/zh-tw/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://cost.1ms.dog/ja/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://cost.1ms.dog/ko/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cost.1ms.dog/es/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cost.1ms.dog/fr/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cost.1ms.dog/de/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cost.1ms.dog/pt/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cost.1ms.dog/ru/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/tencent-cloud-vs-alibaba-cloud/"/>
+  </url>
+  <url>
     <loc>https://cost.1ms.dog/de/r2-vs-s3/</loc>
     <lastmod>2026-11-01</lastmod>
     <priority>0.7</priority>
@@ -3327,6 +3567,22 @@
     <xhtml:link rel="alternate" hreflang="pt" href="https://cost.1ms.dog/pt/cheapest-cdn/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://cost.1ms.dog/ru/cheapest-cdn/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/cheapest-cdn/"/>
+  </url>
+  <url>
+    <loc>https://cost.1ms.dog/de/hong-kong-vps-cost/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cost.1ms.dog/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://cost.1ms.dog/zh-cn/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://cost.1ms.dog/zh-tw/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://cost.1ms.dog/ja/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://cost.1ms.dog/ko/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cost.1ms.dog/es/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cost.1ms.dog/fr/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cost.1ms.dog/de/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cost.1ms.dog/pt/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cost.1ms.dog/ru/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/hong-kong-vps-cost/"/>
   </url>
   <url>
     <loc>https://cost.1ms.dog/pt/</loc>
@@ -3649,6 +3905,22 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/lightsail-vs-ec2/"/>
   </url>
   <url>
+    <loc>https://cost.1ms.dog/pt/tencent-cloud-vs-alibaba-cloud/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cost.1ms.dog/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://cost.1ms.dog/zh-cn/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://cost.1ms.dog/zh-tw/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://cost.1ms.dog/ja/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://cost.1ms.dog/ko/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cost.1ms.dog/es/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cost.1ms.dog/fr/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cost.1ms.dog/de/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cost.1ms.dog/pt/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cost.1ms.dog/ru/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/tencent-cloud-vs-alibaba-cloud/"/>
+  </url>
+  <url>
     <loc>https://cost.1ms.dog/pt/r2-vs-s3/</loc>
     <lastmod>2026-11-01</lastmod>
     <priority>0.7</priority>
@@ -3743,6 +4015,22 @@
     <xhtml:link rel="alternate" hreflang="pt" href="https://cost.1ms.dog/pt/cheapest-cdn/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://cost.1ms.dog/ru/cheapest-cdn/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/cheapest-cdn/"/>
+  </url>
+  <url>
+    <loc>https://cost.1ms.dog/pt/hong-kong-vps-cost/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cost.1ms.dog/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://cost.1ms.dog/zh-cn/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://cost.1ms.dog/zh-tw/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://cost.1ms.dog/ja/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://cost.1ms.dog/ko/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cost.1ms.dog/es/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cost.1ms.dog/fr/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cost.1ms.dog/de/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cost.1ms.dog/pt/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cost.1ms.dog/ru/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/hong-kong-vps-cost/"/>
   </url>
   <url>
     <loc>https://cost.1ms.dog/ru/</loc>
@@ -4065,6 +4353,22 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/lightsail-vs-ec2/"/>
   </url>
   <url>
+    <loc>https://cost.1ms.dog/ru/tencent-cloud-vs-alibaba-cloud/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cost.1ms.dog/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://cost.1ms.dog/zh-cn/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://cost.1ms.dog/zh-tw/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://cost.1ms.dog/ja/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://cost.1ms.dog/ko/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cost.1ms.dog/es/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cost.1ms.dog/fr/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cost.1ms.dog/de/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cost.1ms.dog/pt/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cost.1ms.dog/ru/tencent-cloud-vs-alibaba-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/tencent-cloud-vs-alibaba-cloud/"/>
+  </url>
+  <url>
     <loc>https://cost.1ms.dog/ru/r2-vs-s3/</loc>
     <lastmod>2026-11-01</lastmod>
     <priority>0.7</priority>
@@ -4159,5 +4463,21 @@
     <xhtml:link rel="alternate" hreflang="pt" href="https://cost.1ms.dog/pt/cheapest-cdn/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://cost.1ms.dog/ru/cheapest-cdn/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/cheapest-cdn/"/>
+  </url>
+  <url>
+    <loc>https://cost.1ms.dog/ru/hong-kong-vps-cost/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cost.1ms.dog/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://cost.1ms.dog/zh-cn/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://cost.1ms.dog/zh-tw/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://cost.1ms.dog/ja/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://cost.1ms.dog/ko/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cost.1ms.dog/es/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cost.1ms.dog/fr/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cost.1ms.dog/de/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cost.1ms.dog/pt/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cost.1ms.dog/ru/hong-kong-vps-cost/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cost.1ms.dog/hong-kong-vps-cost/"/>
   </url>
 </urlset>

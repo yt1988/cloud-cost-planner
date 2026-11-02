@@ -129,7 +129,12 @@ input[type="number"]:focus { border-color: var(--ink); }
 .links a:hover { text-decoration: underline; text-underline-offset: 3px; }
 a.ext { display: inline-flex; align-items: center; gap: 3px; white-space: nowrap; }
 a.ext svg { width: .95em; height: .95em; flex: none; }
-a[data-pend] { visibility: hidden; }
+[data-pend] { visibility: hidden; }
+/* latency from the visitor's browser to the data center (measured with m2c's endpoints) */
+.pk-lat { font-size: 12.5px; color: var(--muted); min-height: 1.5em; margin-top: -4px; }
+.lat.good { color: var(--ink); }
+.lat.slow { color: var(--warn); }
+.tbl td small.lat { font-family: var(--f-num); }
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 34px; padding: 0 14px; border-radius: 9px; border: 1px solid var(--line); background: var(--panel); cursor: pointer; font-weight: 500; white-space: nowrap; }
 .btn svg { width: 15px; height: 15px; }
 .btn.icon { width: 34px; padding: 0; }

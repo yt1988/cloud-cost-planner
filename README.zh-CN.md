@@ -4,11 +4,13 @@
 
 填上你要跑的业务和每月流量，它把每家 VPS 和云主机，连同对象存储和 CDN，按一个月算出费用，推荐最便宜的整套方案。
 
-- **服务器**：Hetzner、DigitalOcean、Vultr、Linode（Akamai）、AWS Lightsail、Oracle Cloud、AWS EC2、谷歌云、Azure
+- **服务器**：Hetzner、DigitalOcean、Vultr、Linode（Akamai）、AWS Lightsail、腾讯云轻量、阿里云轻量应用服务器（香港、新加坡、东京、法兰克福、弗吉尼亚）、Oracle Cloud、AWS EC2、谷歌云、Azure
 - **对象存储**：Cloudflare R2、Amazon S3、Backblaze B2、Wasabi、DigitalOcean Spaces、Hetzner Object Storage
 - **CDN**：Cloudflare（免费版）、Amazon CloudFront、Bunny CDN
 - 套餐流量和超额费、云厂商按 GB 收的出口费（含阶梯和免费额度）、Premium/Standard 网络层级、发往中国大陆的价格、请求费、最低计费量、公平使用和条款限制（Cloudflare 免费版不能发视频、Wasabi 出口不能超过存储量）
-- 三个推荐：全局最便宜、离用户近的里最便宜、服务商最少；流量变化时的费用曲线和交叉点；所有厂商对比表
+- 从你自己的浏览器测到页面上每个机房的延迟（用 Me2Cloud 的测速点和方法）
+- 流量大时自动按多台服务器计算（每台按 1 Gbit/s 或套餐带宽）；缺货的套餐会显示，但不推荐
+- 推荐：用户所在区域最便宜、服务商最少、中国大陆用户的香港机房、明显更便宜时的其他大洲；流量变化时的费用曲线和交叉点；所有厂商对比表
 - 10 种语言，每种语言 25 个预渲染页面（场景、流量费、对比、最便宜）
 - 全部在浏览器里计算，没有后端，不上传任何数据
 

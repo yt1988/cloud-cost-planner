@@ -129,7 +129,7 @@ test("the Worker's preview: the page, the cheapest setup in the title, the verdi
   const { resultMeta } = await import("../src/worker.js");
   const m = resultMeta("/zh-cn/download-site-cost/r/1_download_2_4_50_1_20480_95_2048_na_1_50000");
   assert.equal(m.page, "/zh-cn/download-site-cost/");
-  assert.match(m.title, /Hetzner|Vultr|Oracle|DigitalOcean/);
+  assert.match(m.title, /Hetzner|Vultr|Oracle|DigitalOcean|Tencent|Alibaba/);
   assert.match(m.title, /云成本规划器$/);
   assert.match(m.desc, /20 TB/);
   assert.equal(resultMeta("/r/1_-_1_2_25_1_100_0_0_na_1_500").page, "/");
@@ -158,8 +158,14 @@ test("traffic beyond what one server carries adds servers", () => {
 });
 
 test("about the same price with fewer vendors wins; the AWS reference may use S3 and CloudFront", () => {
-  const rec = recommend({ vcpu: 2, ram: 4, disk: 20, gb: 2048, staticPct: 30, storeGB: 50, aud: "na", objKB: 200 }, D);
-  assert.equal(rec.picks[0].r.vendors, 1);
+  for (const sc of SCENES) for (const aud of ["na", "eu", "ap", "cn"]) {
+    const rec = recommend({ ...sc, aud }, D), top = rec.picks[0].r;
+    const ok = rec.rows.filter(r => r.region === top.region && !r.flags.some(f => ["sales", "cfTos", "fair", "soldOut"].includes(f)));
+    const cheapest = ok[0];
+    // nothing near the visitors with fewer vendors costs about the same as the pick, and the pick is no dearer than that
+    assert.ok(top.total <= cheapest.total + Math.max(1, cheapest.total * 0.05) + 1e-9, `${sc.id}/${aud}`);
+    assert.ok(!ok.some(r => r.vendors < top.vendors && r.total <= cheapest.total + Math.max(1, cheapest.total * 0.05)), `${sc.id}/${aud} fewer vendors`);
+  }
   const dl = recommend({ vcpu: 2, ram: 4, disk: 20, gb: 20480, staticPct: 95, storeGB: 2048, aud: "na", objKB: 50000 }, D);
   assert.equal(dl.aws.m.provider, "aws");
   assert.ok(!dl.aws.s || dl.aws.s.id === "s3");

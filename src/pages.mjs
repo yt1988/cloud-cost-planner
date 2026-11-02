@@ -24,12 +24,14 @@ export const PAGES = [
   { slug: "digitalocean-vs-vultr", kind: "vs", a: "digitalocean", b: "vultr" },
   { slug: "vultr-vs-linode", kind: "vs", a: "vultr", b: "linode" },
   { slug: "lightsail-vs-ec2", kind: "vs", a: "lightsail", b: "aws" },
+  { slug: "tencent-cloud-vs-alibaba-cloud", kind: "vs", a: "tencent", b: "aliyun" },
   { slug: "r2-vs-s3", kind: "vsStorage", a: "r2", b: "s3" },
   { slug: "b2-vs-wasabi", kind: "vsStorage", a: "b2", b: "wasabi" },
   { slug: "cloudfront-vs-cloudflare", kind: "vsCdn", a: "cloudfront", b: "cloudflare" },
   { slug: "cheapest-vps-4gb", kind: "cheapVps", ram: 4 },
   { slug: "cheapest-object-storage", kind: "cheapStorage" },
   { slug: "cheapest-cdn", kind: "cheapCdn" },
+  { slug: "hong-kong-vps-cost", kind: "cheapHk" },
 ];
 
 // the calculator's starting point on each page
@@ -39,6 +41,7 @@ export function stateOf(page) {
   if (page.kind === "scene") return { ...base, ...scene(page.scene) };
   if (page.kind === "volume") return { ...base, ...PROXY, gb: page.gb };
   if (page.kind === "egress" || page.kind === "vs") return { ...base, ...PROXY, gb: 10240 };
+  if (page.kind === "cheapHk") return { ...base, ...PROXY, ram: 1, gb: 1024, aud: "cn" };
   if (page.kind === "cheapVps") return { ...base, ...PROXY, vcpu: 2, ram: page.ram, disk: 20, gb: 1024 };
   if (page.kind === "vsStorage" || page.kind === "cheapStorage") return { ...base, ...BUCKET, storeGB: 1024, gb: 1024 };
   return { ...base, ...SITE, gb: 10240 };
@@ -121,6 +124,13 @@ export function facts(page, D, T, F) {
     const top = table(rows.filter(r => r.m && !r.s && !r.c), 12);
     return { v: { r: page.ram, best: machineName(D, top[0].m), t: F.money(top[0].total) },
       table: tableOf([T.c_plan, T.c_region, T.c_cpu, T.c_total], top.map(x => [esc(machineName(D, x.m)), esc(T["reg_" + x.region]), esc(`${x.m.vcpu} / ${F.num(x.m.ram)} GB · ${T["cpu_" + x.m.cpu]}`), F.money(x.total)])) };
+  }
+  if (k === "cheapHk") {
+    // every Hong Kong plan with 1 TB a month to visitors in mainland China, cheapest first
+    const { rows } = plan(stateOf(page), D);
+    const seen = new Set(), hk = rows.filter(r => r.m && r.m.cnRoute === "hk" && !r.s && !r.c && !seen.has(r.m.id) && seen.add(r.m.id)).slice(0, 12);
+    return { v: { best: machineName(D, hk[0].m), t: F.money(hk[0].total) },
+      table: tableOf([T.c_plan, T.c_cpu, T.p_traffic, T.c_total], hk.map(x => [esc(machineName(D, x.m)), esc(`${x.m.vcpu} / ${F.num(x.m.ram)} GB`), esc(F.size(x.m.traffic.includedGB)), F.money(x.total)])) };
   }
   return { v: {}, table: "" };
 }

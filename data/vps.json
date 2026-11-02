@@ -9,108 +9,110 @@
     "oracle": { "name": "Oracle Cloud", "kind": "cloud", "m2c": "oracle" },
     "aws": { "name": "AWS EC2", "kind": "cloud", "m2c": "aws" },
     "gcp": { "name": "Google Cloud", "kind": "cloud", "m2c": "gcp" },
-    "azure": { "name": "Azure", "kind": "cloud", "m2c": "azure" }
+    "azure": { "name": "Azure", "kind": "cloud", "m2c": "azure" },
+    "tencent": { "name": "Tencent Cloud", "kind": "vps", "m2c": "tencent" },
+    "aliyun": { "name": "Alibaba Cloud", "kind": "vps", "m2c": "aliyun" }
   },
   "offers": [
     {
-      "id": "hetzner-cx-eu", "provider": "hetzner", "line": "CX", "region": "eu", "loc": "Nuremberg / Helsinki", "cpu": "shared", "disk": "nvme",
+      "id": "hetzner-cx-eu", "ping": "hetzner:nbg1", "provider": "hetzner", "line": "CX", "region": "eu", "loc": "Nuremberg / Helsinki", "cpu": "shared", "disk": "nvme",
       "currency": "EUR", "per": "month", "traffic": { "scope": "instance", "overagePerGB": 0.0009765625 },
       "plans": [["CX23", 2, 4, 40, 5.99, 20480], ["CX33", 4, 8, 80, 8.99, 20480], ["CX43", 8, 16, 160, 16.49, 20480], ["CX53", 16, 32, 320, 29.99, 20480]],
       "soldOut": true, "soldOutSource": "https://www.hetzner.com/cloud/cost-optimized/",
       "source": "https://www.hetzner.com/cloud/cost-optimized/", "verifiedAt": "2026-11-01"
     },
     {
-      "id": "hetzner-cax-eu", "provider": "hetzner", "line": "CAX", "region": "eu", "loc": "Nuremberg / Helsinki", "cpu": "shared", "arch": "arm", "disk": "nvme",
+      "id": "hetzner-cax-eu", "ping": "hetzner:nbg1", "provider": "hetzner", "line": "CAX", "region": "eu", "loc": "Nuremberg / Helsinki", "cpu": "shared", "arch": "arm", "disk": "nvme",
       "currency": "EUR", "per": "month", "traffic": { "scope": "instance", "overagePerGB": 0.0009765625 },
       "plans": [["CAX11", 2, 4, 40, 6.49, 20480], ["CAX21", 4, 8, 80, 10.99, 20480], ["CAX31", 8, 16, 160, 21.49, 20480], ["CAX41", 16, 32, 320, 41.49, 20480]],
       "soldOut": true, "soldOutSource": "https://www.hetzner.com/cloud/cost-optimized/",
       "source": "https://www.hetzner.com/cloud/cost-optimized/", "verifiedAt": "2026-11-01"
     },
     {
-      "id": "hetzner-cpx-eu", "provider": "hetzner", "line": "CPX", "region": "eu", "loc": "Falkenstein / Nuremberg / Helsinki", "cpu": "shared", "disk": "nvme",
+      "id": "hetzner-cpx-eu", "ping": "hetzner:fsn1", "provider": "hetzner", "line": "CPX", "region": "eu", "loc": "Falkenstein / Nuremberg / Helsinki", "cpu": "shared", "disk": "nvme",
       "currency": "EUR", "per": "month", "traffic": { "scope": "instance", "overagePerGB": 0.0009765625 },
       "plans": [["CPX02", 1, 1, 20, 6.49, 20480], ["CPX12", 1, 2, 40, 11.99, 20480], ["CPX22", 2, 4, 80, 19.99, 20480], ["CPX32", 4, 8, 160, 35.99, 20480],
         ["CPX42", 8, 16, 320, 69.99, 20480], ["CPX62", 16, 32, 640, 130.49, 20480]],
       "source": "https://www.hetzner.com/cloud/regular-performance/", "verifiedAt": "2026-11-01"
     },
     {
-      "id": "hetzner-cpx-na", "provider": "hetzner", "line": "CPX", "region": "na", "loc": "Ashburn / Hillsboro", "cpu": "shared", "disk": "nvme",
+      "id": "hetzner-cpx-na", "ping": "hetzner:ash", "provider": "hetzner", "line": "CPX", "region": "na", "loc": "Ashburn / Hillsboro", "cpu": "shared", "disk": "nvme",
       "currency": "EUR", "per": "month", "traffic": { "scope": "instance", "overagePerGB": 0.0009765625 },
       "plans": [["CPX11", 2, 2, 40, 17.99, 1024], ["CPX21", 3, 4, 80, 32.49, 2048], ["CPX31", 4, 8, 160, 62.99, 3072], ["CPX41", 8, 16, 240, 120.99, 4096],
         ["CPX51", 16, 32, 360, 238.49, 5120]],
       "source": "https://www.hetzner.com/cloud/regular-performance/", "verifiedAt": "2026-11-01"
     },
     {
-      "id": "hetzner-cpx-ap", "provider": "hetzner", "line": "CPX", "region": "ap", "loc": "Singapore", "cpu": "shared", "disk": "nvme",
+      "id": "hetzner-cpx-ap", "ping": "hetzner:sin", "provider": "hetzner", "line": "CPX", "region": "ap", "loc": "Singapore", "cpu": "shared", "disk": "nvme",
       "currency": "EUR", "per": "month", "traffic": { "scope": "instance", "overagePerGB": 0.00722656 },
       "plans": [["CPX02", 1, 1, 20, 7.99, 512], ["CPX12", 1, 2, 40, 15.99, 512], ["CPX22", 2, 4, 80, 26.99, 1024], ["CPX32", 4, 8, 160, 49.49, 2048],
         ["CPX42", 8, 16, 320, 93.99, 3072], ["CPX62", 16, 32, 640, 172.49, 5120]],
       "source": "https://www.hetzner.com/cloud/regular-performance/", "verifiedAt": "2026-11-01"
     },
     {
-      "id": "do-basic", "provider": "digitalocean", "line": "Basic", "regions": { "na": "New York", "eu": "Frankfurt", "ap": "Singapore" }, "cpu": "shared", "disk": "ssd",
+      "id": "do-basic", "ping": {"na": "digitalocean:nyc3", "eu": "digitalocean:fra1", "ap": "digitalocean:sgp1"}, "provider": "digitalocean", "line": "Basic", "regions": { "na": "New York", "eu": "Frankfurt", "ap": "Singapore" }, "cpu": "shared", "disk": "ssd",
       "currency": "USD", "per": "month", "traffic": { "scope": "pooled", "overagePerGB": 0.01 },
       "plans": [["Basic 1 vCPU / 512 MB", 1, 0.5, 10, 4, 500], ["Basic 1 vCPU / 1 GB", 1, 1, 25, 6, 1000], ["Basic 1 vCPU / 2 GB", 1, 2, 50, 12, 2000], ["Basic 2 vCPU / 2 GB", 2, 2, 60, 18, 3000],
         ["Basic 2 vCPU / 4 GB", 2, 4, 80, 24, 4000], ["Basic 4 vCPU / 8 GB", 4, 8, 160, 48, 5000], ["Basic 8 vCPU / 16 GB", 8, 16, 320, 96, 6000]],
       "source": "https://www.digitalocean.com/pricing/droplets", "trafficSource": "https://docs.digitalocean.com/platform/billing/bandwidth/", "verifiedAt": "2026-11-01"
     },
     {
-      "id": "do-gp", "provider": "digitalocean", "line": "General Purpose", "regions": { "na": "New York", "eu": "Frankfurt", "ap": "Singapore" }, "cpu": "dedicated", "disk": "ssd",
+      "id": "do-gp", "ping": {"na": "digitalocean:nyc3", "eu": "digitalocean:fra1", "ap": "digitalocean:sgp1"}, "provider": "digitalocean", "line": "General Purpose", "regions": { "na": "New York", "eu": "Frankfurt", "ap": "Singapore" }, "cpu": "dedicated", "disk": "ssd",
       "currency": "USD", "per": "month", "traffic": { "scope": "pooled", "overagePerGB": 0.01 },
       "plans": [["General Purpose 2 vCPU / 8 GB", 2, 8, 25, 63, 4000]],
       "source": "https://www.digitalocean.com/pricing/droplets", "verifiedAt": "2026-11-01"
     },
     {
-      "id": "vultr-vc2", "provider": "vultr", "line": "Cloud Compute", "regions": { "na": "New Jersey", "eu": "Frankfurt", "ap": "Tokyo" }, "cpu": "shared", "disk": "ssd",
+      "id": "vultr-vc2", "ping": {"na": "vultr:ewr", "eu": "vultr:fra", "ap": "vultr:nrt"}, "provider": "vultr", "line": "Cloud Compute", "regions": { "na": "New Jersey", "eu": "Frankfurt", "ap": "Tokyo" }, "cpu": "shared", "disk": "ssd",
       "currency": "USD", "per": "month", "traffic": { "scope": "pooled", "overagePerGB": 0.01, "accountFreeGB": 2048 },
       "plans": [["Regular 1 vCPU / 1 GB", 1, 1, 25, 5, 1024], ["Regular 1 vCPU / 2 GB", 1, 2, 55, 10, 2048], ["Regular 2 vCPU / 2 GB", 2, 2, 65, 15, 3072], ["Regular 2 vCPU / 4 GB", 2, 4, 80, 20, 3072],
         ["Regular 4 vCPU / 8 GB", 4, 8, 160, 40, 4096], ["Regular 6 vCPU / 16 GB", 6, 16, 320, 80, 5120], ["Regular 8 vCPU / 32 GB", 8, 32, 640, 160, 6144]],
       "source": "https://api.vultr.com/v2/plans?type=vc2", "trafficSource": "https://docs.vultr.com/support/platform/billing/what-is-the-bandwidth-overage-rate", "verifiedAt": "2026-11-01"
     },
     {
-      "id": "vultr-vhp", "provider": "vultr", "line": "High Performance", "regions": { "na": "New Jersey", "eu": "Frankfurt", "ap": "Tokyo" }, "cpu": "shared", "disk": "nvme",
+      "id": "vultr-vhp", "ping": {"na": "vultr:ewr", "eu": "vultr:fra", "ap": "vultr:nrt"}, "provider": "vultr", "line": "High Performance", "regions": { "na": "New Jersey", "eu": "Frankfurt", "ap": "Tokyo" }, "cpu": "shared", "disk": "nvme",
       "currency": "USD", "per": "month", "traffic": { "scope": "pooled", "overagePerGB": 0.01, "accountFreeGB": 2048 },
       "plans": [["High Performance 1 vCPU / 1 GB", 1, 1, 25, 6, 2048], ["High Performance 1 vCPU / 2 GB", 1, 2, 50, 12, 3072], ["High Performance 2 vCPU / 2 GB", 2, 2, 60, 18, 4096], ["High Performance 2 vCPU / 4 GB", 2, 4, 100, 24, 5120],
         ["High Performance 4 vCPU / 8 GB", 4, 8, 180, 48, 6144], ["High Performance 8 vCPU / 16 GB", 8, 16, 350, 96, 8192], ["High Performance 12 vCPU / 24 GB", 12, 24, 500, 144, 12288]],
       "source": "https://api.vultr.com/v2/plans?type=vhp", "trafficSource": "https://docs.vultr.com/support/platform/billing/what-is-the-bandwidth-overage-rate", "verifiedAt": "2026-11-01"
     },
     {
-      "id": "linode-shared", "provider": "linode", "line": "Shared CPU", "regions": { "na": "Newark", "eu": "Frankfurt", "ap": "Tokyo" }, "cpu": "shared", "disk": "ssd",
+      "id": "linode-shared", "ping": {"na": "linode:us-east", "eu": "linode:eu-central", "ap": "linode:jp-tyo-3"}, "provider": "linode", "line": "Shared CPU", "regions": { "na": "Newark", "eu": "Frankfurt", "ap": "Tokyo" }, "cpu": "shared", "disk": "ssd",
       "currency": "USD", "per": "month", "traffic": { "scope": "pooled", "overagePerGB": 0.005 },
       "plans": [["Nanode 1 GB", 1, 1, 25, 5, 1024], ["Linode 2 GB", 1, 2, 50, 12, 2048], ["Linode 4 GB", 2, 4, 80, 24, 4096], ["Linode 8 GB", 4, 8, 160, 48, 5120],
         ["Linode 16 GB", 6, 16, 320, 96, 8192], ["Linode 32 GB", 8, 32, 640, 192, 16384]],
       "source": "https://www.akamai.com/cloud/pricing/cpu", "trafficSource": "https://techdocs.akamai.com/cloud-computing/docs/network-transfer-usage-and-costs", "verifiedAt": "2026-11-01"
     },
     {
-      "id": "linode-dedicated", "provider": "linode", "line": "Dedicated G7", "regions": { "na": "Newark", "eu": "Frankfurt", "ap": "Tokyo" }, "cpu": "dedicated", "disk": "ssd",
+      "id": "linode-dedicated", "ping": {"na": "linode:us-east", "eu": "linode:eu-central", "ap": "linode:jp-tyo-3"}, "provider": "linode", "line": "Dedicated G7", "regions": { "na": "Newark", "eu": "Frankfurt", "ap": "Tokyo" }, "cpu": "dedicated", "disk": "ssd",
       "currency": "USD", "per": "month", "traffic": { "scope": "pooled", "overagePerGB": 0.005 },
       "plans": [["G7 Dedicated 4 GB", 2, 4, 80, 43, 4096], ["G7 Dedicated 8 GB", 4, 8, 160, 86, 5120], ["G7 Dedicated 16 GB", 8, 16, 320, 173, 6144],
         ["G7 Dedicated 32 GB", 16, 32, 640, 346, 7168]],
       "source": "https://www.akamai.com/cloud/pricing/cpu", "verifiedAt": "2026-11-01"
     },
     {
-      "id": "lightsail-na", "provider": "lightsail", "line": "Linux", "region": "na", "loc": "N. Virginia", "cpu": "shared", "disk": "ssd",
+      "id": "lightsail-na", "ping": "aws:us-east-1", "provider": "lightsail", "line": "Linux", "region": "na", "loc": "N. Virginia", "cpu": "shared", "disk": "ssd",
       "currency": "USD", "per": "month", "traffic": { "scope": "pooled", "overagePerGB": 0.09 },
       "plans": [["512 MB", 2, 0.5, 20, 5, 1024], ["1 GB", 2, 1, 40, 7, 2048], ["2 GB", 2, 2, 60, 12, 3072], ["4 GB", 2, 4, 80, 24, 4096],
         ["8 GB", 2, 8, 160, 44, 5120], ["16 GB", 4, 16, 320, 84, 6144], ["32 GB", 8, 32, 640, 164, 7168]],
       "source": "https://aws.amazon.com/lightsail/pricing/", "trafficSource": "https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonLightsail/current/region_index.json", "verifiedAt": "2026-11-01"
     },
     {
-      "id": "lightsail-eu", "provider": "lightsail", "line": "Linux", "region": "eu", "loc": "Frankfurt", "cpu": "shared", "disk": "ssd",
+      "id": "lightsail-eu", "ping": "aws:eu-central-1", "provider": "lightsail", "line": "Linux", "region": "eu", "loc": "Frankfurt", "cpu": "shared", "disk": "ssd",
       "currency": "USD", "per": "month", "traffic": { "scope": "pooled", "overagePerGB": 0.09 },
       "plans": [["512 MB", 2, 0.5, 20, 5, 1024], ["1 GB", 2, 1, 40, 7, 2048], ["2 GB", 2, 2, 60, 12, 3072], ["4 GB", 2, 4, 80, 24, 4096],
         ["8 GB", 2, 8, 160, 44, 5120], ["16 GB", 4, 16, 320, 84, 6144], ["32 GB", 8, 32, 640, 164, 7168]],
       "source": "https://aws.amazon.com/lightsail/pricing/", "trafficSource": "https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonLightsail/current/region_index.json", "verifiedAt": "2026-11-01"
     },
     {
-      "id": "lightsail-ap", "provider": "lightsail", "line": "Linux", "region": "ap", "loc": "Tokyo", "cpu": "shared", "disk": "ssd",
+      "id": "lightsail-ap", "ping": "aws:ap-northeast-1", "provider": "lightsail", "line": "Linux", "region": "ap", "loc": "Tokyo", "cpu": "shared", "disk": "ssd",
       "currency": "USD", "per": "month", "traffic": { "scope": "pooled", "overagePerGB": 0.14 },
       "plans": [["512 MB", 2, 0.5, 20, 5, 1024], ["1 GB", 2, 1, 40, 7, 2048], ["2 GB", 2, 2, 60, 12, 3072], ["4 GB", 2, 4, 80, 24, 4096],
         ["8 GB", 2, 8, 160, 44, 5120], ["16 GB", 4, 16, 320, 84, 6144], ["32 GB", 8, 32, 640, 164, 7168]],
       "source": "https://aws.amazon.com/lightsail/pricing/", "trafficSource": "https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonLightsail/current/region_index.json", "verifiedAt": "2026-11-01"
     },
     {
-      "id": "oracle-a1", "provider": "oracle", "line": "Ampere A1 Flex", "regions": { "na": "Ashburn", "eu": "Frankfurt", "ap": "Tokyo" }, "cpu": "dedicated", "arch": "arm", "disk": "block",
+      "id": "oracle-a1", "ping": {"na": "oracle:us-ashburn-1", "eu": "oracle:eu-frankfurt-1", "ap": "oracle:ap-tokyo-1"}, "provider": "oracle", "line": "Ampere A1 Flex", "regions": { "na": "Ashburn", "eu": "Frankfurt", "ap": "Tokyo" }, "cpu": "dedicated", "arch": "arm", "disk": "block",
       "currency": "USD", "per": "hour", "egress": ["oracle"], "extras": { "diskPerGB": 0.0425, "minDiskGB": 50 },
       "alwaysFree": { "vcpu": 4, "ram": 24, "diskGB": 200 },
       "plans": [["A1 1 OCPU / 2 GB", 1, 2, null, 0.013], ["A1 2 OCPU / 4 GB", 2, 4, null, 0.026], ["A1 4 OCPU / 8 GB", 4, 8, null, 0.052],
@@ -119,7 +121,7 @@
       "source": "https://www.oracle.com/cloud/price-list/", "verifiedAt": "2026-11-01"
     },
     {
-      "id": "oracle-e4", "provider": "oracle", "line": "E4 Flex", "regions": { "na": "Ashburn", "eu": "Frankfurt", "ap": "Tokyo" }, "cpu": "dedicated", "disk": "block",
+      "id": "oracle-e4", "ping": {"na": "oracle:us-ashburn-1", "eu": "oracle:eu-frankfurt-1", "ap": "oracle:ap-tokyo-1"}, "provider": "oracle", "line": "E4 Flex", "regions": { "na": "Ashburn", "eu": "Frankfurt", "ap": "Tokyo" }, "cpu": "dedicated", "disk": "block",
       "currency": "USD", "per": "hour", "egress": ["oracle"], "extras": { "diskPerGB": 0.0425, "minDiskGB": 50 },
       "plans": [["E4 1 OCPU / 2 GB", 2, 2, null, 0.028], ["E4 1 OCPU / 4 GB", 2, 4, null, 0.031], ["E4 1 OCPU / 8 GB", 2, 8, null, 0.037],
         ["E4 2 OCPU / 8 GB", 4, 8, null, 0.062], ["E4 2 OCPU / 16 GB", 4, 16, null, 0.074], ["E4 4 OCPU / 16 GB", 8, 16, null, 0.124],
@@ -127,7 +129,7 @@
       "source": "https://www.oracle.com/cloud/price-list/", "verifiedAt": "2026-11-01"
     },
     {
-      "id": "aws-t4g-na", "provider": "aws", "line": "t4g", "region": "na", "loc": "N. Virginia", "cpu": "shared", "arch": "arm", "disk": "block",
+      "id": "aws-t4g-na", "ping": "aws:us-east-1", "provider": "aws", "line": "t4g", "region": "na", "loc": "N. Virginia", "cpu": "shared", "arch": "arm", "disk": "block",
       "currency": "USD", "per": "hour", "egress": ["aws"], "extras": { "ipv4PerHour": 0.005, "diskPerGB": 0.08, "minDiskGB": 8 },
       "plans": [["t4g.micro", 2, 1, null, 0.0084], ["t4g.small", 2, 2, null, 0.0168], ["t4g.medium", 2, 4, null, 0.0336], ["t4g.large", 2, 8, null, 0.0672],
         ["t4g.xlarge", 4, 16, null, 0.1344], ["t4g.2xlarge", 8, 32, null, 0.2688]],
@@ -135,7 +137,7 @@
       "source": "https://aws.amazon.com/ec2/pricing/on-demand/", "verifiedAt": "2026-11-01"
     },
     {
-      "id": "aws-t4g-eu", "provider": "aws", "line": "t4g", "region": "eu", "loc": "Frankfurt", "cpu": "shared", "arch": "arm", "disk": "block",
+      "id": "aws-t4g-eu", "ping": "aws:eu-central-1", "provider": "aws", "line": "t4g", "region": "eu", "loc": "Frankfurt", "cpu": "shared", "arch": "arm", "disk": "block",
       "currency": "USD", "per": "hour", "egress": ["aws"], "extras": { "ipv4PerHour": 0.005, "diskPerGB": 0.08, "minDiskGB": 8 },
       "plans": [["t4g.micro", 2, 1, null, 0.0096], ["t4g.small", 2, 2, null, 0.0192], ["t4g.medium", 2, 4, null, 0.0384], ["t4g.large", 2, 8, null, 0.0768],
         ["t4g.xlarge", 4, 16, null, 0.1536], ["t4g.2xlarge", 8, 32, null, 0.3072]],
@@ -143,7 +145,7 @@
       "source": "https://aws.amazon.com/ec2/pricing/on-demand/", "verifiedAt": "2026-11-01"
     },
     {
-      "id": "aws-t4g-ap", "provider": "aws", "line": "t4g", "region": "ap", "loc": "Tokyo", "cpu": "shared", "arch": "arm", "disk": "block",
+      "id": "aws-t4g-ap", "ping": "aws:ap-northeast-1", "provider": "aws", "line": "t4g", "region": "ap", "loc": "Tokyo", "cpu": "shared", "arch": "arm", "disk": "block",
       "currency": "USD", "per": "hour", "egress": ["aws"], "extras": { "ipv4PerHour": 0.005, "diskPerGB": 0.08, "minDiskGB": 8 },
       "plans": [["t4g.micro", 2, 1, null, 0.0108], ["t4g.small", 2, 2, null, 0.0216], ["t4g.medium", 2, 4, null, 0.0432], ["t4g.large", 2, 8, null, 0.0864],
         ["t4g.xlarge", 4, 16, null, 0.1728], ["t4g.2xlarge", 8, 32, null, 0.3456]],
@@ -151,7 +153,7 @@
       "source": "https://aws.amazon.com/ec2/pricing/on-demand/", "verifiedAt": "2026-11-01"
     },
     {
-      "id": "gcp-e2-na", "provider": "gcp", "line": "E2", "region": "na", "loc": "Iowa", "cpu": "shared", "disk": "block",
+      "id": "gcp-e2-na", "ping": "gcp:us-central1", "provider": "gcp", "line": "E2", "region": "na", "loc": "Iowa", "cpu": "shared", "disk": "block",
       "currency": "USD", "per": "hour", "egress": ["gcp-premium", "gcp-standard"], "extras": { "ipv4PerHour": 0.005, "diskPerGB": 0.1, "minDiskGB": 10 },
       "alwaysFree": { "plan": "e2-micro", "diskGB": 30 },
       "plans": [["e2-micro", 2, 1, null, 0.008376428], ["e2-small", 2, 2, null, 0.016752855], ["e2-medium", 2, 4, null, 0.03350571],
@@ -159,7 +161,7 @@
       "source": "https://cloud.google.com/products/compute/pricing/general-purpose", "diskSource": "https://cloud.google.com/compute/disks-image-pricing", "verifiedAt": "2026-11-01"
     },
     {
-      "id": "gcp-e2-eu", "provider": "gcp", "line": "E2", "region": "eu", "loc": "Frankfurt", "cpu": "shared", "disk": "block",
+      "id": "gcp-e2-eu", "ping": "gcp:europe-west3", "provider": "gcp", "line": "E2", "region": "eu", "loc": "Frankfurt", "cpu": "shared", "disk": "block",
       "currency": "USD", "per": "hour", "egress": ["gcp-premium", "gcp-standard"], "extras": { "ipv4PerHour": 0.005, "diskPerGB": 0.1, "minDiskGB": 10 },
       "plans": [["e2-micro", 2, 1, null, 0.010791945], ["e2-small", 2, 2, null, 0.02158389], ["e2-medium", 2, 4, null, 0.04316778],
         ["e2-standard-2", 2, 8, null, 0.08633556], ["e2-standard-4", 4, 16, null, 0.17267112], ["e2-standard-8", 8, 32, null, 0.34534224]],
@@ -167,7 +169,7 @@
       "source": "https://cloud.google.com/products/compute/pricing/general-purpose", "verifiedAt": "2026-11-01"
     },
     {
-      "id": "gcp-e2-ap", "provider": "gcp", "line": "E2", "region": "ap", "loc": "Tokyo", "cpu": "shared", "disk": "block",
+      "id": "gcp-e2-ap", "ping": "gcp:asia-northeast1", "provider": "gcp", "line": "E2", "region": "ap", "loc": "Tokyo", "cpu": "shared", "disk": "block",
       "currency": "USD", "per": "hour", "egress": ["gcp-premium", "gcp-standard"], "extras": { "ipv4PerHour": 0.005, "diskPerGB": 0.1, "minDiskGB": 10 },
       "plans": [["e2-micro", 2, 1, null, 0.010745715], ["e2-small", 2, 2, null, 0.02149143], ["e2-medium", 2, 4, null, 0.04298286],
         ["e2-standard-2", 2, 8, null, 0.08596572], ["e2-standard-4", 4, 16, null, 0.17193144], ["e2-standard-8", 8, 32, null, 0.34386288]],
@@ -175,25 +177,132 @@
       "source": "https://cloud.google.com/products/compute/pricing/general-purpose", "verifiedAt": "2026-11-01"
     },
     {
-      "id": "azure-b-na", "provider": "azure", "line": "B-series", "region": "na", "loc": "East US", "cpu": "shared", "disk": "block",
+      "id": "azure-b-na", "ping": "azure:eastus", "provider": "azure", "line": "B-series", "region": "na", "loc": "East US", "cpu": "shared", "disk": "block",
       "currency": "USD", "per": "hour", "egress": ["azure-mgn", "azure-internet"], "extras": { "ipv4PerHour": 0.005, "diskPerGB": 0.075, "minDiskGB": 32 },
       "plans": [["B2ats v2", 2, 1, null, 0.0094], ["B1ms", 1, 2, null, 0.0207], ["B2als v2", 2, 4, null, 0.0376], ["B2as v2", 2, 8, null, 0.0752],
         ["B4as v2", 4, 16, null, 0.15], ["B8as v2", 8, 32, null, 0.301]],
       "source": "https://prices.azure.com/api/retail/prices", "verifiedAt": "2026-11-01"
     },
     {
-      "id": "azure-b-eu", "provider": "azure", "line": "B-series", "region": "eu", "loc": "West Europe", "cpu": "shared", "disk": "block",
+      "id": "azure-b-eu", "ping": "azure:westeurope", "provider": "azure", "line": "B-series", "region": "eu", "loc": "West Europe", "cpu": "shared", "disk": "block",
       "currency": "USD", "per": "hour", "egress": ["azure-mgn", "azure-internet"], "extras": { "ipv4PerHour": 0.005, "diskPerGB": 0.075, "minDiskGB": 32 },
       "plans": [["B2ats v2", 2, 1, null, 0.0108], ["B1ms", 1, 2, null, 0.024], ["B2als v2", 2, 4, null, 0.0432], ["B2as v2", 2, 8, null, 0.0864],
         ["B4as v2", 4, 16, null, 0.173], ["B8as v2", 8, 32, null, 0.346]],
       "source": "https://prices.azure.com/api/retail/prices", "verifiedAt": "2026-11-01"
     },
     {
-      "id": "azure-b-ap", "provider": "azure", "line": "B-series", "region": "ap", "loc": "Japan East", "cpu": "shared", "disk": "block",
+      "id": "azure-b-ap", "ping": "azure:japaneast", "provider": "azure", "line": "B-series", "region": "ap", "loc": "Japan East", "cpu": "shared", "disk": "block",
       "currency": "USD", "per": "hour", "egress": ["azure-mgn", "azure-internet"], "extras": { "ipv4PerHour": 0.005, "diskPerGB": 0.075, "minDiskGB": 32 },
       "plans": [["B2ats v2", 2, 1, null, 0.0123], ["B1ms", 1, 2, null, 0.0272], ["B2als v2", 2, 4, null, 0.049], ["B2as v2", 2, 8, null, 0.098],
         ["B4as v2", 4, 16, null, 0.196], ["B8as v2", 8, 32, null, 0.392]],
       "source": "https://prices.azure.com/api/retail/prices", "verifiedAt": "2026-11-01"
+    },
+    {
+      "id": "tencent-lh-hk", "ping": "tencent:ap-hongkong", "provider": "tencent", "line": "Lighthouse", "region": "ap", "loc": "Hong Kong", "cpu": "shared", "disk": "ssd", "cnRoute": "hk",
+      "currency": "USD", "per": "month", "traffic": { "scope": "instance", "overagePerGB": 0.12 },
+      "plans": [["Lighthouse Starter 2 vCPU / 2 GB · 512 GB", 2, 2, 40, 6, 512, 20], ["Lighthouse Starter 2 vCPU / 2 GB · 1 TB", 2, 2, 50, 8.5, 1024, 30],
+        ["Lighthouse Starter 2 vCPU / 4 GB · 2 TB", 2, 4, 70, 15, 2048, 30], ["Lighthouse General 4 vCPU / 8 GB", 4, 8, 180, 36, 5120, 35],
+        ["Lighthouse General 8 vCPU / 16 GB", 8, 16, 300, 78, 7168, 45], ["Lighthouse General 16 vCPU / 32 GB", 16, 32, 450, 156, 9216, 55]],
+      "source": "https://www.tencentcloud.com/document/product/1103/47794", "verifiedAt": "2026-11-02"
+    },
+    {
+      "id": "tencent-lh-sg", "ping": "tencent:ap-singapore", "provider": "tencent", "line": "Lighthouse", "region": "ap", "loc": "Singapore", "cpu": "shared", "disk": "ssd",
+      "currency": "USD", "per": "month", "traffic": { "scope": "instance", "overagePerGB": 0.081 },
+      "plans": [["Lighthouse Starter 2 vCPU / 2 GB · 512 GB", 2, 2, 40, 4.2, 512, 20], ["Lighthouse Starter 2 vCPU / 2 GB · 1 TB", 2, 2, 50, 4.5, 1024, 30],
+        ["Lighthouse Starter 2 vCPU / 4 GB · 1.5 TB", 2, 4, 60, 6, 1536, 30], ["Lighthouse Starter 2 vCPU / 4 GB · 2 TB", 2, 4, 70, 7.5, 2048, 30],
+        ["Lighthouse Starter 2 vCPU / 8 GB · 2.5 TB", 2, 8, 80, 10, 2560, 30], ["Lighthouse General 4 vCPU / 8 GB", 4, 8, 180, 36, 5120, 35],
+        ["Lighthouse General 8 vCPU / 16 GB", 8, 16, 300, 78, 7168, 45], ["Lighthouse General 16 vCPU / 32 GB", 16, 32, 450, 156, 9216, 55]],
+      "source": "https://www.tencentcloud.com/document/product/1103/47794", "verifiedAt": "2026-11-02"
+    },
+    {
+      "id": "tencent-lh-tyo", "ping": "tencent:ap-tokyo", "provider": "tencent", "line": "Lighthouse", "region": "ap", "loc": "Tokyo", "cpu": "shared", "disk": "ssd",
+      "currency": "USD", "per": "month", "traffic": { "scope": "instance", "overagePerGB": 0.13 },
+      "plans": [["Lighthouse Starter 2 vCPU / 2 GB · 512 GB", 2, 2, 40, 4.2, 512, 20], ["Lighthouse Starter 2 vCPU / 2 GB · 1 TB", 2, 2, 50, 4.5, 1024, 30],
+        ["Lighthouse Starter 2 vCPU / 4 GB · 1.5 TB", 2, 4, 60, 6, 1536, 30], ["Lighthouse Starter 2 vCPU / 4 GB · 2 TB", 2, 4, 70, 7.5, 2048, 30],
+        ["Lighthouse Starter 2 vCPU / 8 GB · 2.5 TB", 2, 8, 80, 10, 2560, 30], ["Lighthouse General 4 vCPU / 8 GB", 4, 8, 180, 36, 5120, 35],
+        ["Lighthouse General 8 vCPU / 16 GB", 8, 16, 300, 78, 7168, 45], ["Lighthouse General 16 vCPU / 32 GB", 16, 32, 450, 156, 9216, 55]],
+      "source": "https://www.tencentcloud.com/document/product/1103/47794", "verifiedAt": "2026-11-02"
+    },
+    {
+      "id": "tencent-lh-fra", "ping": "tencent:eu-frankfurt", "provider": "tencent", "line": "Lighthouse", "region": "eu", "loc": "Frankfurt", "cpu": "shared", "disk": "ssd",
+      "currency": "USD", "per": "month", "traffic": { "scope": "instance", "overagePerGB": 0.077 },
+      "plans": [["Lighthouse Starter 2 vCPU / 2 GB · 512 GB", 2, 2, 40, 4.2, 512, 20], ["Lighthouse Starter 2 vCPU / 2 GB · 1 TB", 2, 2, 50, 4.5, 1024, 30],
+        ["Lighthouse Starter 2 vCPU / 4 GB · 1.5 TB", 2, 4, 60, 6, 1536, 30], ["Lighthouse Starter 2 vCPU / 4 GB · 2 TB", 2, 4, 70, 7.5, 2048, 30],
+        ["Lighthouse Starter 2 vCPU / 8 GB · 2.5 TB", 2, 8, 80, 10, 2560, 30], ["Lighthouse General 4 vCPU / 8 GB", 4, 8, 180, 36, 5120, 35],
+        ["Lighthouse General 8 vCPU / 16 GB", 8, 16, 300, 78, 7168, 45], ["Lighthouse General 16 vCPU / 32 GB", 16, 32, 450, 156, 9216, 55]],
+      "source": "https://www.tencentcloud.com/document/product/1103/47794", "verifiedAt": "2026-11-02"
+    },
+    {
+      "id": "tencent-razor-na", "ping": "tencent:na-ashburn", "provider": "tencent", "line": "Lighthouse Razor Speed", "region": "na", "loc": "Virginia", "cpu": "shared", "disk": "ssd",
+      "currency": "USD", "per": "month", "traffic": { "scope": "unlimited" },
+      "plans": [["Lighthouse Razor Speed 2 vCPU / 1 GB", 2, 1, 40, 5, null, 200], ["Lighthouse Razor Speed 2 vCPU / 2 GB", 2, 2, 40, 5.6, null, 200],
+        ["Lighthouse Razor Speed 2 vCPU / 4 GB", 2, 4, 60, 8.5, null, 200], ["Lighthouse Razor Speed 2 vCPU / 8 GB", 2, 8, 80, 13.2, null, 200],
+        ["Lighthouse Razor Speed 4 vCPU / 8 GB", 4, 8, 120, 33, null, 200], ["Lighthouse Razor Speed 4 vCPU / 16 GB", 4, 16, 180, 50, null, 200]],
+      "note": "razor",
+      "source": "https://www.tencentcloud.com/document/product/1103/47794", "verifiedAt": "2026-11-02"
+    },
+    {
+      "id": "tencent-razor-eu", "ping": "tencent:eu-frankfurt", "provider": "tencent", "line": "Lighthouse Razor Speed", "region": "eu", "loc": "Frankfurt", "cpu": "shared", "disk": "ssd",
+      "currency": "USD", "per": "month", "traffic": { "scope": "unlimited" },
+      "plans": [["Lighthouse Razor Speed 2 vCPU / 1 GB", 2, 1, 40, 5, null, 200], ["Lighthouse Razor Speed 2 vCPU / 2 GB", 2, 2, 40, 5.6, null, 200],
+        ["Lighthouse Razor Speed 2 vCPU / 4 GB", 2, 4, 60, 8.5, null, 200], ["Lighthouse Razor Speed 2 vCPU / 8 GB", 2, 8, 80, 13.2, null, 200],
+        ["Lighthouse Razor Speed 4 vCPU / 8 GB", 4, 8, 120, 33, null, 200], ["Lighthouse Razor Speed 4 vCPU / 16 GB", 4, 16, 180, 50, null, 200]],
+      "note": "razor",
+      "source": "https://www.tencentcloud.com/document/product/1103/47794", "verifiedAt": "2026-11-02"
+    },
+    {
+      "id": "tencent-razor-ap", "ping": "tencent:ap-tokyo", "provider": "tencent", "line": "Lighthouse Razor Speed", "region": "ap", "loc": "Tokyo", "cpu": "shared", "disk": "ssd",
+      "currency": "USD", "per": "month", "traffic": { "scope": "unlimited" },
+      "plans": [["Lighthouse Razor Speed 2 vCPU / 1 GB", 2, 1, 40, 5, null, 200], ["Lighthouse Razor Speed 2 vCPU / 2 GB", 2, 2, 40, 5.6, null, 200],
+        ["Lighthouse Razor Speed 2 vCPU / 4 GB", 2, 4, 60, 8.5, null, 200], ["Lighthouse Razor Speed 2 vCPU / 8 GB", 2, 8, 80, 13.2, null, 200],
+        ["Lighthouse Razor Speed 4 vCPU / 8 GB", 4, 8, 120, 33, null, 200], ["Lighthouse Razor Speed 4 vCPU / 16 GB", 4, 16, 180, 50, null, 200]],
+      "note": "razor",
+      "source": "https://www.tencentcloud.com/document/product/1103/47794", "verifiedAt": "2026-11-02"
+    },
+    {
+      "id": "aliyun-sas-hk", "ping": "aliyun:cn-hongkong", "provider": "aliyun", "line": "Simple Application Server", "region": "ap", "loc": "Hong Kong", "cpu": "shared", "disk": "ssd", "cnRoute": "hk",
+      "currency": "USD", "per": "month", "traffic": { "scope": "instance", "overagePerGB": 0.153 },
+      "plans": [["SAS 1 vCPU / 512 MB", 1, 0.5, 20, 3.5, 1024, 4], ["SAS 1 vCPU / 1 GB", 1, 1, 20, 4.5, 1024, 4],
+        ["SAS 1 vCPU / 2 GB", 1, 2, 40, 9, 1536, 6], ["SAS 2 vCPU / 2 GB", 2, 2, 60, 15, 2048, 10],
+        ["SAS 2 vCPU / 4 GB", 2, 4, 80, 19, 4096, 15], ["SAS 2 vCPU / 8 GB", 2, 8, 160, 35, 5120, 20],
+        ["SAS 4 vCPU / 16 GB", 4, 16, 320, 70, 6144, 30]],
+      "source": "https://www.alibabacloud.com/en/product/swas/pricing", "verifiedAt": "2026-11-02"
+    },
+    {
+      "id": "aliyun-sas-sg", "ping": "aliyun:ap-southeast-1", "provider": "aliyun", "line": "Simple Application Server", "region": "ap", "loc": "Singapore", "cpu": "shared", "disk": "ssd",
+      "currency": "USD", "per": "month", "traffic": { "scope": "instance", "overagePerGB": 0.081 },
+      "plans": [["SAS 1 vCPU / 512 MB", 1, 0.5, 20, 3.5, 1024, 4], ["SAS 1 vCPU / 1 GB", 1, 1, 20, 4.5, 1024, 4],
+        ["SAS 1 vCPU / 2 GB", 1, 2, 40, 9, 1536, 6], ["SAS 2 vCPU / 2 GB", 2, 2, 60, 15, 2048, 10],
+        ["SAS 2 vCPU / 4 GB", 2, 4, 80, 19, 4096, 15], ["SAS 2 vCPU / 8 GB", 2, 8, 160, 35, 5120, 20],
+        ["SAS 4 vCPU / 16 GB", 4, 16, 320, 70, 6144, 30]],
+      "source": "https://www.alibabacloud.com/en/product/swas/pricing", "verifiedAt": "2026-11-02"
+    },
+    {
+      "id": "aliyun-sas-tyo", "ping": "aliyun:ap-northeast-1", "provider": "aliyun", "line": "Simple Application Server", "region": "ap", "loc": "Tokyo", "cpu": "shared", "disk": "ssd",
+      "currency": "USD", "per": "month", "traffic": { "scope": "instance", "overagePerGB": 0.087 },
+      "plans": [["SAS 1 vCPU / 512 MB", 1, 0.5, 20, 3.5, 1024, 4], ["SAS 1 vCPU / 1 GB", 1, 1, 20, 4.5, 1024, 4],
+        ["SAS 1 vCPU / 2 GB", 1, 2, 40, 9, 1536, 6], ["SAS 2 vCPU / 2 GB", 2, 2, 60, 15, 2048, 10],
+        ["SAS 2 vCPU / 4 GB", 2, 4, 80, 19, 4096, 15], ["SAS 2 vCPU / 8 GB", 2, 8, 160, 35, 5120, 20],
+        ["SAS 4 vCPU / 16 GB", 4, 16, 320, 70, 6144, 30]],
+      "source": "https://www.alibabacloud.com/en/product/swas/pricing", "verifiedAt": "2026-11-02"
+    },
+    {
+      "id": "aliyun-sas-fra", "ping": "aliyun:eu-central-1", "provider": "aliyun", "line": "Simple Application Server", "region": "eu", "loc": "Frankfurt", "cpu": "shared", "disk": "ssd",
+      "currency": "USD", "per": "month", "traffic": { "scope": "instance", "overagePerGB": 0.07 },
+      "plans": [["SAS 1 vCPU / 512 MB", 1, 0.5, 20, 3.5, 1024, 4], ["SAS 1 vCPU / 1 GB", 1, 1, 20, 4.5, 1024, 4],
+        ["SAS 1 vCPU / 2 GB", 1, 2, 40, 9, 1536, 6], ["SAS 2 vCPU / 2 GB", 2, 2, 60, 15, 2048, 10],
+        ["SAS 2 vCPU / 4 GB", 2, 4, 80, 19, 4096, 15], ["SAS 2 vCPU / 8 GB", 2, 8, 160, 35, 5120, 20],
+        ["SAS 4 vCPU / 16 GB", 4, 16, 320, 70, 6144, 30]],
+      "source": "https://www.alibabacloud.com/en/product/swas/pricing", "verifiedAt": "2026-11-02"
+    },
+    {
+      "id": "aliyun-sas-va", "ping": "aliyun:us-east-1", "provider": "aliyun", "line": "Simple Application Server", "region": "na", "loc": "Virginia", "cpu": "shared", "disk": "ssd",
+      "currency": "USD", "per": "month", "traffic": { "scope": "instance", "overagePerGB": 0.076 },
+      "plans": [["SAS 1 vCPU / 512 MB", 1, 0.5, 20, 3.5, 1024, 4], ["SAS 1 vCPU / 1 GB", 1, 1, 20, 4.5, 1024, 4],
+        ["SAS 1 vCPU / 2 GB", 1, 2, 40, 9, 1536, 6], ["SAS 2 vCPU / 2 GB", 2, 2, 60, 15, 2048, 10],
+        ["SAS 2 vCPU / 4 GB", 2, 4, 80, 19, 4096, 15], ["SAS 2 vCPU / 8 GB", 2, 8, 160, 35, 5120, 20],
+        ["SAS 4 vCPU / 16 GB", 4, 16, 320, 70, 6144, 30]],
+      "source": "https://www.alibabacloud.com/en/product/swas/pricing", "verifiedAt": "2026-11-02"
     }
   ]
 }

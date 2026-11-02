@@ -51,7 +51,7 @@
     $("picks").innerHTML = picksHTML(rec, T, F, D);
     $("curve").innerHTML = curveHTML(rec, T, F, D, st);
     $("tbl").innerHTML = tableHTML(rec, T, F, D);
-    links();
+    links(); latency();
     const q = toQuery(st);
     // a shared link keeps its address until the visitor changes something
     if (keepShared) keepShared = false; else history.replaceState(null, "", pagePath + "?" + q + location.hash);
@@ -67,6 +67,44 @@
       a.href = base + langDir + (a.dataset.p ? a.dataset.p + "/" : "");
       a.removeAttribute("data-pend");
     });
+  }
+
+  // ---- latency from this browser to each data center on the page, with Me2Cloud's endpoints and its method
+  // (m2c.1ms.dog/endpoints.json, "howTo"): one warm-up request, then the median of three on the reused connection.
+  // One data center at a time (parallel requests slow each other down), the picks first; results are kept across
+  // redraws. Without the shell's m2c address (self-hosted) the slots stay empty.
+  const LAT = new Map();
+  let EPS = null;
+  const endpoints = () => EPS ||= (TOOLS.m2c ? fetch(TOOLS.m2c + "/endpoints.json").then(r => r.json())
+    .then(j => Object.fromEntries(j.endpoints.map(e => [e.id, e]))).catch(() => null) : Promise.resolve(null));
+  async function rtt(e) {
+    const once = async () => {
+      const url = e.nobust ? e.url : e.url + (e.url.includes("?") ? "&" : "?") + "_=" + Math.random().toString(36).slice(2);
+      const t0 = performance.now();
+      if (e.method === "IMG") await new Promise(res => { const i = new Image(); i.onload = i.onerror = res; i.src = url; });
+      else {
+        const r = await fetch(url, { method: e.method === "HEAD" ? "HEAD" : "GET", mode: e.cors ? "cors" : "no-cors", cache: "no-store", credentials: "omit", signal: AbortSignal.timeout(5000) });
+        if (e.cors && e.method !== "HEAD") await r.arrayBuffer();
+      }
+      return performance.now() - t0;
+    };
+    try { await once(); } catch (x) { return null; }
+    const ms = [];
+    for (let i = 0; i < 3; i++) try { ms.push(await once()); } catch (x) {}
+    return ms.length ? ms.sort((a, b) => a - b)[ms.length >> 1] : null;
+  }
+  const showLat = (id, ms) => document.querySelectorAll(`[data-ping="${CSS.escape(id)}"]`).forEach(el => {
+    el.textContent = ms == null ? T.lat_na : fill(T.lat_ms, { ms: Math.round(ms) });
+    el.classList.toggle("good", ms != null && ms < 80); el.classList.toggle("slow", ms != null && ms >= 200);
+    el.removeAttribute("data-pend");
+  });
+  async function latency() {
+    const eps = await endpoints();
+    if (!eps) return;
+    for (const id of new Set([...document.querySelectorAll("[data-ping]")].map(el => el.dataset.ping))) {
+      if (!LAT.has(id)) LAT.set(id, eps[id] ? rtt(eps[id]) : Promise.resolve(null));
+      showLat(id, await LAT.get(id));
+    }
   }
 
   // ---- inputs
@@ -181,5 +219,5 @@
 
   syncInputs();
   // the prerendered result matches the page's preset; redraw only if the link or saved currency changed it
-  if (shared || location.search || cur !== P.cur) render(); else { rec = recommend(st, D); links(); }
+  if (shared || location.search || cur !== P.cur) render(); else { rec = recommend(st, D); links(); latency(); }
 })();

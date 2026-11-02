@@ -5,13 +5,17 @@
 Tell it what you run and how much traffic it serves; it prices every VPS and cloud plan together with object storage and
 CDNs for one month and recommends the cheapest setup.
 
-- **Servers**: Hetzner, DigitalOcean, Vultr, Linode (Akamai), AWS Lightsail, Oracle Cloud, AWS EC2, Google Cloud, Azure
+- **Servers**: Hetzner, DigitalOcean, Vultr, Linode (Akamai), AWS Lightsail, Tencent Cloud Lighthouse, Alibaba Cloud Simple
+  Application Server (Hong Kong, Singapore, Tokyo, Frankfurt, Virginia), Oracle Cloud, AWS EC2, Google Cloud, Azure
 - **Object storage**: Cloudflare R2, Amazon S3, Backblaze B2, Wasabi, DigitalOcean Spaces, Hetzner Object Storage
 - **CDN**: Cloudflare (Free), Amazon CloudFront, Bunny CDN
 - Included traffic and overage, per-GB cloud egress with its tiers and free allowances, Premium/Standard network tiers,
   traffic to mainland China, request fees, minimum charges, fair-use and terms limits (video on Cloudflare Free,
   Wasabi egress above what is stored)
-- Three picks: cheapest anywhere, cheapest near your visitors, fewest vendors; a cost curve as traffic grows and where
+- Latency from your own browser to every data center on the page (Me2Cloud's endpoints and method)
+- Servers scale with traffic (about 1 Gbit/s each, or the plan's port speed); sold-out plans are shown, never recommended
+- Picks: cheapest near your visitors, fewest vendors, Hong Kong for visitors in mainland China, and another continent when
+  it is clearly cheaper; a cost curve as traffic grows and where
   the lines cross; every provider in a table
 - 10 languages, 25 prerendered pages per language (scenarios, egress cost, comparisons, cheapest of a kind)
 - Everything runs in the browser; no backend, nothing uploaded
