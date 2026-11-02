@@ -133,7 +133,7 @@ test("the Worker's preview: the page, the cheapest setup in the title, the verdi
   assert.match(m.title, /云成本规划器$/);
   assert.match(m.desc, /20 TB/);
   assert.equal(resultMeta("/r/1_-_1_2_25_1_100_0_0_na_1_500").page, "/");
-  assert.deepEqual(resultMeta("/ja/r/garbage"), { page: "/ja/", title: null, desc: null });
+  for (const bad of ["/ja/r/garbage", "/download-site-cost/r/zz", "/r/2_-_1_2_25_1_100_0_0_na_1_500", "/r/1_-_1_2_25_1_100_0_0_na", "/r/1_%E0"]) assert.equal(resultMeta(bad), null, bad);
   assert.equal(resultMeta("/zh-cn/no-such-page/r/1_-_1_2_25_1_100_0_0_na_1_500"), null);
   assert.equal(resultMeta("/zh-cn/download-site-cost/"), null);
 });

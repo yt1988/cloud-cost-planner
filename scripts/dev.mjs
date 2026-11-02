@@ -5,6 +5,7 @@ import { createServer } from "node:http";
 import { readFile } from "node:fs/promises";
 import { extname, normalize } from "node:path";
 import { fileURLToPath } from "node:url";
+import { resultMeta } from "../src/worker.js";
 
 const root = fileURLToPath(new URL("../public/", import.meta.url));
 const port = +process.env.PORT || +process.argv[2] || 8799;
@@ -24,9 +25,10 @@ async function rules() {
 }
 
 createServer(async (req, res) => {
-  const urlPath = decodeURIComponent(new URL(req.url, "http://x").pathname);
-  let path = urlPath;
-  path = path.replace(/r\/[^/]+\/?$/, "");                   // a shared result link shows its page (src/worker.js in production)
+  const raw = new URL(req.url, "http://x").pathname;
+  let urlPath; try { urlPath = decodeURIComponent(raw); } catch { res.writeHead(404, { "Content-Type": "text/plain" }).end("not found"); return; }
+  const meta = /\/r\/[^/]+\/?$/.test(raw) && resultMeta(raw);
+  let path = meta ? meta.page : urlPath;                       // a shared result link shows its page; one that doesn't parse, 404 (as src/worker.js)
   if (path.endsWith("/")) path += "index.html";
   const file = normalize(root + path);
   if (!file.startsWith(normalize(root))) { res.writeHead(403).end(); return; }

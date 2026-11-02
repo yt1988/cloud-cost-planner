@@ -1,6 +1,7 @@
 // The Worker in front of public/. A request for a file there never reaches it (static assets are free and unmetered);
 // it sees only what no file answers. A shared result, /<lang>/[<page>/]r/<code> (toCode in src/calc.mjs), is that page
-// with the recommendation in its title and description, so a chat app's link preview shows it. Anything else: the plain 404.
+// with the recommendation in its title and description, so a chat app's link preview shows it. A code that doesn't parse
+// (malformed, unknown version, cut off) is a 404 like anything else no file answers, never the bare page.
 import vps from "../data/vps.json" with { type: "json" };
 import egress from "../data/egress.json" with { type: "json" };
 import storage from "../data/storage.json" with { type: "json" };
@@ -25,16 +26,17 @@ const I = { en, "zh-CN": zhCN, "zh-TW": zhTW, ja, ko, es, fr, de, pt, ru };
 const DIR = Object.fromEntries(Object.keys(I).filter(l => l !== "en").map(l => [l.toLowerCase(), l]));   // folder → language
 const SLUGS = new Set(PAGES.map(p => p.slug));
 
-// What the preview says about a result link, or null when the path isn't one: { page, title, desc }
+// What the preview says about a result link, or null when the path isn't one we can read: { page, title, desc }
 export function resultMeta(path) {
   const parts = path.split("/").filter(Boolean);
   if (parts.length < 2 || parts[parts.length - 2] !== "r") return null;
-  const code = decodeURIComponent(parts.pop()); parts.pop();
+  let code; try { code = decodeURIComponent(parts.pop()); } catch { return null; }   // a stray % is unreadable too
+  parts.pop();
   const lang = DIR[parts[0]] ? DIR[parts.shift()] : "en";
   if (parts.length > 1 || (parts[0] && !SLUGS.has(parts[0]))) return null;
   const page = "/" + (lang === "en" ? "" : lang.toLowerCase() + "/") + (parts[0] ? parts[0] + "/" : "");
   const state = fromCode(code);
-  if (!state) return { page, title: null, desc: null };
+  if (!state) return null;
   const T = I[lang], F = formats(lang, "USD", D.rates), rec = recommend(state, D), best = rec.picks[0];
   if (!best) return { page, title: null, desc: null };
   const title = `${comboName(D, best.r)} · ${F.money(best.r.total)}${T.per_month} · ${T.name}`;
@@ -44,7 +46,7 @@ export function resultMeta(path) {
 export default {
   async fetch(req, env) {
     const url = new URL(req.url), meta = (req.method === "GET" || req.method === "HEAD") && resultMeta(url.pathname);
-    if (!meta) return env.ASSETS.fetch(req);
+    if (!meta) return env.ASSETS.fetch(req);                     // a file, or the plain 404 (the shell shows its 404 page)
     const res = await env.ASSETS.fetch(new Request(new URL(meta.page, url), req));
     if (res.status !== 200) return res;
     // never indexed (canonical still points at the page); the result in the title and description
