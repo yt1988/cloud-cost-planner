@@ -23,7 +23,8 @@ export function formats(lang, cur, rates) {
 
 const providerName = (D, id) => D.vps.providers[id]?.name || id;
 export const machineName = (D, m) => `${providerName(D, m.provider)} ${m.plan}`;
-export const comboName = (D, r) => [r.m && machineName(D, r.m), r.s && r.s.name, r.c && r.c.name].filter(Boolean).join(" + ");
+// a whole setup in one line; "×3" when it takes several servers, so a total is never read as one server's price
+export const comboName = (D, r) => [r.m && machineName(D, r.m) + (r.count > 1 ? " ×" + r.count : ""), r.s && r.s.name, r.c && r.c.name].filter(Boolean).join(" + ");
 // a cloud's way of billing egress, in the page's language ("Premium 层级", "按量出口")
 const egressName = (T, prof) => T["eg_" + prof.id.replace(/-/g, "_")] || prof.product;
 // the plan's size in a few words: "4 vCPU / 8 GB · shared CPU · Arm"
