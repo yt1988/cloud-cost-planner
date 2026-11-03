@@ -8,6 +8,9 @@ export const fill = (s, v) => String(s).replace(/\{(\w+)\}/g, (m, k) => (v[k] ??
 const EXT = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2.5h4.5V7M13.5 2.5 7.5 8.5M12 10v3.5H2.5V4H6"/></svg>';
 export const ext = (href, text, attrs = "") => `<a class="ext"${href ? ` href="${esc(href)}"` : ""} target="_blank" rel="noopener"${attrs}><span>${esc(text)}</span>${EXT}</a>`;
 
+// sizes as each language writes them: French Go/To/Po, Russian ГБ/ТБ/ПБ, GB/TB/PB elsewhere
+const UNITS = { fr: ["Go", "To", "Po"], ru: ["ГБ", "ТБ", "ПБ"] };
+
 // money and sizes in the page's language and currency
 export function formats(lang, cur, rates) {
   const k = rates.perUsd[cur] || 1;
@@ -17,8 +20,9 @@ export function formats(lang, cur, rates) {
   const compact = new Intl.NumberFormat(lang, { style: "currency", currency: cur, notation: "compact", maximumFractionDigits: 0 });
   const num = new Intl.NumberFormat(lang, { maximumFractionDigits: 1 }), num2 = new Intl.NumberFormat(lang, { maximumFractionDigits: 2 });
   // results read in GB below 1 TB, TB above, PB from 1 PB
-  const size = gb => (gb >= 1048576 ? num.format(gb / 1048576) + " PB" : gb >= 1024 ? (gb < 10240 ? num2 : num).format(gb / 1024) + " TB" : num.format(gb) + " GB");
-  return { money, short: usd => compact.format(usd * k), size, num: v => num.format(v) };
+  const [GB, TB, PB] = UNITS[lang] || ["GB", "TB", "PB"];
+  const size = gb => (gb >= 1048576 ? num.format(gb / 1048576) + " " + PB : gb >= 1024 ? (gb < 10240 ? num2 : num).format(gb / 1024) + " " + TB : num.format(gb) + " " + GB);
+  return { money, short: usd => compact.format(usd * k), size, num: v => num.format(v), gb: GB, tb: TB };
 }
 
 const providerName = (D, id) => D.vps.providers[id]?.name || id;
@@ -28,7 +32,7 @@ export const comboName = (D, r) => [r.m && machineName(D, r.m) + (r.count > 1 ? 
 // a cloud's way of billing egress, in the page's language ("Premium 层级", "按量出口")
 const egressName = (T, prof) => T["eg_" + prof.id.replace(/-/g, "_")] || prof.product;
 // the plan's size in a few words: "4 vCPU / 8 GB · shared CPU · Arm"
-const specOf = (T, F, m) => `${m.vcpu} vCPU / ${F.num(m.ram)} GB · ${T["cpu_" + m.cpu]}${m.arch === "arm" ? " · Arm" : ""}`;
+const specOf = (T, F, m) => `${m.vcpu} vCPU / ${F.num(m.ram)} ${F.gb} · ${T["cpu_" + m.cpu]}${m.arch === "arm" ? " · Arm" : ""}`;
 
 // where the browser's latency measurement goes (src/app.js fills it from m2c's endpoints); invisible until then
 const latSlot = (T, id, tag = "span") => (id ? `<${tag} class="lat" data-ping="${esc(id)}" data-pend>${esc(T.lat_wait)}</${tag}>` : "");
@@ -102,7 +106,7 @@ export function tableHTML(rec, T, F, D) {
       const bad = r.flags.some(f => BLOCKING.includes(f));
       return `<tr${bad ? ' class="bad"' : ""}><td><b>${esc(r.m ? machineName(D, r.m) + (r.count > 1 ? " ×" + r.count : "") : r.s.name)}</b>${r.m && r.m.egress ? `<small>${esc(egressName(T, r.m.egress))}</small>` : ""}${r.m && (r.s || r.c) ? `<small>+ ${esc([r.s && r.s.name, r.c && r.c.name].filter(Boolean).join(" + "))}</small>` : ""}${notes.length ? `<small class="warn">${esc(notes.join(" "))}</small>` : ""}</td>` +
         `<td${r.region === near ? ' class="near"' : ""}>${esc(T["reg_" + r.region])}${r.m ? `<small>${esc(r.m.loc)}</small>${latSlot(T, r.m.ping, "small")}` : ""}</td>` +
-        `<td>${r.m ? `${r.m.vcpu} / ${F.num(r.m.ram)} GB<small>${esc(T["cpu_" + r.m.cpu])}${r.m.arch === "arm" ? " · Arm" : ""}</small>` : "—"}</td>` +
+        `<td>${r.m ? `${r.m.vcpu} / ${F.num(r.m.ram)} ${F.gb}<small>${esc(T["cpu_" + r.m.cpu])}${r.m.arch === "arm" ? " · Arm" : ""}</small>` : "—"}</td>` +
         `<td class="n">${r.m ? F.money(r.cost.machine) : "—"}</td><td class="n">${r.m ? F.money(r.cost.traffic) : "—"}</td>` +
         `<td class="n">${r.s || r.c ? F.money(r.cost.storage + r.cost.cdn) : "—"}</td><td class="n"><b>${F.money(r.total)}</b></td>` +
         `<td>${ext(r.m ? r.m.source : r.s.source, T.l_src)}</td></tr>`;

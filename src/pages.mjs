@@ -93,7 +93,7 @@ export function facts(page, D, T, F) {
     for (const [c, ram, disk] of SIZES) for (const gb of [1024, 5120, 20480]) {
       const a = bestOf(D, page.a, { vcpu: c, ram, disk, gb }), b = bestOf(D, page.b, { vcpu: c, ram, disk, gb });
       const cell = x => (x ? `${F.money(x.total)}<small>${esc(x.m.plan)} · ${esc(T["reg_" + x.region])}</small>` : "—");
-      rows.push([esc(`${c} vCPU / ${ram} GB · ${F.size(gb)}`), cell(a), cell(b)]);
+      rows.push([esc(`${c} vCPU / ${ram} ${F.gb} · ${F.size(gb)}`), cell(a), cell(b)]);
     }
     return { v: { a: provName(D, page.a), b: provName(D, page.b) }, table: tableOf([T.th_size, provName(D, page.a), provName(D, page.b)], rows) };
   }
@@ -123,7 +123,7 @@ export function facts(page, D, T, F) {
     const { rows } = plan(stateOf(page), D);
     const top = table(rows.filter(r => r.m && !r.s && !r.c), 12);
     return { v: { r: page.ram, best: machineName(D, top[0].m), t: F.money(top[0].total) },
-      table: tableOf([T.c_plan, T.c_region, T.c_cpu, T.c_total], top.map(x => [esc(machineName(D, x.m)), esc(T["reg_" + x.region]), esc(`${x.m.vcpu} / ${F.num(x.m.ram)} GB · ${T["cpu_" + x.m.cpu]}`), F.money(x.total)])) };
+      table: tableOf([T.c_plan, T.c_region, T.c_cpu, T.c_total], top.map(x => [esc(machineName(D, x.m)), esc(T["reg_" + x.region]), esc(`${x.m.vcpu} / ${F.num(x.m.ram)} ${F.gb} · ${T["cpu_" + x.m.cpu]}`), F.money(x.total)])) };
   }
   if (k === "cheapHk") {
     // every Hong Kong plan with 1 TB a month to visitors in mainland China, cheapest first

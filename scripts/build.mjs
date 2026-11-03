@@ -125,7 +125,7 @@ export async function build({ check = false } = {}) {
 
       const scenes = SCENES.map(s => `<button class="chip" type="button" data-scene="${s.id}" aria-pressed="${state.scene === s.id}">${esc(T["sc_" + s.id])}</button>`).join("");
       const sizeIdx = SIZES.findIndex(([c, r, d]) => c === state.vcpu && r === state.ram && d === state.disk);
-      const sizes = SIZES.map(([c, r], i) => `<button type="button" data-size="${i}" aria-pressed="${i === sizeIdx}">${c} vCPU · ${r} GB</button>`).join("") +
+      const sizes = SIZES.map(([c, r], i) => `<button type="button" data-size="${i}" aria-pressed="${i === sizeIdx}">${c} vCPU · ${r} ${F.gb}</button>`).join("") +
         `<button type="button" data-size="custom" aria-pressed="${sizeIdx < 0 && state.vcpu > 0}">${esc(T.size_custom)}</button>` +
         `<button type="button" data-size="none" aria-pressed="${state.vcpu === 0}">${esc(T.size_none)}</button>`;
       const auds = ["na", "eu", "ap", "cn"].map(a => `<button type="button" data-aud="${a}" aria-pressed="${state.aud === a}">${esc(T["aud_" + a])}</button>`).join("");
@@ -146,7 +146,7 @@ export async function build({ check = false } = {}) {
         .replace("{{h1}}", esc(h1)).replace("{{lede}}", esc(T.lede)).replace("{{scenes}}", scenes).replace("{{sizes}}", sizes).replace("{{auds}}", auds)
         .replace("{{verdict}}", esc(verdict(rec, T, F, D))).replace("{{picks}}", picksHTML(rec, T, F, D)).replace("{{curve}}", curveHTML(rec, T, F, D, state))
         .replace("{{table}}", tableHTML(rec, T, F, D)).replace("{{facts}}", factsHTML).replace("{{sitemap}}", sitemap).replace("{{foot}}", esc(foot))
-        .replace("{{helpNav}}", helpNav).replace("{{helpC}}", helpC)
+        .split("{{uGB}}").join(F.gb).split("{{uTB}}").join(F.tb).replace("{{helpNav}}", helpNav).replace("{{helpC}}", helpC)
         .replace(/\{\{a:(\w+)\}\}/g, (_, k) => esc(T[k])).replace("{{data}}", JSON.stringify(data).replace(/</g, "\\u003c"));
       if (/\{\{[\w:]+\}\}/.test(html)) throw new Error("unfilled placeholder in " + path(slug, sub) + ": " + /\{\{[\w:]+\}\}/.exec(html)[0]);
       pages.push({ file: (slug ? slug + "/" : "") + (sub ? sub + "/" : "") + "index.html", url, sub, html });
