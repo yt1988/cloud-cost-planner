@@ -52,13 +52,23 @@
     $("picks").innerHTML = picksHTML(rec, T, F, D);
     $("curve").innerHTML = curveHTML(rec, T, F, D, st);
     $("tbl").innerHTML = tableHTML(rec, T, F, D);
-    links(); latency();
+    links(); latency(); summary();
     const q = toQuery(st);
     // a shared link keeps its address until the visitor changes something
     if (keepShared) keepShared = false; else { history.replaceState(null, "", pagePath + "?" + q + location.hash); if (banner) banner = banner.remove(); }
   }
   // one redraw per burst of input events (a timer, not requestAnimationFrame: that one stops in background tabs)
   const update = () => { syncInputs(); if (!raf) raf = setTimeout(render, 0); };
+
+  // the bar pinned to the bottom on phones: the cheapest setup and its price, while the result is still below the screen
+  function summary() {
+    const best = rec.picks[0]?.r, F = formats(P.lang, cur, D.rates);
+    $("sbName").textContent = best ? comboName(D, best) : T.v_none;
+    $("sbPrice").innerHTML = best ? esc(F.money(best.total)) + "<small>" + esc(T.per_month) + "</small>" : "";
+  }
+  const resultCard = document.querySelector(".result");
+  const placeBar = () => { $("sumbar").hidden = resultCard.getBoundingClientRect().top < innerHeight - 40; };
+  addEventListener("scroll", placeBar, { passive: true }); addEventListener("resize", placeBar); placeBar();
 
   // links to other 1ms.dog tools, from the addresses the shell announces; none when self-hosted
   function links() {
@@ -167,7 +177,7 @@
 
   // ---- share: the shared 1ms.dog dialog; the link lands on the scenario's own page
   $("share").addEventListener("click", async () => {
-    const { share } = await import("/assets/share/share.js?v=3");
+    const { share } = await import("/assets/share/share.js?v=4");
     const F = formats(P.lang, cur, D.rates);
     const slug = (SCENES.find(s => s.id === st.scene) || SCENES.find(s => s.id === nearestScene(st))).slug;
     const link = location.origin + langDir + slug + "/r/" + toCode(st, Date.now());
@@ -241,7 +251,7 @@
   // someone else's shared result: the shared banner above the verdict; "work out mine" takes the visitor to the inputs,
   // starting from their numbers. The banner goes once the visitor changes something.
   let banner = null;
-  if (fromLink) import("/assets/share/share.js?v=3").then(({ received }) => {
+  if (fromLink) import("/assets/share/share.js?v=4").then(({ received }) => {
     banner = received({ lang: P.lang, ts: sharedOn || Date.now(), at: $("verdictRow"), test: () => {
       $("inH").closest("section").scrollIntoView({ behavior: "smooth", block: "start" });
       $("gbN").focus({ preventScroll: true });
@@ -250,5 +260,5 @@
 
   syncInputs();
   // the prerendered result matches the page's preset; redraw only if the link or saved currency changed it
-  if (shared || location.search || cur !== P.cur) render(); else { rec = recommend(st, D); links(); latency(); }
+  if (shared || location.search || cur !== P.cur) render(); else { rec = recommend(st, D); links(); latency(); summary(); }
 })();
