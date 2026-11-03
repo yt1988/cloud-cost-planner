@@ -225,6 +225,9 @@ a.ext svg { width: .95em; height: .95em; flex: none; }
 /* touch screens: standalone links and the slider get a finger-sized target (they look the same) */
 @media (pointer: coarse) {
   a.ext, .sitemap a { min-height: 32px; }
+  .adv summary { min-height: 32px; display: flex; align-items: center; gap: 6px; list-style: none; }
+  .adv summary::before { content: "▸"; transition: transform .15s; }
+  .adv[open] summary::before { transform: rotate(90deg); }
   .sitemap a { display: inline-flex; align-items: center; }
   .sitemap { line-height: 1.4; gap: 0 14px; }
   .range { height: 32px; }
