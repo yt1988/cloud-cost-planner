@@ -226,6 +226,7 @@ a.ext svg { width: .95em; height: .95em; flex: none; }
 @media (pointer: coarse) {
   a.ext, .sitemap a { min-height: 32px; }
   .adv summary { min-height: 32px; display: flex; align-items: center; gap: 6px; list-style: none; }
+  .adv summary::-webkit-details-marker { display: none; }
   .adv summary::before { content: "▸"; transition: transform .15s; }
   .adv[open] summary::before { transform: rotate(90deg); }
   .sitemap a { display: inline-flex; align-items: center; }
