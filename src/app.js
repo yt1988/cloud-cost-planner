@@ -177,7 +177,7 @@
 
   // ---- share: the shared 1ms.dog dialog; the link lands on the scenario's own page
   $("share").addEventListener("click", async () => {
-    const { share } = await import("/assets/share/share.js?v=7");
+    const { share } = await import("/assets/share/share.js?v=8");
     const F = formats(P.lang, cur, D.rates);
     const slug = (SCENES.find(s => s.id === st.scene) || SCENES.find(s => s.id === nearestScene(st))).slug;
     const link = location.origin + langDir + slug + "/r/" + toCode(st, Date.now());
@@ -278,7 +278,7 @@
   // someone else's shared result: the shared banner above the verdict; "work out mine" takes the visitor to the inputs,
   // starting from their numbers. The banner goes once the visitor changes something.
   let banner = null;
-  if (fromLink) import("/assets/share/share.js?v=7").then(({ received }) => {
+  if (fromLink) import("/assets/share/share.js?v=8").then(({ received }) => {
     banner = received({ lang: P.lang, ts: sharedOn || Date.now(), at: $("verdictRow"), test: () => {
       $("inH").closest("section").scrollIntoView({ behavior: "smooth", block: "start" });
       $("gbN").focus({ preventScroll: true });
