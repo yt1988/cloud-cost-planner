@@ -14,7 +14,7 @@ import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { transform } from "esbuild";
 import { loadData } from "./data.mjs";
-import { recommend, verifiedAt } from "../src/calc.mjs";
+import { recommend, verifiedAt, toQuery } from "../src/calc.mjs";
 import { SCENES, SIZES } from "../src/scenes.mjs";
 import { PAGES, stateOf, facts } from "../src/pages.mjs";
 import { esc, fill, formats, verdict, picksHTML, tableHTML, curveHTML } from "../src/view.mjs";
@@ -145,7 +145,14 @@ export async function build({ check = false } = {}) {
         .split("{{homeHref}}").join(path(slug, "")).replace("{{langOpts}}", langOpts)
         .replace("{{h1}}", esc(h1)).replace("{{lede}}", esc(T.lede)).replace("{{scenes}}", scenes).replace("{{sizes}}", sizes).replace("{{auds}}", auds)
         .replace("{{verdict}}", esc(verdict(rec, T, F, D))).replace("{{picks}}", picksHTML(rec, T, F, D)).replace("{{curve}}", curveHTML(rec, T, F, D, state))
-        .replace("{{table}}", tableHTML(rec, T, F, D)).replace("{{facts}}", factsHTML).replace("{{sitemap}}", sitemap).replace("{{foot}}", esc(foot))
+        // every provider compared is the home page's; a sub-page keeps its own case and points there instead
+        .replace("{{table}}", page ? "" : `    <section class="card more" aria-labelledby="tblH">
+      <h2 id="tblH"><span>${esc(T.tbl_h)}</span> <small>${esc(T.tbl_hint)}</small></h2>
+      <div class="tbl-wrap" id="tbl">${tableHTML(rec, T, F, D)}</div>
+    </section>
+`)
+        .replace("{{toHome}}", page ? `      <p class="to-home"><a class="btn" id="toHome" href="${path(slug, "")}?${esc(toQuery(state))}" data-home="${path(slug, "")}">${esc(T.to_home)}</a></p>
+` : "").replace("{{facts}}", factsHTML).replace("{{sitemap}}", sitemap).replace("{{foot}}", esc(foot))
         .split("{{uGB}}").join(F.gb).split("{{uTB}}").join(F.tb).replace("{{helpNav}}", helpNav).replace("{{helpC}}", helpC)
         .replace(/\{\{a:(\w+)\}\}/g, (_, k) => esc(T[k])).replace("{{data}}", JSON.stringify(data).replace(/</g, "\\u003c"));
       if (/\{\{[\w:]+\}\}/.test(html)) throw new Error("unfilled placeholder in " + path(slug, sub) + ": " + /\{\{[\w:]+\}\}/.exec(html)[0]);

@@ -37,7 +37,7 @@ export default {
   spec: "{c} vCPU / {r} Go", spec_none: "Stockage seul",
   l_m2c: "Mesurer votre latence vers ce fournisseur", l_ls: "Calculer en détail avec les offres Lightsail", l_src: "Tarifs officiels", l_v2c: "Mesurer depuis votre serveur vers chaque cloud",
   curve_h: "Comment le coût évolue avec le trafic", cross: "Au-delà de {gb} par mois, {b} revient moins cher que {a}",
-  tbl_h: "Tous les fournisseurs comparés", tbl_hint: "l'option la moins chère de chaque gamme",
+  tbl_h: "Tous les fournisseurs comparés", tbl_hint: "l'option la moins chère de chaque gamme", to_home: "Saisir vos propres chiffres et comparer tous les fournisseurs →",
   c_plan: "Offre", c_region: "Région", c_cpu: "vCPU / RAM", c_total: "Par mois", c_src: "Source",
   cpu_shared: "CPU partagé", cpu_dedicated: "CPU dédié",
   n_oracle: "Les machines A1 d'Oracle sont souvent en rupture dans les régions les plus demandées.",

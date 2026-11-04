@@ -37,7 +37,7 @@ export default {
   spec: "{c} vCPU / {r} GB", spec_none: "Solo almacenamiento",
   l_m2c: "Mide tu latencia a este proveedor", l_ls: "Calcula en detalle con los planes de Lightsail", l_src: "Precios oficiales", l_v2c: "Mide desde tu propio servidor a cada nube",
   curve_h: "Cómo sube el coste con el tráfico", cross: "Por encima de {gb} al mes, {b} sale más barato que {a}",
-  tbl_h: "Todos los proveedores", tbl_hint: "la opción más barata de cada línea de producto",
+  tbl_h: "Todos los proveedores", tbl_hint: "la opción más barata de cada línea de producto", to_home: "Pon tus propios datos y compara todos los proveedores →",
   c_plan: "Plan", c_region: "Región", c_cpu: "vCPU / RAM", c_total: "Al mes", c_src: "Fuente",
   cpu_shared: "CPU compartida", cpu_dedicated: "CPU dedicada",
   n_oracle: "Las máquinas A1 de Oracle suelen estar agotadas en las regiones más demandadas.",

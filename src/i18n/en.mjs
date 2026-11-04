@@ -37,7 +37,7 @@ export default {
   spec: "{c} vCPU / {r} GB", spec_none: "Storage only",
   l_m2c: "Test your latency to this provider", l_ls: "Work out Lightsail bundles in detail", l_src: "Official pricing", l_v2c: "Test from your own server to every cloud",
   curve_h: "How the cost grows with traffic", cross: "Above {gb} a month, {b} is cheaper than {a}",
-  tbl_h: "Every provider compared", tbl_hint: "the cheapest option in each product line",
+  tbl_h: "Every provider compared", tbl_hint: "the cheapest option in each product line", to_home: "Enter your own numbers and compare every provider →",
   c_plan: "Plan", c_region: "Region", c_cpu: "vCPU / RAM", c_total: "Per month", c_src: "Source",
   cpu_shared: "shared CPU", cpu_dedicated: "dedicated CPU",
   n_oracle: "Oracle's A1 machines are often out of stock in popular regions.",

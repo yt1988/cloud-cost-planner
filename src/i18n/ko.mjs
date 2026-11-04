@@ -37,7 +37,7 @@ export default {
   spec: "{c} vCPU / {r} GB", spec_none: "스토리지만",
   l_m2c: "이 업체까지 지연 시간 측정", l_ls: "Lightsail 요금제로 자세히 계산", l_src: "공식 요금 페이지", l_v2c: "내 서버에서 각 클라우드까지 측정",
   curve_h: "트래픽이 늘면 요금은 어떻게 될까", cross: "월 {gb} 초과 시 {b} 쪽이 {a}보다 저렴해요",
-  tbl_h: "전체 업체 비교", tbl_hint: "제품군마다 가장 저렴한 구성만 표시",
+  tbl_h: "전체 업체 비교", tbl_hint: "제품군마다 가장 저렴한 구성만 표시", to_home: "직접 조건을 넣고 전체 업체 비교하기 →",
   c_plan: "요금제", c_region: "지역", c_cpu: "vCPU / 메모리", c_total: "월 요금", c_src: "출처",
   cpu_shared: "공유 CPU", cpu_dedicated: "전용 CPU",
   n_oracle: "Oracle A1은 인기 지역에서 자리가 없는 경우가 많아요.",

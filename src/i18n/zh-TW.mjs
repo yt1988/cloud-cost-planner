@@ -37,7 +37,7 @@ export default {
   spec: "{c} 核心 {r} GB", spec_none: "只需要儲存空間",
   l_m2c: "測一下到這家的延遲", l_ls: "用 Lightsail 方案細算", l_src: "官方價格頁", l_v2c: "從你自己的主機測到各家雲端",
   curve_h: "流量變多時，費用怎麼變", cross: "每月超過 {gb} 後，{b} 比 {a} 便宜",
-  tbl_h: "所有廠商比較", tbl_hint: "每條產品線只列最便宜的一種",
+  tbl_h: "所有廠商比較", tbl_hint: "每條產品線只列最便宜的一種", to_home: "自己填入條件，看所有廠商比較 →",
   c_plan: "方案", c_region: "機房", c_cpu: "CPU / 記憶體", c_total: "月費", c_src: "來源",
   cpu_shared: "共用 CPU", cpu_dedicated: "專用 CPU",
   n_oracle: "Oracle A1 在熱門區域常常開不出主機。",

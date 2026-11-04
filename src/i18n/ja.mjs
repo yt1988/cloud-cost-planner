@@ -37,7 +37,7 @@ export default {
   spec: "{c} vCPU / {r} GB", spec_none: "ストレージのみ",
   l_m2c: "この事業者への遅延を測る", l_ls: "Lightsail のプランで詳しく計算", l_src: "公式の料金ページ", l_v2c: "自分のサーバーから各クラウドへの遅延を測る",
   curve_h: "転送量が増えると料金はどう変わるか", cross: "月 {gb} を超えると、{b} のほうが {a} より安くなります",
-  tbl_h: "全事業者の比較", tbl_hint: "製品ラインごとに最も安い構成だけを表示",
+  tbl_h: "全事業者の比較", tbl_hint: "製品ラインごとに最も安い構成だけを表示", to_home: "条件を自分で入れて、全事業者を比べる →",
   c_plan: "プラン", c_region: "リージョン", c_cpu: "vCPU / メモリ", c_total: "月額", c_src: "出典",
   cpu_shared: "共有 CPU", cpu_dedicated: "専有 CPU",
   n_oracle: "Oracle の A1 は人気のリージョンでは在庫切れのことがよくあります。",

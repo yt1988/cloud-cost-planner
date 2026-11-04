@@ -51,9 +51,10 @@
     $("verdict").textContent = verdict(rec, T, F, D);
     $("picks").innerHTML = picksHTML(rec, T, F, D);
     $("curve").innerHTML = curveHTML(rec, T, F, D, st);
-    $("tbl").innerHTML = tableHTML(rec, T, F, D);
+    if ($("tbl")) $("tbl").innerHTML = tableHTML(rec, T, F, D);
     links(); latency(); summary();
     const q = toQuery(st);
+    if ($("toHome")) $("toHome").href = $("toHome").dataset.home + "?" + q;   // the home page opens with these same numbers
     // a shared link keeps its address until the visitor changes something
     if (keepShared) keepShared = false; else { history.replaceState(null, "", pagePath + "?" + q + location.hash); if (banner) banner = banner.remove(); }
   }

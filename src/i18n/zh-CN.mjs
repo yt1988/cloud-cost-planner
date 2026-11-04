@@ -37,7 +37,7 @@ export default {
   spec: "{c} 核 {r} GB", spec_none: "只要存储",
   l_m2c: "测一下到这家的延迟", l_ls: "按 Lightsail 套餐细算", l_src: "官方定价页", l_v2c: "从你自己的服务器测到各家云",
   curve_h: "流量变多，费用怎么变", cross: "每月超过 {gb} 后，{b} 比 {a} 便宜",
-  tbl_h: "所有厂商对比", tbl_hint: "每条产品线只列最便宜的一种",
+  tbl_h: "所有厂商对比", tbl_hint: "每条产品线只列最便宜的一种", to_home: "自己填参数，看所有厂商对比 →",
   c_plan: "方案", c_region: "机房", c_cpu: "CPU / 内存", c_total: "月费", c_src: "来源",
   cpu_shared: "共享 CPU", cpu_dedicated: "独享 CPU",
   n_oracle: "Oracle A1 在热门区域经常开不出机器。",

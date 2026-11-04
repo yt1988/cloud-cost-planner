@@ -113,8 +113,10 @@ input[type="number"]:focus { border-color: var(--ink); }
 .tag.t-cheapest { background: color-mix(in srgb, var(--ink) 16%, transparent); color: var(--ink); }
 .pk-total b { font: 650 28px/1.1 var(--f-num); letter-spacing: -.03em; }
 .pk-total small { color: var(--muted); margin-left: 4px; font-size: 13px; }
-.pk-parts { margin: 0; display: flex; flex-direction: column; gap: 2px; border-top: 1px solid var(--line); padding-top: 8px; }
-.pk-parts div { display: grid; grid-template-columns: 52px minmax(0, 1fr) auto; gap: 2px 10px; font-size: 13px; align-items: baseline; padding: 4px 0; }
+/* one label column for the whole card, as wide as its longest label ("Хранилище", "Almacenamiento" are wider than 52px) */
+.pk-parts { margin: 0; display: grid; grid-template-columns: max-content minmax(0, 1fr) auto; gap: 2px 10px; align-items: baseline; font-size: 13px; border-top: 1px solid var(--line); padding-top: 8px; }
+.pk-parts div { display: contents; }
+.pk-parts dt, .pk-parts dd { padding: 4px 0; }
 .pk-parts dt { color: var(--muted); }
 .pk-parts dd { margin: 0; overflow-wrap: anywhere; }
 .pk-parts dd b { display: block; font-weight: 600; }
@@ -141,6 +143,10 @@ a.ext svg { width: .95em; height: .95em; flex: none; }
 .btn.icon { width: 34px; padding: 0; }
 .btn.primary { background: var(--ink); color: var(--ink-fg); border-color: transparent; font-weight: 600; }
 .btn.primary:hover { filter: brightness(1.06); }
+/* a sub-page's way to the full calculator: a secondary button that may wrap in long languages */
+.to-home { margin: 16px 0 0; }
+.to-home .btn { white-space: normal; height: auto; min-height: 34px; padding: 7px 14px; text-align: center; text-decoration: none; color: inherit; }
+.to-home .btn:hover { border-color: var(--ink); }
 
 /* curve */
 .curve { display: block; width: 100%; height: auto; margin-top: 10px; }
