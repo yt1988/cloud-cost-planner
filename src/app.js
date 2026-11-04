@@ -15,7 +15,7 @@
 
   // ---- state: the page's preset; a shared result (/…/r/<code>) or the address while editing (?v=1&…) on top
   const shared = /\/r\/([^/]+)\/?$/.exec(location.pathname);
-  const pagePath = location.pathname.replace(/r\/[^/]*\/?$/, "");
+  const pagePath = location.pathname.replace(/\/r\/[^/]*\/?$/, "/");   // a whole /r/<code> segment, not the r of /fr/
   const fromLink = shared && fromCode(decodeURIComponent(shared[1]));
   const { on: sharedOn, ...linked } = fromLink || fromQuery(location.search) || {};
   // a link names its own scenario (or none): the page's preset scenario doesn't stay highlighted for other numbers
@@ -182,54 +182,81 @@
     const slug = (SCENES.find(s => s.id === st.scene) || SCENES.find(s => s.id === nearestScene(st))).slug;
     const link = location.origin + langDir + slug + "/r/" + toCode(st, Date.now());
     const line = verdict(rec, T, F, D);
+    // s broken into lines no wider than w with the current font: at spaces, or anywhere in CJK text; never cut short
+    const breakLines = (x, s, w) => {
+      const out = [];
+      let cur = "";
+      for (const part of String(s).match(/[⺀-鿿가-힯豈-﫿＀-￯]|[^\s⺀-鿿가-힯豈-﫿＀-￯]+\s*|\s+/g) || []) {
+        if (cur && x.measureText((cur + part).trimEnd()).width > w) { out.push(cur.trim()); cur = part.trimStart(); } else cur += part;
+      }
+      if (cur.trim()) out.push(cur.trim());
+      return out;
+    };
+    // the largest of sizes at which s takes at most n lines (more lines at the smallest, rather than "…"); sets the font
+    const block = (x, s, w, sizes, n, weight, face) => {
+      for (const z of sizes) {
+        x.font = `${weight} ${z}px ${face}`;
+        const ls = breakLines(x, s, w);
+        if (ls.length <= n || z === sizes[sizes.length - 1]) return { ls, z, font: x.font, h: ls.length * Math.round(z * 1.25) };
+      }
+    };
+    const card = (x, k, paint) => {
+      const colors = [k.v("c1"), k.v("c2"), k.v("c3"), k.v("c4") || k.v("c3")], bw = k.W - k.P * 2, q = rec.q;
+      const text = (b, color, xx, top) => {
+        if (!paint) return;
+        x.font = b.font; x.fillStyle = color;
+        b.ls.forEach((ln, i) => x.fillText(ln, xx, top + b.z + i * Math.round(b.z * 1.25) - Math.round(b.z * 0.2)));
+      };
+      const right = (t, font, color, xx, yy) => { if (!paint) return; x.font = font; x.fillStyle = color; x.textAlign = "right"; x.fillText(t, xx, yy); x.textAlign = "left"; };
+      let y = k.top - 4;
+      const work = block(x, [q.vcpu > 0 ? fill(T.spec, { c: q.vcpu, r: F.num(q.ram) }) : T.spec_none, F.size(q.gb) + T.per_month, T["aud_" + q.aud]].join("  ·  "), bw, [24, 22, 20], 1, 500, k.F);
+      text(work, k.v("muted"), k.P, y); y += work.h + 16;
+      const [best, ...rest] = rec.picks;
+      if (!best) { const b = block(x, T.v_none, bw, [34, 30, 26], 2, 700, k.F); text(b, k.v("fg"), k.P, y + 20); return y + 20 + b.h + 80; }
+      // the cheapest: tags, name and place on the left, the price large on the right
+      const price = F.money(best.r.total), pf = `700 66px ${k.M}`;
+      x.font = pf; const pw = x.measureText(price).width, lw = bw - 56 - pw - 32;
+      const tags = block(x, best.tags.map(t => T["tag_" + t]).join(" · "), lw, [24, 22], 2, 700, k.F);
+      const name = block(x, comboName(D, best.r), lw, [30, 28, 26, 24], 2, 700, k.F);
+      const place = block(x, T["reg_" + best.r.region] + (best.r.m ? " · " + best.r.m.loc : ""), lw, [22, 20], 2, 400, k.F);
+      const boxH = Math.max(184, 24 + tags.h + 8 + name.h + 8 + place.h + 22);
+      if (paint) {
+        x.fillStyle = k.v("panel"); k.roundRect(x, k.P, y, bw, boxH, 18); x.fill();
+        x.strokeStyle = colors[0]; x.lineWidth = 3; k.roundRect(x, k.P, y, bw, boxH, 18); x.stroke();
+      }
+      let iy = y + 24;
+      text(tags, colors[0], k.P + 28, iy); iy += tags.h + 8;
+      text(name, k.v("fg"), k.P + 28, iy); iy += name.h + 8;
+      text(place, k.v("muted"), k.P + 28, iy);
+      right(price, pf, k.v("fg"), k.P + bw - 28, y + boxH / 2 + 12);
+      right(T.per_month, `400 22px ${k.F}`, k.v("muted"), k.P + bw - 28, y + boxH / 2 + 48);
+      y += boxH + 20;
+      // the others: tags over the setup on the left, the price on the right
+      rest.forEach((p, i) => {
+        const pr = F.money(p.r.total), rf = `700 34px ${k.M}`;
+        x.font = rf; const w = bw - 56 - x.measureText(pr).width - 32;
+        const tg = block(x, p.tags.map(t => T["tag_" + t]).join(" · "), w, [22, 20], 2, 700, k.F);
+        const nm = block(x, comboName(D, p.r), w, [26, 24, 22], 2, 500, k.F);
+        text(tg, colors[i + 1], k.P + 28, y); text(nm, k.v("fg"), k.P + 28, y + tg.h + 4);
+        right(pr, rf, k.v("fg"), k.P + bw - 28, y + Math.max(36, (tg.h + 4 + nm.h) / 2 + 14));
+        y += tg.h + 4 + nm.h + 20;
+      });
+      const aws = awsRef();
+      if (aws) {
+        const b = block(x, comboName(D, aws) + "  " + F.money(aws.total) + T.per_month + "  (" + F.num(aws.total / Math.max(best.r.total, 0.01)) + "×)", bw - 56, [24, 22, 20], 1, 400, k.F);
+        text(b, k.v("muted"), k.P + 28, y + 4); y += b.h + 8;
+      }
+      return y + 76;
+    };
     share({
       lang: P.lang, name: T.name, file: "cloud-cost", show: [], never: [], home: location.origin + langDir,
       link: () => link, text: () => line,
-      // fitted into 1200×630 for the link preview, so the cheapest setup and its monthly price come first and large;
-      // the workload above it, the other picks one row each below, AWS's price for the same as the last line
-      height: (x, k) => k.top + 44 + 200 + Math.max(0, rec.picks.length - 1) * 60 + (awsRef() ? 50 : 0) + 84,
-      draw: async (x, k) => {
-        const colors = [k.v("c1"), k.v("c2"), k.v("c3"), k.v("c4") || k.v("c3")], bw = k.W - k.P * 2, q = rec.q;
-        const right = (t, xx, yy) => { x.textAlign = "right"; x.fillText(t, xx, yy); x.textAlign = "left"; };
-        let y = k.top + 20;
-        x.fillStyle = k.v("muted"); x.font = `500 24px ${k.F}`;
-        x.fillText(k.clip(x, [q.vcpu > 0 ? fill(T.spec, { c: q.vcpu, r: F.num(q.ram) }) : T.spec_none, F.size(q.gb) + T.per_month, T["aud_" + q.aud]].join("  ·  "), bw), k.P, y);
-        y += 24;
-        const [best, ...rest] = rec.picks;
-        if (!best) { x.fillStyle = k.v("fg"); x.font = `700 34px ${k.F}`; x.fillText(k.clip(x, T.v_none, bw), k.P, y + 60); return; }
-        // the cheapest: name (up to two lines) and place on the left, the price large on the right
-        x.fillStyle = k.v("panel"); k.roundRect(x, k.P, y, bw, 184, 18); x.fill();
-        x.strokeStyle = colors[0]; x.lineWidth = 3; k.roundRect(x, k.P, y, bw, 184, 18); x.stroke();
-        x.font = `700 66px ${k.M}`; const pw = x.measureText(F.money(best.r.total)).width;
-        x.fillStyle = k.v("fg"); right(F.money(best.r.total), k.P + bw - 28, y + 104);
-        x.fillStyle = k.v("muted"); x.font = `400 22px ${k.F}`; right(T.per_month, k.P + bw - 28, y + 140);
-        const lw = bw - 56 - pw - 32;
-        x.fillStyle = colors[0]; x.font = `700 24px ${k.F}`; x.fillText(k.clip(x, best.tags.map(t => T["tag_" + t]).join(" · "), lw), k.P + 28, y + 42);
-        x.fillStyle = k.v("fg"); x.font = `700 30px ${k.F}`;
-        const lines = [""];
-        for (const word of comboName(D, best.r).split(" ")) {
-          const last = lines.length - 1, next = lines[last] ? lines[last] + " " + word : word;
-          if (x.measureText(next).width <= lw || !lines[last] || last === 1) lines[last] = next; else lines.push(word);
-        }
-        lines.forEach((ln, i) => x.fillText(k.clip(x, ln, lw), k.P + 28, y + 82 + i * 38));
-        x.fillStyle = k.v("muted"); x.font = `400 22px ${k.F}`; x.fillText(k.clip(x, T["reg_" + best.r.region] + (best.r.m ? " · " + best.r.m.loc : ""), lw), k.P + 28, y + 158);
-        y += 184 + 16;
-        // the others: tag and setup, price on the right
-        rest.forEach((p, i) => {
-          x.font = `700 34px ${k.M}`; const w = x.measureText(F.money(p.r.total)).width;
-          x.fillStyle = k.v("fg"); right(F.money(p.r.total), k.P + bw - 28, y + 38);
-          x.fillStyle = colors[i + 1]; x.font = `700 22px ${k.F}`;
-          const tag = p.tags.map(t => T["tag_" + t]).join(" · "), tw = x.measureText(tag).width;
-          x.fillText(tag, k.P + 28, y + 36);
-          x.fillStyle = k.v("fg"); x.font = `500 26px ${k.F}`; x.fillText(k.clip(x, comboName(D, p.r), bw - 56 - w - tw - 52), k.P + 28 + tw + 16, y + 36);
-          y += 60;
-        });
-        const aws = awsRef();
-        if (aws) {
-          x.fillStyle = k.v("muted"); x.font = `400 24px ${k.F}`;
-          x.fillText(k.clip(x, comboName(D, aws) + "  " + F.money(aws.total) + T.per_month + "  (" + F.num(aws.total / Math.max(best.r.total, 0.01)) + "×)", bw - 56), k.P + 28, y + 38);
-        }
-      },
+      // fitted into 1200 wide for the link preview, with nothing cut off by "…" (1ms-shell docs/tool-contract.md): the
+      // workload first, then the cheapest setup and its monthly price large, the other picks one block each, AWS's price
+      // for the same last. A long name shrinks a little, then wraps, and the card grows to hold it: the same layout runs
+      // once without painting for the height, then again to paint
+      height: (x, k) => card(x, k, false),
+      draw: async (x, k) => { card(x, k, true); },
       foot: () => [fill(T.foot_short, { d: P.verified })],
       ts: Date.now(),
     }).open();
