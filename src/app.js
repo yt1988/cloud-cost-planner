@@ -276,6 +276,50 @@
     return s.gb >= 1024 ? "saas" : "blog";
   }
 
+  // ---- reporting a problem (the shell's dialog, 1ms-shell src/report.js): the inputs and the numbers the page worked
+  // out, in the page's language, so a report can be checked without asking the visitor to retype anything. The
+  // calculator reads no address and stores no location, so there is nothing to mask, and it has no share privacy
+  // toggles; the one thing left out is the browser's latency readings, which say nothing about a wrong price.
+  if (typeof window.msOpenReport === "function") {
+    $("rpBtn").hidden = false;
+    $("rpBtn").setAttribute("data-ms-report", T.rp_pre);
+    window.msReport = () => {
+      const F = formats(P.lang, cur, D.rates);
+      const sep = /^(zh|ja)/.test(P.lang) ? "：" : ": ";
+      const best = rec.picks[0]?.r, aws = awsRef();
+      const r2 = v => Math.round(v * 100) / 100;
+      const summary = (rec.picks.length ? verdict(rec, T, F, D) : T.v_none).slice(0, 300);
+      const data = {
+        v: 1, at: new Date().toISOString(), lang: P.lang, cur, prices: P.verified,
+        // the address that opens the same numbers again (a link made before the page changed keeps working)
+        url: location.origin + pagePath + "?" + toQuery(st),
+        state: st,
+        result: {
+          picks: rec.picks.map(p => ({ name: comboName(D, p.r), tags: p.tags, total: r2(p.r.total), region: p.r.region,
+            vendors: p.r.vendors, count: p.r.count,
+            parts: { machine: r2(p.r.cost.machine), traffic: r2(p.r.cost.traffic), storage: r2(p.r.cost.storage), cdn: r2(p.r.cost.cdn) } })),
+          aws: rec.aws ? { name: comboName(D, rec.aws), total: r2(rec.aws.total) } : null,
+        },
+      };
+      // the readings a visitor most often says are wrong, as "label: value" to pick from: the price, the AWS reference,
+      // the server, the storage and the CDN, then the inputs (traffic, where the visitors are), the price-check date and
+      // the currency the page shows. Each one is short enough for the dialog's one-tap list (60 characters).
+      const pick = (k, v) => (v ? T[k] + sep + v : null);
+      const picks = [
+        best && pick("tag_cheapest", F.money(best.total) + T.per_month),
+        aws && pick("rp_aws", F.money(aws.total) + T.per_month),
+        best && best.m && pick("p_machine", machineName(D, best.m)),
+        best && best.s && pick("p_storage", best.s.name + " · " + F.size(st.storeGB)),
+        best && best.c && pick("p_cdn", best.c.name),
+        st.gb > 0 && pick("p_traffic", F.size(st.gb)),
+        pick("in_aud", T["aud_" + st.aud]),
+        fill(T.foot_short, { d: P.verified }),
+        pick("f_cur", cur),
+      ].filter(Boolean).slice(0, 8).map(s => s.slice(0, 60));
+      return { summary, data, picks };
+    };
+  }
+
   // someone else's shared result: the shared banner above the verdict; "work out mine" takes the visitor to the inputs,
   // starting from their numbers. The banner goes once the visitor changes something.
   let banner = null;

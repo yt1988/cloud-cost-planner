@@ -19,6 +19,8 @@ export default {
   out_h: "推荐方案", share: "分享",
   tag_cheapest: "最省钱", tag_far: "机房远些，但更便宜", tag_simple: "最省事",
   tag_hk: "香港机房",
+  rp_aws: "AWS 参考",
+  rp_btn: "结果不对？", rp_pre: "计算结果不对：",
   n_razor: "Razor Speed：不限流量，带宽 200 Mbps。",
   n_cfCn: "Cloudflare 免费版在中国大陆没有节点，大陆用户会绕到海外节点访问，速度可能偏慢。",
   lat_wait: "正在测延迟…",

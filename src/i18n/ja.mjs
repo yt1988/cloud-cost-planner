@@ -19,6 +19,8 @@ export default {
   out_h: "おすすめの構成", share: "共有",
   tag_cheapest: "最安", tag_far: "遠いけれど安い", tag_simple: "契約先が最少",
   tag_hk: "香港",
+  rp_aws: "AWS 参考",
+  rp_btn: "結果が違いますか？", rp_pre: "計算結果が違います：",
   n_razor: "Razor Speed：転送量無制限、帯域 200 Mbps。",
   n_cfCn: "Cloudflare の無料プランは中国本土に拠点がありません。本土の利用者には海外から配信されるため、遅くなることがあります。",
   lat_wait: "遅延を測定中…",

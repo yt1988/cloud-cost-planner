@@ -19,6 +19,8 @@ export default {
   out_h: "추천 구성", share: "공유",
   tag_cheapest: "최저가", tag_far: "멀지만 더 저렴", tag_simple: "업체 수 최소",
   tag_hk: "홍콩",
+  rp_aws: "AWS 참고",
+  rp_btn: "결과가 다른가요?", rp_pre: "계산 결과가 다릅니다:",
   n_razor: "Razor Speed: 트래픽 무제한, 대역폭 200 Mbps.",
   n_cfCn: "Cloudflare 무료 요금제는 중국 본토에 거점이 없어요. 본토 사용자는 해외 거점을 거치므로 느릴 수 있어요.",
   lat_wait: "지연 시간 측정 중…",

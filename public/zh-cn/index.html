@@ -51,7 +51,7 @@
 <meta name="twitter:image" content="https://cost.1ms.dog/og/zh-cn.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"云成本规划器","url":"https://cost.1ms.dog/zh-cn/","applicationCategory":"BusinessApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","description":"选好业务、填上每月流量，就能看到 Hetzner、DigitalOcean、Vultr、Linode、Lightsail、Oracle、AWS、谷歌云、Azure 各要多少钱，连同 R2、S3、B2 和 CDN 一起算。套餐流量、超额费、出口流量费都算进月费，最便宜的组合排第一。","inLanguage":"zh-CN","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"推荐方案是怎么算出来的？","acceptedAnswer":{"@type":"Answer","text":"我们把所有满足你 CPU 和内存要求的服务器套餐，和每种对象存储、CDN 搭配起来，逐个算出一个月要花多少钱：套餐价、超出套餐的流量费（大云厂商是按 GB 收的出口流量费）、存储费、请求费和 CDN 流量费。页面列出最多三种：就近机房里最便宜的；服务商最少的，账单好管；以及别的大洲明显更便宜时的那一个。其余方案都在对比表里。用了 CDN 时，按 80% 的请求由 CDN 缓存直接返回计算，另外 20% 要回源（CDN 回到你的服务器或存储去取文件），这部分流量按源站的规则收费。"}},{"@type":"Question","name":"为什么大云厂商贵这么多？","acceptedAnswer":{"@type":"Answer","text":"主要贵在流量。AWS、谷歌云、Azure 对发往公网的每 GB 都收费，约 $0.08 到 $0.12；而大多数 VPS 套餐每月自带 1 到 20 TB 流量。每月几 TB 流量时，大云的流量费往往比服务器本身还贵。"}},{"@type":"Question","name":"「静态文件」指什么？该填多少？","acceptedAnswer":{"@type":"Answer","text":"就是每个访客拿到的都一样的文件：图片、安装包、视频、脚本。它们可以放到对象存储或 CDN 上发，不经过你的服务器。可以这样估：博客大多是静态的（80% 左右），API 和代理完全不是（0%），下载站几乎全是（95%）。"}},{"@type":"Question","name":"什么时候值得用「对象存储 + CDN」？","acceptedAnswer":{"@type":"Answer","text":"静态文件占了大部分流量，而且超出了服务器套餐自带的流量时。Cloudflare R2 出口流量免费；Backblaze B2 通过 Cloudflare 或 Bunny 分发也免费。这样每月几 TB 的下载，可能只要几美元，而不是几百美元。"}},{"@type":"Question","name":"为什么上传免费、下载收费？","acceptedAnswer":{"@type":"Answer","text":"厂商要为流出自己网络的流量向上游买带宽，而流入的流量还能把客户吸引过来。所以你往服务器上传东西不花钱，服务器发给访客的流量（出口流量）才收费。"}},{"@type":"Question","name":"谷歌云的 Premium 和 Standard 层级有什么区别？","acceptedAnswer":{"@type":"Answer","text":"Premium 层级先走谷歌自己的骨干网，到离访客最近的节点才进入公网，按目的地计价；Standard 层级在机房附近就交给公网，更便宜。Azure 的「微软网络路由」和「公网路由」是同一个意思。"}},{"@type":"Question","name":"发往中国大陆的流量为什么更贵？","acceptedAnswer":{"@type":"Answer","text":"因为进入中国的国际线路少、价格高。谷歌云 Premium 层级发往中国单独计价，大约是普通价格的两倍；而且不管付多少钱，进中国的线路都常常慢。一般亚太机房离得最近，可以先用页面上的延迟测试比一比。"}},{"@type":"Question","name":"为什么不比性能？","acceptedAnswer":{"@type":"Answer","text":"这里按价格和配置筛选，不是跑分。共享 CPU 的套餐（表里有标注）在同一台物理机上的邻居忙时可能变慢。如果你在意，可以在高级选项里把它们排除。"}},{"@type":"Question","name":"买几台小机器凑流量划算吗？","acceptedAnswer":{"@type":"Answer","text":"有时候几台小套餐加起来的流量比一台大的还多。规划器不会自动找这种组合，你可以在高级选项里改服务器台数，自己比一比。"}},{"@type":"Question","name":"价格准吗？多久更新一次？","acceptedAnswer":{"@type":"Answer","text":"每个价格都对照厂商官方定价页人工核对过，核对日期在页脚，表里每一行都有来源链接。所有价格都不含增值税等税费，实际账单还要按你所在地的规定加税。厂商用美元或欧元标价；换成别的币种显示时，按欧洲央行的固定参考汇率换算（日期见页脚），和你实际被扣的金额可能略有出入。发现不对，欢迎在 GitHub 提 issue。"}},{"@type":"Question","name":"延迟是怎么测的？到中国大陆的线路怎么看？","acceptedAnswer":{"@type":"Answer","text":"你的浏览器会向页面上每个机房发几个很小的请求并计时，测速点和方法与 Me2Cloud 相同：先预热一次，再取三次结果的中位数。测出来的是你自己网络的真实延迟，不是实验室数据。到中国大陆的线路好坏，不同厂商、不同运营商差别很大，从价格上看不出来。如果你的用户在国内，就在国内打开这个页面（或者请国内用户帮忙打开），比较香港和东京机房的延迟。"}}]}]}</script>
 <link rel="preload" href="/assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/app.8ffcc04563.css">
+<link rel="stylesheet" href="/assets/app.a40aec9fbf.css">
 </head>
 <body>
 <div class="app">
@@ -158,7 +158,7 @@
 
 <p class="links"><a class="ext" href="https://www.tencentcloud.com/document/product/1103/47794" target="_blank" rel="noopener"><span>官方定价页</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2.5h4.5V7M13.5 2.5 7.5 8.5M12 10v3.5H2.5V4H6"/></svg></a><a class="ext" target="_blank" rel="noopener" data-tool="m2c" data-p="tencent" data-pend><span>测一下到这家的延迟</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2.5h4.5V7M13.5 2.5 7.5 8.5M12 10v3.5H2.5V4H6"/></svg></a></p>
 </article></div>
-      <p class="links"><a class="ext" data-tool="v2c" data-pend target="_blank" rel="noopener"><span data-i="l_v2c">从你自己的服务器测到各家云</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2.5h4.5V7M13.5 2.5 7.5 8.5M12 10v3.5H2.5V4H6"/></svg></a></p>
+      <p class="links"><button class="rp" id="rpBtn" type="button" data-i="rp_btn" hidden>结果不对？</button><a class="ext" data-tool="v2c" data-pend target="_blank" rel="noopener"><span data-i="l_v2c">从你自己的服务器测到各家云</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2.5h4.5V7M13.5 2.5 7.5 8.5M12 10v3.5H2.5V4H6"/></svg></a></p>
     </section>
 
     <section class="card chart" aria-labelledby="curveH">
@@ -196,7 +196,7 @@
   </div>
 </div>
 <script type="application/json" id="data">{"lang":"zh-CN","paths":{"en":"/","zh-CN":"/zh-cn/","zh-TW":"/zh-tw/","ja":"/ja/","ko":"/ko/","es":"/es/","fr":"/fr/","de":"/de/","pt":"/pt/","ru":"/ru/"},"state":{"scene":"saas","aud":"na","shared":true,"free":false,"count":1,"vcpu":2,"ram":4,"disk":20,"gb":2048,"staticPct":30,"storeGB":50,"objKB":200},"cur":"USD","verified":"2026-11-01","slug":""}</script>
-<script src="/assets/l.zh-cn.421aa62437.js" defer></script>
-<script src="/assets/app.b25de72042.js" defer></script>
+<script src="/assets/l.zh-cn.4ae36f7a28.js" defer></script>
+<script src="/assets/app.35f3fed908.js" defer></script>
 </body>
 </html>

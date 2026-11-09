@@ -130,6 +130,10 @@ input[type="number"]:focus { border-color: var(--ink); }
 .result > .links { margin-top: 12px; }
 .links a { color: var(--ink); text-decoration: none; }
 .links a:hover { text-decoration: underline; text-underline-offset: 3px; }
+/* the tool's own way into the shell's report dialog, with the words that make the dialog ask which reading is wrong
+   (src/app.js only shows it when the shell provides that dialog) */
+.links .rp { border: 0; padding: 0; background: none; color: var(--ink); font: inherit; cursor: pointer; }
+.links .rp:hover { text-decoration: underline; text-underline-offset: 3px; }
 a.ext { display: inline-flex; align-items: center; gap: 3px; white-space: nowrap; }
 a.ext svg { width: .95em; height: .95em; flex: none; }
 [data-pend] { visibility: hidden; }
@@ -230,7 +234,7 @@ a.ext svg { width: .95em; height: .95em; flex: none; }
 
 /* touch screens: standalone links and the slider get a finger-sized target (they look the same) */
 @media (pointer: coarse) {
-  a.ext, .sitemap a { min-height: 32px; }
+  a.ext, .sitemap a, .links .rp { min-height: 32px; }
   .adv summary { min-height: 32px; display: flex; align-items: center; gap: 6px; list-style: none; }
   .adv summary::-webkit-details-marker { display: none; }
   .adv summary::before { content: "▸"; transition: transform .15s; }

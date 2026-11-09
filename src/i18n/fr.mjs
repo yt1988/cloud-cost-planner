@@ -19,6 +19,8 @@ export default {
   out_h: "Recommandé", share: "Partager",
   tag_cheapest: "Le moins cher", tag_far: "Plus loin, mais moins cher", tag_simple: "Moins de fournisseurs",
   tag_hk: "Hong Kong",
+  rp_aws: "Référence AWS",
+  rp_btn: "Résultat faux ?", rp_pre: "Le résultat est faux :",
   n_razor: "Razor Speed : trafic illimité à 200 Mbit/s.",
   n_cfCn: "L'offre gratuite de Cloudflare n'a pas de serveurs en Chine continentale : les visiteurs y sont servis depuis l'étranger, parfois lentement.",
   lat_wait: "Mesure de la latence…",
