@@ -241,17 +241,18 @@ a.ext svg { width: .95em; height: .95em; flex: none; }
   .seg button { min-height: 32px; }
 }
 
-/* phones: the cheapest setup and its price pinned to the bottom while the result is off screen, so changing an input
-   shows the result change; a tap goes to the picks */
+/* touch screens: the cheapest setup and its price pinned to the bottom while the result is off screen, so changing an
+   input shows the result change; a tap goes to the picks. The setup name wraps instead of being cut with "…" (the
+   contract forbids a cut-off "…" in UI text), so the bar grows to a third line in the long languages; the page's last
+   block is padded by the tallest bar so the bar never hides it */
 .sumbar { display: none; }
-@media (max-width: 720px) {
+@media (max-width: 720px), (pointer: coarse) {
   .sumbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; display: flex; align-items: center; gap: 12px; min-height: 52px;
     padding: 8px 16px calc(8px + env(safe-area-inset-bottom)); background: var(--panel); border-top: 1px solid var(--line);
-    box-shadow: 0 -4px 16px var(--shadow); color: var(--fg); text-decoration: none; transition: transform .2s; }
-  .sumbar[hidden] { display: flex; transform: translateY(110%); visibility: hidden; }
-  .sumbar .sb-n { flex: 1; min-width: 0; font-size: 13px; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    box-shadow: 0 -4px 16px var(--shadow); color: var(--fg); text-decoration: none; }
+  .sumbar .sb-n { flex: 1; min-width: 0; font-size: 13px; line-height: 1.35; }
   .sumbar .sb-n b { color: var(--ink); font-weight: 600; margin-right: 6px; }
   .sumbar .sb-p { flex: none; font: 650 20px/1 var(--f-num); letter-spacing: -.02em; }
   .sumbar .sb-p small { font: 400 12px var(--f-ui); color: var(--muted); margin-left: 2px; }
-  body { padding-bottom: calc(60px + env(safe-area-inset-bottom)); }
+  body { padding-bottom: calc(72px + env(safe-area-inset-bottom)); }
 }
