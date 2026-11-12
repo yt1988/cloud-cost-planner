@@ -70,7 +70,7 @@ export async function build({ check = false } = {}) {
   const appCode = appSrc.replace("/* @lib */", () => `const D = ${JSON.stringify(D)};\n${lib0}`);
   new Function(appCode);                                                  // must parse
   const js = (await transform(appCode, { loader: "js", minify: true, target: "es2019", legalComments: "none" })).code;
-  const cssFull = (await Promise.all(["fonts.css", "style.css"].map(f => readFile(new URL(f, src), "utf8")))).join("\n");
+  const cssFull = (await Promise.all(["fonts.css", "base.css", "style.css"].map(f => readFile(new URL(f, src), "utf8")))).join("\n");
   const css = (await transform(cssFull, { loader: "css", minify: true, legalComments: "none" })).code;
   const jsName = `app.${hash(js)}.js`, cssName = `app.${hash(css)}.css`;
 
