@@ -84,3 +84,8 @@ in the data. For exchange rates, update `data/rates.json` from the ECB reference
   version instead, and keep the old ones opening.
 - Comments explain why, not what. Keep the README (English and `README.zh-CN.md`) in step with features.
   The README block between `<!-- 1ms-repos … -->` and `<!-- /1ms-repos -->` is generated elsewhere, so don't edit it.
+
+## 提交说明
+
+- 用英文，一句话说清改了什么。
+- 引用站内 issue 时只写 `#<数字>`，不要写 `yt1988/<私有仓库>#<数字>`，也不要写出私有仓库的名字；公开仓库的历史里不该出现内部仓库。
