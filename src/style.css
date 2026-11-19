@@ -178,7 +178,15 @@ a.ext svg { width: .95em; height: .95em; flex: none; }
   .help-nav { display: none; }
   .help-b .help-pick { display: flex; }
 }
-@media (max-width: 480px) {
+/* The product name never ends in "…" (AGENTS.md): below 768 it wraps inside the brand rather than being cut, and the
+   brand may shrink so the row cannot push the page sideways. The shared base.css makes .brand `flex: none` below 520
+   for the shell's own bar; that rule reaches this header too, so it is reset here. */
+@media (max-width: 767px) {
+  .brand { flex: 1 1 auto; min-width: min-content; }   /* never narrower than the logo */
+  .pname { min-width: 0; white-space: normal; overflow: hidden; text-overflow: clip; line-height: 1.25; }
+}
+/* no room for it beside the logo and the four controls, as in the shared header (.brand-name hides at the same width) */
+@media (max-width: 520px) {
   .pname { display: none; }
 }
 
