@@ -5,7 +5,10 @@ import { nearOf, POINTS, curve, crossings, table, BLOCKING } from "./calc.mjs";
 
 export const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 export const fill = (s, v) => String(s).replace(/\{(\w+)\}/g, (m, k) => (v[k] ?? m));
-const EXT = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2.5h4.5V7M13.5 2.5 7.5 8.5M12 10v3.5H2.5V4H6"/></svg>';
+// xmlns on every <svg> this module writes: the build's rewriter would add it, but app.js also bundles this code and
+// redraws in the browser, where extensions that re-load an <svg> as an image (Dark Reader) serialize it with
+// outerHTML, which cannot carry the namespace (#146)
+const EXT = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2.5h4.5V7M13.5 2.5 7.5 8.5M12 10v3.5H2.5V4H6"/></svg>';
 export const ext = (href, text, attrs = "") => `<a class="ext"${href ? ` href="${esc(href)}"` : ""} target="_blank" rel="noopener"${attrs}><span>${esc(text)}</span>${EXT}</a>`;
 
 // sizes as each language writes them: French Go/To/Po, Russian ГБ/ТБ/ПБ, GB/TB/PB elsewhere
@@ -131,7 +134,7 @@ export function curveHTML(rec, T, F, D, input) {
   const cross = [];
   for (let i = 0; i < lines.length; i++) for (let j = i + 1; j < lines.length; j++)
     for (const x of crossings(POINTS, lines[i].v, lines[j].v)) cross.push(fill(T.cross, { gb: F.size(Math.round(x.gb)), b: x.cheaper === "b" ? lines[j].name : lines[i].name, a: x.cheaper === "b" ? lines[i].name : lines[j].name }));
-  return `<svg class="curve" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(T.curve_h)}"><g class="grid">${grid.join("")}</g>` +
+  return `<svg xmlns="http://www.w3.org/2000/svg" class="curve" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(T.curve_h)}"><g class="grid">${grid.join("")}</g>` +
     `<line class="now" x1="${xs(at)}" x2="${xs(at)}" y1="${Tp}" y2="${H - B}"/>` +
     lines.map(l => `<path class="${l.cls}" d="${path(l.v)}"/>`).join("") + `</svg>` +
     `<ul class="legend">${lines.map(l => `<li class="${l.cls}"><i></i>${esc(l.name)}</li>`).join("")}</ul>` +
